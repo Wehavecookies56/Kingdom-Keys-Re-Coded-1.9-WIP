@@ -6,7 +6,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
+import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.api.recipes.RecipeRegistry;
+import wehavecookies56.kk.capabilities.SynthesisRecipeCapability.ISynthesisRecipe;
 import wehavecookies56.kk.network.packet.AbstractMessage.AbstractServerMessage;
 import wehavecookies56.kk.util.TextHelper;
 
@@ -39,14 +41,15 @@ public class UseRecipe extends AbstractServerMessage<UseRecipe> {
 	@Override
 	public void process (EntityPlayer player, Side side) {
 		boolean consume = false;
+		ISynthesisRecipe RECIPES = player.getCapability(KingdomKeys.SYNTHESIS_RECIPES, null);
 		if (RecipeRegistry.get(recipe1) == null) {
 			String message = "ERROR: Recipe for " + TextHelper.localize(recipe1 + ".name") + " was not learnt because it is not a valid recipe, Report this to Wehavecookies56";
 			TextHelper.sendFormattedChatMessage(message, TextFormatting.RED, player);
-		} else if (RecipeRegistry.isRecipeKnown(player, recipe1)) {
+		} else if (RecipeRegistry.isRecipeKnown(RECIPES.getKnownRecipes(), recipe1)) {
 			String message = "Recipe for " + TextHelper.localize(recipe1 + ".name") + " was not learnt because you have already learnt it";
 			TextHelper.sendFormattedChatMessage(message, TextFormatting.YELLOW, player);
 		} else {
-			RecipeRegistry.learnrecipe(player, recipe1);
+			RecipeRegistry.learnrecipe(RECIPES.getKnownRecipes(), player, recipe1);
 			String message = "Successfully learnt the recipe for " + TextHelper.localize(recipe1 + ".name");
 			TextHelper.sendFormattedChatMessage(message, TextFormatting.GREEN, player);
 			consume = true;
@@ -54,11 +57,11 @@ public class UseRecipe extends AbstractServerMessage<UseRecipe> {
 		if (RecipeRegistry.get(recipe2) == null) {
 			String message = "ERROR: Recipe for " + TextHelper.localize(recipe2 + ".name") + " was not learnt because it is not a valid recipe, Report this to Wehavecookies56";
 			TextHelper.sendFormattedChatMessage(message, TextFormatting.RED, player);
-		} else if (RecipeRegistry.isRecipeKnown(player, recipe2)) {
+		} else if (RecipeRegistry.isRecipeKnown(RECIPES.getKnownRecipes(), recipe2)) {
 			String message = "Recipe for " + TextHelper.localize(recipe2 + ".name") + " was not learnt because you have already learnt it";
 			TextHelper.sendFormattedChatMessage(message, TextFormatting.YELLOW, player);
 		} else {
-			RecipeRegistry.learnrecipe(player, recipe2);
+			RecipeRegistry.learnrecipe(RECIPES.getKnownRecipes(), player, recipe2);
 			String message = "Successfully learnt the recipe for " + TextHelper.localize(recipe2 + ".name");
 			TextHelper.sendFormattedChatMessage(message, TextFormatting.GREEN, player);
 			consume = true;
@@ -66,11 +69,11 @@ public class UseRecipe extends AbstractServerMessage<UseRecipe> {
 		if (RecipeRegistry.get(recipe3) == null) {
 			String message = "ERROR: Recipe for " + TextHelper.localize(recipe3 + ".name") + " was not learnt because it is not a valid recipe, Report this to Wehavecookies56";
 			TextHelper.sendFormattedChatMessage(message, TextFormatting.RED, player);
-		} else if (RecipeRegistry.isRecipeKnown(player, recipe3)) {
+		} else if (RecipeRegistry.isRecipeKnown(RECIPES.getKnownRecipes(), recipe3)) {
 			String message = "Recipe for " + TextHelper.localize(recipe3 + ".name") + " was not learnt because you have already learnt it";
 			TextHelper.sendFormattedChatMessage(message, TextFormatting.YELLOW, player);
 		} else {
-			RecipeRegistry.learnrecipe(player, recipe3);
+			RecipeRegistry.learnrecipe(RECIPES.getKnownRecipes(), player, recipe3);
 			String message = "Successfully learnt the recipe for " + TextHelper.localize(recipe3 + ".name");
 			TextHelper.sendFormattedChatMessage(message, TextFormatting.GREEN, player);
 			consume = true;

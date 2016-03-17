@@ -29,6 +29,7 @@ import wehavecookies56.kk.capabilities.ModCapabilities;
 import wehavecookies56.kk.capabilities.MunnyCapability.IMunny;
 import wehavecookies56.kk.capabilities.PlayerStatsCapability.IPlayerStats;
 import wehavecookies56.kk.capabilities.SummonKeybladeCapability.ISummonKeyblade;
+import wehavecookies56.kk.capabilities.SynthesisRecipeCapability.ISynthesisRecipe;
 import wehavecookies56.kk.driveforms.ModDriveForms;
 import wehavecookies56.kk.entities.PlayerLevel;
 import wehavecookies56.kk.entities.TileEntityKKChest;
@@ -94,6 +95,8 @@ public class KingdomKeys {
     public static final Capability<IDriveState> DRIVE_STATE = null;
 	@CapabilityInject(IFirstTimeJoin.class)
     public static final Capability<IFirstTimeJoin> FIRST_TIME_JOIN = null;
+	@CapabilityInject(ISynthesisRecipe.class)
+    public static final Capability<ISynthesisRecipe> SYNTHESIS_RECIPES = null;
 
 	@EventHandler
 	public void preInit (FMLPreInitializationEvent e) {

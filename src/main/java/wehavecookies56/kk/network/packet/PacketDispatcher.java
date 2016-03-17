@@ -19,7 +19,6 @@ import wehavecookies56.kk.network.packet.client.SpawnThunderEntity;
 import wehavecookies56.kk.network.packet.client.SpawnThunderParticles;
 import wehavecookies56.kk.network.packet.client.SyncExtendedPlayer;
 import wehavecookies56.kk.network.packet.client.SyncExtendedPlayerMaterials;
-import wehavecookies56.kk.network.packet.client.SyncExtendedPlayerRecipes;
 import wehavecookies56.kk.network.packet.server.AntiPoints;
 import wehavecookies56.kk.network.packet.server.CreateFromSynthesisRecipe;
 import wehavecookies56.kk.network.packet.server.DeSummonKeyblade;
@@ -63,7 +62,6 @@ public class PacketDispatcher {
 
 		// Server to Client
 		registerMessage(SyncExtendedPlayer.class);
-		registerMessage(SyncExtendedPlayerRecipes.class);
 		registerMessage(SyncExtendedPlayerMaterials.class);
 		registerMessage(SpawnFireParticles.class);
 		registerMessage(SpawnBlizzardParticles.class);

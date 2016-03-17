@@ -14,8 +14,9 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
+import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.api.recipes.RecipeRegistry;
-import wehavecookies56.kk.entities.ExtendedPlayerRecipes;
+import wehavecookies56.kk.capabilities.SynthesisRecipeCapability.ISynthesisRecipe;
 import wehavecookies56.kk.lib.Lists;
 import wehavecookies56.kk.network.packet.PacketDispatcher;
 import wehavecookies56.kk.network.packet.server.UseRecipe;
@@ -31,8 +32,6 @@ public class ItemRecipe extends Item {
 	public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World world, EntityPlayer player,
 			EnumHand hand) {
 		if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) {
-			ExtendedPlayerRecipes.get(player);
-			ExtendedPlayerRecipes.loadProxyData((player));
 			PacketDispatcher.sendToServer(new UseRecipe(stack.getTagCompound().getString("recipe1"), stack.getTagCompound().getString("recipe2"), stack.getTagCompound().getString("recipe3")));
 			return super.onItemRightClick(stack, world, player, hand);
 		} else if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
@@ -40,12 +39,14 @@ public class ItemRecipe extends Item {
 			String recipe2 = stack.getTagCompound().getString("recipe2");
 			String recipe3 = stack.getTagCompound().getString("recipe3");
 
+			ISynthesisRecipe RECIPES = player.getCapability(KingdomKeys.SYNTHESIS_RECIPES, null);
+			
 			boolean consume = false;
-			if (RecipeRegistry.get(recipe1) == null) {} else if (RecipeRegistry.isRecipeKnown(player, recipe1)) {} else
+			if (RecipeRegistry.get(recipe1) == null) {} else if (RecipeRegistry.isRecipeKnown(RECIPES.getKnownRecipes(), recipe1)) {} else
 				consume = true;
-			if (RecipeRegistry.get(recipe2) == null) {} else if (RecipeRegistry.isRecipeKnown(player, recipe2)) {} else
+			if (RecipeRegistry.get(recipe2) == null) {} else if (RecipeRegistry.isRecipeKnown(RECIPES.getKnownRecipes(), recipe2)) {} else
 				consume = true;
-			if (RecipeRegistry.get(recipe3) == null) {} else if (RecipeRegistry.isRecipeKnown(player, recipe3)) {} else
+			if (RecipeRegistry.get(recipe3) == null) {} else if (RecipeRegistry.isRecipeKnown(RECIPES.getKnownRecipes(), recipe3)) {} else
 				consume = true;
 
 			if (consume) stack.stackSize--;
@@ -89,7 +90,7 @@ public class ItemRecipe extends Item {
 	}
 
 	@Override
-	public void addInformation (ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
+	public void addInformation (ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
 		// Make sure it has NBT data
 		if (stack.hasTagCompound()) {
 			// Get NBT data that was set

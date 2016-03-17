@@ -22,9 +22,8 @@ import wehavecookies56.kk.api.materials.MaterialRegistry;
 import wehavecookies56.kk.api.recipes.Recipe;
 import wehavecookies56.kk.api.recipes.RecipeRegistry;
 import wehavecookies56.kk.capabilities.MunnyCapability.IMunny;
-import wehavecookies56.kk.entities.ExtendedPlayer;
+import wehavecookies56.kk.capabilities.SynthesisRecipeCapability.ISynthesisRecipe;
 import wehavecookies56.kk.entities.ExtendedPlayerMaterials;
-import wehavecookies56.kk.entities.ExtendedPlayerRecipes;
 import wehavecookies56.kk.item.ModItems;
 import wehavecookies56.kk.lib.Config;
 import wehavecookies56.kk.lib.Constants;
@@ -116,7 +115,7 @@ public class GuiSynthesis extends GuiTooltip {
 				submenu = MATERIALS;
 				break;
 			case CREATE:
-				if (isRecipeUsable(ExtendedPlayerRecipes.get(mc.thePlayer).knownRecipes.get(selected), 1)) PacketDispatcher.sendToServer(new CreateFromSynthesisRecipe(ExtendedPlayerRecipes.get(mc.thePlayer).knownRecipes.get(selected), 1));
+				if (isRecipeUsable(mc.thePlayer.getCapability(KingdomKeys.SYNTHESIS_RECIPES, null).getKnownRecipes().get(selected), 1)) PacketDispatcher.sendToServer(new CreateFromSynthesisRecipe(mc.thePlayer.getCapability(KingdomKeys.SYNTHESIS_RECIPES, null).getKnownRecipes().get(selected), 1));
 				break;
 			case TAKE1:
 				materials.addAll(mats.getKnownMaterialsMap().keySet());
@@ -257,7 +256,7 @@ public class GuiSynthesis extends GuiTooltip {
 		}
 		if (selected != -1 && submenu == RECIPES) Create.visible = true;
 		if (selected == -1) Create.visible = false;
-		if (selected != -1 && isRecipeUsable(ExtendedPlayerRecipes.get(mc.thePlayer).knownRecipes.get(selected), 1))
+		if (selected != -1 && isRecipeUsable(mc.thePlayer.getCapability(KingdomKeys.SYNTHESIS_RECIPES, null).getKnownRecipes().get(selected), 1))
 			Create.enabled = true;
 		else {
 			if (isInventoryFull()) Create.displayString = "Inventory Full";
@@ -337,14 +336,14 @@ public class GuiSynthesis extends GuiTooltip {
 	}
 
 	public void drawSelected (int mouseX, int mouseY) {
-		ExtendedPlayerRecipes props = ExtendedPlayerRecipes.get(mc.thePlayer);
+		ISynthesisRecipe RECIPES = mc.thePlayer.getCapability(KingdomKeys.SYNTHESIS_RECIPES, null);
 		int posX = 220;
 		if (selected != -1) {
 			Minecraft.getMinecraft().renderEngine.bindTexture(optionsBackground);
 			drawGradientRect(posX - 10, 60, 700, height - ((height / 8) + 70 / 16), -1072689136, -804253680);
 		}
 		GL11.glPushMatrix(); {
-			for (int i = 0; i < props.knownRecipes.size(); i++)
+			for (int i = 0; i < RECIPES.getKnownRecipes().size(); i++)
 				if (selected == i) {
 					float scale = 1.0f;
 					if(mc.gameSettings.guiScale == Constants.SCALE_LARGE) {
@@ -353,7 +352,7 @@ public class GuiSynthesis extends GuiTooltip {
 					GL11.glPushMatrix(); {
 						GL11.glTranslatef(posX, 70, 0);
 						GL11.glScalef(2 * scale, 2 * scale, 2 * scale);
-						drawString(fontRendererObj, TextHelper.localize(props.knownRecipes.get(i).toString() + ".name"), 0, 0, 0xFFF700);
+						drawString(fontRendererObj, TextHelper.localize(RECIPES.getKnownRecipes().get(i).toString() + ".name"), 0, 0, 0xFFF700);
 					}
 					GL11.glPopMatrix();
 
@@ -362,7 +361,7 @@ public class GuiSynthesis extends GuiTooltip {
 					int row = 0;
 					int column = 0;
 					int materialLength = 0;
-					Iterator it = RecipeRegistry.get(props.knownRecipes.get(i)).getRequirements().entrySet().iterator();
+					Iterator it = RecipeRegistry.get(RECIPES.getKnownRecipes().get(i)).getRequirements().entrySet().iterator();
 					while (it.hasNext()) {
 						Map.Entry<Material, Integer> pair = (Map.Entry<Material, Integer>) it.next();
 						int distY = (int) (24 * scale);

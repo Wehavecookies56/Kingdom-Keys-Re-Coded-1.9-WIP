@@ -1,13 +1,14 @@
 package wehavecookies56.kk.api.recipes;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.google.common.collect.ImmutableMap;
 
 import net.minecraft.entity.player.EntityPlayer;
+import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.achievements.ModAchievements;
-import wehavecookies56.kk.entities.ExtendedPlayerRecipes;
 import wehavecookies56.kk.util.AchievementHelper;
 
 public class RecipeRegistry {
@@ -36,19 +37,18 @@ public class RecipeRegistry {
 		return recipeMap.get(name);
 	}
 
-	public static boolean learnrecipe (EntityPlayer player, String recipeName) {
-		if (player != null && !isRecipeKnown(player, recipeName)) {
+	public static boolean learnrecipe (List<String> list, EntityPlayer player, String recipeName) {
+		if (!isRecipeKnown(list, recipeName)) {
 			Recipe recipe = recipeMap.get(recipeName);
-			ExtendedPlayerRecipes.get(player).learnRecipe(recipe);
+			player.getCapability(KingdomKeys.SYNTHESIS_RECIPES, null).learnRecipe(recipe);
 			AchievementHelper.addAchievement(player, ModAchievements.getRecipe);
 			return true;
 		}
 		return false;
 	}
 
-	public static boolean isRecipeKnown (EntityPlayer player, String name) {
-		if (ExtendedPlayerRecipes.get(player) != null) return ExtendedPlayerRecipes.get(player).knownRecipes.contains(name);
-		return false;
+	public static boolean isRecipeKnown (List<String> recipeList, String name) {
+		return recipeList.contains(name);
 	}
 
 }

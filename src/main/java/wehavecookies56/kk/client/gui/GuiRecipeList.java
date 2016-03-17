@@ -7,7 +7,8 @@ import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.client.GuiScrollingList;
-import wehavecookies56.kk.entities.ExtendedPlayerRecipes;
+import wehavecookies56.kk.KingdomKeys;
+import wehavecookies56.kk.capabilities.SynthesisRecipeCapability.ISynthesisRecipe;
 import wehavecookies56.kk.item.ModItems;
 import wehavecookies56.kk.util.TextHelper;
 
@@ -31,7 +32,7 @@ public class GuiRecipeList extends GuiScrollingList {
 
 	@Override
 	protected int getSize () {
-		return ExtendedPlayerRecipes.get(Minecraft.getMinecraft().thePlayer).knownRecipes.size();
+		return Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.SYNTHESIS_RECIPES, null).getKnownRecipes().size();
 	}
 
 	@Override
@@ -50,10 +51,10 @@ public class GuiRecipeList extends GuiScrollingList {
 
 	@Override
 	protected void drawSlot (int var1, int var2, int var3, int var4, Tessellator var5) {
-		ExtendedPlayerRecipes props = ExtendedPlayerRecipes.get(Minecraft.getMinecraft().thePlayer);
+		ISynthesisRecipe RECIPES = Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.SYNTHESIS_RECIPES, null);
 
-		this.f.drawString(f.trimStringToWidth(TextHelper.localize(props.knownRecipes.get(var1).toString() + ".name"), listWidth - 1), this.left + 3, var3 + 2, 0xFFFFFF);
-		this.ir.renderItemAndEffectIntoGUI(getItemStackFromName(props.knownRecipes.get(var1).toString()), this.left + 3, var3 + 12);
+		this.f.drawString(f.trimStringToWidth(TextHelper.localize(RECIPES.getKnownRecipes().get(var1).toString() + ".name"), listWidth - 1), this.left + 3, var3 + 2, 0xFFFFFF);
+		this.ir.renderItemAndEffectIntoGUI(getItemStackFromName(RECIPES.getKnownRecipes().get(var1).toString()), this.left + 3, var3 + 12);
 	}
 
 	public ItemStack getItemStackFromName (String name) {

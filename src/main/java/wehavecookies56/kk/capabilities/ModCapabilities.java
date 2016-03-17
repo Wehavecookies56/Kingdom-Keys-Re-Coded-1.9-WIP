@@ -6,6 +6,7 @@ import wehavecookies56.kk.capabilities.FirstTimeJoinCapability.IFirstTimeJoin;
 import wehavecookies56.kk.capabilities.MunnyCapability.IMunny;
 import wehavecookies56.kk.capabilities.PlayerStatsCapability.IPlayerStats;
 import wehavecookies56.kk.capabilities.SummonKeybladeCapability.ISummonKeyblade;
+import wehavecookies56.kk.capabilities.SynthesisRecipeCapability.ISynthesisRecipe;
 
 public class ModCapabilities {
 
@@ -15,6 +16,7 @@ public class ModCapabilities {
         CapabilityManager.INSTANCE.register(ISummonKeyblade.class, new SummonKeybladeCapability.Storage(), SummonKeybladeCapability.Default.class);
         CapabilityManager.INSTANCE.register(IDriveState.class, new DriveStateCapability.Storage(), DriveStateCapability.Default.class);
         CapabilityManager.INSTANCE.register(IFirstTimeJoin.class, new FirstTimeJoinCapability.Storage(), FirstTimeJoinCapability.Default.class);
+        CapabilityManager.INSTANCE.register(ISynthesisRecipe.class, new SynthesisRecipeCapability.Storage(), SynthesisRecipeCapability.Default.class);
 	}
 	
 }

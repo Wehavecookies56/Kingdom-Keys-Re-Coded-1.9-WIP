@@ -8,7 +8,6 @@ import com.mojang.authlib.GameProfile;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.boss.EntityWither;
@@ -57,9 +56,9 @@ import wehavecookies56.kk.capabilities.FirstTimeJoinCapability.IFirstTimeJoin;
 import wehavecookies56.kk.capabilities.MunnyCapability.IMunny;
 import wehavecookies56.kk.capabilities.PlayerStatsCapability.IPlayerStats;
 import wehavecookies56.kk.capabilities.SummonKeybladeCapability.ISummonKeyblade;
+import wehavecookies56.kk.capabilities.SynthesisRecipeCapability.ISynthesisRecipe;
 import wehavecookies56.kk.entities.ExtendedPlayer;
 import wehavecookies56.kk.entities.ExtendedPlayerMaterials;
-import wehavecookies56.kk.entities.ExtendedPlayerRecipes;
 import wehavecookies56.kk.entities.magic.EntityThunder;
 import wehavecookies56.kk.inventory.InventorySynthesisBagL;
 import wehavecookies56.kk.inventory.InventorySynthesisBagM;
@@ -80,8 +79,9 @@ import wehavecookies56.kk.network.packet.server.MagicOrbPickup;
 import wehavecookies56.kk.network.packet.server.MunnyPickup;
 
 public class EventHandler {
+	
 	@SubscribeEvent
-	public void onEntityConstructing (AttachCapabilitiesEvent event) {
+	public void onEntityConstructing (AttachCapabilitiesEvent.Entity event) {
 		event.addCapability(new ResourceLocation(Reference.MODID, "IMunny"), new ICapabilitySerializable<NBTPrimitive>()
         {
             IMunny inst = KingdomKeys.MUNNY.getDefaultInstance();
@@ -204,6 +204,31 @@ public class EventHandler {
             @Override
             public void deserializeNBT(NBTTagCompound nbt) {
             	KingdomKeys.FIRST_TIME_JOIN.getStorage().readNBT(KingdomKeys.FIRST_TIME_JOIN, inst, null, nbt);
+            }
+        });
+		
+		event.addCapability(new ResourceLocation(Reference.MODID, "ISynthesisRecipe"), new ICapabilitySerializable<NBTTagCompound>()
+        {
+			ISynthesisRecipe inst = KingdomKeys.SYNTHESIS_RECIPES.getDefaultInstance();
+            @Override
+            public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
+                return capability == KingdomKeys.SYNTHESIS_RECIPES;
+            }
+
+            @SuppressWarnings("unchecked")
+            @Override
+            public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
+                return capability == KingdomKeys.SYNTHESIS_RECIPES ? (T)inst : null;
+            }
+
+            @Override
+            public NBTTagCompound serializeNBT() {
+                return (NBTTagCompound)KingdomKeys.SYNTHESIS_RECIPES.getStorage().writeNBT(KingdomKeys.SYNTHESIS_RECIPES, inst, null);
+            }
+
+            @Override
+            public void deserializeNBT(NBTTagCompound nbt) {
+            	KingdomKeys.SYNTHESIS_RECIPES.getStorage().readNBT(KingdomKeys.SYNTHESIS_RECIPES, inst, null, nbt);
             }
         });
 		//if (event.entity instanceof EntityPlayer && ExtendedPlayer.get((EntityPlayer) event.entity) == null) ExtendedPlayer.register((EntityPlayer) event.entity);
@@ -348,8 +373,6 @@ public class EventHandler {
 			}
 			ExtendedPlayer.get((EntityPlayer) event.entity);
 			ExtendedPlayer.saveProxyData((EntityPlayer) event.entity);
-			ExtendedPlayerRecipes.get((EntityPlayer) event.entity);
-			ExtendedPlayerRecipes.saveProxyData((EntityPlayer) event.entity);
 			ExtendedPlayerMaterials.get((EntityPlayer) event.entity);
 			ExtendedPlayerMaterials.saveProxyData((EntityPlayer) event.entity);
 		}
