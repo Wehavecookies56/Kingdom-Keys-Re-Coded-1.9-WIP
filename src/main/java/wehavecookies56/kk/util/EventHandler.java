@@ -367,7 +367,8 @@ public class EventHandler {
 		if (event.entity instanceof EntityPlayer) for (int i = 0; i < event.drops.size(); i++)
 			if (event.drops.get(i).getEntityItem().getItem() instanceof ItemKeyblade && (event.drops.get(i).getEntityItem().getItem() != ModItems.WoodenKeyblade && event.drops.get(i).getEntityItem().getItem() != ModItems.WoodenStick)) {
 				event.drops.remove(i);
-				ExtendedPlayer.get((EntityPlayer) event.entity).setKeybladeSummoned(false);
+				
+				event.entity.getCapability(KingdomKeys.SUMMON_KEYBLADE, null).setKeybladeSummoned(false, null, null);
 				i = 0;
 			}
 		if (event.source.getSourceOfDamage() instanceof EntityPlayer) {
@@ -459,21 +460,22 @@ public class EventHandler {
 		} else if (event.item.getEntityItem().getItem() instanceof ItemHpOrb) {
 			if (event.entityPlayer.getHeldItem(EnumHand.MAIN_HAND) != null) if (event.entityPlayer.getHeldItem(EnumHand.MAIN_HAND).getItem() == ModItems.EmptyBottle) return;
 
+			IPlayerStats STATS = event.entityPlayer.getCapability(KingdomKeys.PLAYER_STATS, null);
 			HpOrbPickup packet = new HpOrbPickup(event.item.getEntityItem());
 			if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) {
-				if (event.entityPlayer.getHealth() >= ExtendedPlayer.get(event.entityPlayer).getHP()) return;
-				if (event.entityPlayer.getHealth() < ExtendedPlayer.get(event.entityPlayer).getHP() - 1)
+				if (event.entityPlayer.getHealth() >= STATS.getHP()) return;
+				if (event.entityPlayer.getHealth() < STATS.getHP() - 1)
 					event.entityPlayer.heal(2);
 				else
 					event.entityPlayer.heal(1);
 				PacketDispatcher.sendToServer(packet);
 			}
 			if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
-				if (event.entityPlayer.getHealth() >= ExtendedPlayer.get(event.entityPlayer).getHP()) {
+				if (event.entityPlayer.getHealth() >= STATS.getHP()) {
 					event.item.getEntityItem().stackSize--;
 					return;
 				}
-				if (event.entityPlayer.getHealth() < ExtendedPlayer.get(event.entityPlayer).getHP() - 1)
+				if (event.entityPlayer.getHealth() < STATS.getHP() - 1)
 					event.entityPlayer.heal(2);
 				else
 					event.entityPlayer.heal(1);
@@ -647,14 +649,14 @@ public class EventHandler {
 			STATS.setRecharge(true);
 			if (STATS.getMP() != STATS.getMaxMP()) {
 				STATS.addMP(0.1);
-				if (ExtendedPlayer.get(event.player).mp > ExtendedPlayer.get(event.player).getMaxMp()) ExtendedPlayer.get(event.player).mp = ExtendedPlayer.get(event.player).getMaxMp();
+				if (STATS.getMP() > STATS.getMaxMP()) STATS.setMP(STATS.getMaxMP());
 
 			} else {
-				ExtendedPlayer.get(event.player).setMp(ExtendedPlayer.get(event.player).getMaxMp());
-				ExtendedPlayer.get(event.player).setRecharge(false);
+				STATS.setMP(STATS.getMaxMP());
+				STATS.setRecharge(false);
 			}
 		}
-		if (!ExtendedPlayer.get(event.player).getDriveInUse().equals("none") && DriveFormRegistry.isDriveFormRegistered(ExtendedPlayer.get(event.player).getDriveInUse())) DriveFormRegistry.get(ExtendedPlayer.get(event.player).getDriveInUse()).update(event.player);
+		if (!DS.getActiveDriveName().equals("none") && DriveFormRegistry.isDriveFormRegistered(DS.getActiveDriveName())) DriveFormRegistry.get(DS.getActiveDriveName()).update(event.player);
 		if (event.player != null) {
 			List<Entity> entities = event.player.worldObj.getEntitiesWithinAABBExcludingEntity(event.player, event.player.getEntityBoundingBox().expand(16.0D, 10.0D, 16.0D));
 			List<Entity> bossEntities = event.player.worldObj.getEntitiesWithinAABBExcludingEntity(event.player, event.player.getEntityBoundingBox().expand(150.0D, 100.0D, 150.0D));
@@ -707,11 +709,12 @@ public class EventHandler {
 	@SubscribeEvent
 	public void onHurt (LivingHurtEvent event) {
 		if (event.entityLiving instanceof EntityPlayer) {
+			IPlayerStats STATS = event.entity.getCapability(KingdomKeys.PLAYER_STATS, null);
 			EntityPlayer player = (EntityPlayer) event.entityLiving;
-			if (event.ammount - ExtendedPlayer.get(player).getDefense() <= 0)
+			if (event.ammount - STATS.getDefense() <= 0)
 				event.ammount = 1;
 			else
-				event.ammount = (float)( event.ammount - (ExtendedPlayer.get(player).getDefense()*0.25));
+				event.ammount = (float)( event.ammount - (STATS.getDefense()*0.25));
 
 			if (player.getHeldItem(EnumHand.MAIN_HAND) != null && player.getHeldItem(EnumHand.MAIN_HAND).getItem() == ModItems.FrozenPride) 
 			{
@@ -726,10 +729,12 @@ public class EventHandler {
 		}
 		if (event.source.getSourceOfDamage() instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) event.source.getSourceOfDamage();
-			event.ammount = (float) (event.ammount + (ExtendedPlayer.get(player).getStrength() * 0.25));
+			IPlayerStats STATS = player.getCapability(KingdomKeys.PLAYER_STATS, null);
+			IDriveState DS = player.getCapability(KingdomKeys.DRIVE_STATE, null);
+			event.ammount = (float) (event.ammount + (STATS.getStrength() * 0.25));
 			if (player.getHeldItem(EnumHand.MAIN_HAND) != null) if (player.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ItemKeyblade) {
-				if (ExtendedPlayer.get(player).getDriveInUse().equals("Valor")) event.ammount = (float) (event.ammount * 1.5);
-				ExtendedPlayer.get(player).addDP(1);
+				if (DS.getActiveDriveName().equals("Valor")) event.ammount = (float) (event.ammount * 1.5);
+				STATS.addDP(1);
 			} else
 				return;
 		}
@@ -739,7 +744,8 @@ public class EventHandler {
 	public void onFall (LivingFallEvent event) {
 		if (event.entityLiving instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) event.entityLiving;
-			if (ExtendedPlayer.get(player).getInDrive()) event.distance = 0;
+			IDriveState DS = player.getCapability(KingdomKeys.DRIVE_STATE, null);
+			if (DS.getInDrive()) event.distance = 0;
 		}
 	}
 

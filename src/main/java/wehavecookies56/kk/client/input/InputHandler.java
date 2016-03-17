@@ -6,6 +6,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.event.MouseEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
+import wehavecookies56.kk.KingdomKeys;
+import wehavecookies56.kk.capabilities.DriveStateCapability.IDriveState;
+import wehavecookies56.kk.capabilities.PlayerStatsCapability.IPlayerStats;
+import wehavecookies56.kk.capabilities.SummonKeybladeCapability.ISummonKeyblade;
 import wehavecookies56.kk.client.gui.GuiCommandMenu;
 import wehavecookies56.kk.driveforms.ModDriveForms;
 import wehavecookies56.kk.entities.ExtendedPlayer;
@@ -36,7 +40,7 @@ public class InputHandler {
 
 	public boolean antiFormCheck () {
 		double random = Math.random();
-		int ap = ExtendedPlayer.get(Minecraft.getMinecraft().thePlayer).getAntiPoints();
+		int ap = Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.DRIVE_STATE, null).getAntiPoints();
 		int prob = 0;
 		if (ap > 0 && ap <= 4)
 			prob = 10;
@@ -128,11 +132,13 @@ public class InputHandler {
 		Minecraft mc = Minecraft.getMinecraft();
 		EntityPlayer player = mc.thePlayer;
 		World world = mc.theWorld;
+		IPlayerStats STATS = player.getCapability(KingdomKeys.PLAYER_STATS, null);
+		IDriveState DS = player.getCapability(KingdomKeys.DRIVE_STATE, null);
 
 		switch (GuiCommandMenu.selected) {
 			case GuiCommandMenu.MAGIC:
 				if (GuiCommandMenu.submenu == GuiCommandMenu.SUB_MAIN) {
-					if (!ExtendedPlayer.get(player).getRecharge() && (!ExtendedPlayer.spells.isEmpty() && !ExtendedPlayer.get(player).getDriveInUse().equals(Strings.Form_Valor))) {
+					if (!STATS.getRecharge() && (!ExtendedPlayer.spells.isEmpty() && !DS.getActiveDriveName().equals(Strings.Form_Valor))) {
 						GuiCommandMenu.magicselected = 0;
 						GuiCommandMenu.submenu = GuiCommandMenu.SUB_MAGIC;
 						//TODO world.playSound(player.posX, player.posY, player.posZ, SoundHelper.Select, 1f, 1f, false);
@@ -160,8 +166,8 @@ public class InputHandler {
 
 			case GuiCommandMenu.DRIVE:
 				if (GuiCommandMenu.submenu == GuiCommandMenu.SUB_MAIN) {
-					if (ExtendedPlayer.get(player).getInDrive()) {// Revert
-						if (ExtendedPlayer.get(player).getDriveInUse().equals(Strings.Form_Anti) && ExtendedPlayer.get(player).cheatMode == false) {
+					if (DS.getInDrive()) {// Revert
+						if (DS.getActiveDriveName().equals(Strings.Form_Anti) && ExtendedPlayer.get(player).cheatMode == false) {
 							GuiCommandMenu.selected = GuiCommandMenu.ATTACK;
 							//TODO world.playSound(player.posX, player.posY, player.posZ, SoundHelper.Error, 2f, 1f, false);
 						} else {
@@ -170,7 +176,7 @@ public class InputHandler {
 							GuiCommandMenu.selected = GuiCommandMenu.ATTACK;
 							//TODO world.playSound(player.posX, player.posY, player.posZ, SoundHelper.Select, 1f, 1f, false);
 						}
-					} else if (ExtendedPlayer.driveForms.isEmpty() || ExtendedPlayer.get(player).getDP() <= 0) {
+					} else if (ExtendedPlayer.driveForms.isEmpty() || STATS.getDP() <= 0) {
 						//TODO world.playSound(player.posX, player.posY, player.posZ, SoundHelper.Error, 1f, 1f, false);
 						GuiCommandMenu.selected = GuiCommandMenu.ATTACK;
 					} else {
@@ -185,7 +191,7 @@ public class InputHandler {
 		if (GuiCommandMenu.selected == GuiCommandMenu.MAGIC && GuiCommandMenu.submenu == GuiCommandMenu.SUB_MAGIC) {
 			if (ExtendedPlayer.spells.isEmpty()) 
 			{} 
-			else if (!ExtendedPlayer.get(player).getRecharge() || Constants.getCost(ExtendedPlayer.spells.get(GuiCommandMenu.magicselected)) == -1 && ExtendedPlayer.get(player).getMp() > 0) {
+			else if (!STATS.getRecharge() || Constants.getCost(ExtendedPlayer.spells.get(GuiCommandMenu.magicselected)) == -1 && STATS.getMP() > 0) {
 				Magic.getMagic(player, world, ExtendedPlayer.spells.get(GuiCommandMenu.magicselected));
 				GuiCommandMenu.selected = GuiCommandMenu.ATTACK;
 				GuiCommandMenu.submenu = GuiCommandMenu.SUB_MAIN;
@@ -204,7 +210,7 @@ public class InputHandler {
 		}
 
 		if (GuiCommandMenu.selected == GuiCommandMenu.DRIVE && GuiCommandMenu.submenu == GuiCommandMenu.SUB_DRIVE) {
-			if (ExtendedPlayer.driveForms.isEmpty()) {} else if ((ExtendedPlayer.get(player).getDP() >= Constants.getCost(ExtendedPlayer.driveForms.get(GuiCommandMenu.driveselected)))) {
+			if (ExtendedPlayer.driveForms.isEmpty()) {} else if ((STATS.getDP() >= Constants.getCost(ExtendedPlayer.driveForms.get(GuiCommandMenu.driveselected)))) {
 				if(!antiFormCheck()){
 					ModDriveForms.getDriveForm(player, world, ExtendedPlayer.driveForms.get(GuiCommandMenu.driveselected));
 				}
@@ -237,6 +243,7 @@ public class InputHandler {
 		Minecraft mc = Minecraft.getMinecraft();
 		EntityPlayer player = mc.thePlayer;
 		World world = mc.theWorld;
+		ISummonKeyblade SUMMON = player.getCapability(KingdomKeys.SUMMON_KEYBLADE, null);
 
 		Keybinds key = getPressedKey();
 		if (key != null) switch (key) {
@@ -267,10 +274,10 @@ public class InputHandler {
 					//TODO Minecraft.getMinecraft().theWorld.playSound(Minecraft.getMinecraft().thePlayer.posX, Minecraft.getMinecraft().thePlayer.posY, Minecraft.getMinecraft().thePlayer.posZ, SoundHelper.Error, 2f, 1f, false);
 					break;
 				}
-				if (props.isKeybladeSummoned() == false && player.inventory.getCurrentItem() == null && props.inventoryKeychain.getStackInSlot(0).getItem() instanceof ItemKeychain) {
+				if (SUMMON.getKeybladeSummoned() == false && player.inventory.getCurrentItem() == null && props.inventoryKeychain.getStackInSlot(0).getItem() instanceof ItemKeychain) {
 					PacketDispatcher.sendToServer(new SummonKeyblade(((ItemKeychain) props.inventoryKeychain.getStackInSlot(0).getItem()).getKeyblade()));
 					PacketDispatcher.sendToServer(new SyncExtendedPlayer(player));
-				} else if (player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem() instanceof ItemKeyblade && props.isKeybladeSummoned() == true) {
+				} else if (player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem() instanceof ItemKeyblade && SUMMON.getKeybladeSummoned() == true) {
 					PacketDispatcher.sendToServer(new DeSummonKeyblade(player.inventory.getCurrentItem()));
 					PacketDispatcher.sendToServer(new SyncExtendedPlayer(player));
 				} else

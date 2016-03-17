@@ -46,7 +46,7 @@ public class DriveStateCapability {
 	
 	public static class Default implements IDriveState {
         private boolean inDrive = false;
-        private String activeDrive = "";
+        private String activeDrive = "none";
         int antiPoints = 0;
 		@Override public boolean getInDrive() { return inDrive; }
 		@Override public String getActiveDriveName() { return activeDrive; }

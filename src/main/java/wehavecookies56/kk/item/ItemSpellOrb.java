@@ -36,7 +36,7 @@ public abstract class ItemSpellOrb extends Item {
 	}
 
 	@Override
-	public void addInformation (ItemStack stack, EntityPlayer player, List tooltip, boolean advanced) {
+	public void addInformation (ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced) {
 		tooltip.add(TextHelper.localize(Constants.getMagicName(magic, ExtendedPlayer.get(player).getMagicLevel(magic))));
 		super.addInformation(stack, player, tooltip, advanced);
 	}

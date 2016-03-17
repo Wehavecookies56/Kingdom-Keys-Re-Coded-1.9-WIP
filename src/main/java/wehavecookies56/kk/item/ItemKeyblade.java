@@ -13,6 +13,8 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import wehavecookies56.kk.KingdomKeys;
+import wehavecookies56.kk.capabilities.PlayerStatsCapability.IPlayerStats;
 import wehavecookies56.kk.entities.ExtendedPlayer;
 
 public class ItemKeyblade extends ItemSword {
@@ -28,8 +30,9 @@ public class ItemKeyblade extends ItemSword {
 
 		if (world.getBlockState(pos).getBlock() instanceof BlockDoor) {
 			SoundEvent sound;
-			if ((!ExtendedPlayer.get(player).inRecharge) || ExtendedPlayer.get(player).cheatMode) {
-				if (!ExtendedPlayer.get(player).cheatMode) ExtendedPlayer.get(player).removeMp(30);
+			IPlayerStats STATS = player.getCapability(KingdomKeys.PLAYER_STATS, null);
+			if ((!STATS.getRecharge()) || ExtendedPlayer.get(player).cheatMode) {
+				if (!ExtendedPlayer.get(player).cheatMode) STATS.remMP(30);
 
 				if (world.getBlockState(pos).getValue(BlockDoor.HALF) == EnumDoorHalf.UPPER) {
 					world.setBlockState(pos.down(), world.getBlockState(pos.down()).withProperty(BlockDoor.OPEN, !world.getBlockState(pos.down()).getValue(BlockDoor.OPEN)));
