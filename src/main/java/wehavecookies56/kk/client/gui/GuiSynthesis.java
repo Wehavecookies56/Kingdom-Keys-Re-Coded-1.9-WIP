@@ -55,6 +55,7 @@ public class GuiSynthesis extends GuiTooltip {
 	@SuppressWarnings ("unchecked")
 	@Override
 	public void initGui () {
+		System.out.println(mc.thePlayer.getCapability(KingdomKeys.SYNTHESIS_RECIPES, null).getKnownRecipes().size());
 		this.recipeList = new GuiRecipeList(this);
 		this.recipeList.registerScrollButtons(this.buttonList, 7, 8);
 		this.materialList = new GuiMaterialList(this);

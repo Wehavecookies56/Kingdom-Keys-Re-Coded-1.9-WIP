@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumHand;
@@ -19,6 +20,7 @@ import wehavecookies56.kk.client.gui.GuiKKChest;
 import wehavecookies56.kk.client.gui.GuiKeychains;
 import wehavecookies56.kk.client.gui.GuiPotions;
 import wehavecookies56.kk.client.gui.GuiSpells;
+import wehavecookies56.kk.client.gui.GuiSynthesis;
 import wehavecookies56.kk.client.gui.GuiSynthesisBagL;
 import wehavecookies56.kk.client.gui.GuiSynthesisBagM;
 import wehavecookies56.kk.client.gui.GuiSynthesisBagS;
@@ -35,6 +37,8 @@ import wehavecookies56.kk.inventory.ContainerSynthesisBagS;
 import wehavecookies56.kk.inventory.InventorySynthesisBagL;
 import wehavecookies56.kk.inventory.InventorySynthesisBagM;
 import wehavecookies56.kk.inventory.InventorySynthesisBagS;
+import wehavecookies56.kk.network.packet.PacketDispatcher;
+import wehavecookies56.kk.network.packet.client.SyncRecipeData;
 import wehavecookies56.kk.util.LogHelper;
 
 public class CommonProxy implements IGuiHandler {
@@ -82,7 +86,9 @@ public class CommonProxy implements IGuiHandler {
 			else
 				return null;
 		}
-
+		else if (ID == KingdomKeys.GUI_SPELLS_INV) {
+			return null;
+		}
 		else if (ID == KingdomKeys.GUI_SYNTHESISBAGS_INV)
 			return new ContainerSynthesisBagS(player, player.inventory, new InventorySynthesisBagS(player.getHeldItem(EnumHand.MAIN_HAND)));
 		else if (ID == KingdomKeys.GUI_SYNTHESISBAGM_INV)
@@ -110,7 +116,10 @@ public class CommonProxy implements IGuiHandler {
 				return new GuiKKChest(player.inventory, (TileEntityKKChest) world.getTileEntity(new BlockPos(x, y, z)));
 			else
 				return null;
-		} else if (ID == KingdomKeys.GUI_SYNTHESISBAGS_INV)
+		} 
+		else if (ID == KingdomKeys.GUI_SYNTHESISTABLE)
+			return new GuiSynthesis(null);
+		else if (ID == KingdomKeys.GUI_SYNTHESISBAGS_INV)
 			return new GuiSynthesisBagS(player, player.inventory, new InventorySynthesisBagS(player.getHeldItem(EnumHand.MAIN_HAND)));
 		else if (ID == KingdomKeys.GUI_SYNTHESISBAGM_INV)
 			return new GuiSynthesisBagM(player, player.inventory, new InventorySynthesisBagM(player.getHeldItem(EnumHand.MAIN_HAND)));

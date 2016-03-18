@@ -19,6 +19,7 @@ import wehavecookies56.kk.network.packet.client.SpawnThunderEntity;
 import wehavecookies56.kk.network.packet.client.SpawnThunderParticles;
 import wehavecookies56.kk.network.packet.client.SyncExtendedPlayer;
 import wehavecookies56.kk.network.packet.client.SyncExtendedPlayerMaterials;
+import wehavecookies56.kk.network.packet.client.SyncRecipeData;
 import wehavecookies56.kk.network.packet.server.AntiPoints;
 import wehavecookies56.kk.network.packet.server.CreateFromSynthesisRecipe;
 import wehavecookies56.kk.network.packet.server.DeSummonKeyblade;
@@ -73,6 +74,7 @@ public class PacketDispatcher {
 		registerMessage(SyncStatMessagesPacket.class);
 		registerMessage(SpawnThunderEntity.class);
 		registerMessage(SpawnDriveFormParticles.class);
+		registerMessage(SyncRecipeData.class);
 
 		// Client to Server
 		registerMessage(MunnyPickup.class);

@@ -81,6 +81,7 @@ public class KingdomKeys {
 	public static final int GUI_SYNTHESISBAGS_INV = modGuiIndex++;
 	public static final int GUI_SYNTHESISBAGM_INV = modGuiIndex++;
 	public static final int GUI_SYNTHESISBAGL_INV = modGuiIndex++;
+	public static final int GUI_SYNTHESISTABLE = modGuiIndex++;
 
 	@Mod.Instance (Reference.MODID)
 	public static KingdomKeys instance;
