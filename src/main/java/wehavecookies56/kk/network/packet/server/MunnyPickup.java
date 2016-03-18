@@ -8,7 +8,6 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.relauncher.Side;
 import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.capabilities.MunnyCapability.IMunny;
-import wehavecookies56.kk.entities.ExtendedPlayer;
 import wehavecookies56.kk.network.packet.AbstractMessage.AbstractServerMessage;
 
 public class MunnyPickup extends AbstractServerMessage<MunnyPickup> {

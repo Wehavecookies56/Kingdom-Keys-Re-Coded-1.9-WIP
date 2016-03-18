@@ -6,7 +6,6 @@ import api.player.model.ModelPlayerAPI;
 import api.player.model.ModelPlayerArmor;
 import api.player.model.ModelPlayerBase;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import wehavecookies56.kk.entities.ExtendedPlayer;

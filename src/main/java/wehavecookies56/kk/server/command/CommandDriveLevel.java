@@ -2,7 +2,6 @@ package wehavecookies56.kk.server.command;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommand;

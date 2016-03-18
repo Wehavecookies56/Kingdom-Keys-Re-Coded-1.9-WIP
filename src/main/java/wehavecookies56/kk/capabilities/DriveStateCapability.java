@@ -1,14 +1,10 @@
 package wehavecookies56.kk.capabilities;
 
 import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTTagByte;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagInt;
-import net.minecraft.nbt.NBTBase.NBTPrimitive;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
-import net.minecraftforge.test.NoBedSleepingTest.IExtraSleeping;
 
 public class DriveStateCapability {
 	

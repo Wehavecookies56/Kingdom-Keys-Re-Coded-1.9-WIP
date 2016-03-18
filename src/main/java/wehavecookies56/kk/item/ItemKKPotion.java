@@ -1,6 +1,5 @@
 package wehavecookies56.kk.item;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemFood;
@@ -12,7 +11,6 @@ import wehavecookies56.kk.lib.Strings;
 import wehavecookies56.kk.network.packet.PacketDispatcher;
 import wehavecookies56.kk.network.packet.server.PotionConsume;
 import wehavecookies56.kk.network.packet.server.RemoveItemInSlot;
-import wehavecookies56.kk.util.SoundHelper;
 
 public abstract class ItemKKPotion extends ItemFood {
 

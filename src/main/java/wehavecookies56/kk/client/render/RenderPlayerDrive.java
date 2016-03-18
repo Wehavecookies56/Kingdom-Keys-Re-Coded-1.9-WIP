@@ -1,6 +1,5 @@
 package wehavecookies56.kk.client.render;
 
-import api.player.model.ModelPlayerArmor;
 import api.player.render.RenderPlayerAPI;
 import api.player.render.RenderPlayerBase;
 import net.minecraft.client.entity.AbstractClientPlayer;

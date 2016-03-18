@@ -5,8 +5,6 @@ import java.io.IOException;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import wehavecookies56.kk.KingdomKeys;
-import wehavecookies56.kk.capabilities.MunnyCapability.IMunny;
-import wehavecookies56.kk.entities.ExtendedPlayer;
 import wehavecookies56.kk.lib.Strings;
 import wehavecookies56.kk.util.GuiHelper;
 import wehavecookies56.kk.util.TextHelper;

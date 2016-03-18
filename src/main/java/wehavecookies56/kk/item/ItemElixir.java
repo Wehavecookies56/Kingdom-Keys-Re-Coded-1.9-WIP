@@ -2,7 +2,6 @@ package wehavecookies56.kk.item;
 
 import net.minecraft.entity.player.EntityPlayer;
 import wehavecookies56.kk.KingdomKeys;
-import wehavecookies56.kk.entities.ExtendedPlayer;
 import wehavecookies56.kk.lib.Strings;
 
 public class ItemElixir extends ItemKKPotion {

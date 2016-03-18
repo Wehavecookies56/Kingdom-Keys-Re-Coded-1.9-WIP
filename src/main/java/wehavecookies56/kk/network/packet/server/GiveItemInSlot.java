@@ -8,7 +8,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.relauncher.Side;
 import wehavecookies56.kk.network.packet.AbstractMessage;
-import wehavecookies56.kk.network.packet.PacketDispatcher;
 
 public class GiveItemInSlot extends AbstractMessage<GiveItemInSlot> {
 	//String player;

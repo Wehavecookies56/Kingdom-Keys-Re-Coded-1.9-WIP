@@ -8,7 +8,6 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
-import wehavecookies56.kk.client.model.ModelIfrit;
 import wehavecookies56.kk.client.model.ModelPrometheus;
 import wehavecookies56.kk.entities.projectiles.EntityIfrit;
 import wehavecookies56.kk.lib.Reference;

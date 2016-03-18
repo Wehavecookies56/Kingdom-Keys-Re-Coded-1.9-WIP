@@ -2,17 +2,13 @@ package wehavecookies56.kk.network.packet.server;
 
 import java.io.IOException;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.relauncher.Side;
 import wehavecookies56.kk.entities.ExtendedPlayer;
 import wehavecookies56.kk.item.ItemKKPotion;
 import wehavecookies56.kk.item.ModItems;
-import wehavecookies56.kk.network.packet.PacketDispatcher;
 import wehavecookies56.kk.network.packet.AbstractMessage.AbstractServerMessage;
-import wehavecookies56.kk.util.SoundHelper;
 
 public class PotionConsume extends AbstractServerMessage<PotionConsume> {
 

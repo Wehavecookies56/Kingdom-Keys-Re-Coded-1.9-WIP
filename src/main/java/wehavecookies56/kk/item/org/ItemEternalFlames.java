@@ -14,7 +14,6 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import wehavecookies56.kk.entities.projectiles.EntityBlazeofGlory;
 import wehavecookies56.kk.entities.projectiles.EntityEternalFlames;
 
 public class ItemEternalFlames extends ItemSword {

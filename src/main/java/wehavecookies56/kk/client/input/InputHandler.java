@@ -28,7 +28,6 @@ import wehavecookies56.kk.network.packet.server.GiveAchievementOpenMenu;
 import wehavecookies56.kk.network.packet.server.SummonKeyblade;
 import wehavecookies56.kk.util.GuiHelper;
 import wehavecookies56.kk.util.KeyboardHelper;
-import wehavecookies56.kk.util.SoundHelper;
 
 public class InputHandler {
 

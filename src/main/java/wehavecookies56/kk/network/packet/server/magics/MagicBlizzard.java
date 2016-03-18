@@ -12,8 +12,8 @@ import wehavecookies56.kk.entities.magic.EntityBlizzara;
 import wehavecookies56.kk.entities.magic.EntityBlizzard;
 import wehavecookies56.kk.lib.Constants;
 import wehavecookies56.kk.lib.Strings;
-import wehavecookies56.kk.network.packet.PacketDispatcher;
 import wehavecookies56.kk.network.packet.AbstractMessage.AbstractServerMessage;
+import wehavecookies56.kk.network.packet.PacketDispatcher;
 import wehavecookies56.kk.network.packet.client.SpawnBlizzardParticles;
 
 public class MagicBlizzard extends AbstractServerMessage<MagicBlizzard> {

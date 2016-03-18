@@ -3,8 +3,6 @@ package wehavecookies56.kk.capabilities;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.sun.corba.se.impl.orbutil.closure.Constant;
-
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;

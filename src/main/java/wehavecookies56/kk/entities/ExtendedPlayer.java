@@ -4,13 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
-import net.minecraftforge.items.IItemHandler;
 import wehavecookies56.kk.api.driveforms.DriveForm;
 import wehavecookies56.kk.inventory.InventoryDriveForms;
 import wehavecookies56.kk.inventory.InventoryKeychain;
@@ -22,9 +20,7 @@ import wehavecookies56.kk.item.ItemSpellOrb;
 import wehavecookies56.kk.lib.Strings;
 import wehavecookies56.kk.network.CommonProxy;
 import wehavecookies56.kk.network.packet.PacketDispatcher;
-import wehavecookies56.kk.network.packet.client.ShowOverlayPacket;
 import wehavecookies56.kk.network.packet.client.SyncExtendedPlayer;
-import wehavecookies56.kk.network.packet.server.SyncStatMessagesPacket;
 
 public class ExtendedPlayer implements IExtendedEntityProperties {
 

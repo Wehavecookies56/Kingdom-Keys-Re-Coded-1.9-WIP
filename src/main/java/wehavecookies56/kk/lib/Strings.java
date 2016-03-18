@@ -1,7 +1,5 @@
 package wehavecookies56.kk.lib;
 
-import wehavecookies56.kk.client.gui.GuiMenu_Config;
-
 public class Strings {
 
 	public static final String tabKingdomKeys = "tabKingdomKeys";

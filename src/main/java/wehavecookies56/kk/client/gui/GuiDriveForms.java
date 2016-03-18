@@ -14,7 +14,6 @@ import net.minecraft.world.World;
 import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.capabilities.MunnyCapability.IMunny;
 import wehavecookies56.kk.client.input.Keybinds;
-import wehavecookies56.kk.entities.ExtendedPlayer;
 import wehavecookies56.kk.inventory.ContainerDriveForms;
 import wehavecookies56.kk.inventory.InventoryDriveForms;
 import wehavecookies56.kk.lib.Reference;

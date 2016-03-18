@@ -10,7 +10,6 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.capabilities.PlayerStatsCapability.IPlayerStats;
-import wehavecookies56.kk.entities.ExtendedPlayer;
 import wehavecookies56.kk.lib.Constants;
 import wehavecookies56.kk.lib.Reference;
 

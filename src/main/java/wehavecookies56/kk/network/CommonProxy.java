@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumHand;
@@ -37,8 +36,6 @@ import wehavecookies56.kk.inventory.ContainerSynthesisBagS;
 import wehavecookies56.kk.inventory.InventorySynthesisBagL;
 import wehavecookies56.kk.inventory.InventorySynthesisBagM;
 import wehavecookies56.kk.inventory.InventorySynthesisBagS;
-import wehavecookies56.kk.network.packet.PacketDispatcher;
-import wehavecookies56.kk.network.packet.client.SyncRecipeData;
 import wehavecookies56.kk.util.LogHelper;
 
 public class CommonProxy implements IGuiHandler {

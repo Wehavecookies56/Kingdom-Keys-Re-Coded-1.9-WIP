@@ -1,6 +1,7 @@
 package wehavecookies56.kk.util;
 
-import static net.minecraftforge.oredict.OreDictionary.*;
+import static net.minecraftforge.oredict.OreDictionary.registerOre;
+
 import wehavecookies56.kk.block.ModBlocks;
 import wehavecookies56.kk.item.ModItems;
 
