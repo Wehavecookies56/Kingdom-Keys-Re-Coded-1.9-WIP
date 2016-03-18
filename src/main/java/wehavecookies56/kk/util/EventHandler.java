@@ -157,6 +157,31 @@ public class EventHandler {
             }
         });
 		
+		event.addCapability(new ResourceLocation(Reference.MODID, "IMagicState"), new ICapabilitySerializable<NBTTagCompound>()
+        {
+			IDriveState inst = KingdomKeys.MAGIC_STATE.getDefaultInstance();
+            @Override
+            public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
+                return capability == KingdomKeys.MAGIC_STATE;
+            }
+
+            @SuppressWarnings("unchecked")
+            @Override
+            public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
+                return capability == KingdomKeys.MAGIC_STATE ? (T)inst : null;
+            }
+
+            @Override
+            public NBTTagCompound serializeNBT() {
+                return (NBTTagCompound)KingdomKeys.MAGIC_STATE.getStorage().writeNBT(KingdomKeys.MAGIC_STATE, inst, null);
+            }
+
+            @Override
+            public void deserializeNBT(NBTTagCompound nbt) {
+            	KingdomKeys.MAGIC_STATE.getStorage().readNBT(KingdomKeys.MAGIC_STATE, inst, null, nbt);
+            }
+        });
+		
 		event.addCapability(new ResourceLocation(Reference.MODID, "IDriveState"), new ICapabilitySerializable<NBTTagCompound>()
         {
 			IDriveState inst = KingdomKeys.DRIVE_STATE.getDefaultInstance();

@@ -25,6 +25,7 @@ import wehavecookies56.kk.block.ModBlocks;
 import wehavecookies56.kk.block.ModBlocksRecipes;
 import wehavecookies56.kk.capabilities.DriveStateCapability.IDriveState;
 import wehavecookies56.kk.capabilities.FirstTimeJoinCapability.IFirstTimeJoin;
+import wehavecookies56.kk.capabilities.MagicStateCapability.IMagicState;
 import wehavecookies56.kk.capabilities.ModCapabilities;
 import wehavecookies56.kk.capabilities.MunnyCapability.IMunny;
 import wehavecookies56.kk.capabilities.PlayerStatsCapability.IPlayerStats;
@@ -92,6 +93,8 @@ public class KingdomKeys {
     public static final Capability<IPlayerStats> PLAYER_STATS = null;
 	@CapabilityInject(ISummonKeyblade.class)
     public static final Capability<ISummonKeyblade> SUMMON_KEYBLADE = null;
+	@CapabilityInject(IMagicState.class)
+    public static final Capability<IDriveState> MAGIC_STATE = null;
 	@CapabilityInject(IDriveState.class)
     public static final Capability<IDriveState> DRIVE_STATE = null;
 	@CapabilityInject(IFirstTimeJoin.class)
