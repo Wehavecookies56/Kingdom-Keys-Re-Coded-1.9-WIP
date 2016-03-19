@@ -7,6 +7,7 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
+import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.entities.ExtendedPlayer;
 import wehavecookies56.kk.inventory.InventorySpells;
 import wehavecookies56.kk.lib.Constants;
@@ -36,8 +37,6 @@ public class LevelUpMagic extends AbstractServerMessage<LevelUpMagic> {
 	@Override
 	public void process (EntityPlayer player, Side side) {
 
-		ExtendedPlayer ep = ExtendedPlayer.get(player);
-
 		int firstEmptySlot = -1;
 
 		boolean hasMagicInSlot = false;
@@ -56,16 +55,16 @@ public class LevelUpMagic extends AbstractServerMessage<LevelUpMagic> {
 		if (!hasMagicInSlot) {
 			ExtendedPlayer.get(player).inventorySpells.setInventorySlotContents(firstEmptySlot, player.getHeldItem(EnumHand.MAIN_HAND));
 			player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
-			String magicName = TextHelper.localize(Constants.getMagicName(magic, ep.getMagicLevel(magic)));
+			String magicName = TextHelper.localize(Constants.getMagicName(magic, player.getCapability(KingdomKeys.MAGIC_STATE, null).getMagicLevel(magic)));
 			TextHelper.sendFormattedChatMessage("Succesfully learnt " + magicName + "!", TextFormatting.YELLOW, player);
 		} else {
-			if (ep.getMagicLevel(magic) < Constants.MAX_MAGIC_LEVEL) {
-				ep.setMagicLevel(magic, ep.getMagicLevel(magic) + 1);
+			if (player.getCapability(KingdomKeys.MAGIC_STATE, null).getMagicLevel(magic) < Constants.MAX_MAGIC_LEVEL) {
+				player.getCapability(KingdomKeys.MAGIC_STATE, null).setMagicLevel(magic, player.getCapability(KingdomKeys.MAGIC_STATE, null).getMagicLevel(magic) + 1);
 				player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
-				TextHelper.sendFormattedChatMessage("Leveled up " + TextHelper.localize(Constants.getMagicName(magic, ep.getMagicLevel(magic) - 1)) + ", it is now " + TextHelper.localize(Constants.getMagicName(magic, ep.getMagicLevel(magic))) + "!", TextFormatting.YELLOW, player);
+				TextHelper.sendFormattedChatMessage("Leveled up " + TextHelper.localize(Constants.getMagicName(magic, player.getCapability(KingdomKeys.MAGIC_STATE, null).getMagicLevel(magic) - 1)) + ", it is now " + TextHelper.localize(Constants.getMagicName(magic, player.getCapability(KingdomKeys.MAGIC_STATE, null).getMagicLevel(magic))) + "!", TextFormatting.YELLOW, player);
 
 			} else {
-				TextHelper.sendFormattedChatMessage("Can't level up " + TextHelper.localize(Constants.getMagicName(magic, ep.getMagicLevel(magic))) + ", it is already at the max level!", TextFormatting.YELLOW, player);
+				TextHelper.sendFormattedChatMessage("Can't level up " + TextHelper.localize(Constants.getMagicName(magic, player.getCapability(KingdomKeys.MAGIC_STATE, null).getMagicLevel(magic))) + ", it is already at the max level!", TextFormatting.YELLOW, player);
 			}
 		}		
 	}

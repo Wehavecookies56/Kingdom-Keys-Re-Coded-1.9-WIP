@@ -12,6 +12,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.text.TextFormatting;
+import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.entities.ExtendedPlayer;
 import wehavecookies56.kk.util.TextHelper;
 
@@ -77,24 +78,24 @@ public class CommandResetLevel implements ICommand {
 		if (sender.getCommandSenderEntity() instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) sender.getCommandSenderEntity();
 			if (args.length == 0) {
-				ExtendedPlayer.get(player).level = 1;
-				ExtendedPlayer.get(player).experience = 0;
-				ExtendedPlayer.get(player).setStrength(1);
-				ExtendedPlayer.get(player).setDefense(1);
-				ExtendedPlayer.get(player).setMagic(1);
-				ExtendedPlayer.get(player).setHP(20);
-				player.heal(ExtendedPlayer.get(player).getHP());
+				player.getCapability(KingdomKeys.PLAYER_STATS, null).level = 1;
+				player.getCapability(KingdomKeys.PLAYER_STATS, null).experience = 0;
+				player.getCapability(KingdomKeys.PLAYER_STATS, null).setStrength(1);
+				player.getCapability(KingdomKeys.PLAYER_STATS, null).setDefense(1);
+				player.getCapability(KingdomKeys.PLAYER_STATS, null).setMagic(1);
+				player.getCapability(KingdomKeys.PLAYER_STATS, null).setHP(20);
+				player.heal(player.getCapability(KingdomKeys.PLAYER_STATS, null).getHP());
 				TextHelper.sendFormattedChatMessage("You level has been reset", TextFormatting.YELLOW, (EntityPlayer) sender.getCommandSenderEntity());
 
 			} else if (args.length == 1) {
 				EntityPlayerMP entityplayermp = args.length == 1 ? server.getPlayerList().getPlayerByUUID(UUID.fromString(args[0])) : getCommandSenderAsPlayer(sender);
-				ExtendedPlayer.get(entityplayermp).level = 1;
-				ExtendedPlayer.get(entityplayermp).experience = 0;
-				ExtendedPlayer.get(entityplayermp).setStrength(1);
-				ExtendedPlayer.get(entityplayermp).setDefense(1);
-				ExtendedPlayer.get(entityplayermp).setMagic(1);
-				ExtendedPlayer.get(entityplayermp).setHP(20);
-				player.heal(ExtendedPlayer.get(entityplayermp).getHP());
+				entityplayermp.getCapability(KingdomKeys.PLAYER_STATS, null).level = 1;
+				entityplayermp.getCapability(KingdomKeys.PLAYER_STATS, null).experience = 0;
+				entityplayermp.getCapability(KingdomKeys.PLAYER_STATS, null).setStrength(1);
+				entityplayermp.getCapability(KingdomKeys.PLAYER_STATS, null).setDefense(1);
+				entityplayermp.getCapability(KingdomKeys.PLAYER_STATS, null).setMagic(1);
+				entityplayermp.getCapability(KingdomKeys.PLAYER_STATS, null).setHP(20);
+				player.heal(entityplayermp.getCapability(KingdomKeys.PLAYER_STATS, null).getHP());
 				TextHelper.sendFormattedChatMessage(args[0] + "'s level has been reset", TextFormatting.YELLOW, (EntityPlayer) sender.getCommandSenderEntity());
 
 			} else

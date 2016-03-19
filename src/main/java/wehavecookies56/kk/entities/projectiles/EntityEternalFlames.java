@@ -88,10 +88,10 @@ public class EntityEternalFlames extends EntityThrowable implements IThrowableEn
 			}
 			mop.entityHit.setFire(8);
 			float shotDamage;
-			if (ExtendedPlayer.get(player).getStrength() / 2 < 8)
+			if (player.getCapability(KingdomKeys.PLAYER_STATS, null).getStrength() / 2 < 8)
 				shotDamage = 8;
 			else
-				shotDamage = ExtendedPlayer.get(player).getStrength() / 2;
+				shotDamage = player.getCapability(KingdomKeys.PLAYER_STATS, null).getStrength() / 2;
 
 			mop.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, getThrower()), shotDamage);
 		}

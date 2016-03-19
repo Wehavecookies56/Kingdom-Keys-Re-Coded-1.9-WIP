@@ -45,7 +45,7 @@ public class DriveFormPacket extends AbstractServerMessage<DriveFormPacket> {
 	public void process (EntityPlayer player, Side side) {
 		if (this.revert) {
 			player.getCapability(KingdomKeys.DRIVE_STATE, null).setInDrive(false);
-			player.getCapability(KingdomKeys.DRIVE_STATE, null).setDriveInUse("none");
+			player.getCapability(KingdomKeys.DRIVE_STATE, null).setActiveDriveName("none");
 			if (!player.getCapability(KingdomKeys.DRIVE_STATE, null).getCheatMode) player.getCapability(KingdomKeys.PLAYER_STATS, null).setDP(0);
 		}
 		if (DriveFormRegistry.isDriveFormRegistered(form)) DriveFormRegistry.get(form).initDrive(player);
