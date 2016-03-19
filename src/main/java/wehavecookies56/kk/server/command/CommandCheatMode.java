@@ -13,6 +13,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
+import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.entities.ExtendedPlayer;
 import wehavecookies56.kk.util.TextHelper;
 
@@ -64,16 +65,16 @@ public class CommandCheatMode implements ICommand {
 	@Override
 	public void execute (MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
 		if (sender.getCommandSenderEntity() instanceof EntityPlayer) if (args.length == 0) {
-			if (ExtendedPlayer.get((EntityPlayer) sender.getCommandSenderEntity()).cheatMode) {
-				ExtendedPlayer.get((EntityPlayer) sender.getCommandSenderEntity()).setCheatMode(false);
+			if (sender.getCommandSenderEntity().getCapability(KingdomKeys.PLAYER_STATS, null).getCheatMode()) {
+				sender.getCommandSenderEntity().getCapability(KingdomKeys.PLAYER_STATS, null).setCheatMode(false);
 				TextHelper.sendFormattedChatMessage("You are no longer in Cheat Mode", TextFormatting.RED, (EntityPlayer) sender.getCommandSenderEntity());
 			} else {
-				ExtendedPlayer.get((EntityPlayer) sender.getCommandSenderEntity()).setCheatMode(true);
+				sender.getCommandSenderEntity().getCapability(KingdomKeys.PLAYER_STATS, null).setCheatMode(true);
 				TextHelper.sendFormattedChatMessage("You are now in Cheat Mode", TextFormatting.GREEN, (EntityPlayer) sender.getCommandSenderEntity());
 			}
 		} else if (args.length == 1) {
 			EntityPlayerMP entityplayermp = args.length == 1 ? server.getPlayerList().getPlayerByUUID(UUID.fromString(args[0])) : getCommandSenderAsPlayer(sender);
-			if (ExtendedPlayer.get(entityplayermp).cheatMode) {
+			if (entityplayermp.getCapability(KingdomKeys.PLAYER_STATS, null).getCheatMode()) {
 				ExtendedPlayer.get(entityplayermp).setCheatMode(false);
 				TextHelper.sendFormattedChatMessage(args[1] + " is no longer in Cheat Mode", TextFormatting.RED, (EntityPlayer) sender.getCommandSenderEntity());
 			} else {

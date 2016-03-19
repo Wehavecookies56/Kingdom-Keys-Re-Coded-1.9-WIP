@@ -37,7 +37,7 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
 	public static List<String> spells = new ArrayList<String>();
 	public static List<String> items = new ArrayList<String>();
 
-	public boolean cheatMode;
+	//public boolean cheatMode;
 	
 	public boolean isKH1Fire;
 

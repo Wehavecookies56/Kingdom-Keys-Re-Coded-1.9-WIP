@@ -5,6 +5,7 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
+import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.entities.ExtendedPlayer;
 import wehavecookies56.kk.lib.Strings;
 import wehavecookies56.kk.network.packet.PacketDispatcher;
@@ -19,7 +20,7 @@ public class Magic {
 
 	public static double getMagicCost (String magic, EntityPlayer player) {
 		double cost = 0;
-		if (ExtendedPlayer.get(player).cheatMode) cost = 0;
+		if (player.getCapability(KingdomKeys.PLAYER_STATS, null).getCheatMode()) cost = 0;
 		return cost;
 	}
 

@@ -42,6 +42,8 @@ public class PlayerStatsCapability {
 		void remMP(double mp);
 		void setMaxMP(double mp);
 		void setRecharge(boolean recharge);
+		boolean getCheatMode();
+		void setCheatMode(boolean cheat);
 	}
 
 	public static class Storage implements IStorage<IPlayerStats> {
@@ -59,6 +61,7 @@ public class PlayerStatsCapability {
 			properties.setDouble("MP", instance.getMP());
 			properties.setDouble("Max MP", instance.getMaxMP());
 			properties.setBoolean("Recharge", instance.getRecharge());
+			properties.setBoolean("CheatMode", instance.getCheatMode());
 			return properties;
 		}
 
@@ -75,6 +78,7 @@ public class PlayerStatsCapability {
 			instance.setMP(properties.getDouble("MP"));
 			instance.setMaxMP(properties.getDouble("Max MP"));
 			instance.setRecharge(properties.getBoolean("Recharge"));
+			instance.setCheatMode(properties.getBoolean("CheatMode"));
 		}
 	}
 	
@@ -92,6 +96,8 @@ public class PlayerStatsCapability {
         private double dp = 0;
         private double maxDP = 1000;
 		private boolean recharge = false;
+		private boolean cheatMode;
+		
         @Override public double getMP() { return this.mp; }
         @Override public double getMaxMP() { return this.maxMP; }
 		@Override public int getLevel() { return this.level; }
@@ -139,8 +145,11 @@ public class PlayerStatsCapability {
         @Override public boolean setMP(double mp) { if (mp <= this.maxMP) {this.mp = mp; return true; } return false; }
         @Override public void addMP(double mp) { if (mp + this.mp > this.maxMP) this.mp = this.maxMP; else this.mp += mp; }
         @Override public void remMP(double mp) { if (mp + this.mp < 0) this.mp = 0; else this.mp -= mp; }
-        @Override public void setMaxMP(double maxMP) { this.maxMP = mp; }
+        @Override public void setMaxMP(double maxMP) { this.maxMP = mp;}
 		@Override public void setRecharge(boolean recharge) { this.recharge = recharge; }
+		@Override public boolean getCheatMode() {return this.cheatMode;}
+		@Override public void setCheatMode(boolean cheat) {this.cheatMode = cheat;}
+		
  
     }
 }

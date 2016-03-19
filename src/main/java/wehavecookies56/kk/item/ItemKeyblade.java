@@ -31,8 +31,8 @@ public class ItemKeyblade extends ItemSword {
 		if (world.getBlockState(pos).getBlock() instanceof BlockDoor) {
 			SoundEvent sound;
 			IPlayerStats STATS = player.getCapability(KingdomKeys.PLAYER_STATS, null);
-			if ((!STATS.getRecharge()) || ExtendedPlayer.get(player).cheatMode) {
-				if (!ExtendedPlayer.get(player).cheatMode) STATS.remMP(30);
+			if ((!STATS.getRecharge()) || player.getCapability(KingdomKeys.PLAYER_STATS, null).getCheatMode()) {
+				if (!player.getCapability(KingdomKeys.PLAYER_STATS, null).getCheatMode()) STATS.remMP(30);
 
 				if (world.getBlockState(pos).getValue(BlockDoor.HALF) == EnumDoorHalf.UPPER) {
 					world.setBlockState(pos.down(), world.getBlockState(pos.down()).withProperty(BlockDoor.OPEN, !world.getBlockState(pos.down()).getValue(BlockDoor.OPEN)));

@@ -396,7 +396,7 @@ public class GuiCommandMenu extends GuiScreen {
 					GL11.glScalef(scale, scale, scale);
 					if (submenu == SUB_DRIVE) {
 						IPlayerStats STATS = mc.thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null);
-						if (STATS.getDP() >= Constants.getCost(driveCommands.get(i)) || ExtendedPlayer.get(mc.thePlayer).cheatMode)
+						if (STATS.getDP() >= Constants.getCost(driveCommands.get(i)) || mc.thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null).getCheatMode())
 							drawString(mc.fontRendererObj, TextHelper.localize(driveCommands.get(i)), 6, 4, 0xFFFFFF);
 						else
 							drawString(mc.fontRendererObj, TextHelper.localize(driveCommands.get(i)), 6, 4, 0x888888);

@@ -42,7 +42,7 @@ public class DriveFormAnti extends DriveForm {
 
 	@Override
 	public void update (EntityPlayer player) {
-		if (ExtendedPlayer.get(player).cheatMode == false) if (player.getCapability(KingdomKeys.PLAYER_STATS, null).getDP() > 0) {
+		if (player.getCapability(KingdomKeys.PLAYER_STATS, null).getCheatMode() == false) if (player.getCapability(KingdomKeys.PLAYER_STATS, null).getDP() > 0) {
 			player.getCapability(KingdomKeys.PLAYER_STATS, null).remDP(0.1);
 			if (player.getCapability(KingdomKeys.PLAYER_STATS, null).getDP() < 0) player.getCapability(KingdomKeys.PLAYER_STATS, null).setDP(0);
 		} else
