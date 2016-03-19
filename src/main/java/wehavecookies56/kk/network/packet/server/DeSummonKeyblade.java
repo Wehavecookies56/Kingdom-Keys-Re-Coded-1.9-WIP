@@ -6,6 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.relauncher.Side;
+import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.entities.ExtendedPlayer;
 import wehavecookies56.kk.network.packet.AbstractMessage.AbstractServerMessage;
 import wehavecookies56.kk.util.SoundHelper;
@@ -34,7 +35,7 @@ public class DeSummonKeyblade extends AbstractServerMessage<DeSummonKeyblade> {
 	public void process (EntityPlayer player, Side side) {
 		player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
 		SoundHelper.playSoundAtEntity(player.worldObj, player, SoundHelper.UnSummon, 0.5f, 1);
-		ExtendedPlayer.get(player).setKeybladeSummoned(false);
+		player.getCapability(KingdomKeys.PLAYER_STATS, null).setKeybladeSummoned(false);
 	}
 
 }

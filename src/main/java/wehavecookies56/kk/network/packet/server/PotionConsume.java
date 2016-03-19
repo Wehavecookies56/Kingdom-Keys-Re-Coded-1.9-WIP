@@ -5,6 +5,7 @@ import java.io.IOException;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.relauncher.Side;
+import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.entities.ExtendedPlayer;
 import wehavecookies56.kk.item.ItemKKPotion;
 import wehavecookies56.kk.item.ModItems;
@@ -39,12 +40,12 @@ public class PotionConsume extends AbstractServerMessage<PotionConsume> {
 			break;
 		case "ether":
 			((ItemKKPotion) ModItems.Ether).getPotionEffect(player);
-			ExtendedPlayer.get(player).addMp(33);
+			player.getCapability(KingdomKeys.PLAYER_STATS, null).addMP(33);
 			break;
 		case "elixir":
 			((ItemKKPotion) ModItems.Elixir).getPotionEffect(player);
 			player.heal(10);
-			ExtendedPlayer.get(player).addMp(33);
+			player.getCapability(KingdomKeys.PLAYER_STATS, null).addMP(33);
 			break;
 		default:
 			break;

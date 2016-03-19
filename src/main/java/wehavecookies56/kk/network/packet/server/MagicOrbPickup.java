@@ -6,6 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.relauncher.Side;
+import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.entities.ExtendedPlayer;
 import wehavecookies56.kk.network.packet.AbstractMessage.AbstractServerMessage;
 
@@ -33,7 +34,7 @@ public class MagicOrbPickup extends AbstractServerMessage<MagicOrbPickup> {
 	public void process (EntityPlayer player, Side side) {
 		//player.inventory.consumeInventoryItem(toRemove.getItem());
 		toRemove.stackSize--;
-		ExtendedPlayer.get(player).addMp(toRemove.getTagCompound().getInteger("amount"));
+		player.getCapability(KingdomKeys.PLAYER_STATS, null).addMP(toRemove.getTagCompound().getInteger("amount"));
 	}
 
 }

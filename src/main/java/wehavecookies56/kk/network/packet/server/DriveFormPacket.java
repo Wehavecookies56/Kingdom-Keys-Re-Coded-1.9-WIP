@@ -5,6 +5,7 @@ import java.io.IOException;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.relauncher.Side;
+import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.api.driveforms.DriveForm;
 import wehavecookies56.kk.api.driveforms.DriveFormRegistry;
 import wehavecookies56.kk.entities.ExtendedPlayer;
@@ -43,9 +44,9 @@ public class DriveFormPacket extends AbstractServerMessage<DriveFormPacket> {
 	@Override
 	public void process (EntityPlayer player, Side side) {
 		if (this.revert) {
-			ExtendedPlayer.get(player).setInDrive(false);
-			ExtendedPlayer.get(player).setDriveInUse("none");
-			if (!ExtendedPlayer.get(player).cheatMode) ExtendedPlayer.get(player).setDP(0);
+			player.getCapability(KingdomKeys.DRIVE_STATE, null).setInDrive(false);
+			player.getCapability(KingdomKeys.DRIVE_STATE, null).setDriveInUse("none");
+			if (!player.getCapability(KingdomKeys.DRIVE_STATE, null).getCheatMode) player.getCapability(KingdomKeys.PLAYER_STATS, null).setDP(0);
 		}
 		if (DriveFormRegistry.isDriveFormRegistered(form)) DriveFormRegistry.get(form).initDrive(player);
 

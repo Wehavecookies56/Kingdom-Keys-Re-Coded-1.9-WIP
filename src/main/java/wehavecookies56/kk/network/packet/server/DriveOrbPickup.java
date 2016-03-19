@@ -6,6 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.relauncher.Side;
+import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.entities.ExtendedPlayer;
 import wehavecookies56.kk.network.packet.AbstractMessage.AbstractServerMessage;
 
@@ -33,7 +34,7 @@ public class DriveOrbPickup extends AbstractServerMessage<DriveOrbPickup> {
 	public void process (EntityPlayer player, Side side) {
 		//player.inventory.consumeInventoryItem(toRemove.getItem());
 		toRemove.stackSize--;
-		ExtendedPlayer.get(player).addDP(toRemove.getTagCompound().getInteger("amount"));
+		player.getCapability(KingdomKeys.PLAYER_STATS, null).addDP(toRemove.getTagCompound().getInteger("amount"));
 	}
 
 }
