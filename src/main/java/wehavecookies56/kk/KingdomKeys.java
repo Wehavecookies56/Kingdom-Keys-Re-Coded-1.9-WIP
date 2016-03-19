@@ -30,6 +30,8 @@ import wehavecookies56.kk.capabilities.ModCapabilities;
 import wehavecookies56.kk.capabilities.MunnyCapability.IMunny;
 import wehavecookies56.kk.capabilities.PlayerStatsCapability.IPlayerStats;
 import wehavecookies56.kk.capabilities.SummonKeybladeCapability.ISummonKeyblade;
+import wehavecookies56.kk.capabilities.SynthesisMaterialCapability;
+import wehavecookies56.kk.capabilities.SynthesisMaterialCapability.ISynthesisMaterial;
 import wehavecookies56.kk.capabilities.SynthesisRecipeCapability.ISynthesisRecipe;
 import wehavecookies56.kk.driveforms.ModDriveForms;
 import wehavecookies56.kk.entities.PlayerLevel;
@@ -94,13 +96,15 @@ public class KingdomKeys {
 	@CapabilityInject(ISummonKeyblade.class)
     public static final Capability<ISummonKeyblade> SUMMON_KEYBLADE = null;
 	@CapabilityInject(IMagicState.class)
-    public static final Capability<IDriveState> MAGIC_STATE = null;
+    public static final Capability<IMagicState> MAGIC_STATE = null;
 	@CapabilityInject(IDriveState.class)
     public static final Capability<IDriveState> DRIVE_STATE = null;
 	@CapabilityInject(IFirstTimeJoin.class)
     public static final Capability<IFirstTimeJoin> FIRST_TIME_JOIN = null;
 	@CapabilityInject(ISynthesisRecipe.class)
     public static final Capability<ISynthesisRecipe> SYNTHESIS_RECIPES = null;
+	@CapabilityInject(ISynthesisMaterial.class)
+	public static final Capability<ISynthesisMaterial> SYNTHESIS_MATERIALS = null;
 
 	@EventHandler
 	public void preInit (FMLPreInitializationEvent e) {

@@ -3,18 +3,21 @@ package wehavecookies56.kk.network.packet.server;
 import java.io.IOException;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
+import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.api.materials.MaterialRegistry;
-import wehavecookies56.kk.entities.ExtendedPlayerMaterials;
 import wehavecookies56.kk.item.ModItems;
 import wehavecookies56.kk.lib.Reference;
 import wehavecookies56.kk.lib.Strings;
+import wehavecookies56.kk.network.packet.PacketDispatcher;
 import wehavecookies56.kk.network.packet.AbstractMessage.AbstractServerMessage;
+import wehavecookies56.kk.network.packet.client.SyncMaterialData;
 
 public class TakeMaterials extends AbstractServerMessage<TakeMaterials> {
 
@@ -42,7 +45,7 @@ public class TakeMaterials extends AbstractServerMessage<TakeMaterials> {
 
 	@Override
 	public void process (EntityPlayer player, Side side) {
-		if (amount > ExtendedPlayerMaterials.get(player).getMaterialAmount(MaterialRegistry.get(materialName))) amount = ExtendedPlayerMaterials.get(player).getMaterialAmount(MaterialRegistry.get(materialName));
+		if (amount > player.getCapability(KingdomKeys.SYNTHESIS_MATERIALS, null).getMaterialAmount(MaterialRegistry.get(materialName))) amount = player.getCapability(KingdomKeys.SYNTHESIS_MATERIALS, null).getMaterialAmount(MaterialRegistry.get(materialName));
 		if (materialName.startsWith("sm.")) {
 			ItemStack material = new ItemStack(ModItems.SynthesisMaterial, amount);
 			material.setTagCompound(new NBTTagCompound());
@@ -56,29 +59,30 @@ public class TakeMaterials extends AbstractServerMessage<TakeMaterials> {
 			else if (materialName.endsWith("crystal") || materialName.equals(Strings.SM_LostIllusion) || materialName.equals(Strings.SM_OrichalcumPlus)) material.getTagCompound().setString("rank", "S");
 
 			player.inventory.addItemStackToInventory(material);
-			ExtendedPlayerMaterials.get(player).removeMaterial(MaterialRegistry.get(materialName), amount);
+			player.getCapability(KingdomKeys.SYNTHESIS_MATERIALS, null).removeMaterial(MaterialRegistry.get(materialName), amount);
 
 		} else if (materialName.startsWith("item.")) {
 			if (GameRegistry.findItem(Reference.MODID, materialName.replace("item.", "")) != null) {
 				player.inventory.addItemStackToInventory(new ItemStack(GameRegistry.findItem(Reference.MODID, materialName.replace("item.", "")), amount));
-				ExtendedPlayerMaterials.get(player).removeMaterial(MaterialRegistry.get(materialName), amount);
+				player.getCapability(KingdomKeys.SYNTHESIS_MATERIALS, null).removeMaterial(MaterialRegistry.get(materialName), amount);
 			} else {
 				// VANILLA ITEMS HERE
 				if (materialName.equals(Items.wooden_sword.getUnlocalizedName())) {
 					player.inventory.addItemStackToInventory(new ItemStack(Items.wooden_sword, amount));
-					ExtendedPlayerMaterials.get(player).removeMaterial(MaterialRegistry.get(materialName), amount);
+					player.getCapability(KingdomKeys.SYNTHESIS_MATERIALS, null).removeMaterial(MaterialRegistry.get(materialName), amount);
 				}
 				if (materialName.equals(Items.stick.getUnlocalizedName())) {
 					player.inventory.addItemStackToInventory(new ItemStack(Items.stick, amount));
-					ExtendedPlayerMaterials.get(player).removeMaterial(MaterialRegistry.get(materialName), amount);
+					player.getCapability(KingdomKeys.SYNTHESIS_MATERIALS, null).removeMaterial(MaterialRegistry.get(materialName), amount);
 				}
 			}
 		} else if (materialName.startsWith("tile.")) if (GameRegistry.findBlock(Reference.MODID, materialName.replace("tile.", "")) != null) {
 			player.inventory.addItemStackToInventory(new ItemStack(GameRegistry.findBlock(Reference.MODID, materialName.replace("tile.", "")), amount));
-			ExtendedPlayerMaterials.get(player).removeMaterial(MaterialRegistry.get(materialName), amount);
+			player.getCapability(KingdomKeys.SYNTHESIS_MATERIALS, null).removeMaterial(MaterialRegistry.get(materialName), amount);
 		} else {
 			// VANILLA BLOCKS HERE
 		}
+		PacketDispatcher.sendTo(new SyncMaterialData(player.getCapability(KingdomKeys.SYNTHESIS_MATERIALS, null)), (EntityPlayerMP) player);
 	}
 
 }

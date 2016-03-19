@@ -15,6 +15,7 @@ import net.minecraft.world.World;
 import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.entities.TileEntitySynthesisTable;
 import wehavecookies56.kk.network.packet.PacketDispatcher;
+import wehavecookies56.kk.network.packet.client.SyncMaterialData;
 import wehavecookies56.kk.network.packet.client.SyncRecipeData;
 
 public class BlockSynthesisTable extends Block implements ITileEntityProvider {
@@ -32,6 +33,7 @@ public class BlockSynthesisTable extends Block implements ITileEntityProvider {
 		playerIn.openGui(KingdomKeys.instance, KingdomKeys.GUI_SYNTHESISTABLE, worldIn, pos.getX(), pos.getY(), pos.getZ());
 		if (!worldIn.isRemote){
 			PacketDispatcher.sendTo(new SyncRecipeData(playerIn.getCapability(KingdomKeys.SYNTHESIS_RECIPES, null)), (EntityPlayerMP) playerIn);
+			PacketDispatcher.sendTo(new SyncMaterialData(playerIn.getCapability(KingdomKeys.SYNTHESIS_MATERIALS, null)), (EntityPlayerMP) playerIn);
 		}
 		return true;
 	}

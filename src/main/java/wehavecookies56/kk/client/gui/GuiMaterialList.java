@@ -3,8 +3,6 @@ package wehavecookies56.kk.client.gui;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
@@ -13,9 +11,13 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.GuiScrollingList;
+
+import org.lwjgl.opengl.GL11;
+
+import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.api.materials.Material;
 import wehavecookies56.kk.api.materials.MaterialRegistry;
-import wehavecookies56.kk.entities.ExtendedPlayerMaterials;
+import wehavecookies56.kk.capabilities.SynthesisMaterialCapability.ISynthesisMaterial;
 import wehavecookies56.kk.util.TextHelper;
 
 public class GuiMaterialList extends GuiScrollingList {
@@ -38,7 +40,7 @@ public class GuiMaterialList extends GuiScrollingList {
 
 	@Override
 	protected int getSize () {
-		return ExtendedPlayerMaterials.get(Minecraft.getMinecraft().thePlayer).knownMaterialsMap.size();
+		return Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.SYNTHESIS_MATERIALS, null).getKnownMaterialsMap().size();
 	}
 
 	@Override
@@ -58,13 +60,13 @@ public class GuiMaterialList extends GuiScrollingList {
 	@Override
 	protected void drawSlot (int var1, int var2, int var3, int var4, Tessellator var5) {
 
-		ExtendedPlayerMaterials props = ExtendedPlayerMaterials.get(Minecraft.getMinecraft().thePlayer);
-
+		ISynthesisMaterial MATS = Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.SYNTHESIS_MATERIALS, null);
+		
 		List<String> materials = new ArrayList<String>();
 
-		materials.addAll(props.getKnownMaterialsMap().keySet());
+		materials.addAll(MATS.getKnownMaterialsMap().keySet());
 
-		this.f.drawString(f.trimStringToWidth(TextHelper.localize(materials.get(var1).toString() + ".name") + " x" + props.knownMaterialsMap.get(materials.get(var1)), listWidth - 10), this.left + 3, var3 + 2, 0xFFFFFF);
+		this.f.drawString(f.trimStringToWidth(TextHelper.localize(materials.get(var1).toString() + ".name") + " x" + MATS.getKnownMaterialsMap().get(materials.get(var1)), listWidth - 10), this.left + 3, var3 + 2, 0xFFFFFF);
 		Material m = MaterialRegistry.get(materials.get(var1).toString());
 		if (m.getTexture() != null) {
 			GL11.glPushMatrix();

@@ -5,6 +5,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
+import wehavecookies56.kk.lib.Strings;
 
 public class DriveStateCapability {
 	
@@ -12,10 +13,12 @@ public class DriveStateCapability {
 		boolean getInDrive();
 		String getActiveDriveName();
 		int getAntiPoints();
+		int getDriveLevel(String drive);
 		
 		void setInDrive(boolean drive);
 		void setActiveDriveName(String drive);
 		void setAntiPoints(int points);
+		void setDriveLevel(String drive, int level);
 	}
 
 	public static class Storage implements IStorage<IDriveState> {
@@ -26,7 +29,12 @@ public class DriveStateCapability {
 			properties.setBoolean("InDrive", instance.getInDrive());
 			properties.setString("ActiveDriveName", instance.getActiveDriveName());
 			properties.setInteger("AntiPoints", instance.getAntiPoints());
-			
+			properties.setInteger("DriveLevelValor", instance.getDriveLevel(Strings.Form_Valor));
+			properties.setInteger("DriveLevelWisdom", instance.getDriveLevel(Strings.Form_Wisdom));
+			properties.setInteger("DriveLevelLimit", instance.getDriveLevel(Strings.Form_Limit));
+			properties.setInteger("DriveLevelMaster", instance.getDriveLevel(Strings.Form_Master));
+			properties.setInteger("DriveLevelFinal", instance.getDriveLevel(Strings.Form_Final));
+
 			return properties;
 		}
 
@@ -36,7 +44,12 @@ public class DriveStateCapability {
 			instance.setInDrive(properties.getBoolean("InDrive"));
 			instance.setActiveDriveName(properties.getString("ActiveDriveName"));
 			instance.setAntiPoints(properties.getInteger("AntiPoints"));
-			
+			instance.setDriveLevel(Strings.Form_Valor, properties.getInteger("DriveLevelValor"));
+			instance.setDriveLevel(Strings.Form_Wisdom, properties.getInteger("DriveLevelWisdom"));
+			instance.setDriveLevel(Strings.Form_Limit, properties.getInteger("DriveLevelLimit"));
+			instance.setDriveLevel(Strings.Form_Master, properties.getInteger("DriveLevelMaster"));
+			instance.setDriveLevel(Strings.Form_Final, properties.getInteger("DriveLevelFinal"));
+
 		}
 	}
 	
@@ -44,13 +57,45 @@ public class DriveStateCapability {
         private boolean inDrive = false;
         private String activeDrive = "none";
         int antiPoints = 0;
+		int valor, wisdom, limit, master, Final;
 		@Override public boolean getInDrive() { return inDrive; }
 		@Override public String getActiveDriveName() { return activeDrive; }
 		@Override public int getAntiPoints() { return antiPoints; }
+		@Override
+		public int getDriveLevel(String drive) {
+			switch(drive) {
+				case Strings.Form_Valor:
+					return valor;
+				case Strings.Form_Wisdom:
+					return wisdom;
+				case Strings.Form_Limit:
+					return limit;
+				case Strings.Form_Master:
+					return master;
+				case Strings.Form_Final:
+					return Final;
+			}
+			return 0;
+		}
+
 		@Override public void setInDrive(boolean drive) { this.inDrive = drive; }
 		@Override public void setActiveDriveName(String drive) { this.activeDrive = drive; }
 		@Override public void setAntiPoints(int points) { this.antiPoints = points; }
-        
+		@Override
+		public void setDriveLevel(String drive, int level) {
+			switch (drive) {
+				case Strings.Form_Valor:
+					valor = level;
+				case Strings.Form_Wisdom:
+					wisdom = level;
+				case Strings.Form_Limit:
+					limit = level;
+				case Strings.Form_Master:
+					master = level;
+				case Strings.Form_Final:
+					Final = level;
+			}
+		}
     }
 }
 

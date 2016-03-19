@@ -5,8 +5,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
@@ -16,14 +14,17 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+
+import org.lwjgl.opengl.GL11;
+
 import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.api.materials.Material;
 import wehavecookies56.kk.api.materials.MaterialRegistry;
 import wehavecookies56.kk.api.recipes.Recipe;
 import wehavecookies56.kk.api.recipes.RecipeRegistry;
 import wehavecookies56.kk.capabilities.MunnyCapability.IMunny;
+import wehavecookies56.kk.capabilities.SynthesisMaterialCapability.ISynthesisMaterial;
 import wehavecookies56.kk.capabilities.SynthesisRecipeCapability.ISynthesisRecipe;
-import wehavecookies56.kk.entities.ExtendedPlayerMaterials;
 import wehavecookies56.kk.item.ModItems;
 import wehavecookies56.kk.lib.Config;
 import wehavecookies56.kk.lib.Constants;
@@ -97,7 +98,7 @@ public class GuiSynthesis extends GuiTooltip {
 
 	@Override
 	protected void actionPerformed (GuiButton button) {
-		ExtendedPlayerMaterials mats = ExtendedPlayerMaterials.get(mc.thePlayer);
+		ISynthesisMaterial MATS = mc.thePlayer.getCapability(KingdomKeys.SYNTHESIS_MATERIALS, null);
 		List<String> materials = new ArrayList<String>();
 		int freeSlots = 0;
 		boolean foundMaterial = false;
@@ -119,33 +120,33 @@ public class GuiSynthesis extends GuiTooltip {
 				if (isRecipeUsable(mc.thePlayer.getCapability(KingdomKeys.SYNTHESIS_RECIPES, null).getKnownRecipes().get(selected), 1)) PacketDispatcher.sendToServer(new CreateFromSynthesisRecipe(mc.thePlayer.getCapability(KingdomKeys.SYNTHESIS_RECIPES, null).getKnownRecipes().get(selected), 1));
 				break;
 			case TAKE1:
-				materials.addAll(mats.getKnownMaterialsMap().keySet());
+				materials.addAll(MATS.getKnownMaterialsMap().keySet());
 
 				freeSlots = getFreeSlots();
 				foundMaterial = getInventoryMaterial(materials.get(materialSelected));
-				if (foundMaterial || freeSlots >= 1) if (mats.getKnownMaterialsMap().get(materials.get(materialSelected)) >= 1) PacketDispatcher.sendToServer(new TakeMaterials(1, materials.get(materialSelected)));
+				if (foundMaterial || freeSlots >= 1) if (MATS.getKnownMaterialsMap().get(materials.get(materialSelected)) >= 1) PacketDispatcher.sendToServer(new TakeMaterials(1, materials.get(materialSelected)));
 				break;
 			case TAKEHALFSTACK:
-				materials.addAll(mats.getKnownMaterialsMap().keySet());
+				materials.addAll(MATS.getKnownMaterialsMap().keySet());
 
 				freeSlots = getFreeSlots();
 				foundMaterial = getInventoryMaterial(materials.get(materialSelected));
-				if (foundMaterial || freeSlots >= 1) if (mats.getKnownMaterialsMap().get(materials.get(materialSelected)) >= 32)
+				if (foundMaterial || freeSlots >= 1) if (MATS.getKnownMaterialsMap().get(materials.get(materialSelected)) >= 32)
 					PacketDispatcher.sendToServer(new TakeMaterials(32, materials.get(materialSelected)));
 				else
-					PacketDispatcher.sendToServer(new TakeMaterials(mats.getKnownMaterialsMap().get(materials.get(materialSelected)), materials.get(materialSelected)));
+					PacketDispatcher.sendToServer(new TakeMaterials(MATS.getKnownMaterialsMap().get(materials.get(materialSelected)), materials.get(materialSelected)));
 				break;
 			case TAKESTACK:
-				materials.addAll(mats.getKnownMaterialsMap().keySet());
+				materials.addAll(MATS.getKnownMaterialsMap().keySet());
 
 				freeSlots = getFreeSlots();
-				if (freeSlots >= 1) if (mats.getKnownMaterialsMap().get(materials.get(materialSelected)) >= 64)
+				if (freeSlots >= 1) if (MATS.getKnownMaterialsMap().get(materials.get(materialSelected)) >= 64)
 					PacketDispatcher.sendToServer(new TakeMaterials(64, materials.get(materialSelected)));
 				else
-					PacketDispatcher.sendToServer(new TakeMaterials(mats.getKnownMaterialsMap().get(materials.get(materialSelected)), materials.get(materialSelected)));
+					PacketDispatcher.sendToServer(new TakeMaterials(MATS.getKnownMaterialsMap().get(materials.get(materialSelected)), materials.get(materialSelected)));
 				break;
 			case TAKEALL:
-				materials.addAll(mats.getKnownMaterialsMap().keySet());
+				materials.addAll(MATS.getKnownMaterialsMap().keySet());
 				freeSlots = getFreeSlots();
 				if (freeSlots >= 1) PacketDispatcher.sendToServer(new TakeMaterials(freeSlots * 64, materials.get(materialSelected)));
 				break;
@@ -158,14 +159,14 @@ public class GuiSynthesis extends GuiTooltip {
 
 	public boolean isRecipeUsable (String name, int amountToRemove) {
 		EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-		ExtendedPlayerMaterials mats = ExtendedPlayerMaterials.get(player);
+		ISynthesisMaterial MATS = player.getCapability(KingdomKeys.SYNTHESIS_MATERIALS, null);
 		Recipe r = RecipeRegistry.get(name);
 		List<Boolean> hasMaterials = new ArrayList<Boolean>();
 		if (isInventoryFull()) return false;
 		Iterator it = r.getRequirements().entrySet().iterator();
 		while (it.hasNext()) {
 			Map.Entry<Material, Integer> pair = (Map.Entry<Material, Integer>) it.next();
-			if (mats.knownMaterialsMap.containsKey(pair.getKey().getName())) if (pair.getValue() != null && mats.knownMaterialsMap.get(pair.getKey().getName()) != null) if (pair.getValue() <= mats.knownMaterialsMap.get(pair.getKey().getName())) hasMaterials.add(true);
+			if (MATS.getKnownMaterialsMap().containsKey(pair.getKey().getName())) if (pair.getValue() != null && MATS.getKnownMaterialsMap().get(pair.getKey().getName()) != null) if (pair.getValue() <= MATS.getKnownMaterialsMap().get(pair.getKey().getName())) hasMaterials.add(true);
 
 		}
 		if (r.getRequirements().size() > 0) if (hasMaterials.size() == r.getRequirements().size()) return true;
@@ -223,12 +224,12 @@ public class GuiSynthesis extends GuiTooltip {
 			}
 		}
 		if (materialSelected != -1) {
-			ExtendedPlayerMaterials mats = ExtendedPlayerMaterials.get(mc.thePlayer);
+			ISynthesisMaterial MATS = mc.thePlayer.getCapability(KingdomKeys.SYNTHESIS_MATERIALS, null);
 			List<String> materials = new ArrayList<String>();
 
-			materials.addAll(mats.getKnownMaterialsMap().keySet());
-			if (!mats.getKnownMaterialsMap().isEmpty()) {
-				if (!(mats.getKnownMaterialsMap().get(materials.get(materialSelected)) < 1)) {
+			materials.addAll(MATS.getKnownMaterialsMap().keySet());
+			if (!MATS.getKnownMaterialsMap().isEmpty()) {
+				if (!(MATS.getKnownMaterialsMap().get(materials.get(materialSelected)) < 1)) {
 					Take1.enabled = true;
 					TakeStack.enabled = true;
 					TakeHalfStack.enabled = true;
@@ -295,20 +296,20 @@ public class GuiSynthesis extends GuiTooltip {
 	}
 
 	public void drawSelectedMaterial (int mouseX, int mouseY) {
-		ExtendedPlayerMaterials mats = ExtendedPlayerMaterials.get(mc.thePlayer);
+		ISynthesisMaterial MATS = mc.thePlayer.getCapability(KingdomKeys.SYNTHESIS_MATERIALS, null);
 		if (materialSelected != -1) {
 			Minecraft.getMinecraft().renderEngine.bindTexture(optionsBackground);
 			drawGradientRect(190, 60, 500, height - ((height / 8) + 70 / 16), -1072689136, -804253680);
 		}
 		List<String> materials = new ArrayList<String>();
 
-		materials.addAll(mats.getKnownMaterialsMap().keySet());
-		for (int i = 0; i < mats.getKnownMaterialsMap().size(); i++)
+		materials.addAll(MATS.getKnownMaterialsMap().keySet());
+		for (int i = 0; i < MATS.getKnownMaterialsMap().size(); i++)
 			if (materialSelected == i) {
 				GL11.glPushMatrix(); {
 					GL11.glTranslatef(200, 70, 0);
 					GL11.glScalef(2, 2, 2);
-					drawString(fontRendererObj, TextHelper.localize(materials.get(i).toString() + ".name") + " x" + mats.getKnownMaterialsMap().get(materials.get(i)), 0, 0, 0xFFF700);
+					drawString(fontRendererObj, TextHelper.localize(materials.get(i).toString() + ".name") + " x" + MATS.getKnownMaterialsMap().get(materials.get(i)), 0, 0, 0xFFF700);
 				}
 				GL11.glPopMatrix();
 				Material m = MaterialRegistry.get(materials.get(i).toString());
@@ -386,10 +387,10 @@ public class GuiSynthesis extends GuiTooltip {
 						String name = pair.getKey().getName();
 						String info = "";
 						int colour = 0xFFFFFF;
-						ExtendedPlayerMaterials mats = ExtendedPlayerMaterials.get(mc.thePlayer);
-						if (mats.getKnownMaterialsMap().containsKey(pair.getKey().getName())) {
-							info = " - You have " + mats.getKnownMaterialsMap().get(pair.getKey().getName());
-							if (mats.getKnownMaterialsMap().get(pair.getKey().getName()) >= pair.getValue())
+						ISynthesisMaterial MATS = mc.thePlayer.getCapability(KingdomKeys.SYNTHESIS_MATERIALS, null);
+						if (MATS.getKnownMaterialsMap().containsKey(pair.getKey().getName())) {
+							info = " - You have " + MATS.getKnownMaterialsMap().get(pair.getKey().getName());
+							if (MATS.getKnownMaterialsMap().get(pair.getKey().getName()) >= pair.getValue())
 								colour = 0x00CF18;
 							else
 								colour = 0xB50000;

@@ -294,7 +294,7 @@ public class GuiCommandMenu extends GuiScreen {
 						colour = STATS.getMP() < 1 ? 0x888888 : colour;
 
 						String magic = spells.get(i);
-						int level = ExtendedPlayer.get(mc.thePlayer).getMagicLevel(magic);
+						int level = mc.thePlayer.getCapability(KingdomKeys.MAGIC_STATE, null).getMagicLevel(magic);
 						String magicName = Constants.getMagicName(magic, level);
 						drawString(mc.fontRendererObj, TextHelper.localize(magicName), 6, 4, colour);
 						GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);

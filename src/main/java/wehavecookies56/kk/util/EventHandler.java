@@ -3,8 +3,6 @@ package wehavecookies56.kk.util;
 import java.util.List;
 import java.util.UUID;
 
-import com.mojang.authlib.GameProfile;
-
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -53,12 +51,13 @@ import wehavecookies56.kk.api.driveforms.DriveFormRegistry;
 import wehavecookies56.kk.block.ModBlocks;
 import wehavecookies56.kk.capabilities.DriveStateCapability.IDriveState;
 import wehavecookies56.kk.capabilities.FirstTimeJoinCapability.IFirstTimeJoin;
+import wehavecookies56.kk.capabilities.MagicStateCapability.IMagicState;
 import wehavecookies56.kk.capabilities.MunnyCapability.IMunny;
 import wehavecookies56.kk.capabilities.PlayerStatsCapability.IPlayerStats;
 import wehavecookies56.kk.capabilities.SummonKeybladeCapability.ISummonKeyblade;
+import wehavecookies56.kk.capabilities.SynthesisMaterialCapability.ISynthesisMaterial;
 import wehavecookies56.kk.capabilities.SynthesisRecipeCapability.ISynthesisRecipe;
 import wehavecookies56.kk.entities.ExtendedPlayer;
-import wehavecookies56.kk.entities.ExtendedPlayerMaterials;
 import wehavecookies56.kk.entities.magic.EntityThunder;
 import wehavecookies56.kk.inventory.InventorySynthesisBagL;
 import wehavecookies56.kk.inventory.InventorySynthesisBagM;
@@ -77,6 +76,8 @@ import wehavecookies56.kk.network.packet.server.DriveOrbPickup;
 import wehavecookies56.kk.network.packet.server.HpOrbPickup;
 import wehavecookies56.kk.network.packet.server.MagicOrbPickup;
 import wehavecookies56.kk.network.packet.server.MunnyPickup;
+
+import com.mojang.authlib.GameProfile;
 
 public class EventHandler {
 	
@@ -159,7 +160,7 @@ public class EventHandler {
 		
 		event.addCapability(new ResourceLocation(Reference.MODID, "IMagicState"), new ICapabilitySerializable<NBTTagCompound>()
         {
-			IDriveState inst = KingdomKeys.MAGIC_STATE.getDefaultInstance();
+			IMagicState inst = KingdomKeys.MAGIC_STATE.getDefaultInstance();
             @Override
             public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
                 return capability == KingdomKeys.MAGIC_STATE;
@@ -256,6 +257,32 @@ public class EventHandler {
             	KingdomKeys.SYNTHESIS_RECIPES.getStorage().readNBT(KingdomKeys.SYNTHESIS_RECIPES, inst, null, nbt);
             }
         });
+		
+		event.addCapability(new ResourceLocation(Reference.MODID, "ISynthesisMaterial"), new ICapabilitySerializable<NBTTagCompound>()
+		        {
+					ISynthesisMaterial inst = KingdomKeys.SYNTHESIS_MATERIALS.getDefaultInstance();
+		            @Override
+		            public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
+		                return capability == KingdomKeys.SYNTHESIS_MATERIALS;
+		            }
+
+		            @SuppressWarnings("unchecked")
+		            @Override
+		            public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
+		                return capability == KingdomKeys.SYNTHESIS_MATERIALS ? (T)inst : null;
+		            }
+
+		            @Override
+		            public NBTTagCompound serializeNBT() {
+		                return (NBTTagCompound)KingdomKeys.SYNTHESIS_MATERIALS.getStorage().writeNBT(KingdomKeys.SYNTHESIS_MATERIALS, inst, null);
+		            }
+
+		            @Override
+		            public void deserializeNBT(NBTTagCompound nbt) {
+		            	KingdomKeys.SYNTHESIS_MATERIALS.getStorage().readNBT(KingdomKeys.SYNTHESIS_MATERIALS, inst, null, nbt);
+		            }
+		        });
+
 		//if (event.entity instanceof EntityPlayer && ExtendedPlayer.get((EntityPlayer) event.entity) == null) ExtendedPlayer.register((EntityPlayer) event.entity);
 		//if (event.entity instanceof EntityPlayer && ExtendedPlayerRecipes.get((EntityPlayer) event.entity) == null) ExtendedPlayerRecipes.register((EntityPlayer) event.entity);
 		//if (event.entity instanceof EntityPlayer && ExtendedPlayerMaterials.get((EntityPlayer) event.entity) == null) ExtendedPlayerMaterials.register((EntityPlayer) event.entity);
@@ -398,8 +425,6 @@ public class EventHandler {
 			}
 			ExtendedPlayer.get((EntityPlayer) event.entity);
 			ExtendedPlayer.saveProxyData((EntityPlayer) event.entity);
-			ExtendedPlayerMaterials.get((EntityPlayer) event.entity);
-			ExtendedPlayerMaterials.saveProxyData((EntityPlayer) event.entity);
 		}
 
 		if (!event.entity.worldObj.isRemote && event.entity instanceof EntityMob) if (event.source.getSourceOfDamage() instanceof EntityPlayer) {

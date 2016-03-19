@@ -33,10 +33,6 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
 	public final InventorySpells inventorySpells = new InventorySpells();
 	public final InventoryDriveForms inventoryDrive = new InventoryDriveForms();
 
-	public int fireLevel = 1, blizzardLevel = 1, thunderLevel = 1, cureLevel = 1, gravityLevel = 1, aeroLevel = 1, stopLevel = 1;
-
-	public int valorLevel = 1, wisdomLevel = 1, limitLevel = 1, masterLevel = 1, finalLevel = 1;
-
 	public static List<String> driveForms = new ArrayList<String>();
 	public static List<String> spells = new ArrayList<String>();
 	public static List<String> items = new ArrayList<String>();
@@ -48,20 +44,6 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
 	public ExtendedPlayer (EntityPlayer player) {
 		this.player = player;
 		this.cheatMode = false;
-
-		this.fireLevel = 1;
-		this.blizzardLevel = 1;
-		this.thunderLevel = 1;
-		this.gravityLevel = 1;
-		this.cureLevel = 1;
-		this.aeroLevel = 1;
-		this.stopLevel = 1;
-
-		this.valorLevel = 0;
-		this.wisdomLevel = 0;
-		this.limitLevel = 0;
-		this.masterLevel = 0;
-		this.finalLevel = 0;
 		
 		this.isKH1Fire = false;
 	}
@@ -75,20 +57,6 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
 		this.inventoryDrive.writeToNBT(properties);
 		
 		properties.setBoolean("CheatMode", this.cheatMode);
-
-		properties.setInteger("FireLevel", this.fireLevel);
-		properties.setInteger("BlizzardLevel", this.blizzardLevel);
-		properties.setInteger("ThunderLevel", this.thunderLevel);
-		properties.setInteger("CureLevel", this.cureLevel);
-		properties.setInteger("GravityLevel", this.gravityLevel);
-		properties.setInteger("AeroLevel", this.aeroLevel);
-		properties.setInteger("StopLevel", this.stopLevel);
-
-		properties.setInteger("ValorLevel", this.valorLevel);
-		properties.setInteger("WisdomLevel", this.wisdomLevel);
-		properties.setInteger("LimitLevel", this.limitLevel);
-		properties.setInteger("MasterLevel", this.masterLevel);
-		properties.setInteger("FinalLevel", this.finalLevel);
 		
 		properties.setBoolean("isKH1Fire", this.isKH1Fire);
 
@@ -120,47 +88,12 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
 		this.cheatMode = properties.getBoolean("CheatMode");
 		
 		//player.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(this.hp);
-
-		this.fireLevel = properties.getInteger("FireLevel");
-		this.blizzardLevel = properties.getInteger("BlizzardLevel");
-		this.thunderLevel = properties.getInteger("ThunderLevel");
-		this.cureLevel = properties.getInteger("CureLevel");
-		this.gravityLevel = properties.getInteger("GravityLevel");
-		this.aeroLevel = properties.getInteger("AeroLevel");
-		this.stopLevel = properties.getInteger("StopLevel");
-
-		this.valorLevel = properties.getInteger("ValorLevel");
-		this.wisdomLevel = properties.getInteger("WisdomLevel");
-		this.limitLevel = properties.getInteger("LimitLevel");
-		this.masterLevel = properties.getInteger("MasterLevel");
-		this.finalLevel = properties.getInteger("FinalLevel");
 		
 		this.isKH1Fire = properties.getBoolean("isKH1Fire");
 	}
 
 	@Override
 	public void init (Entity entity, World world) {}
-
-	public int getMagicLevel (String magic) {
-		switch(magic){
-			case Strings.Spell_Fire:
-				return this.fireLevel;
-			case Strings.Spell_Blizzard:
-				return this.blizzardLevel;
-			case Strings.Spell_Thunder:
-				return this.thunderLevel;
-			case Strings.Spell_Cure:
-				return this.cureLevel;
-			case Strings.Spell_Gravity:
-				return this.gravityLevel;
-			case Strings.Spell_Aero:
-				return this.aeroLevel;
-			case Strings.Spell_Stop:
-				return this.stopLevel;
-			default:
-				return -1;
-		}
-	}
 
 	public void setKH1Fire(boolean kh1)
 	{
@@ -171,71 +104,6 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
 	public boolean getKH1Fire()
 	{
 		return this.isKH1Fire;
-	}
-	
-	public void setDriveLevel (String form, int level) {
-		switch(form){
-			case Strings.Form_Valor:
-				this.valorLevel = level;
-				break;
-			case Strings.Form_Wisdom:
-				this.wisdomLevel = level;
-				break;
-			case Strings.Form_Limit:
-				this.limitLevel = level;
-				break;
-			case Strings.Form_Master:
-				this.masterLevel = level;
-				break;
-			case Strings.Form_Final:
-				this.finalLevel = level;
-				break;
-		}
-		sync();
-	}
-
-	public int getDriveLevel (String form) {
-		switch(form){
-			case Strings.Form_Valor:
-				return this.valorLevel;
-			case Strings.Form_Wisdom:
-				return this.wisdomLevel;
-			case Strings.Form_Limit:
-				return this.limitLevel;
-			case Strings.Form_Master:
-				return this.masterLevel;
-			case Strings.Form_Final:
-				return this.finalLevel;
-			default:
-				return -1;
-		}
-	}
-
-	public void setMagicLevel (String magic, int level) {
-		switch(magic){
-			case Strings.Spell_Fire:
-				this.fireLevel = level;
-				break;
-			case Strings.Spell_Blizzard:
-				blizzardLevel = level;
-				break;
-			case Strings.Spell_Thunder:
-				this.thunderLevel = level;
-				break;
-			case Strings.Spell_Cure:
-				this.cureLevel = level;
-				break;
-			case Strings.Spell_Gravity:
-				this.gravityLevel = level;
-				break;
-			case Strings.Spell_Aero:
-				this.aeroLevel = level;
-				break;
-			case Strings.Spell_Stop:
-				this.stopLevel = level;
-				break;
-		}
-		sync();
 	}
 
 

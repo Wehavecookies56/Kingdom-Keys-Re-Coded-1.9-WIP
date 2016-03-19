@@ -3,10 +3,11 @@ package wehavecookies56.kk.api.materials;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.google.common.collect.ImmutableMap;
+import wehavecookies56.kk.KingdomKeys;
 
 import net.minecraft.entity.player.EntityPlayer;
-import wehavecookies56.kk.entities.ExtendedPlayerMaterials;
+
+import com.google.common.collect.ImmutableMap;
 
 public class MaterialRegistry {
 
@@ -37,15 +38,14 @@ public class MaterialRegistry {
 	public static boolean learnMaterial (EntityPlayer player, String name) {
 		if (player != null && !isMaterialKnown(player, name)) {
 			Material material = materialMap.get(name);
-			ExtendedPlayerMaterials.get(player).learnMaterial(material);
+			//player.getCapability(KingdomKeys.SYNTHESIS_MATERIALS, null).(material);
 			return true;
 		}
 		return false;
 	}
 
 	public static boolean isMaterialKnown (EntityPlayer player, String name) {
-		if (ExtendedPlayerMaterials.get(player) != null) return ExtendedPlayerMaterials.get(player).knownMaterialsMap.containsKey(name);
-		return false;
+		return player.getCapability(KingdomKeys.SYNTHESIS_MATERIALS, null).getKnownMaterialsMap().containsKey(name);
 	}
 
 }

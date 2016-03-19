@@ -5,6 +5,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
+import wehavecookies56.kk.lib.Strings;
 
 public class MagicStateCapability {
 	
@@ -19,12 +20,12 @@ public class MagicStateCapability {
 		public NBTBase writeNBT(Capability<IMagicState> capability, IMagicState instance, EnumFacing side) {
 			NBTTagCompound properties = new NBTTagCompound();
 			
-			properties.setInteger("MagicLevelFire", instance.getMagicLevel("Fire"));
-			properties.setInteger("MagicLevelBlizzard", instance.getMagicLevel("Blizzard"));
-			properties.setInteger("MagicLevelThunder", instance.getMagicLevel("Thunder"));
-			properties.setInteger("MagicLevelCure", instance.getMagicLevel("Cure"));
-			properties.setInteger("MagicLevelAero", instance.getMagicLevel("Aero"));
-			properties.setInteger("MagicLevelStop", instance.getMagicLevel("Stop"));
+			properties.setInteger("MagicLevelFire", instance.getMagicLevel(Strings.Spell_Fire));
+			properties.setInteger("MagicLevelBlizzard", instance.getMagicLevel(Strings.Spell_Blizzard));
+			properties.setInteger("MagicLevelThunder", instance.getMagicLevel(Strings.Spell_Thunder));
+			properties.setInteger("MagicLevelCure", instance.getMagicLevel(Strings.Spell_Cure));
+			properties.setInteger("MagicLevelAero", instance.getMagicLevel(Strings.Spell_Aero));
+			properties.setInteger("MagicLevelStop", instance.getMagicLevel(Strings.Spell_Stop));
 
 			return properties;
 		}
@@ -32,32 +33,32 @@ public class MagicStateCapability {
 		@Override
 		public void readNBT(Capability<IMagicState> capability, IMagicState instance, EnumFacing side, NBTBase nbt) {
 			NBTTagCompound properties = (NBTTagCompound) nbt;
-			instance.setMagicLevel("Fire", properties.getInteger("MagicLevelFire"));
-			instance.setMagicLevel("Blizzard", properties.getInteger("MagicLevelBlizzard"));
-			instance.setMagicLevel("Thunder", properties.getInteger("MagicLevelThunder"));
-			instance.setMagicLevel("Cure", properties.getInteger("MagicLevelCure"));
-			instance.setMagicLevel("Aero", properties.getInteger("MagicLevelAero"));
-			instance.setMagicLevel("Stop", properties.getInteger("MagicLevelStop"));
+			instance.setMagicLevel(Strings.Spell_Fire, properties.getInteger("MagicLevelFire"));
+			instance.setMagicLevel(Strings.Spell_Blizzard, properties.getInteger("MagicLevelBlizzard"));
+			instance.setMagicLevel(Strings.Spell_Thunder, properties.getInteger("MagicLevelThunder"));
+			instance.setMagicLevel(Strings.Spell_Cure, properties.getInteger("MagicLevelCure"));
+			instance.setMagicLevel(Strings.Spell_Aero, properties.getInteger("MagicLevelAero"));
+			instance.setMagicLevel(Strings.Spell_Stop, properties.getInteger("MagicLevelStop"));
 		}
 	}
 	
 	public static class Default implements IMagicState {
-        private int fireLevel, blizzardLevel, thunderLevel, cureLevel, aeroLevel, stopLevel;
+        private int fireLevel = 1, blizzardLevel = 1, thunderLevel = 1, cureLevel = 1, aeroLevel = 1, stopLevel = 1;
 		@Override
 		public int getMagicLevel(String magic) {
 			switch(magic)
 			{
-			case "Fire":
+			case Strings.Spell_Fire:
 				return fireLevel;
-			case "Blizzard":
+			case Strings.Spell_Blizzard:
 				return blizzardLevel;
-			case "Thunder":
+			case Strings.Spell_Thunder:
 				return thunderLevel;
-			case "Cure":
+			case Strings.Spell_Cure:
 				return cureLevel;
-			case "Aero":
+			case Strings.Spell_Aero:
 				return aeroLevel;
-			case "Stop":
+			case Strings.Spell_Stop:
 				return stopLevel;
 			}
 			return 0;
@@ -66,17 +67,17 @@ public class MagicStateCapability {
 		public void setMagicLevel(String magic, int level) {
 			switch(magic)
 			{
-			case "Fire":
+			case Strings.Spell_Fire:
 				fireLevel = level;
-			case "Blizzard":
+			case Strings.Spell_Blizzard:
 				blizzardLevel = level;
-			case "Thunder":
+			case Strings.Spell_Thunder:
 				thunderLevel = level;
-			case "Cure":
+			case Strings.Spell_Cure:
 				cureLevel = level;
-			case "Aero":
+			case Strings.Spell_Aero:
 				aeroLevel = level;
-			case "Stop":
+			case Strings.Spell_Stop:
 				stopLevel = level;
 			}			
 		}
