@@ -6,6 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
+import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.entities.ExtendedPlayer;
 import wehavecookies56.kk.entities.magic.EntityStop;
 import wehavecookies56.kk.entities.magic.EntityStopga;
@@ -32,9 +33,9 @@ public class MagicStop extends AbstractServerMessage<MagicStop> {
 
 	@Override
 	public void process (EntityPlayer player, Side side) {
-		if (!ExtendedPlayer.get(player).cheatMode) ExtendedPlayer.get(player).removeMp(Constants.getCost(Strings.Spell_Aero));
+		if (!ExtendedPlayer.get(player).cheatMode) player.getCapability(KingdomKeys.PLAYER_STATS, null).remMP(Constants.getCost(Strings.Spell_Aero));
 		World world = player.worldObj;
-		if (!world.isRemote) switch (ExtendedPlayer.get(player).getMagicLevel(Strings.Spell_Stop)) {
+		if (!world.isRemote) switch (player.getCapability(KingdomKeys.MAGIC_STATE, null).getMagicLevel(Strings.Spell_Stop)) {
 			case 1:
 				world.spawnEntityInWorld(new EntityStop(world, player, player.posX, player.posY, player.posZ));
 				PacketDispatcher.sendToAllAround(new SpawnStopParticles(player,1), player, 64.0D);
