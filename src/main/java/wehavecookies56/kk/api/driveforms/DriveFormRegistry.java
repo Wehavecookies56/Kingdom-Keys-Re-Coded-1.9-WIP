@@ -6,6 +6,7 @@ import java.util.Map;
 import com.google.common.collect.ImmutableMap;
 
 import net.minecraft.entity.player.EntityPlayer;
+import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.entities.ExtendedPlayer;
 
 public class DriveFormRegistry {
@@ -46,7 +47,7 @@ public class DriveFormRegistry {
 	public static boolean isDriveFormKnown (EntityPlayer player, String name) {
 		if (ExtendedPlayer.get(player) != null) {
 			ExtendedPlayer.get(player);
-			return ExtendedPlayer.driveForms.contains(name);
+			return player.getCapability(KingdomKeys.PLAYER_STATS, null).getDriveFormsList().contains(name);
 		}
 		return false;
 	}

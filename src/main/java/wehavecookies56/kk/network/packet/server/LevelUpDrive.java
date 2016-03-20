@@ -82,8 +82,8 @@ public class LevelUpDrive extends AbstractServerMessage<LevelUpDrive> {
 		else
 		{
 			for (int i = 0; i < InventoryDriveForms.INV_SIZE; i++) {
-				if (ExtendedPlayer.get(player).inventoryDrive.getStackInSlot(i) != null) {
-					if (ExtendedPlayer.get(player).inventoryDrive.getStackInSlot(i).getItem() == player.getHeldItem(EnumHand.MAIN_HAND).getItem()) {
+				if (player.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryDriveForms().getStackInSlot(i) != null) {
+					if (player.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryDriveForms().getStackInSlot(i).getItem() == player.getHeldItem(EnumHand.MAIN_HAND).getItem()) {
 						hasDriveInSlot = i;
 					}
 				} else {
@@ -93,7 +93,7 @@ public class LevelUpDrive extends AbstractServerMessage<LevelUpDrive> {
 			}
 	
 			if (hasDriveInSlot == -1) {
-				ExtendedPlayer.get(player).inventoryDrive.setInventorySlotContents(nullSlot, player.getHeldItem(EnumHand.MAIN_HAND));
+				player.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryDriveForms().setInventorySlotContents(nullSlot, player.getHeldItem(EnumHand.MAIN_HAND));
 				player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
 				TextHelper.sendFormattedChatMessage("Succesfully learnt " + form + " Form!", TextFormatting.YELLOW, player);
 			} else {
