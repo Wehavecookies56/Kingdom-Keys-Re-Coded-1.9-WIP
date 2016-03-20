@@ -31,6 +31,9 @@ public class DriveOrbPickup extends AbstractServerMessage<DriveOrbPickup> {
 
 	@Override
 	public void process (EntityPlayer player, Side side) {
+		System.out.println(player.getCapability(KingdomKeys.PLAYER_STATS, null));
+		System.out.println(toRemove.getTagCompound().getInteger("amount"));
+		System.out.println(player.getCapability(KingdomKeys.PLAYER_STATS, null).getDP());
 		//player.inventory.consumeInventoryItem(toRemove.getItem());
 		toRemove.stackSize--;
 		player.getCapability(KingdomKeys.PLAYER_STATS, null).addDP(toRemove.getTagCompound().getInteger("amount"));

@@ -560,7 +560,8 @@ public class EventHandler {
 			// if(dp < 1000) //Not pickup orb when full
 			{
 				DriveOrbPickup packet = new DriveOrbPickup(event.item.getEntityItem());
-				if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) PacketDispatcher.sendToServer(packet);
+				if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) 
+					PacketDispatcher.sendToServer(packet);
 				if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
 					event.item.getEntityItem().stackSize--;
 					STATS.addDP(event.item.getEntityItem().getTagCompound().getInteger("amount"));
