@@ -89,6 +89,9 @@ public class GuiCommandMenu extends GuiScreen {
 	}
 
 	public void drawCommandMenu (int width, int height) {
+		IDriveState DS = mc.thePlayer.getCapability(KingdomKeys.DRIVE_STATE, null);
+		IPlayerStats STATS = mc.thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null);
+
 		// Magic:"+magicselected+" Drive:"+driveselected);
 		//System.out.println("Is KH1 Fire?: "+ExtendedPlayer.get(Minecraft.getMinecraft().thePlayer).getKH1Fire());
 		float scale = 1.05f;
@@ -120,15 +123,13 @@ public class GuiCommandMenu extends GuiScreen {
 					drawTexturedModalRect(0, 0, TOP_WIDTH, 0, TOP_WIDTH + MENU_WIDTH, v + MENU_HEIGHT);
 			}
 
-			IDriveState DS = mc.thePlayer.getCapability(KingdomKeys.DRIVE_STATE, null);
-			IPlayerStats STATS = mc.thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null);
 			if (DS.getInDrive()) {
 				if (DS.getActiveDriveName().equals(Strings.Form_Anti))
 					drawString(mc.fontRendererObj, TextHelper.localize(Strings.Gui_CommandMenu_Drive_Revert), 6 + textX, 4, 0x888888);
 				else
 					drawString(mc.fontRendererObj, TextHelper.localize(Strings.Gui_CommandMenu_Drive_Revert), 6 + textX, 4, 0xFFFFFF);
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			} else if (ExtendedPlayer.driveForms.isEmpty() || STATS.getDP() <= 0)
+			} else if (STATS.getDriveFormsList().isEmpty() || STATS.getDP() <= 0)
 				drawString(mc.fontRendererObj, TextHelper.localize(Strings.Gui_CommandMenu_Drive), 6 + textX, 4, 0x888888);
 			else
 				drawString(mc.fontRendererObj, TextHelper.localize(Strings.Gui_CommandMenu_Drive), 6 + textX, 4, 0xFFFFFF);
@@ -161,7 +162,8 @@ public class GuiCommandMenu extends GuiScreen {
 				else
 					drawTexturedModalRect(0, 0, TOP_WIDTH, 0, TOP_WIDTH + MENU_WIDTH, v + MENU_HEIGHT);
 			}
-			if (ExtendedPlayer.items.isEmpty())
+
+			if (STATS.getItemsList().isEmpty())
 				drawString(mc.fontRendererObj, TextHelper.localize(Strings.Gui_CommandMenu_Items), 6 + textX, 4, 0x888888);
 			else
 				drawString(mc.fontRendererObj, TextHelper.localize(Strings.Gui_CommandMenu_Items), 6 + textX, 4, 0xFFFFFF);
@@ -198,10 +200,8 @@ public class GuiCommandMenu extends GuiScreen {
 			if (spells == null) {
 				drawString(mc.fontRendererObj, TextHelper.localize(Strings.Gui_CommandMenu_Magic), 6 + textX, 4, 0x888888);
 			} else {
-				IDriveState DS = mc.thePlayer.getCapability(KingdomKeys.DRIVE_STATE, null);
-				IPlayerStats STATS = mc.thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null);
 				//if (!ExtendedPlayer.get(mc.thePlayer).getRecharge() && !spells.isEmpty() && !ExtendedPlayer.get(mc.thePlayer).getDriveInUse().equals("Valor"))
-				if (!STATS.getRecharge() && (!ExtendedPlayer.spells.isEmpty() && !DS.getActiveDriveName().equals(Strings.Form_Valor))) 
+				if (!STATS.getRecharge() && (!STATS.getSpellsList().isEmpty() && !DS.getActiveDriveName().equals(Strings.Form_Valor))) 
 
 					drawString(mc.fontRendererObj, TextHelper.localize(Strings.Gui_CommandMenu_Magic), 6 + textX, 4, 0xFFFFFF);
 				else
@@ -257,7 +257,7 @@ public class GuiCommandMenu extends GuiScreen {
 		}
 		GL11.glPopMatrix();
 		// Magic submenu //
-		spells = ExtendedPlayer.spells;
+		spells = STATS.getSpellsList();
 		if (spells == null) {} else if (!spells.isEmpty()) {
 			// MAGIC TOP
 			GL11.glPushMatrix();
@@ -288,7 +288,6 @@ public class GuiCommandMenu extends GuiScreen {
 							drawTexturedModalRect(0, 0, TOP_WIDTH, 15, TOP_WIDTH + MENU_WIDTH, v + MENU_HEIGHT);
 						else
 							drawTexturedModalRect(0, 0, TOP_WIDTH, 0, TOP_WIDTH + MENU_WIDTH, v + MENU_HEIGHT);
-						IPlayerStats STATS = mc.thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null);
 						colour = Constants.getCost(spells.get(i)) < STATS.getMP() ? 0xFFFFFF : 0xFF9900;
 						if (spells.get(i).equals(Strings.Spell_Cure)) colour = 0xFF9900;
 						colour = STATS.getMP() < 1 ? 0x888888 : colour;
@@ -304,7 +303,7 @@ public class GuiCommandMenu extends GuiScreen {
 			}
 		}
 		// Items submenu //
-		items = ExtendedPlayer.items;
+		items = STATS.getItemsList();
 		if (items == null) {} else if (!items.isEmpty()) {
 			// Items TOP
 			GL11.glPushMatrix();
@@ -347,7 +346,7 @@ public class GuiCommandMenu extends GuiScreen {
 
 		ExtendedPlayer.get(mc.thePlayer);
 		// Drive form submenu //
-		driveCommands = ExtendedPlayer.driveForms;
+		driveCommands = STATS.getDriveFormsList();
 		if (driveCommands == null) {} else if (!driveCommands.isEmpty()) {
 			// DRIVE TOP
 			GL11.glPushMatrix();
@@ -395,7 +394,6 @@ public class GuiCommandMenu extends GuiScreen {
 					GL11.glTranslatef(x, (height - MENU_HEIGHT * scale * (driveCommands.size() - i)), 0);
 					GL11.glScalef(scale, scale, scale);
 					if (submenu == SUB_DRIVE) {
-						IPlayerStats STATS = mc.thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null);
 						if (STATS.getDP() >= Constants.getCost(driveCommands.get(i)) || mc.thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null).getCheatMode())
 							drawString(mc.fontRendererObj, TextHelper.localize(driveCommands.get(i)), 6, 4, 0xFFFFFF);
 						else

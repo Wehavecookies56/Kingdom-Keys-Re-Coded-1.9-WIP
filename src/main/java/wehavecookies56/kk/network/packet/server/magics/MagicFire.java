@@ -31,7 +31,7 @@ public class MagicFire extends AbstractServerMessage<MagicFire> {
 
 	@Override
 	public void process (EntityPlayer player, Side side) {
-		if (!Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null).getCheatMode()) player.getCapability(KingdomKeys.PLAYER_STATS, null).remMP(Constants.getCost(Strings.Spell_Fire));
+		if (!player.getCapability(KingdomKeys.PLAYER_STATS, null).getCheatMode()) player.getCapability(KingdomKeys.PLAYER_STATS, null).remMP(Constants.getCost(Strings.Spell_Fire));
 		World world = player.worldObj;
 		switch (player.getCapability(KingdomKeys.MAGIC_STATE, null).getMagicLevel(Strings.Spell_Fire)) {
 			case 1:

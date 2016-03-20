@@ -1,9 +1,11 @@
 package wehavecookies56.kk.inventory;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
+import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.entities.ExtendedPlayer;
 import wehavecookies56.kk.item.ItemKKPotion;
 import wehavecookies56.kk.lib.Strings;
@@ -43,9 +45,9 @@ public class InventoryPotionsMenu extends AbstractInventory {
 
 	@Override
 	public void markDirty () {
-		ExtendedPlayer.items.clear();
+		Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null).getItemsList().clear();
 		for (int i = 0; i < getSizeInventory(); i++)
-			if (getStackInSlot(i) != null) ExtendedPlayer.items.add(((ItemKKPotion) getStackInSlot(i).getItem()).getItemName());
+			if (getStackInSlot(i) != null) Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null).getItemsList().add(((ItemKKPotion) getStackInSlot(i).getItem()).getItemName());
 		super.markDirty();
 	}
 

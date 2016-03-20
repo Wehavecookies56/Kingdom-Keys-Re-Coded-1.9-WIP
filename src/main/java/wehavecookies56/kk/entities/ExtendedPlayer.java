@@ -27,85 +27,13 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
 	public final static String EXT_PROP_NAME = "KKExtendedPlayer";
 
 	private final EntityPlayer player;
-
-	public final InventoryKeychain inventoryKeychain = new InventoryKeychain();
-	public final InventoryPotionsMenu inventoryPotions = new InventoryPotionsMenu();
-	public final InventorySpells inventorySpells = new InventorySpells();
-	public final InventoryDriveForms inventoryDrive = new InventoryDriveForms();
-
-	public static List<String> driveForms = new ArrayList<String>();
-	public static List<String> spells = new ArrayList<String>();
-	public static List<String> items = new ArrayList<String>();
-
-	//public boolean cheatMode;
 	
-	public boolean isKH1Fire;
-
 	public ExtendedPlayer (EntityPlayer player) {
 		this.player = player;
-		this.cheatMode = false;
-		
-		this.isKH1Fire = false;
-	}
-
-	@Override
-	public void saveNBTData (NBTTagCompound compound) {
-		NBTTagCompound properties = new NBTTagCompound();
-		this.inventoryKeychain.writeToNBT(properties);
-		this.inventoryPotions.writeToNBT(properties);
-		this.inventorySpells.writeToNBT(properties);
-		this.inventoryDrive.writeToNBT(properties);
-		
-		properties.setBoolean("CheatMode", this.cheatMode);
-		
-		properties.setBoolean("isKH1Fire", this.isKH1Fire);
-
-		compound.setTag(EXT_PROP_NAME, properties);
-
-	}
-
-	@Override
-	public void loadNBTData (NBTTagCompound compound) {
-		NBTTagCompound properties = (NBTTagCompound) compound.getTag(EXT_PROP_NAME);
-		this.inventoryKeychain.readFromNBT(properties);
-		this.inventoryPotions.readFromNBT(properties);
-		this.inventorySpells.readFromNBT(properties);
-		this.inventoryDrive.readFromNBT(properties);
-
-		ExtendedPlayer.spells.clear();
-		for (int i = 0; i < this.inventorySpells.getSizeInventory(); i++) {
-			if (this.inventorySpells.getStackInSlot(i) != null) {
-				ExtendedPlayer.spells.add(((ItemSpellOrb) this.inventorySpells.getStackInSlot(i).getItem()).getMagicName());
-			}
-		}
-		ExtendedPlayer.driveForms.clear();
-		for (int i = 0; i < this.inventoryDrive.getSizeInventory(); i++)
-			if (this.inventoryDrive.getStackInSlot(i) != null) ExtendedPlayer.driveForms.add(((ItemDriveForm) this.inventoryDrive.getStackInSlot(i).getItem()).getDriveFormName());
-		ExtendedPlayer.items.clear();
-		for (int i = 0; i < this.inventoryPotions.getSizeInventory(); i++)
-			if (this.inventoryPotions.getStackInSlot(i) != null) ExtendedPlayer.items.add(((ItemKKPotion) this.inventoryPotions.getStackInSlot(i).getItem()).getItemName());
-		
-		this.cheatMode = properties.getBoolean("CheatMode");
-		
-		//player.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(this.hp);
-		
-		this.isKH1Fire = properties.getBoolean("isKH1Fire");
 	}
 
 	@Override
 	public void init (Entity entity, World world) {}
-
-	public void setKH1Fire(boolean kh1)
-	{
-		this.isKH1Fire = kh1;
-		sync();
-	}
-	
-	public boolean getKH1Fire()
-	{
-		return this.isKH1Fire;
-	}
-
 
 	/*
 	public void levelUp () {
@@ -177,11 +105,6 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
 	}
 	*/
 
-	public void setCheatMode (boolean bool) {
-		this.cheatMode = bool;
-		sync();
-	}
-
 	public final void sync () {
 		SyncExtendedPlayer packet = new SyncExtendedPlayer(player);
 		if (player.worldObj.isRemote) PacketDispatcher.sendToServer(packet);
@@ -224,5 +147,17 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
 	public void learnDriveForm (DriveForm driveForm) {
 		driveForms.add(driveForm.getName());
 		if (player instanceof EntityPlayerMP) sync();
+	}
+
+	@Override
+	public void saveNBTData(NBTTagCompound compound) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void loadNBTData(NBTTagCompound compound) {
+		// TODO Auto-generated method stub
+		
 	}
 }

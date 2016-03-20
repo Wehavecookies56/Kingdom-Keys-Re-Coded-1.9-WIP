@@ -70,13 +70,13 @@ public class CommonProxy implements IGuiHandler {
 		TileEntity te = world.getTileEntity(xyz);
 
 		if (ID == KingdomKeys.GUI_KEYCHAIN_INV)
-			return new ContainerKeychain(player, player.inventory, ExtendedPlayer.get(player).inventoryKeychain);
+			return new ContainerKeychain(player, player.inventory, player.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryKeychain());
 		else if (ID == KingdomKeys.GUI_POTIONS_INV)
-			return new ContainerPotionsMenu(player, player.inventory, ExtendedPlayer.get(player).inventoryPotions);
+			return new ContainerPotionsMenu(player, player.inventory, player.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryPotionsMenu());
 		else if (ID == KingdomKeys.GUI_SPELLS_INV)
-			return new ContainerSpells(player, player.inventory, ExtendedPlayer.get(player).inventorySpells);
+			return new ContainerSpells(player, player.inventory, player.getCapability(KingdomKeys.PLAYER_STATS, null).getInventorySpells());
 		else if (ID == KingdomKeys.GUI_DRIVE_INV)
-			return new ContainerDriveForms(player, player.inventory, ExtendedPlayer.get(player).inventoryDrive);
+			return new ContainerDriveForms(player, player.inventory, player.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryDriveForms());
 		else if (ID == KingdomKeys.GUI_KKCHEST_INV) {
 			if (te instanceof TileEntityKKChest)
 				return new ContainerKKChest(player.inventory, (TileEntityKKChest) world.getTileEntity(new BlockPos(x, y, z)));
@@ -100,13 +100,13 @@ public class CommonProxy implements IGuiHandler {
 		TileEntity te = world.getTileEntity(xyz);
 
 		if (ID == KingdomKeys.GUI_KEYCHAIN_INV)
-			return new GuiKeychains(player, player.inventory, ExtendedPlayer.get(player).inventoryKeychain);
+			return new GuiKeychains(player, player.inventory, player.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryKeychain());
 		else if (ID == KingdomKeys.GUI_POTIONS_INV)
-			return new GuiPotions(player, player.inventory, ExtendedPlayer.get(player).inventoryPotions);
+			return new GuiPotions(player, player.inventory, player.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryPotionsMenu());
 		else if (ID == KingdomKeys.GUI_SPELLS_INV)
-			return new GuiSpells(player, player.inventory, ExtendedPlayer.get(player).inventorySpells);
+			return new GuiSpells(player, player.inventory, player.getCapability(KingdomKeys.PLAYER_STATS, null).getInventorySpells());
 		else if (ID == KingdomKeys.GUI_DRIVE_INV)
-			return new GuiDriveForms(player, player.inventory, ExtendedPlayer.get(player).inventoryDrive);
+			return new GuiDriveForms(player, player.inventory, player.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryDriveForms());
 		else if (ID == KingdomKeys.GUI_KKCHEST_INV) {
 
 			if (te instanceof TileEntityKKChest)

@@ -1,9 +1,11 @@
 package wehavecookies56.kk.inventory;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
+import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.entities.ExtendedPlayer;
 import wehavecookies56.kk.item.ItemSpellOrb;
 import wehavecookies56.kk.lib.Strings;
@@ -38,9 +40,9 @@ public class InventorySpells extends AbstractInventory {
 
 	@Override
 	public void markDirty () {
-		ExtendedPlayer.spells.clear();
+		Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null).getSpellsList().clear();
 		for (int i = 0; i < getSizeInventory(); i++)
-			if (getStackInSlot(i) != null) ExtendedPlayer.spells.add(((ItemSpellOrb) getStackInSlot(i).getItem()).getMagicName());
+			if (getStackInSlot(i) != null) Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null).getSpellsList().add(((ItemSpellOrb) getStackInSlot(i).getItem()).getMagicName());
 		super.markDirty();
 	}
 

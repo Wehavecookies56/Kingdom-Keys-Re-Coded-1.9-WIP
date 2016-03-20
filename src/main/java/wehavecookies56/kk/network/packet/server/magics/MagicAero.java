@@ -33,7 +33,7 @@ public class MagicAero extends AbstractServerMessage<MagicAero> {
 
 	@Override 
 	public void process (EntityPlayer player, Side side) {
-		if (!Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null).getCheatMode()) player.getCapability(KingdomKeys.PLAYER_STATS, null).remMP(Constants.getCost(Strings.Spell_Aero));
+		if (!player.getCapability(KingdomKeys.PLAYER_STATS, null).getCheatMode()) player.getCapability(KingdomKeys.PLAYER_STATS, null).remMP(Constants.getCost(Strings.Spell_Aero));
 		World world = player.worldObj;
 		if (!world.isRemote) switch (player.getCapability(KingdomKeys.MAGIC_STATE, null).getMagicLevel(Strings.Spell_Aero)) {
 			case 1:

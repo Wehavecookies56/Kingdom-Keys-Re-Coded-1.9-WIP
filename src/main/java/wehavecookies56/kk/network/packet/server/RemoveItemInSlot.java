@@ -5,6 +5,7 @@ import java.io.IOException;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.relauncher.Side;
+import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.entities.ExtendedPlayer;
 import wehavecookies56.kk.inventory.InventoryKeychain;
 import wehavecookies56.kk.inventory.InventoryPotionsMenu;
@@ -49,12 +50,12 @@ public class RemoveItemInSlot extends AbstractServerMessage<RemoveItemInSlot> {
 	@Override
 	public void process (EntityPlayer player, Side side) {
 		if (inv.equals("keychain")) {
-			keychain = ExtendedPlayer.get(player).inventoryKeychain;
+			keychain = player.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryKeychain();
 			keychain.setInventorySlotContents(slot, null);
 		}
 
 		if (inv.equals("potion")) {
-			potions = ExtendedPlayer.get(player).inventoryPotions;
+			potions = player.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryPotionsMenu();
 			potions.setInventorySlotContents(slot, null);
 			if (sound) SoundHelper.playSoundAtEntity(player.worldObj, player, SoundHelper.Potion, 0.5f, 1);
 		}

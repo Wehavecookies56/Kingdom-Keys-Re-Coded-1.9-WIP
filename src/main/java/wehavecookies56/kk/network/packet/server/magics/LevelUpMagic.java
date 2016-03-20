@@ -42,8 +42,8 @@ public class LevelUpMagic extends AbstractServerMessage<LevelUpMagic> {
 		boolean hasMagicInSlot = false;
 				
 		for (int i = 0; i < InventorySpells.INV_SIZE; i++) {
-			if (ExtendedPlayer.get(player).inventorySpells.getStackInSlot(i) != null) {
-				if (ExtendedPlayer.get(player).inventorySpells.getStackInSlot(i).getItem() == player.getHeldItem(EnumHand.MAIN_HAND).getItem()) {
+			if (player.getCapability(KingdomKeys.PLAYER_STATS, null).getInventorySpells().getStackInSlot(i) != null) {
+				if (player.getCapability(KingdomKeys.PLAYER_STATS, null).getInventorySpells().getStackInSlot(i).getItem() == player.getHeldItem(EnumHand.MAIN_HAND).getItem()) {
 					hasMagicInSlot = true;
 				}
 			} else {
@@ -53,7 +53,7 @@ public class LevelUpMagic extends AbstractServerMessage<LevelUpMagic> {
 		}
 
 		if (!hasMagicInSlot) {
-			ExtendedPlayer.get(player).inventorySpells.setInventorySlotContents(firstEmptySlot, player.getHeldItem(EnumHand.MAIN_HAND));
+			player.getCapability(KingdomKeys.PLAYER_STATS, null).getInventorySpells().setInventorySlotContents(firstEmptySlot, player.getHeldItem(EnumHand.MAIN_HAND));
 			player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
 			String magicName = TextHelper.localize(Constants.getMagicName(magic, player.getCapability(KingdomKeys.MAGIC_STATE, null).getMagicLevel(magic)));
 			TextHelper.sendFormattedChatMessage("Succesfully learnt " + magicName + "!", TextFormatting.YELLOW, player);

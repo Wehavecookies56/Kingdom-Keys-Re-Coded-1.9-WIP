@@ -30,7 +30,7 @@ public class MagicCure extends AbstractServerMessage<MagicCure> {
 
 	@Override
 	public void process (EntityPlayer player, Side side) {
-		if (!Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null).getCheatMode()) player.getCapability(KingdomKeys.PLAYER_STATS, null).setMP(0);
+		if (!player.getCapability(KingdomKeys.PLAYER_STATS, null).getCheatMode()) player.getCapability(KingdomKeys.PLAYER_STATS, null).setMP(0);
 		World world = player.worldObj;
 		player.extinguish();
 		switch (player.getCapability(KingdomKeys.MAGIC_STATE, null).getMagicLevel(Strings.Spell_Cure)) {
