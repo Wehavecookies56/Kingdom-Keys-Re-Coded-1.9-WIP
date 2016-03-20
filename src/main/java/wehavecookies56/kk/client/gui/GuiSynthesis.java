@@ -55,7 +55,6 @@ public class GuiSynthesis extends GuiTooltip {
 	@SuppressWarnings ("unchecked")
 	@Override
 	public void initGui () {
-		System.out.println(mc.thePlayer.getCapability(KingdomKeys.SYNTHESIS_RECIPES, null).getKnownRecipes().size());
 		this.recipeList = new GuiRecipeList(this);
 		this.recipeList.registerScrollButtons(this.buttonList, 7, 8);
 		this.materialList = new GuiMaterialList(this);
@@ -116,7 +115,9 @@ public class GuiSynthesis extends GuiTooltip {
 				submenu = MATERIALS;
 				break;
 			case CREATE:
-				if (isRecipeUsable(mc.thePlayer.getCapability(KingdomKeys.SYNTHESIS_RECIPES, null).getKnownRecipes().get(selected), 1)) PacketDispatcher.sendToServer(new CreateFromSynthesisRecipe(mc.thePlayer.getCapability(KingdomKeys.SYNTHESIS_RECIPES, null).getKnownRecipes().get(selected), 1));
+				if (isRecipeUsable(mc.thePlayer.getCapability(KingdomKeys.SYNTHESIS_RECIPES, null).getKnownRecipes().get(selected), 1)) {
+					PacketDispatcher.sendToServer(new CreateFromSynthesisRecipe(mc.thePlayer.getCapability(KingdomKeys.SYNTHESIS_RECIPES, null).getKnownRecipes().get(selected), 1));
+				}
 				break;
 			case TAKE1:
 				materials.addAll(MATS.getKnownMaterialsMap().keySet());
@@ -161,14 +162,24 @@ public class GuiSynthesis extends GuiTooltip {
 		ISynthesisMaterial MATS = player.getCapability(KingdomKeys.SYNTHESIS_MATERIALS, null);
 		Recipe r = RecipeRegistry.get(name);
 		List<Boolean> hasMaterials = new ArrayList<Boolean>();
-		if (isInventoryFull()) return false;
+		if (isInventoryFull()) 
+			return false;
 		Iterator it = r.getRequirements().entrySet().iterator();
 		while (it.hasNext()) {
 			Map.Entry<Material, Integer> pair = (Map.Entry<Material, Integer>) it.next();
-			if (MATS.getKnownMaterialsMap().containsKey(pair.getKey().getName())) if (pair.getValue() != null && MATS.getKnownMaterialsMap().get(pair.getKey().getName()) != null) if (pair.getValue() <= MATS.getKnownMaterialsMap().get(pair.getKey().getName())) hasMaterials.add(true);
-
+			if (MATS.getKnownMaterialsMap().containsKey(pair.getKey().getName())) {
+				if (pair.getValue() != null && MATS.getKnownMaterialsMap().get(pair.getKey().getName()) != null) {
+					if (pair.getValue() <= MATS.getKnownMaterialsMap().get(pair.getKey().getName())) {
+						hasMaterials.add(true);	
+					}
+				}
+			}
 		}
-		if (r.getRequirements().size() > 0) if (hasMaterials.size() == r.getRequirements().size()) return true;
+		if (r.getRequirements().size() > 0) {
+			if (hasMaterials.size() == r.getRequirements().size()) {
+				return true;
+			}
+		}
 		return false;
 	}
 

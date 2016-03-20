@@ -3,12 +3,15 @@ package wehavecookies56.kk.network.packet.server;
 import java.io.IOException;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.relauncher.Side;
 import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.api.materials.MaterialRegistry;
 import wehavecookies56.kk.item.ItemSynthesisMaterial;
 import wehavecookies56.kk.network.packet.AbstractMessage.AbstractServerMessage;
+import wehavecookies56.kk.network.packet.client.SyncMaterialData;
+import wehavecookies56.kk.network.packet.PacketDispatcher;
 
 public class OpenMaterials extends AbstractServerMessage<OpenMaterials> {
 
@@ -38,6 +41,7 @@ public class OpenMaterials extends AbstractServerMessage<OpenMaterials> {
 				player.getCapability(KingdomKeys.SYNTHESIS_MATERIALS, null).addMaterial(MaterialRegistry.get(player.inventory.mainInventory[i].getItem().getUnlocalizedName()), player.inventory.mainInventory[i].stackSize);
 				player.inventory.setInventorySlotContents(i, null);
 			}
+		PacketDispatcher.sendTo(new SyncMaterialData(player.getCapability(KingdomKeys.SYNTHESIS_MATERIALS, null)), (EntityPlayerMP) player);
 	}
 
 }

@@ -23,6 +23,7 @@ public class SynthesisMaterialCapability {
 
 		void addMaterial (Material material, int amount);
 		void removeMaterial (Material material, int amount);
+		void setMaterial (Material material, int amount);
 
 	}
 
@@ -76,9 +77,35 @@ public class SynthesisMaterialCapability {
 		public void addMaterial(Material material, int amount) {
 			if (materials.containsKey(material.getName())) {
 				int currAmount = materials.get(material.getName());
-				materials.replace(material.getName(), currAmount + amount);
-			} else
-				materials.put(material.getName(), amount);
+				if (amount <= 0) {
+					materials.remove(material.getName());
+				} else if (amount >= currAmount) {
+					materials.replace(material.getName(), currAmount + amount);
+				} else {
+					materials.replace(material.getName(), currAmount - amount);
+				}
+			} else {
+				if (amount <= 0) {
+					materials.remove(material.getName());
+				} else {
+					materials.put(material.getName(), amount);
+				}
+			}
+		}
+		
+		@Override 
+		public void setMaterial(Material material, int amount) {
+			if (materials.containsKey(material.getName())) {
+				if (amount <= 0) 
+					materials.remove(material.getName());
+				else
+				materials.replace(material.getName(), amount);
+			} else {
+				if (amount <= 0)
+					materials.remove(material.getName());
+				else
+					materials.put(material.getName(), amount);
+			}
 		}
 
 		@Override

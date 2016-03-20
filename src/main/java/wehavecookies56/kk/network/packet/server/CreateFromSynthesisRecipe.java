@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.relauncher.Side;
@@ -15,6 +16,8 @@ import wehavecookies56.kk.api.recipes.Recipe;
 import wehavecookies56.kk.api.recipes.RecipeRegistry;
 import wehavecookies56.kk.capabilities.SynthesisMaterialCapability.ISynthesisMaterial;
 import wehavecookies56.kk.item.ItemKeychain;
+import wehavecookies56.kk.network.packet.PacketDispatcher;
+import wehavecookies56.kk.network.packet.client.SyncMaterialData;
 import wehavecookies56.kk.network.packet.AbstractMessage.AbstractServerMessage;
 import wehavecookies56.kk.util.AchievementHelper;
 
@@ -53,6 +56,7 @@ public class CreateFromSynthesisRecipe extends AbstractServerMessage<CreateFromS
 			Map.Entry<Material, Integer> pair = (Map.Entry<Material, Integer>) it.next();
 			MATS.removeMaterial(pair.getKey(), pair.getValue());
 		}
+		PacketDispatcher.sendTo(new SyncMaterialData(player.getCapability(KingdomKeys.SYNTHESIS_MATERIALS, null)), (EntityPlayerMP) player);
 
 	}
 

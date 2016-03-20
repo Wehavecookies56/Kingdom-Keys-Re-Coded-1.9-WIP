@@ -45,7 +45,8 @@ public class TakeMaterials extends AbstractServerMessage<TakeMaterials> {
 
 	@Override
 	public void process (EntityPlayer player, Side side) {
-		if (amount > player.getCapability(KingdomKeys.SYNTHESIS_MATERIALS, null).getMaterialAmount(MaterialRegistry.get(materialName))) amount = player.getCapability(KingdomKeys.SYNTHESIS_MATERIALS, null).getMaterialAmount(MaterialRegistry.get(materialName));
+		if (amount > player.getCapability(KingdomKeys.SYNTHESIS_MATERIALS, null).getMaterialAmount(MaterialRegistry.get(materialName)))
+			amount = player.getCapability(KingdomKeys.SYNTHESIS_MATERIALS, null).getMaterialAmount(MaterialRegistry.get(materialName));
 		if (materialName.startsWith("sm.")) {
 			ItemStack material = new ItemStack(ModItems.SynthesisMaterial, amount);
 			material.setTagCompound(new NBTTagCompound());

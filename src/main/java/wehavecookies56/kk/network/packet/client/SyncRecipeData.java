@@ -39,7 +39,6 @@ public class SyncRecipeData extends AbstractClientMessage<SyncRecipeData> {
 
 	@Override
 	public void process(EntityPlayer player, Side side) {
-		System.out.println("Syncing data");
 		final ISynthesisRecipe recipe = player.getCapability(KingdomKeys.SYNTHESIS_RECIPES, null);
 		for (int i = 0; i < recipes.size(); i++) {
 			recipe.learnRecipe(RecipeRegistry.get(recipes.get(i)));

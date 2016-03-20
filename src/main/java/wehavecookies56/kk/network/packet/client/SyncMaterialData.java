@@ -44,12 +44,11 @@ public class SyncMaterialData extends AbstractClientMessage<SyncMaterialData> {
 
 	@Override
 	public void process(EntityPlayer player, Side side) {
-		System.out.println("Syncing data");
 		final ISynthesisMaterial material = player.getCapability(KingdomKeys.SYNTHESIS_MATERIALS, null);
 		Iterator<Entry<String, Integer>> it = materials.entrySet().iterator();
 		while (it.hasNext()) {
 			Map.Entry<String, Integer> pair = (Map.Entry<String, Integer>) it.next();
-			material.addMaterial(MaterialRegistry.get(pair.getKey().toString()), pair.getValue());
+			material.setMaterial(MaterialRegistry.get(pair.getKey().toString()), pair.getValue());
 		}
 	}
 
