@@ -3,11 +3,10 @@ package wehavecookies56.kk.api.materials;
 import java.util.HashMap;
 import java.util.Map;
 
-import wehavecookies56.kk.KingdomKeys;
+import com.google.common.collect.ImmutableMap;
 
 import net.minecraft.entity.player.EntityPlayer;
-
-import com.google.common.collect.ImmutableMap;
+import wehavecookies56.kk.KingdomKeys;
 
 public class MaterialRegistry {
 

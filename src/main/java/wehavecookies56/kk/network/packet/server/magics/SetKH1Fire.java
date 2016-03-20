@@ -2,10 +2,11 @@ package wehavecookies56.kk.network.packet.server.magics;
 
 import java.io.IOException;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.relauncher.Side;
-import wehavecookies56.kk.entities.ExtendedPlayer;
+import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.network.packet.AbstractMessage.AbstractServerMessage;
 
 public class SetKH1Fire extends AbstractServerMessage<SetKH1Fire> {
@@ -30,8 +31,6 @@ public class SetKH1Fire extends AbstractServerMessage<SetKH1Fire> {
 
 	@Override
 	public void process (EntityPlayer player, Side side) {
-		ExtendedPlayer ep = ExtendedPlayer.get(player);
-
-		ep.setKH1Fire(kh1fire);
+		Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.MAGIC_STATE, null).setKH1Fire(kh1fire);
 	}
 }

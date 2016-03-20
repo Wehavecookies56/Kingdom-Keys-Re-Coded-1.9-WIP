@@ -15,8 +15,8 @@ import wehavecookies56.kk.api.materials.MaterialRegistry;
 import wehavecookies56.kk.item.ModItems;
 import wehavecookies56.kk.lib.Reference;
 import wehavecookies56.kk.lib.Strings;
-import wehavecookies56.kk.network.packet.PacketDispatcher;
 import wehavecookies56.kk.network.packet.AbstractMessage.AbstractServerMessage;
+import wehavecookies56.kk.network.packet.PacketDispatcher;
 import wehavecookies56.kk.network.packet.client.SyncMaterialData;
 
 public class TakeMaterials extends AbstractServerMessage<TakeMaterials> {

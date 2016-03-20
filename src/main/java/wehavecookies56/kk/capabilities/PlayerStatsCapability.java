@@ -79,6 +79,7 @@ public class PlayerStatsCapability {
 			instance.setMaxMP(properties.getDouble("Max MP"));
 			instance.setRecharge(properties.getBoolean("Recharge"));
 			instance.setCheatMode(properties.getBoolean("CheatMode"));
+		//	
 		}
 	}
 	
@@ -96,7 +97,7 @@ public class PlayerStatsCapability {
         private double dp = 0;
         private double maxDP = 1000;
 		private boolean recharge = false;
-		private boolean cheatMode;
+		private boolean cheatMode = false;
 		
         @Override public double getMP() { return this.mp; }
         @Override public double getMaxMP() { return this.maxMP; }
@@ -149,9 +150,5 @@ public class PlayerStatsCapability {
 		@Override public void setRecharge(boolean recharge) { this.recharge = recharge; }
 		@Override public boolean getCheatMode() {return this.cheatMode;}
 		@Override public void setCheatMode(boolean cheat) {this.cheatMode = cheat;}
-		
- 
     }
 }
-
-

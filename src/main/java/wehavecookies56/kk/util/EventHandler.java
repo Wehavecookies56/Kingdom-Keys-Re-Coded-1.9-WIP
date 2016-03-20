@@ -3,6 +3,8 @@ package wehavecookies56.kk.util;
 import java.util.List;
 import java.util.UUID;
 
+import com.mojang.authlib.GameProfile;
+
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -76,8 +78,6 @@ import wehavecookies56.kk.network.packet.server.DriveOrbPickup;
 import wehavecookies56.kk.network.packet.server.HpOrbPickup;
 import wehavecookies56.kk.network.packet.server.MagicOrbPickup;
 import wehavecookies56.kk.network.packet.server.MunnyPickup;
-
-import com.mojang.authlib.GameProfile;
 
 public class EventHandler {
 	

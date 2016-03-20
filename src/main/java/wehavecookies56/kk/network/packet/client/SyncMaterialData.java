@@ -1,10 +1,8 @@
 package wehavecookies56.kk.network.packet.client;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -13,9 +11,7 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.relauncher.Side;
 import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.api.materials.MaterialRegistry;
-import wehavecookies56.kk.api.recipes.RecipeRegistry;
 import wehavecookies56.kk.capabilities.SynthesisMaterialCapability.ISynthesisMaterial;
-import wehavecookies56.kk.capabilities.SynthesisRecipeCapability.ISynthesisRecipe;
 import wehavecookies56.kk.network.packet.AbstractMessage.AbstractClientMessage;
 
 public class SyncMaterialData extends AbstractClientMessage<SyncMaterialData> {

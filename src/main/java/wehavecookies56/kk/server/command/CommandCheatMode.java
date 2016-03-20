@@ -14,7 +14,6 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import wehavecookies56.kk.KingdomKeys;
-import wehavecookies56.kk.entities.ExtendedPlayer;
 import wehavecookies56.kk.util.TextHelper;
 
 public class CommandCheatMode implements ICommand {
@@ -75,10 +74,10 @@ public class CommandCheatMode implements ICommand {
 		} else if (args.length == 1) {
 			EntityPlayerMP entityplayermp = args.length == 1 ? server.getPlayerList().getPlayerByUUID(UUID.fromString(args[0])) : getCommandSenderAsPlayer(sender);
 			if (entityplayermp.getCapability(KingdomKeys.PLAYER_STATS, null).getCheatMode()) {
-				ExtendedPlayer.get(entityplayermp).setCheatMode(false);
+				entityplayermp.getCapability(KingdomKeys.PLAYER_STATS, null).setCheatMode(false);
 				TextHelper.sendFormattedChatMessage(args[1] + " is no longer in Cheat Mode", TextFormatting.RED, (EntityPlayer) sender.getCommandSenderEntity());
 			} else {
-				ExtendedPlayer.get(entityplayermp).setCheatMode(true);
+				entityplayermp.getCapability(KingdomKeys.PLAYER_STATS, null).setCheatMode(true);
 				TextHelper.sendFormattedChatMessage(args[1] + " is now in Cheat Mode", TextFormatting.GREEN, (EntityPlayer) sender.getCommandSenderEntity());
 			}
 		} else

@@ -2,12 +2,12 @@ package wehavecookies56.kk.network.packet.server.magics;
 
 import java.io.IOException;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import wehavecookies56.kk.KingdomKeys;
-import wehavecookies56.kk.entities.ExtendedPlayer;
 import wehavecookies56.kk.entities.magic.EntityAero;
 import wehavecookies56.kk.entities.magic.EntityAeroga;
 import wehavecookies56.kk.entities.magic.EntityAerora;
@@ -31,9 +31,9 @@ public class MagicAero extends AbstractServerMessage<MagicAero> {
 
 	}
 
-	@Override
+	@Override 
 	public void process (EntityPlayer player, Side side) {
-		if (!ExtendedPlayer.get(player).cheatMode) player.getCapability(KingdomKeys.PLAYER_STATS, null).remMP(Constants.getCost(Strings.Spell_Aero));
+		if (!Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null).getCheatMode()) player.getCapability(KingdomKeys.PLAYER_STATS, null).remMP(Constants.getCost(Strings.Spell_Aero));
 		World world = player.worldObj;
 		if (!world.isRemote) switch (player.getCapability(KingdomKeys.MAGIC_STATE, null).getMagicLevel(Strings.Spell_Aero)) {
 			case 1:

@@ -5,7 +5,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.api.driveforms.DriveForm;
-import wehavecookies56.kk.entities.ExtendedPlayer;
 import wehavecookies56.kk.lib.Constants;
 import wehavecookies56.kk.lib.Reference;
 import wehavecookies56.kk.lib.Strings;

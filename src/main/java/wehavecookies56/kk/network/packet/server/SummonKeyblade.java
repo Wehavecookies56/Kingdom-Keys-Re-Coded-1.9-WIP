@@ -7,7 +7,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.relauncher.Side;
 import wehavecookies56.kk.KingdomKeys;
-import wehavecookies56.kk.entities.ExtendedPlayer;
 import wehavecookies56.kk.item.ItemKeyblade;
 import wehavecookies56.kk.network.packet.AbstractMessage.AbstractServerMessage;
 import wehavecookies56.kk.util.SoundHelper;
@@ -36,6 +35,6 @@ public class SummonKeyblade extends AbstractServerMessage<SummonKeyblade> {
 	public void process (EntityPlayer player, Side side) {
 		player.inventory.setInventorySlotContents(player.inventory.currentItem, stack);
 		SoundHelper.playSoundAtEntity(player.worldObj, player, SoundHelper.Summon, 0.5f, 1);
-		player.getCapability(KingdomKeys.PLAYER_STATS, null).setKeybladeSummoned(true);
+		player.getCapability(KingdomKeys.SUMMON_KEYBLADE, null).setIsKeybladeSummoned(true);
 	}
 }

@@ -12,6 +12,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.text.TextFormatting;
+import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.entities.ExtendedPlayer;
 import wehavecookies56.kk.item.ItemKeyblade;
 import wehavecookies56.kk.network.packet.PacketDispatcher;
@@ -86,7 +87,7 @@ public class CommandRemoveKeychain implements ICommand {
 					PacketDispatcher.sendToServer(new RemoveItemInSlot("keychain", 0));
 					PacketDispatcher.sendToAllAround(new RemoveItemInSlot("keychain", 0), (EntityPlayer) sender.getCommandSenderEntity(), 1);
 
-					if (props.isKeybladeSummoned()) if (player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem() instanceof ItemKeyblade) // props.isKeybladeSummoned()
+					if (sender.getCommandSenderEntity().getCapability(KingdomKeys.SUMMON_KEYBLADE, null).getKeybladeSummoned()) if (player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem() instanceof ItemKeyblade) // props.isKeybladeSummoned()
 																																											// ==
 																																											// true
 						PacketDispatcher.sendToServer(new DeSummonKeyblade(player.inventory.getCurrentItem()));
@@ -100,7 +101,7 @@ public class CommandRemoveKeychain implements ICommand {
 
 				if (propsmp.inventoryKeychain.getStackInSlot(0) != null) {
 					PacketDispatcher.sendToServer(new RemoveItemInSlot("keychain", 0));
-					if (propsmp.isKeybladeSummoned()) if (playermp.inventory.getCurrentItem() != null && playermp.inventory.getCurrentItem().getItem() instanceof ItemKeyblade) PacketDispatcher.sendToServer(new DeSummonKeyblade(playermp.inventory.getCurrentItem()));
+					if (playermp.getCapability(KingdomKeys.SUMMON_KEYBLADE, null).getKeybladeSummoned()) if (playermp.inventory.getCurrentItem() != null && playermp.inventory.getCurrentItem().getItem() instanceof ItemKeyblade) PacketDispatcher.sendToServer(new DeSummonKeyblade(playermp.inventory.getCurrentItem()));
 					PacketDispatcher.sendToServer(new SyncExtendedPlayer(playermp));
 					TextHelper.sendFormattedChatMessage(args[0] + "'s keychain has been removed!", TextFormatting.YELLOW, (EntityPlayer) sender.getCommandSenderEntity());
 				} else

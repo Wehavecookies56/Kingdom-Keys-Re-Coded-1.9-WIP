@@ -7,7 +7,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.relauncher.Side;
 import wehavecookies56.kk.KingdomKeys;
-import wehavecookies56.kk.entities.ExtendedPlayer;
 import wehavecookies56.kk.network.packet.AbstractMessage.AbstractServerMessage;
 
 public class DriveOrbPickup extends AbstractServerMessage<DriveOrbPickup> {

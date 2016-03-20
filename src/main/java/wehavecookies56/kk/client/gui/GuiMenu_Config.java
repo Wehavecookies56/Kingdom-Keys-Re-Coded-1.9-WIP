@@ -8,7 +8,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
-import wehavecookies56.kk.entities.ExtendedPlayer;
+import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.lib.Config;
 import wehavecookies56.kk.lib.Strings;
 import wehavecookies56.kk.network.packet.PacketDispatcher;
@@ -47,8 +47,11 @@ public class GuiMenu_Config extends GuiMenu_Bars {
 				musicToggle.displayString = String.valueOf(Config.EnableCustomMusic);
 				break;
 			case FIRE:
-				PacketDispatcher.sendToServer(new SetKH1Fire((ExtendedPlayer.get(Minecraft.getMinecraft().thePlayer).isKH1Fire = ExtendedPlayer.get(Minecraft.getMinecraft().thePlayer).isKH1Fire ? false: true)));
-				fire.displayString = String.valueOf(ExtendedPlayer.get(Minecraft.getMinecraft().thePlayer).getKH1Fire());
+				if(Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.MAGIC_STATE, null).getKH1Fire() == true)
+					PacketDispatcher.sendToServer(new SetKH1Fire(false));
+				else
+					PacketDispatcher.sendToServer(new SetKH1Fire(true));
+				fire.displayString = String.valueOf(Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.MAGIC_STATE, null).getKH1Fire());
 				break;
 		}
 		//System.out.println(ExtendedPlayer.get(Minecraft.getMinecraft().thePlayer).isKH1Fire);
@@ -72,7 +75,7 @@ public class GuiMenu_Config extends GuiMenu_Bars {
 		b = new GuiColourTextField(B, mc.fontRendererObj, bPosX, 100, boxWidth, 10);
 		buttonList.add(showHearts = new GuiButton(HEARTS, mc.fontRendererObj.getStringWidth(TextHelper.localize(Strings.Gui_Menu_Config_Hearts)) + 15, 115, 100, 20, String.valueOf(Config.EnableHeartsOnHUD)));
 		buttonList.add(musicToggle = new GuiButton(MUSIC, mc.fontRendererObj.getStringWidth(TextHelper.localize(Strings.Gui_Menu_Config_Music)) + 15, 135, 100, 20, String.valueOf(Config.EnableCustomMusic)));
-		buttonList.add(fire = new GuiButton(FIRE, mc.fontRendererObj.getStringWidth(TextHelper.localize(Strings.Gui_Menu_Config_Fire)) + 15, 155, 100, 20, String.valueOf(ExtendedPlayer.get(Minecraft.getMinecraft().thePlayer).isKH1Fire)));
+		buttonList.add(fire = new GuiButton(FIRE, mc.fontRendererObj.getStringWidth(TextHelper.localize(Strings.Gui_Menu_Config_Fire)) + 15, 155, 100, 20, String.valueOf(Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.MAGIC_STATE, null).getKH1Fire())));
 		//back = new GuiButton(BACK, 10, 0, 100, 20, TextHelper.localize(Strings.Gui_Menu_Items_Button_Back));
 		buttonList.add(back = new GuiButton(BACK, 5, (mc.displayHeight / 2) - (mc.displayHeight / 8), 100, 20, TextHelper.localize(Strings.Gui_Menu_Items_Button_Back)));
 		this.r.setText(String.valueOf(Config.interfaceColour[0]));

@@ -5,6 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
@@ -14,9 +16,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-
-import org.lwjgl.opengl.GL11;
-
 import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.api.materials.Material;
 import wehavecookies56.kk.api.materials.MaterialRegistry;

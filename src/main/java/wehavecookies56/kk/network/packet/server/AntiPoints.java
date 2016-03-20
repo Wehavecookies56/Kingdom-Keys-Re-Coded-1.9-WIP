@@ -6,7 +6,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.relauncher.Side;
 import wehavecookies56.kk.KingdomKeys;
-import wehavecookies56.kk.entities.ExtendedPlayer;
 import wehavecookies56.kk.network.packet.AbstractMessage.AbstractServerMessage;
 
 public class AntiPoints extends AbstractServerMessage<AntiPoints> {
@@ -36,7 +35,8 @@ public class AntiPoints extends AbstractServerMessage<AntiPoints> {
 	@Override
 	public void process (EntityPlayer player, Side side) {
 		if (this.operation.equals("+"))
-			player.getCapability(KingdomKeys.PLAYER_STATS, null).addAntiPoints(points);
-		else if (this.operation.equals("-")) player.getCapability(KingdomKeys.PLAYER_STATS, null).removeAntiPoints(points);
+			player.getCapability(KingdomKeys.DRIVE_STATE, null).setAntiPoints(player.getCapability(KingdomKeys.DRIVE_STATE, null).getAntiPoints() + points);
+		else if (this.operation.equals("-")) 
+			player.getCapability(KingdomKeys.DRIVE_STATE, null).setAntiPoints(player.getCapability(KingdomKeys.DRIVE_STATE, null).getAntiPoints() - points);
 	}
 }

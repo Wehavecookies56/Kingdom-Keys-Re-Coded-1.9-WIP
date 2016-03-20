@@ -8,7 +8,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.api.driveforms.DriveForm;
 import wehavecookies56.kk.api.driveforms.DriveFormRegistry;
-import wehavecookies56.kk.entities.ExtendedPlayer;
 import wehavecookies56.kk.network.packet.AbstractMessage.AbstractServerMessage;
 
 public class DriveFormPacket extends AbstractServerMessage<DriveFormPacket> {

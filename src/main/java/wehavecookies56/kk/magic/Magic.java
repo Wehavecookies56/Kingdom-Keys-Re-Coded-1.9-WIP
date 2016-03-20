@@ -1,12 +1,12 @@
 package wehavecookies56.kk.magic;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 import wehavecookies56.kk.KingdomKeys;
-import wehavecookies56.kk.entities.ExtendedPlayer;
 import wehavecookies56.kk.lib.Strings;
 import wehavecookies56.kk.network.packet.PacketDispatcher;
 import wehavecookies56.kk.network.packet.server.magics.MagicAero;
@@ -50,7 +50,7 @@ public class Magic {
 	}
 
 	public static void Fire (EntityPlayer player, World world) {
-		if(ExtendedPlayer.get(player).getKH1Fire())
+		if(Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.MAGIC_STATE, null).getKH1Fire())
 			System.out.println("KH1");
 		else
 		{

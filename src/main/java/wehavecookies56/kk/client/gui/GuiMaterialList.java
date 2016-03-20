@@ -3,6 +3,8 @@ package wehavecookies56.kk.client.gui;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
@@ -11,9 +13,6 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.GuiScrollingList;
-
-import org.lwjgl.opengl.GL11;
-
 import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.api.materials.Material;
 import wehavecookies56.kk.api.materials.MaterialRegistry;

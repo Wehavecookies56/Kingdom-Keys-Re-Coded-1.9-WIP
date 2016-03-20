@@ -2,12 +2,12 @@ package wehavecookies56.kk.network.packet.server.magics;
 
 import java.io.IOException;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import wehavecookies56.kk.KingdomKeys;
-import wehavecookies56.kk.entities.ExtendedPlayer;
 import wehavecookies56.kk.entities.magic.EntityCura;
 import wehavecookies56.kk.entities.magic.EntityCuraga;
 import wehavecookies56.kk.entities.magic.EntityCure;
@@ -30,7 +30,7 @@ public class MagicCure extends AbstractServerMessage<MagicCure> {
 
 	@Override
 	public void process (EntityPlayer player, Side side) {
-		if (!ExtendedPlayer.get(player).cheatMode) player.getCapability(KingdomKeys.PLAYER_STATS, null).setMP(0);
+		if (!Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null).getCheatMode()) player.getCapability(KingdomKeys.PLAYER_STATS, null).setMP(0);
 		World world = player.worldObj;
 		player.extinguish();
 		switch (player.getCapability(KingdomKeys.MAGIC_STATE, null).getMagicLevel(Strings.Spell_Cure)) {

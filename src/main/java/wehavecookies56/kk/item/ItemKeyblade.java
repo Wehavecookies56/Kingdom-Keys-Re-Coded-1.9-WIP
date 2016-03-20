@@ -15,7 +15,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.capabilities.PlayerStatsCapability.IPlayerStats;
-import wehavecookies56.kk.entities.ExtendedPlayer;
 
 public class ItemKeyblade extends ItemSword {
 

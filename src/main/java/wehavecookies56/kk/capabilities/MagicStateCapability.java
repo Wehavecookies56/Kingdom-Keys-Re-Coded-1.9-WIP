@@ -10,7 +10,9 @@ import wehavecookies56.kk.lib.Strings;
 public class MagicStateCapability {
 	
 	public interface IMagicState {
+		boolean getKH1Fire();
 		int getMagicLevel(String magic);
+		void setKH1Fire(boolean kh1fire);
 		void setMagicLevel(String magic, int level);
 	}
 
@@ -26,6 +28,8 @@ public class MagicStateCapability {
 			properties.setInteger("MagicLevelCure", instance.getMagicLevel(Strings.Spell_Cure));
 			properties.setInteger("MagicLevelAero", instance.getMagicLevel(Strings.Spell_Aero));
 			properties.setInteger("MagicLevelStop", instance.getMagicLevel(Strings.Spell_Stop));
+			
+			properties.setBoolean("KH1Fire", instance.getKH1Fire());
 
 			return properties;
 		}
@@ -39,11 +43,16 @@ public class MagicStateCapability {
 			instance.setMagicLevel(Strings.Spell_Cure, properties.getInteger("MagicLevelCure"));
 			instance.setMagicLevel(Strings.Spell_Aero, properties.getInteger("MagicLevelAero"));
 			instance.setMagicLevel(Strings.Spell_Stop, properties.getInteger("MagicLevelStop"));
+			
+			instance.setKH1Fire(properties.getBoolean("KH1Fire"));
+
 		}
 	}
 	
 	public static class Default implements IMagicState {
         private int fireLevel = 1, blizzardLevel = 1, thunderLevel = 1, cureLevel = 1, aeroLevel = 1, stopLevel = 1;
+		private boolean kh1fire = false;
+
 		@Override
 		public int getMagicLevel(String magic) {
 			switch(magic)
@@ -81,7 +90,16 @@ public class MagicStateCapability {
 				stopLevel = level;
 			}			
 		}
-        
+        @Override
+        public void setKH1Fire(boolean kh1fire)
+        {
+        	this.kh1fire = kh1fire;
+        }
+        @Override
+        public boolean getKH1Fire()
+        {
+        	return this.kh1fire;
+        }
     }
 }
 

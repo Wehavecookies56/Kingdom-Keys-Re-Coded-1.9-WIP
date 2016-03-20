@@ -13,6 +13,8 @@ public class SummonKeybladeCapability {
 		String getKeybladeName();
 		String getKeychainName();
 		boolean setKeybladeSummoned(boolean summoned, String keychainName, String keybladeName);
+		boolean getIsKeybladeSummoned();
+		void setIsKeybladeSummoned(boolean summoned);
 	}
 
 	public static class Storage implements IStorage<ISummonKeyblade> {
@@ -23,7 +25,8 @@ public class SummonKeybladeCapability {
 			properties.setBoolean("Keyblade Summoned", instance.getKeybladeSummoned());
 			properties.setString("Keyblade Name", instance.getKeybladeName());
 			properties.setString("Keychain Name", instance.getKeychainName());
-			
+			properties.setBoolean("Is Keyblade Summoned", instance.getIsKeybladeSummoned());
+
 			return properties;
 		}
 
@@ -31,7 +34,7 @@ public class SummonKeybladeCapability {
 		public void readNBT(Capability<ISummonKeyblade> capability, ISummonKeyblade instance, EnumFacing side, NBTBase nbt) {
 			NBTTagCompound properties = (NBTTagCompound) nbt;
 			instance.setKeybladeSummoned(properties.getBoolean("Keyblade Summoned"), properties.getString("Keyblade Name"), properties.getString("Keychain Name"));
-			
+			instance.setIsKeybladeSummoned(properties.getBoolean("Is Keyblade Summoned"));
 		}
 	}
 	
@@ -39,6 +42,8 @@ public class SummonKeybladeCapability {
         private boolean summoned = false;
         private String keyblade = "";
         private String keychain = "";
+    	private boolean keybladeSummoned = false;
+
         @Override public boolean getKeybladeSummoned() { return this.summoned; }
         @Override public String getKeybladeName() { return this.keyblade; }
         @Override public String getKeychainName() { return this.keychain; }
@@ -52,6 +57,9 @@ public class SummonKeybladeCapability {
         	}
         	return this.summoned;
         }
+        //TODO maybe this isnt necessary
+        @Override public boolean getIsKeybladeSummoned() {return this.keybladeSummoned;}
+    	@Override public void setIsKeybladeSummoned(boolean summoned) {this.keybladeSummoned = summoned;} 
 
     }
 }
