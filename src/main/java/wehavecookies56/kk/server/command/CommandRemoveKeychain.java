@@ -80,10 +80,9 @@ public class CommandRemoveKeychain implements ICommand {
 	@Override
 	public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
 		if (sender.getCommandSenderEntity() instanceof EntityPlayer) {
-			ExtendedPlayer props = ExtendedPlayer.get((EntityPlayer) sender.getCommandSenderEntity());
 			EntityPlayer player = (EntityPlayer) sender.getCommandSenderEntity();
 			if (args.length == 0) {
-				if (props.inventoryKeychain.getStackInSlot(0) != null) {
+				if (player.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryKeychain().getStackInSlot(0) != null) {
 					PacketDispatcher.sendToServer(new RemoveItemInSlot("keychain", 0));
 					PacketDispatcher.sendToAllAround(new RemoveItemInSlot("keychain", 0), (EntityPlayer) sender.getCommandSenderEntity(), 1);
 
@@ -97,9 +96,8 @@ public class CommandRemoveKeychain implements ICommand {
 					TextHelper.sendFormattedChatMessage("The chain slot has no chain!", TextFormatting.RED, (EntityPlayer) sender.getCommandSenderEntity());
 			} else if (args.length == 1) {
 				EntityPlayerMP playermp = args.length == 1 ? server.getPlayerList().getPlayerByUUID(UUID.fromString(args[0])) : getCommandSenderAsPlayer(sender);
-				ExtendedPlayer propsmp = ExtendedPlayer.get(playermp);
 
-				if (propsmp.inventoryKeychain.getStackInSlot(0) != null) {
+				if (playermp.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryKeychain().getStackInSlot(0) != null) {
 					PacketDispatcher.sendToServer(new RemoveItemInSlot("keychain", 0));
 					if (playermp.getCapability(KingdomKeys.SUMMON_KEYBLADE, null).getKeybladeSummoned()) if (playermp.inventory.getCurrentItem() != null && playermp.inventory.getCurrentItem().getItem() instanceof ItemKeyblade) PacketDispatcher.sendToServer(new DeSummonKeyblade(playermp.inventory.getCurrentItem()));
 					PacketDispatcher.sendToServer(new SyncExtendedPlayer(playermp));

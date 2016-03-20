@@ -6,6 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.relauncher.Side;
+import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.entities.ExtendedPlayer;
 import wehavecookies56.kk.network.packet.AbstractMessage.AbstractClientMessage;
 
@@ -17,7 +18,7 @@ public class SyncExtendedPlayer extends AbstractClientMessage<SyncExtendedPlayer
 
 	public SyncExtendedPlayer (EntityPlayer player) {
 		data = new NBTTagCompound();
-		ExtendedPlayer.get(player).saveNBTData(data);
+		player.getCapability(KingdomKeys.PLAYER_STATS, null).saveNBTData(data);
 	}
 
 	@Override
