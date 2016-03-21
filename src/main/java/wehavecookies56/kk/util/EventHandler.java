@@ -73,6 +73,7 @@ import wehavecookies56.kk.lib.Reference;
 import wehavecookies56.kk.lib.Strings;
 import wehavecookies56.kk.network.packet.PacketDispatcher;
 import wehavecookies56.kk.network.packet.client.SyncDriveData;
+import wehavecookies56.kk.network.packet.client.SyncMunnyData;
 import wehavecookies56.kk.network.packet.server.DeSummonKeyblade;
 import wehavecookies56.kk.network.packet.server.DriveOrbPickup;
 import wehavecookies56.kk.network.packet.server.HpOrbPickup;
@@ -550,6 +551,7 @@ public class EventHandler {
 			if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
 				event.item.getEntityItem().stackSize--;
 				munny.addMunny(event.item.getEntityItem().getTagCompound().getInteger("amount"));
+				PacketDispatcher.sendTo(new SyncMunnyData(munny), (EntityPlayerMP) event.entityPlayer);
 				
 			}
 		} else if (event.item.getEntityItem().getItem() instanceof ItemHpOrb) {

@@ -22,7 +22,7 @@ import wehavecookies56.kk.network.packet.PacketDispatcher;
 import wehavecookies56.kk.network.packet.server.AntiPoints;
 import wehavecookies56.kk.network.packet.server.DeSummonKeyblade;
 import wehavecookies56.kk.network.packet.server.DriveFormPacket;
-import wehavecookies56.kk.network.packet.server.GiveAchievementOpenMenu;
+import wehavecookies56.kk.network.packet.server.OpenMenu;
 import wehavecookies56.kk.network.packet.server.SummonKeyblade;
 import wehavecookies56.kk.util.GuiHelper;
 import wehavecookies56.kk.util.KeyboardHelper;
@@ -250,7 +250,7 @@ public class InputHandler {
 		if (key != null) switch (key) {
 			case OPENMENU:
 				GuiHelper.openMenu();
-				PacketDispatcher.sendToServer(new GiveAchievementOpenMenu());
+				PacketDispatcher.sendToServer(new OpenMenu());
 				break;
 			case SCROLL_UP:
 				commandUp();

@@ -19,13 +19,14 @@ import wehavecookies56.kk.network.packet.client.SpawnThunderEntity;
 import wehavecookies56.kk.network.packet.client.SpawnThunderParticles;
 import wehavecookies56.kk.network.packet.client.SyncDriveData;
 import wehavecookies56.kk.network.packet.client.SyncMaterialData;
+import wehavecookies56.kk.network.packet.client.SyncMunnyData;
 import wehavecookies56.kk.network.packet.client.SyncRecipeData;
 import wehavecookies56.kk.network.packet.server.AntiPoints;
 import wehavecookies56.kk.network.packet.server.CreateFromSynthesisRecipe;
 import wehavecookies56.kk.network.packet.server.DeSummonKeyblade;
 import wehavecookies56.kk.network.packet.server.DriveFormPacket;
 import wehavecookies56.kk.network.packet.server.DriveOrbPickup;
-import wehavecookies56.kk.network.packet.server.GiveAchievementOpenMenu;
+import wehavecookies56.kk.network.packet.server.OpenMenu;
 import wehavecookies56.kk.network.packet.server.GiveItemInSlot;
 import wehavecookies56.kk.network.packet.server.GlidePacket;
 import wehavecookies56.kk.network.packet.server.HpOrbPickup;
@@ -75,6 +76,7 @@ public class PacketDispatcher {
 		registerMessage(SyncRecipeData.class);
 		registerMessage(SyncMaterialData.class);
 		registerMessage(SyncDriveData.class);
+		registerMessage(SyncMunnyData.class);
 
 		// Client to Server
 		registerMessage(MunnyPickup.class);
@@ -94,7 +96,7 @@ public class PacketDispatcher {
 		registerMessage(CreateFromSynthesisRecipe.class);
 		registerMessage(DriveOrbPickup.class);
 		registerMessage(MagicOrbPickup.class);
-		registerMessage(GiveAchievementOpenMenu.class);
+		registerMessage(OpenMenu.class);
 		registerMessage(DriveFormPacket.class);
 		registerMessage(AntiPoints.class);
 		registerMessage(GlidePacket.class);
