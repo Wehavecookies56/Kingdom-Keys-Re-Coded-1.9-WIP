@@ -12,7 +12,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.text.TextFormatting;
-import wehavecookies56.kk.entities.ExtendedPlayer;
+import wehavecookies56.kk.KingdomKeys;
+import wehavecookies56.kk.capabilities.PlayerStatsCapability.IPlayerStats;
 import wehavecookies56.kk.util.TextHelper;
 
 public class CommandLevelUp implements ICommand {
@@ -90,16 +91,17 @@ public class CommandLevelUp implements ICommand {
 					TextHelper.sendFormattedChatMessage("Invalid level, it must be a number between 1 - 100", TextFormatting.RED, (EntityPlayer) sender.getCommandSenderEntity());
 					return;
 				}
-				ExtendedPlayer.get(player).level = 1;
-				ExtendedPlayer.get(player).experience = 0;
-				ExtendedPlayer.get(player).setStrength(1);
-				ExtendedPlayer.get(player).setDefense(1);
-				ExtendedPlayer.get(player).setMagic(1);
-				ExtendedPlayer.get(player).setHP(20);
+				IPlayerStats STATS = player.getCapability(KingdomKeys.PLAYER_STATS, null);
+				STATS.setLevel(1);
+				STATS.setExperience(0);
+				STATS.setStrength(1);
+				STATS.setDefense(1);
+				STATS.setMagic(1);
+				STATS.setHP(20);
 
-				while (ExtendedPlayer.get(player).getLevel() < level)
-					ExtendedPlayer.get(player).addXP(20);
-				player.heal(ExtendedPlayer.get(player).getHP());
+				while (STATS.getLevel() < level)
+					STATS.addExperience(20);
+				player.heal(STATS.getHP());
 				TextHelper.sendFormattedChatMessage("Your level is now " + args[0], TextFormatting.YELLOW, (EntityPlayer) sender.getCommandSenderEntity());
 
 			} else if (args.length == 2) {
@@ -115,16 +117,17 @@ public class CommandLevelUp implements ICommand {
 					return;
 				}
 				EntityPlayerMP entityplayermp = args.length == 2 ?  server.getPlayerList().getPlayerByUUID(UUID.fromString(args[1])) : getCommandSenderAsPlayer(sender);
-				ExtendedPlayer.get(entityplayermp).level = 1;
-				ExtendedPlayer.get(entityplayermp).experience = 0;
-				ExtendedPlayer.get(entityplayermp).setStrength(1);
-				ExtendedPlayer.get(entityplayermp).setDefense(1);
-				ExtendedPlayer.get(entityplayermp).setMagic(1);
-				ExtendedPlayer.get(entityplayermp).setHP(20);
+				IPlayerStats STATS = entityplayermp.getCapability(KingdomKeys.PLAYER_STATS, null);
+				STATS.setLevel(1);
+				STATS.setExperience(0);
+				STATS.setStrength(1);
+				STATS.setDefense(1);
+				STATS.setMagic(1);
+				STATS.setHP(20);
 
-				while (ExtendedPlayer.get(entityplayermp).getLevel() < level)
-					ExtendedPlayer.get(entityplayermp).addXP(20);
-				entityplayermp.heal(ExtendedPlayer.get(entityplayermp).getHP());
+				while (STATS.getLevel() < level)
+					STATS.addExperience(20);
+				entityplayermp.heal(STATS.getHP());
 				TextHelper.sendFormattedChatMessage(args[1] + "'s level is now " + args[0], TextFormatting.YELLOW, (EntityPlayer) sender.getCommandSenderEntity());
 
 			} else

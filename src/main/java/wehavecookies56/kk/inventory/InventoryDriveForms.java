@@ -6,7 +6,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import wehavecookies56.kk.KingdomKeys;
-import wehavecookies56.kk.entities.ExtendedPlayer;
 import wehavecookies56.kk.item.ItemDriveForm;
 import wehavecookies56.kk.item.ItemSpellOrb;
 import wehavecookies56.kk.lib.Strings;
@@ -41,9 +40,9 @@ public class InventoryDriveForms extends AbstractInventory {
 
 	@Override
 	public void markDirty () {
-		Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null).getDriveFormsList().clear();
+		Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.DRIVE_STATE, null).getDriveFormsList().clear();
 		for (int i = 0; i < getSizeInventory(); i++)
-			if (getStackInSlot(i) != null) Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null).getDriveFormsList().add(((ItemDriveForm) getStackInSlot(i).getItem()).getDriveFormName());
+			if (getStackInSlot(i) != null) Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.DRIVE_STATE, null).getDriveFormsList().add(((ItemDriveForm) getStackInSlot(i).getItem()).getDriveFormName());
 		super.markDirty();
 	}
 

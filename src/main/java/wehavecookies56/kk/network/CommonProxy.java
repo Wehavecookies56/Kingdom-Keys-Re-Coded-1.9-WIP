@@ -23,7 +23,6 @@ import wehavecookies56.kk.client.gui.GuiSynthesis;
 import wehavecookies56.kk.client.gui.GuiSynthesisBagL;
 import wehavecookies56.kk.client.gui.GuiSynthesisBagM;
 import wehavecookies56.kk.client.gui.GuiSynthesisBagS;
-import wehavecookies56.kk.entities.ExtendedPlayer;
 import wehavecookies56.kk.entities.TileEntityKKChest;
 import wehavecookies56.kk.inventory.ContainerDriveForms;
 import wehavecookies56.kk.inventory.ContainerKKChest;
@@ -76,7 +75,7 @@ public class CommonProxy implements IGuiHandler {
 		else if (ID == KingdomKeys.GUI_SPELLS_INV)
 			return new ContainerSpells(player, player.inventory, player.getCapability(KingdomKeys.PLAYER_STATS, null).getInventorySpells());
 		else if (ID == KingdomKeys.GUI_DRIVE_INV)
-			return new ContainerDriveForms(player, player.inventory, player.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryDriveForms());
+			return new ContainerDriveForms(player, player.inventory, player.getCapability(KingdomKeys.DRIVE_STATE, null).getInventoryDriveForms());
 		else if (ID == KingdomKeys.GUI_KKCHEST_INV) {
 			if (te instanceof TileEntityKKChest)
 				return new ContainerKKChest(player.inventory, (TileEntityKKChest) world.getTileEntity(new BlockPos(x, y, z)));
@@ -106,7 +105,7 @@ public class CommonProxy implements IGuiHandler {
 		else if (ID == KingdomKeys.GUI_SPELLS_INV)
 			return new GuiSpells(player, player.inventory, player.getCapability(KingdomKeys.PLAYER_STATS, null).getInventorySpells());
 		else if (ID == KingdomKeys.GUI_DRIVE_INV)
-			return new GuiDriveForms(player, player.inventory, player.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryDriveForms());
+			return new GuiDriveForms(player, player.inventory, player.getCapability(KingdomKeys.DRIVE_STATE, null).getInventoryDriveForms());
 		else if (ID == KingdomKeys.GUI_KKCHEST_INV) {
 
 			if (te instanceof TileEntityKKChest)

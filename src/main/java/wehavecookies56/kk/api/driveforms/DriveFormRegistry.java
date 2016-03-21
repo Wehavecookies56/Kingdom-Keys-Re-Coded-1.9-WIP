@@ -7,7 +7,6 @@ import com.google.common.collect.ImmutableMap;
 
 import net.minecraft.entity.player.EntityPlayer;
 import wehavecookies56.kk.KingdomKeys;
-import wehavecookies56.kk.entities.ExtendedPlayer;
 
 public class DriveFormRegistry {
 
@@ -38,18 +37,14 @@ public class DriveFormRegistry {
 	public static boolean learnDriveForm (EntityPlayer player, String name) {
 		if (player != null && !isDriveFormKnown(player, name)) {
 			DriveForm driveForm = driveFormMap.get(name);
-			ExtendedPlayer.get(player).learnDriveForm(driveForm);
+			player.getCapability(KingdomKeys.DRIVE_STATE, null).learnDriveForm(driveForm);
 			return true;
 		}
 		return false;
 	}
 
 	public static boolean isDriveFormKnown (EntityPlayer player, String name) {
-		if (ExtendedPlayer.get(player) != null) {
-			ExtendedPlayer.get(player);
-			return player.getCapability(KingdomKeys.PLAYER_STATS, null).getDriveFormsList().contains(name);
-		}
-		return false;
+		return player.getCapability(KingdomKeys.DRIVE_STATE, null).getDriveFormsList().contains(name);
 	}
 
 }

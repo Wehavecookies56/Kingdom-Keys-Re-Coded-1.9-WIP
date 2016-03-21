@@ -69,7 +69,7 @@ public class RenderEntitySharpshooterBullet extends Render<EntitySharpshooterBul
 
 			try {
 				model = B3DLoader.instance.loadModel(this.model);
-			} catch (IOException e) {
+			} catch (Exception e) {
 				model = ModelLoaderRegistry.getMissingModel();
 			}
 
@@ -77,7 +77,7 @@ public class RenderEntitySharpshooterBullet extends Render<EntitySharpshooterBul
 			worldRenderer.begin(7, Attributes.DEFAULT_BAKED_FORMAT);
 
 			// Get Quads
-			List<BakedQuad> generalQuads = bakedModel.getGeneralQuads();
+			List<BakedQuad> generalQuads = bakedModel.getQuads(null, null, 1);
 
 			for (BakedQuad q : generalQuads) {
 				int[] vd = q.getVertexData();
@@ -85,7 +85,7 @@ public class RenderEntitySharpshooterBullet extends Render<EntitySharpshooterBul
 			}
 
 			for (EnumFacing face : EnumFacing.values()) {
-				List<BakedQuad> faceQuads = bakedModel.getFaceQuads(face);
+				List<BakedQuad> faceQuads = bakedModel.getQuads(null, null, 1);
 				for (BakedQuad q : faceQuads) {
 					int[] vd = q.getVertexData();
 					worldRenderer.addVertexData(vd);

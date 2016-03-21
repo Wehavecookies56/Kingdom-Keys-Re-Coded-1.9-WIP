@@ -10,7 +10,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
-import wehavecookies56.kk.entities.ExtendedPlayer;
+import wehavecookies56.kk.KingdomKeys;
+import wehavecookies56.kk.capabilities.MunnyCapability.IMunny;
 import wehavecookies56.kk.util.TextHelper;
 
 public class CommandGiveMunny implements ICommand {
@@ -69,12 +70,12 @@ public class CommandGiveMunny implements ICommand {
 		if (sender.getCommandSenderEntity() instanceof EntityPlayer) if (args.length == 0)
 			TextHelper.sendFormattedChatMessage("Invalid arguments, usage \"/givemunny <amount>\"", TextFormatting.RED, (EntityPlayer) sender.getCommandSenderEntity());
 		else {
-			ExtendedPlayer munny = ExtendedPlayer.get((EntityPlayer) sender.getCommandSenderEntity());
+			IMunny munny = ((EntityPlayer) sender.getCommandSenderEntity()).getCapability(KingdomKeys.MUNNY, null);
 			if (!isInteger(args[0].toString()))
 				TextHelper.sendFormattedChatMessage("Invalid arguments, usage \"/givemunny <amount>\"", TextFormatting.RED, (EntityPlayer) sender.getCommandSenderEntity());
-			else if (Integer.parseInt(args[0].toString()) > munny.getMaxMunny() || Integer.parseInt(args[0].toString()) < 0)
-				TextHelper.sendFormattedChatMessage("Invalid arguments, enter a value between 0 and " + (munny.getMaxMunny() - munny.getMunny()), TextFormatting.RED, (EntityPlayer) sender.getCommandSenderEntity());
-			else if (Integer.parseInt(args[0].toString()) + munny.getMunny() > munny.getMaxMunny())
+			else if (Integer.parseInt(args[0].toString()) > Integer.MAX_VALUE || Integer.parseInt(args[0].toString()) < 0)
+				TextHelper.sendFormattedChatMessage("Invalid arguments, enter a value between 0 and " + (Integer.MAX_VALUE - munny.getMunny()), TextFormatting.RED, (EntityPlayer) sender.getCommandSenderEntity());
+			else if (Integer.parseInt(args[0].toString()) + munny.getMunny() > Integer.MAX_VALUE)
 				TextHelper.sendFormattedChatMessage("Invalid arguments, adding this value would go over the maximum amount", TextFormatting.RED, (EntityPlayer) sender.getCommandSenderEntity());
 			else {
 				munny.addMunny(Integer.parseInt(args[0].toString()));

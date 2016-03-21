@@ -17,7 +17,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.capabilities.DriveStateCapability.IDriveState;
 import wehavecookies56.kk.capabilities.PlayerStatsCapability.IPlayerStats;
-import wehavecookies56.kk.entities.ExtendedPlayer;
 import wehavecookies56.kk.lib.Constants;
 import wehavecookies56.kk.lib.Reference;
 import wehavecookies56.kk.lib.Strings;
@@ -129,7 +128,7 @@ public class GuiCommandMenu extends GuiScreen {
 				else
 					drawString(mc.fontRendererObj, TextHelper.localize(Strings.Gui_CommandMenu_Drive_Revert), 6 + textX, 4, 0xFFFFFF);
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			} else if (STATS.getDriveFormsList().isEmpty() || STATS.getDP() <= 0)
+			} else if (DS.getDriveFormsList().isEmpty() || STATS.getDP() <= 0)
 				drawString(mc.fontRendererObj, TextHelper.localize(Strings.Gui_CommandMenu_Drive), 6 + textX, 4, 0x888888);
 			else
 				drawString(mc.fontRendererObj, TextHelper.localize(Strings.Gui_CommandMenu_Drive), 6 + textX, 4, 0xFFFFFF);
@@ -344,9 +343,8 @@ public class GuiCommandMenu extends GuiScreen {
 			}
 		}
 
-		ExtendedPlayer.get(mc.thePlayer);
 		// Drive form submenu //
-		driveCommands = STATS.getDriveFormsList();
+		driveCommands = DS.getDriveFormsList();
 		if (driveCommands == null) {} else if (!driveCommands.isEmpty()) {
 			// DRIVE TOP
 			GL11.glPushMatrix();
@@ -394,7 +392,7 @@ public class GuiCommandMenu extends GuiScreen {
 					GL11.glTranslatef(x, (height - MENU_HEIGHT * scale * (driveCommands.size() - i)), 0);
 					GL11.glScalef(scale, scale, scale);
 					if (submenu == SUB_DRIVE) {
-						if (STATS.getDP() >= Constants.getCost(driveCommands.get(i)) || mc.thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null).getCheatMode())
+						if (STATS.getDP() >= Constants.getCost(driveCommands.get(i)) || mc.thePlayer.getCapability(KingdomKeys.CHEAT_MODE, null).getCheatMode())
 							drawString(mc.fontRendererObj, TextHelper.localize(driveCommands.get(i)), 6, 4, 0xFFFFFF);
 						else
 							drawString(mc.fontRendererObj, TextHelper.localize(driveCommands.get(i)), 6, 4, 0x888888);

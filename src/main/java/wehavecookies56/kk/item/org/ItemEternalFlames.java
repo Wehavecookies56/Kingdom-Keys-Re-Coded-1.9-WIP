@@ -5,10 +5,12 @@ import java.util.List;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
@@ -36,18 +38,23 @@ public class ItemEternalFlames extends ItemSword {
 	
 	@Override
 	public void onPlayerStoppedUsing(ItemStack stack, World world, EntityLivingBase player, int timeLeft) {
-		if (!player.isSneaking()) {
-			world.playSound(player.posX, player.posY, player.posZ, SoundEvents.entity_ghast_shoot, SoundCategory.PLAYERS, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F), false);
-			world.spawnEntityInWorld(new EntityEternalFlames(world, player));
-			player.swingArm(EnumHand.MAIN_HAND);
-		} //else
-			//player.setItemInUse(stack, getMaxItemUseDuration(stack));
+		
 	}
 	
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn,EnumHand hand) {
-		//player.setItemInUse(stack, getMaxItemUseDuration(stack));
-		return super.onItemRightClick(itemStackIn, worldIn, playerIn, hand);
+	public ItemStack onItemUseFinish(ItemStack stack, World world, EntityLivingBase player) {
+		return super.onItemUseFinish(stack, world, player);
+	}
+	
+	@Override
+	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStack, World world, EntityPlayer player, EnumHand hand) {
+		if (!player.isSneaking()) {
+			world.playSound(player.posX, player.posY, player.posZ, SoundEvents.entity_ghast_shoot, SoundCategory.PLAYERS, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F), false);
+			System.out.println("Spawn");
+			world.spawnEntityInWorld(new EntityEternalFlames(world, player));
+			player.swingArm(EnumHand.MAIN_HAND);
+		}
+		return ActionResult.newResult(EnumActionResult.SUCCESS, itemStack);
 	}
 
 	@Override

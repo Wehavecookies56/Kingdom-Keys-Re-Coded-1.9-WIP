@@ -37,16 +37,18 @@ public class EntityEternalFlames extends EntityThrowable implements IThrowableEn
 	protected float getGravityVelocity () {
 		return 0.0F;
 	}
+		
+	boolean returning = false;
 
 	@Override
 	public void onUpdate () 
 	{
+		super.onUpdate();
 		int rotation = 0;
 		//this.worldObj.spawnParticle(EnumParticleTypes.FLAME, this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
-		KingdomKeys.proxy.spawnTestParticle(worldObj, posX + worldObj.rand.nextDouble() * width * 2.0F - width, posY + worldObj.rand.nextDouble() * height, posZ + worldObj.rand.nextDouble() * width * 2.0F - width, worldObj.rand.nextGaussian() * 0.02D, worldObj.rand.nextGaussian() * 0.02D, worldObj.rand.nextGaussian() * 0.02D);
+		//KingdomKeys.proxy.spawnTestParticle(worldObj, posX + worldObj.rand.nextDouble() * width * 2.0F - width, posY + worldObj.rand.nextDouble() * height, posZ + worldObj.rand.nextDouble() * width * 2.0F - width, worldObj.rand.nextGaussian() * 0.02D, worldObj.rand.nextGaussian() * 0.02D, worldObj.rand.nextGaussian() * 0.02D);
 		this.rotationYaw = (rotation + 1) % 360;
-		boolean returning = false;
-			
+				
 		if (ticksExisted > 15) {
 			returning = true;
 			setThrowableHeading(this.getThrower().posX - this.posX, this.getThrower().posY - this.posY + 1.25, this.getThrower().posZ - this.posZ, 1.5f, 0);
@@ -73,9 +75,7 @@ public class EntityEternalFlames extends EntityThrowable implements IThrowableEn
 					}
 				}
 			}
-		}
-		
-		super.onUpdate();
+		}		
 	}
 
 	@Override

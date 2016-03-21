@@ -33,7 +33,7 @@ public class MagicBlizzard extends AbstractServerMessage<MagicBlizzard> {
 
 	@Override
 	public void process (EntityPlayer player, Side side) {
-		if (!player.getCapability(KingdomKeys.PLAYER_STATS, null).getCheatMode()) player.getCapability(KingdomKeys.PLAYER_STATS, null).remMP(Constants.getCost(Strings.Spell_Blizzard));
+		if (!player.getCapability(KingdomKeys.CHEAT_MODE, null).getCheatMode()) player.getCapability(KingdomKeys.PLAYER_STATS, null).remMP(Constants.getCost(Strings.Spell_Blizzard));
 		World world = player.worldObj;
 		switch (player.getCapability(KingdomKeys.MAGIC_STATE, null).getMagicLevel(Strings.Spell_Blizzard)) {
 			case 1:

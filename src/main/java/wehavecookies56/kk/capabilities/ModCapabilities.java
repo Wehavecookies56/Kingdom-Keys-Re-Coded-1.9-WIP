@@ -1,6 +1,7 @@
 package wehavecookies56.kk.capabilities;
 
 import net.minecraftforge.common.capabilities.CapabilityManager;
+import wehavecookies56.kk.capabilities.CheatModeCapability.ICheatMode;
 import wehavecookies56.kk.capabilities.DriveStateCapability.IDriveState;
 import wehavecookies56.kk.capabilities.FirstTimeJoinCapability.IFirstTimeJoin;
 import wehavecookies56.kk.capabilities.MagicStateCapability.IMagicState;
@@ -21,6 +22,7 @@ public class ModCapabilities {
         CapabilityManager.INSTANCE.register(IFirstTimeJoin.class, new FirstTimeJoinCapability.Storage(), FirstTimeJoinCapability.Default.class);
         CapabilityManager.INSTANCE.register(ISynthesisRecipe.class, new SynthesisRecipeCapability.Storage(), SynthesisRecipeCapability.Default.class);
         CapabilityManager.INSTANCE.register(ISynthesisMaterial.class, new SynthesisMaterialCapability.Storage(), SynthesisMaterialCapability.Default.class);
+        CapabilityManager.INSTANCE.register(ICheatMode.class, new CheatModeCapability.Storage(), CheatModeCapability.Default.class);
 	}
 	
 }

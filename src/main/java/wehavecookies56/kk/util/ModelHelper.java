@@ -10,10 +10,11 @@ import com.google.common.collect.ImmutableList;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.Attributes;
-import net.minecraftforge.client.model.IFlexibleBakedModel;
 import net.minecraftforge.client.model.obj.OBJModel;
 
 public class ModelHelper {
@@ -95,9 +96,9 @@ public class ModelHelper {
 
 	public static final String ALL_PARTS = "ALL";
 
-	public static HashMap<String, IFlexibleBakedModel> getModelsForGroups (OBJModel objModel) {
+	public static HashMap<String, IBakedModel> getModelsForGroups (OBJModel objModel) {
 
-		HashMap<String, IFlexibleBakedModel> modelParts = new HashMap<String, IFlexibleBakedModel>();
+		HashMap<String, IBakedModel> modelParts = new HashMap<String, IBakedModel>();
 
 		if (!objModel.getMatLib().getGroups().keySet().isEmpty()) for (String key : objModel.getMatLib().getGroups().keySet()) {
 			String k = key;
@@ -109,12 +110,12 @@ public class ModelHelper {
 		return modelParts;
 	}
 
-	public static void renderBakedModel (IFlexibleBakedModel bakedModel) {
+	public static void renderBakedModel (IBakedModel bakedModel) {
 		Tessellator tessellator = Tessellator.getInstance();
 
 		VertexBuffer worldrenderer = tessellator.getBuffer();
-		worldrenderer.begin(GL11.GL_QUADS, bakedModel.getFormat());
-		for (BakedQuad bakedQuad : bakedModel.getGeneralQuads())
+		worldrenderer.begin(GL11.GL_QUADS, DefaultVertexFormats.ITEM);
+		for (BakedQuad bakedQuad : bakedModel.getQuads(null, null, 1))
 			worldrenderer.addVertexData(bakedQuad.getVertexData());
 
 		tessellator.draw();

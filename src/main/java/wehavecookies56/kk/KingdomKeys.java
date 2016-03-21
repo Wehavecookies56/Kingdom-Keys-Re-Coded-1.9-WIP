@@ -23,6 +23,7 @@ import wehavecookies56.kk.api.materials.MaterialRegistry;
 import wehavecookies56.kk.api.recipes.RecipeRegistry;
 import wehavecookies56.kk.block.ModBlocks;
 import wehavecookies56.kk.block.ModBlocksRecipes;
+import wehavecookies56.kk.capabilities.CheatModeCapability.ICheatMode;
 import wehavecookies56.kk.capabilities.DriveStateCapability.IDriveState;
 import wehavecookies56.kk.capabilities.FirstTimeJoinCapability.IFirstTimeJoin;
 import wehavecookies56.kk.capabilities.MagicStateCapability.IMagicState;
@@ -104,6 +105,8 @@ public class KingdomKeys {
     public static final Capability<ISynthesisRecipe> SYNTHESIS_RECIPES = null;
 	@CapabilityInject(ISynthesisMaterial.class)
 	public static final Capability<ISynthesisMaterial> SYNTHESIS_MATERIALS = null;
+	@CapabilityInject(ICheatMode.class)
+	public static final Capability<ICheatMode> CHEAT_MODE = null;
 
 	@EventHandler
 	public void preInit (FMLPreInitializationEvent e) {

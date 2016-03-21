@@ -17,7 +17,6 @@ import wehavecookies56.kk.network.packet.client.SpawnFireParticles;
 import wehavecookies56.kk.network.packet.client.SpawnStopParticles;
 import wehavecookies56.kk.network.packet.client.SpawnThunderEntity;
 import wehavecookies56.kk.network.packet.client.SpawnThunderParticles;
-import wehavecookies56.kk.network.packet.client.SyncExtendedPlayer;
 import wehavecookies56.kk.network.packet.client.SyncMaterialData;
 import wehavecookies56.kk.network.packet.client.SyncRecipeData;
 import wehavecookies56.kk.network.packet.server.AntiPoints;
@@ -62,7 +61,6 @@ public class PacketDispatcher {
 	public static final void registerPackets () {
 
 		// Server to Client
-		registerMessage(SyncExtendedPlayer.class);
 		registerMessage(SpawnFireParticles.class);
 		registerMessage(SpawnBlizzardParticles.class);
 		registerMessage(SpawnThunderParticles.class);

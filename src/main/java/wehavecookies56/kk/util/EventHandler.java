@@ -51,6 +51,7 @@ import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.achievements.ModAchievements;
 import wehavecookies56.kk.api.driveforms.DriveFormRegistry;
 import wehavecookies56.kk.block.ModBlocks;
+import wehavecookies56.kk.capabilities.CheatModeCapability.ICheatMode;
 import wehavecookies56.kk.capabilities.DriveStateCapability.IDriveState;
 import wehavecookies56.kk.capabilities.FirstTimeJoinCapability.IFirstTimeJoin;
 import wehavecookies56.kk.capabilities.MagicStateCapability.IMagicState;
@@ -59,7 +60,6 @@ import wehavecookies56.kk.capabilities.PlayerStatsCapability.IPlayerStats;
 import wehavecookies56.kk.capabilities.SummonKeybladeCapability.ISummonKeyblade;
 import wehavecookies56.kk.capabilities.SynthesisMaterialCapability.ISynthesisMaterial;
 import wehavecookies56.kk.capabilities.SynthesisRecipeCapability.ISynthesisRecipe;
-import wehavecookies56.kk.entities.ExtendedPlayer;
 import wehavecookies56.kk.entities.magic.EntityThunder;
 import wehavecookies56.kk.inventory.InventorySynthesisBagL;
 import wehavecookies56.kk.inventory.InventorySynthesisBagM;
@@ -72,7 +72,6 @@ import wehavecookies56.kk.item.ModItems;
 import wehavecookies56.kk.lib.Reference;
 import wehavecookies56.kk.lib.Strings;
 import wehavecookies56.kk.network.packet.PacketDispatcher;
-import wehavecookies56.kk.network.packet.client.SyncExtendedPlayer;
 import wehavecookies56.kk.network.packet.server.DeSummonKeyblade;
 import wehavecookies56.kk.network.packet.server.DriveOrbPickup;
 import wehavecookies56.kk.network.packet.server.HpOrbPickup;
@@ -105,6 +104,31 @@ public class EventHandler {
             @Override
             public void deserializeNBT(NBTPrimitive nbt) {
             	KingdomKeys.MUNNY.getStorage().readNBT(KingdomKeys.MUNNY, inst, null, nbt);
+            }
+        });
+		
+		event.addCapability(new ResourceLocation(Reference.MODID, "ICheatMode"), new ICapabilitySerializable<NBTPrimitive>()
+        {
+            ICheatMode inst = KingdomKeys.CHEAT_MODE.getDefaultInstance();
+            @Override
+            public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
+                return capability == KingdomKeys.CHEAT_MODE;
+            }
+
+            @SuppressWarnings("unchecked")
+            @Override
+            public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
+                return capability == KingdomKeys.CHEAT_MODE ? (T)inst : null;
+            }
+
+            @Override
+            public NBTPrimitive serializeNBT() {
+                return (NBTPrimitive)KingdomKeys.CHEAT_MODE.getStorage().writeNBT(KingdomKeys.CHEAT_MODE, inst, null);
+            }
+
+            @Override
+            public void deserializeNBT(NBTPrimitive nbt) {
+            	KingdomKeys.CHEAT_MODE.getStorage().readNBT(KingdomKeys.CHEAT_MODE, inst, null, nbt);
             }
         });
 		
@@ -421,10 +445,7 @@ public class EventHandler {
 			if (SUMMON.getKeybladeSummoned()) {
 				PacketDispatcher.sendToServer(new DeSummonKeyblade(player.inventory.getCurrentItem()));
 				SUMMON.setKeybladeSummoned(false, null, null);
-				PacketDispatcher.sendToServer(new SyncExtendedPlayer(player));
 			}
-			ExtendedPlayer.get((EntityPlayer) event.entity);
-			ExtendedPlayer.saveProxyData((EntityPlayer) event.entity);
 		}
 
 		if (!event.entity.worldObj.isRemote && event.entity instanceof EntityMob) if (event.source.getSourceOfDamage() instanceof EntityPlayer) {

@@ -6,7 +6,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.relauncher.Side;
 import wehavecookies56.kk.KingdomKeys;
-import wehavecookies56.kk.entities.ExtendedPlayer;
 import wehavecookies56.kk.inventory.InventoryKeychain;
 import wehavecookies56.kk.inventory.InventoryPotionsMenu;
 import wehavecookies56.kk.network.packet.AbstractMessage.AbstractServerMessage;

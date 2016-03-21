@@ -8,7 +8,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import wehavecookies56.kk.KingdomKeys;
-import wehavecookies56.kk.entities.ExtendedPlayer;
 import wehavecookies56.kk.inventory.InventorySpells;
 import wehavecookies56.kk.lib.Constants;
 import wehavecookies56.kk.network.packet.AbstractMessage.AbstractServerMessage;

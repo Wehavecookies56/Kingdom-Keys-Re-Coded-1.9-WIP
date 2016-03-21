@@ -1,6 +1,5 @@
 package wehavecookies56.kk.capabilities;
 
-import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,13 +8,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
-import wehavecookies56.kk.entities.ExtendedPlayer;
 import wehavecookies56.kk.entities.PlayerLevel;
-import wehavecookies56.kk.inventory.InventoryDriveForms;
 import wehavecookies56.kk.inventory.InventoryKeychain;
 import wehavecookies56.kk.inventory.InventoryPotionsMenu;
 import wehavecookies56.kk.inventory.InventorySpells;
-import wehavecookies56.kk.item.ItemDriveForm;
 import wehavecookies56.kk.item.ItemKKPotion;
 import wehavecookies56.kk.item.ItemSpellOrb;
 
@@ -54,18 +50,13 @@ public class PlayerStatsCapability {
 		void remMP(double mp);
 		void setMaxMP(double mp);
 		void setRecharge(boolean recharge);
-		boolean getCheatMode();
-		void setCheatMode(boolean cheat);
 		
 		InventoryKeychain getInventoryKeychain();
 		InventoryPotionsMenu getInventoryPotionsMenu();
 		InventorySpells getInventorySpells();
-		InventoryDriveForms getInventoryDriveForms();
 
 		List getSpellsList();
 		List getItemsList();
-		List getDriveFormsList();
-
 		
 	}
 
@@ -84,12 +75,10 @@ public class PlayerStatsCapability {
 			properties.setDouble("MP", instance.getMP());
 			properties.setDouble("Max MP", instance.getMaxMP());
 			properties.setBoolean("Recharge", instance.getRecharge());
-			properties.setBoolean("CheatMode", instance.getCheatMode());
 			
 			instance.getInventoryKeychain().writeToNBT(properties);
 			instance.getInventoryPotionsMenu().writeToNBT(properties);
 			instance.getInventorySpells().writeToNBT(properties);
-			instance.getInventoryDriveForms().writeToNBT(properties);
 
 			return properties;
 		}
@@ -107,12 +96,10 @@ public class PlayerStatsCapability {
 			instance.setMP(properties.getDouble("MP"));
 			instance.setMaxMP(properties.getDouble("Max MP"));
 			instance.setRecharge(properties.getBoolean("Recharge"));
-			instance.setCheatMode(properties.getBoolean("CheatMode"));
 			
 			instance.getInventoryKeychain().readFromNBT(properties);
 			instance.getInventoryPotionsMenu().readFromNBT(properties);
 			instance.getInventorySpells().readFromNBT(properties);
-			instance.getInventoryDriveForms().readFromNBT(properties);
 			
 			instance.getSpellsList().clear();
 			for (int i = 0; i < instance.getInventorySpells().getSizeInventory(); i++) {
@@ -120,9 +107,6 @@ public class PlayerStatsCapability {
 					instance.getSpellsList().add(((ItemSpellOrb) instance.getInventorySpells().getStackInSlot(i).getItem()).getMagicName());
 				}
 			}
-			instance.getDriveFormsList().clear();
-			for (int i = 0; i < instance.getInventoryDriveForms().getSizeInventory(); i++)
-				if (instance.getInventoryDriveForms().getStackInSlot(i) != null) instance.getDriveFormsList().add(((ItemDriveForm) instance.getInventoryDriveForms().getStackInSlot(i).getItem()).getDriveFormName());
 			
 			instance.getItemsList().clear();
 			for (int i = 0; i < instance.getInventoryPotionsMenu().getSizeInventory(); i++)
@@ -150,20 +134,16 @@ public class PlayerStatsCapability {
 		private final InventoryKeychain inventoryKeychain = new InventoryKeychain();
 		private final InventoryPotionsMenu inventoryPotions = new InventoryPotionsMenu();
 		private final InventorySpells inventorySpells = new InventorySpells();
-		private final InventoryDriveForms inventoryDrive = new InventoryDriveForms();
 		
 		private static List<String> spells = new ArrayList<String>();
 		private static List<String> items = new ArrayList<String>();
-		private static List<String> driveForms = new ArrayList<String>();
 		
 		@Override public InventoryKeychain getInventoryKeychain(){return this.inventoryKeychain;}
 		@Override public InventoryPotionsMenu getInventoryPotionsMenu(){return this.inventoryPotions;}
 		@Override public InventorySpells getInventorySpells(){return this.inventorySpells;}
-		@Override public InventoryDriveForms getInventoryDriveForms(){return this.inventoryDrive;}
 		
 		@Override public List getSpellsList(){return this.spells;}
 		@Override public List getItemsList(){return this.items;}
-		@Override public List getDriveFormsList(){return this.driveForms;}
 
         @Override public double getMP() { return this.mp; }
         @Override public double getMaxMP() { return this.maxMP; }
@@ -214,7 +194,5 @@ public class PlayerStatsCapability {
         @Override public void remMP(double mp) { if (mp + this.mp < 0) this.mp = 0; else this.mp -= mp; }
         @Override public void setMaxMP(double maxMP) { this.maxMP = mp;}
 		@Override public void setRecharge(boolean recharge) { this.recharge = recharge; }
-		@Override public boolean getCheatMode() {return this.cheatMode;}
-		@Override public void setCheatMode(boolean cheat) {this.cheatMode = cheat;}
     }
 }

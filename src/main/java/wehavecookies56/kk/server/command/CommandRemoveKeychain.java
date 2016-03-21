@@ -13,10 +13,8 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.text.TextFormatting;
 import wehavecookies56.kk.KingdomKeys;
-import wehavecookies56.kk.entities.ExtendedPlayer;
 import wehavecookies56.kk.item.ItemKeyblade;
 import wehavecookies56.kk.network.packet.PacketDispatcher;
-import wehavecookies56.kk.network.packet.client.SyncExtendedPlayer;
 import wehavecookies56.kk.network.packet.server.DeSummonKeyblade;
 import wehavecookies56.kk.network.packet.server.RemoveItemInSlot;
 import wehavecookies56.kk.util.TextHelper;
@@ -90,7 +88,6 @@ public class CommandRemoveKeychain implements ICommand {
 																																											// ==
 																																											// true
 						PacketDispatcher.sendToServer(new DeSummonKeyblade(player.inventory.getCurrentItem()));
-					PacketDispatcher.sendToServer(new SyncExtendedPlayer(player));
 					TextHelper.sendFormattedChatMessage("Your keychain has been removed!", TextFormatting.YELLOW, (EntityPlayer) sender.getCommandSenderEntity());
 				} else
 					TextHelper.sendFormattedChatMessage("The chain slot has no chain!", TextFormatting.RED, (EntityPlayer) sender.getCommandSenderEntity());
@@ -100,7 +97,6 @@ public class CommandRemoveKeychain implements ICommand {
 				if (playermp.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryKeychain().getStackInSlot(0) != null) {
 					PacketDispatcher.sendToServer(new RemoveItemInSlot("keychain", 0));
 					if (playermp.getCapability(KingdomKeys.SUMMON_KEYBLADE, null).getKeybladeSummoned()) if (playermp.inventory.getCurrentItem() != null && playermp.inventory.getCurrentItem().getItem() instanceof ItemKeyblade) PacketDispatcher.sendToServer(new DeSummonKeyblade(playermp.inventory.getCurrentItem()));
-					PacketDispatcher.sendToServer(new SyncExtendedPlayer(playermp));
 					TextHelper.sendFormattedChatMessage(args[0] + "'s keychain has been removed!", TextFormatting.YELLOW, (EntityPlayer) sender.getCommandSenderEntity());
 				} else
 					TextHelper.sendFormattedChatMessage("The chain slot has no chain!", TextFormatting.RED, (EntityPlayer) sender.getCommandSenderEntity());

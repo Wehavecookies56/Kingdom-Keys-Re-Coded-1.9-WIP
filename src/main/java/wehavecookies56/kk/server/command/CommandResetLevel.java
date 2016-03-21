@@ -77,8 +77,8 @@ public class CommandResetLevel implements ICommand {
 		if (sender.getCommandSenderEntity() instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) sender.getCommandSenderEntity();
 			if (args.length == 0) {
-				player.getCapability(KingdomKeys.PLAYER_STATS, null).level = 1;
-				player.getCapability(KingdomKeys.PLAYER_STATS, null).experience = 0;
+				player.getCapability(KingdomKeys.PLAYER_STATS, null).setLevel(1);
+				player.getCapability(KingdomKeys.PLAYER_STATS, null).setExperience(0);
 				player.getCapability(KingdomKeys.PLAYER_STATS, null).setStrength(1);
 				player.getCapability(KingdomKeys.PLAYER_STATS, null).setDefense(1);
 				player.getCapability(KingdomKeys.PLAYER_STATS, null).setMagic(1);
@@ -88,8 +88,8 @@ public class CommandResetLevel implements ICommand {
 
 			} else if (args.length == 1) {
 				EntityPlayerMP entityplayermp = args.length == 1 ? server.getPlayerList().getPlayerByUUID(UUID.fromString(args[0])) : getCommandSenderAsPlayer(sender);
-				entityplayermp.getCapability(KingdomKeys.PLAYER_STATS, null).level = 1;
-				entityplayermp.getCapability(KingdomKeys.PLAYER_STATS, null).experience = 0;
+				entityplayermp.getCapability(KingdomKeys.PLAYER_STATS, null).setLevel(1);
+				entityplayermp.getCapability(KingdomKeys.PLAYER_STATS, null).setExperience(0);
 				entityplayermp.getCapability(KingdomKeys.PLAYER_STATS, null).setStrength(1);
 				entityplayermp.getCapability(KingdomKeys.PLAYER_STATS, null).setDefense(1);
 				entityplayermp.getCapability(KingdomKeys.PLAYER_STATS, null).setMagic(1);

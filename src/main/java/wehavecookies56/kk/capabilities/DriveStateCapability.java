@@ -1,10 +1,16 @@
 package wehavecookies56.kk.capabilities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
+import wehavecookies56.kk.api.driveforms.DriveForm;
+import wehavecookies56.kk.inventory.InventoryDriveForms;
+import wehavecookies56.kk.item.ItemDriveForm;
 import wehavecookies56.kk.lib.Strings;
 
 public class DriveStateCapability {
@@ -19,6 +25,11 @@ public class DriveStateCapability {
 		void setActiveDriveName(String drive);
 		void setAntiPoints(int points);
 		void setDriveLevel(String drive, int level);
+		void learnDriveForm(DriveForm form);
+		
+		InventoryDriveForms getInventoryDriveForms();
+
+		List<String> getDriveFormsList();
 	}
 
 	public static class Storage implements IStorage<IDriveState> {
@@ -34,6 +45,7 @@ public class DriveStateCapability {
 			properties.setInteger("DriveLevelLimit", instance.getDriveLevel(Strings.Form_Limit));
 			properties.setInteger("DriveLevelMaster", instance.getDriveLevel(Strings.Form_Master));
 			properties.setInteger("DriveLevelFinal", instance.getDriveLevel(Strings.Form_Final));
+			instance.getInventoryDriveForms().writeToNBT(properties);
 
 			return properties;
 		}
@@ -50,6 +62,11 @@ public class DriveStateCapability {
 			instance.setDriveLevel(Strings.Form_Master, properties.getInteger("DriveLevelMaster"));
 			instance.setDriveLevel(Strings.Form_Final, properties.getInteger("DriveLevelFinal"));
 
+			instance.getInventoryDriveForms().readFromNBT(properties);
+			
+			instance.getDriveFormsList().clear();
+			for (int i = 0; i < instance.getInventoryDriveForms().getSizeInventory(); i++)
+				if (instance.getInventoryDriveForms().getStackInSlot(i) != null) instance.getDriveFormsList().add(((ItemDriveForm) instance.getInventoryDriveForms().getStackInSlot(i).getItem()).getDriveFormName());
 		}
 	}
 	
@@ -57,6 +74,9 @@ public class DriveStateCapability {
         private boolean inDrive = false;
         private String activeDrive = "none";
         int antiPoints = 0;
+		private final InventoryDriveForms inventoryDrive = new InventoryDriveForms();
+		private static List<String> driveForms = new ArrayList<String>();
+
 		int valor, wisdom, limit, master, Final;
 		@Override public boolean getInDrive() { return inDrive; }
 		@Override public String getActiveDriveName() { return activeDrive; }
@@ -96,6 +116,14 @@ public class DriveStateCapability {
 					Final = level;
 			}
 		}
+		@Override
+		public void learnDriveForm(DriveForm form) {
+			driveForms.add(form.getName());
+		}
+		@Override public InventoryDriveForms getInventoryDriveForms(){return this.inventoryDrive;}
+
+		@Override public List getDriveFormsList(){return this.driveForms;}
+
     }
 }
 

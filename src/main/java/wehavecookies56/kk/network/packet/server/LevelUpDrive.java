@@ -8,7 +8,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import wehavecookies56.kk.KingdomKeys;
-import wehavecookies56.kk.entities.ExtendedPlayer;
 import wehavecookies56.kk.inventory.InventoryDriveForms;
 import wehavecookies56.kk.lib.Strings;
 import wehavecookies56.kk.network.packet.AbstractMessage.AbstractServerMessage;
@@ -44,7 +43,6 @@ public class LevelUpDrive extends AbstractServerMessage<LevelUpDrive> {
 
 	@Override
 	public void process (EntityPlayer player, Side side) {
-		ExtendedPlayer ep = ExtendedPlayer.get(player);
 		int valorLevel = player.getCapability(KingdomKeys.DRIVE_STATE, null).getDriveLevel(Strings.Form_Valor);
 		int wisdomLevel = player.getCapability(KingdomKeys.DRIVE_STATE, null).getDriveLevel(Strings.Form_Wisdom);
 		int limitLevel = player.getCapability(KingdomKeys.DRIVE_STATE, null).getDriveLevel(Strings.Form_Limit);
@@ -82,8 +80,8 @@ public class LevelUpDrive extends AbstractServerMessage<LevelUpDrive> {
 		else
 		{
 			for (int i = 0; i < InventoryDriveForms.INV_SIZE; i++) {
-				if (player.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryDriveForms().getStackInSlot(i) != null) {
-					if (player.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryDriveForms().getStackInSlot(i).getItem() == player.getHeldItem(EnumHand.MAIN_HAND).getItem()) {
+				if (player.getCapability(KingdomKeys.DRIVE_STATE, null).getInventoryDriveForms().getStackInSlot(i) != null) {
+					if (player.getCapability(KingdomKeys.DRIVE_STATE, null).getInventoryDriveForms().getStackInSlot(i).getItem() == player.getHeldItem(EnumHand.MAIN_HAND).getItem()) {
 						hasDriveInSlot = i;
 					}
 				} else {
@@ -93,7 +91,7 @@ public class LevelUpDrive extends AbstractServerMessage<LevelUpDrive> {
 			}
 	
 			if (hasDriveInSlot == -1) {
-				player.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryDriveForms().setInventorySlotContents(nullSlot, player.getHeldItem(EnumHand.MAIN_HAND));
+				player.getCapability(KingdomKeys.DRIVE_STATE, null).getInventoryDriveForms().setInventorySlotContents(nullSlot, player.getHeldItem(EnumHand.MAIN_HAND));
 				player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
 				TextHelper.sendFormattedChatMessage("Succesfully learnt " + form + " Form!", TextFormatting.YELLOW, player);
 			} else {
