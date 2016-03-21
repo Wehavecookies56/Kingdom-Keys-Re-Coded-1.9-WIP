@@ -64,6 +64,7 @@ public class GuiCommandMenu extends GuiScreen {
 			{
 				// drawTexturedModalRect(0, mc.displayHeight/2 - MENU_HEIGHT,
 				// TOP_WIDTH, 0, TOP_WIDTH + MENU_WIDTH, MENU_HEIGHT);
+				//System.out.println(Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.DRIVE_STATE, null).getDriveLevel(Strings.Form_Valor));
 				drawCommandMenu(event.resolution.getScaledWidth(), event.resolution.getScaledHeight());
 			}
 			GL11.glPopMatrix();

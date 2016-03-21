@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import wehavecookies56.kk.KingdomKeys;
@@ -31,7 +32,7 @@ public class BlockSynthesisTable extends Block implements ITileEntityProvider {
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
 			EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
-		playerIn.playSound(ModSounds.kupo, 1, 1);
+		worldIn.playSound((EntityPlayer)null, playerIn.posX, playerIn.posY, playerIn.posZ, ModSounds.kupo, SoundCategory.MASTER, 0.5F, 0.4F);
 		playerIn.openGui(KingdomKeys.instance, KingdomKeys.GUI_SYNTHESISTABLE, worldIn, pos.getX(), pos.getY(), pos.getZ());
 		if (!worldIn.isRemote){
 			PacketDispatcher.sendTo(new SyncRecipeData(playerIn.getCapability(KingdomKeys.SYNTHESIS_RECIPES, null)), (EntityPlayerMP) playerIn);
