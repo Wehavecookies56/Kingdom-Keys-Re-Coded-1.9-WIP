@@ -74,6 +74,7 @@ import wehavecookies56.kk.lib.Reference;
 import wehavecookies56.kk.lib.Strings;
 import wehavecookies56.kk.network.packet.PacketDispatcher;
 import wehavecookies56.kk.network.packet.client.SyncDriveData;
+import wehavecookies56.kk.network.packet.client.SyncDriveInventory;
 import wehavecookies56.kk.network.packet.client.SyncMunnyData;
 import wehavecookies56.kk.network.packet.client.SyncSpellInventory;
 import wehavecookies56.kk.network.packet.server.DeSummonKeyblade;
@@ -410,6 +411,7 @@ public class EventHandler {
 		PacketDispatcher.sendToServer(new SyncData());
 		if (!event.entity.worldObj.isRemote && event.entity instanceof EntityPlayer) {
 			PacketDispatcher.sendTo(new SyncSpellInventory(event.entity.getCapability(KingdomKeys.PLAYER_STATS, null)), (EntityPlayerMP) event.entity);
+			PacketDispatcher.sendTo(new SyncDriveInventory(event.entity.getCapability(KingdomKeys.DRIVE_STATE, null)), (EntityPlayerMP) event.entity);
 			IFirstTimeJoin FTJ = event.entity.getCapability(KingdomKeys.FIRST_TIME_JOIN, null);
 			if (!FTJ.getFirstTimeJoin()) {
 				((EntityPlayer) event.entity).inventory.addItemStackToInventory(new ItemStack(ModItems.WoodenKeyblade));
