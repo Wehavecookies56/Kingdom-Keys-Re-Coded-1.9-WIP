@@ -80,6 +80,7 @@ import wehavecookies56.kk.network.packet.server.DriveOrbPickup;
 import wehavecookies56.kk.network.packet.server.HpOrbPickup;
 import wehavecookies56.kk.network.packet.server.MagicOrbPickup;
 import wehavecookies56.kk.network.packet.server.MunnyPickup;
+import wehavecookies56.kk.network.packet.server.SyncData;
 
 public class EventHandler {
 	
@@ -405,6 +406,7 @@ public class EventHandler {
 	
 	@SubscribeEvent
 	public void OnEntityJoinWorld (EntityJoinWorldEvent event) {
+		PacketDispatcher.sendToServer(new SyncData());
 		if (!event.entity.worldObj.isRemote && event.entity instanceof EntityPlayer) {
 			IFirstTimeJoin FTJ = event.entity.getCapability(KingdomKeys.FIRST_TIME_JOIN, null);
 			if (!FTJ.getFirstTimeJoin()) {
