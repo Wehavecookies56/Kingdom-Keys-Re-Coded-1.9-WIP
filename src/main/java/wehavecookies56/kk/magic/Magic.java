@@ -9,6 +9,7 @@ import net.minecraft.world.World;
 import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.lib.Strings;
 import wehavecookies56.kk.network.packet.PacketDispatcher;
+import wehavecookies56.kk.network.packet.server.SyncData;
 import wehavecookies56.kk.network.packet.server.magics.MagicAero;
 import wehavecookies56.kk.network.packet.server.magics.MagicBlizzard;
 import wehavecookies56.kk.network.packet.server.magics.MagicCure;
@@ -50,6 +51,8 @@ public class Magic {
 	}
 
 	public static void Fire (EntityPlayer player, World world) {
+		PacketDispatcher.sendToServer(new SyncData());
+
 		if(Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.MAGIC_STATE, null).getKH1Fire())
 			System.out.println("KH1");
 		else
@@ -61,29 +64,39 @@ public class Magic {
 	}
 
 	public static void Blizzard (EntityPlayer player, World world) {
+		PacketDispatcher.sendToServer(new SyncData());
+
 		PacketDispatcher.sendToServer(new MagicBlizzard());
 		player.swingArm(EnumHand.MAIN_HAND);
 		//if (FMLCommonHandler.instance().getSide() == Side.SERVER) PacketDispatcher.sendToDimension(new MagicBlizzard(), world.provider.getDimensionId());
 	}
 
 	public static void Thunder (EntityPlayer player, World world) {
+		PacketDispatcher.sendToServer(new SyncData());
+
 		PacketDispatcher.sendToServer(new MagicThunder());
 		player.swingArm(EnumHand.MAIN_HAND);
 	}
 
 	public static void Cure (EntityPlayer player, World world) {
+		PacketDispatcher.sendToServer(new SyncData());
+
 		PacketDispatcher.sendToServer(new MagicCure());
 		player.swingArm(EnumHand.MAIN_HAND);
 
 	}
 
 	public static void Aero (EntityPlayer player, World world) {
+		PacketDispatcher.sendToServer(new SyncData());
+
 		PacketDispatcher.sendToServer(new MagicAero());
 		player.swingArm(EnumHand.MAIN_HAND);
 		world.playSound(player.posX, player.posY, player.posZ, SoundEvents.entity_ghast_shoot, SoundCategory.PLAYERS, 1, 1, false);
 	}
 
 	public static void Stop (EntityPlayer player, World world) {
+		PacketDispatcher.sendToServer(new SyncData());
+
 		PacketDispatcher.sendToServer(new MagicStop());
 		player.swingArm(EnumHand.MAIN_HAND);
 		world.playSound(player.posX, player.posY, player.posZ, SoundEvents.entity_ghast_shoot, SoundCategory.PLAYERS, 1, 1, false);
