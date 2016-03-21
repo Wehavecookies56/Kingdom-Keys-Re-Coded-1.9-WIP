@@ -9,6 +9,7 @@ import wehavecookies56.kk.lib.Strings;
 import wehavecookies56.kk.network.packet.PacketDispatcher;
 import wehavecookies56.kk.network.packet.server.AntiPoints;
 import wehavecookies56.kk.network.packet.server.DriveFormPacket;
+import wehavecookies56.kk.network.packet.server.SyncData;
 
 public class ModDriveForms {
 	
@@ -31,6 +32,8 @@ public class ModDriveForms {
 	}
 
 	public static void getDriveForm (EntityPlayer player, World world, String drive) {
+		//PacketDispatcher.sendToServer(new SyncData());
+
 		switch (drive) {
 			case Strings.Form_Valor:
 				PacketDispatcher.sendToServer(new DriveFormPacket(Strings.Form_Valor));

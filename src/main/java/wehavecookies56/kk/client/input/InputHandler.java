@@ -217,6 +217,8 @@ public class InputHandler {
 
 		if (GuiCommandMenu.selected == GuiCommandMenu.DRIVE && GuiCommandMenu.submenu == GuiCommandMenu.SUB_DRIVE) {
 			if (DS.getDriveFormsList().isEmpty()) {} else if ((STATS.getDP() >= Constants.getCost((String) DS.getDriveFormsList().get(GuiCommandMenu.driveselected)))) {
+				PacketDispatcher.sendToServer(new SyncData());
+
 				if(!antiFormCheck()){
 					ModDriveForms.getDriveForm(player, world, (String) DS.getDriveFormsList().get(GuiCommandMenu.driveselected));
 				}
