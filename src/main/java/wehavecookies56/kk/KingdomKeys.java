@@ -33,6 +33,7 @@ import wehavecookies56.kk.capabilities.PlayerStatsCapability.IPlayerStats;
 import wehavecookies56.kk.capabilities.SummonKeybladeCapability.ISummonKeyblade;
 import wehavecookies56.kk.capabilities.SynthesisMaterialCapability.ISynthesisMaterial;
 import wehavecookies56.kk.capabilities.SynthesisRecipeCapability.ISynthesisRecipe;
+import wehavecookies56.kk.client.audio.ModSounds;
 import wehavecookies56.kk.driveforms.ModDriveForms;
 import wehavecookies56.kk.entities.PlayerLevel;
 import wehavecookies56.kk.entities.TileEntityKKChest;
@@ -154,10 +155,13 @@ public class KingdomKeys {
 		// Instance
 		MinecraftForge.EVENT_BUS.register(instance);
 
+		ModSounds.init();
+		LogHelper.info("Sounds loaded");
+		
 		// Update checker
 		MinecraftForge.EVENT_BUS.register(new UpdateChecker());
 		LogHelper.info("Update checker loaded");
-
+		
 		// Crafting recipes
 		ModItemsRecipes.init();
 		ModBlocksRecipes.init();
