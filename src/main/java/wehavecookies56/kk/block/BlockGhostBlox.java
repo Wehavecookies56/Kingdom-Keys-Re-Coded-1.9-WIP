@@ -89,6 +89,6 @@ public class BlockGhostBlox extends BlockBlox {
 		if (worldIn.getValue(VISIBLE).intValue() == 0)
 			return super.getCollisionBoundingBox(worldIn, pos, state);
 		else
-			return null;
+			return new AxisAlignedBB(new BlockPos(0, 0, 0), new BlockPos(0, 0, 0));
 	}
 }

@@ -40,6 +40,7 @@ import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -394,18 +395,17 @@ public class EventHandler {
 	}
 
 	@SubscribeEvent
+	public void PlayerClone (PlayerEvent.Clone event) {
+		if (event.wasDeath) {
+			IFirstTimeJoin ftjbefore = event.original.getCapability(KingdomKeys.FIRST_TIME_JOIN, null);
+			IFirstTimeJoin ftjafter = event.entityPlayer.getCapability(KingdomKeys.FIRST_TIME_JOIN, null);
+			ftjafter.setFirstTimeJoin(ftjbefore.getFirstTimeJoin());
+		}
+	}
+	
+	@SubscribeEvent
 	public void OnEntityJoinWorld (EntityJoinWorldEvent event) {
 		if (!event.entity.worldObj.isRemote && event.entity instanceof EntityPlayer) {
-			/*ExtendedPlayer.get((EntityPlayer) event.entity);
-			ExtendedPlayer.loadProxyData(((EntityPlayer) event.entity));
-			PacketDispatcher.sendTo(new SyncExtendedPlayer((EntityPlayer) event.entity), ((EntityPlayerMP) event.entity));
-			ExtendedPlayerRecipes.get((EntityPlayer) event.entity);
-			ExtendedPlayerRecipes.loadProxyData(((EntityPlayer) event.entity));
-			PacketDispatcher.sendTo(new SyncExtendedPlayerRecipes((EntityPlayer) event.entity), ((EntityPlayerMP) event.entity));
-			ExtendedPlayerMaterials.get((EntityPlayer) event.entity);
-			ExtendedPlayerMaterials.loadProxyData(((EntityPlayer) event.entity));
-			PacketDispatcher.sendTo(new SyncExtendedPlayerMaterials((EntityPlayer) event.entity), ((EntityPlayerMP) event.entity));
-			*/
 			IFirstTimeJoin FTJ = event.entity.getCapability(KingdomKeys.FIRST_TIME_JOIN, null);
 			if (!FTJ.getFirstTimeJoin()) {
 				((EntityPlayer) event.entity).inventory.addItemStackToInventory(new ItemStack(ModItems.WoodenKeyblade));
