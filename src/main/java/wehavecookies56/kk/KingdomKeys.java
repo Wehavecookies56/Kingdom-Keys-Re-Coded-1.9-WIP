@@ -155,7 +155,6 @@ public class KingdomKeys {
 		// Instance
 		MinecraftForge.EVENT_BUS.register(instance);
 
-		ModSounds.init();
 		LogHelper.info("Sounds loaded");
 		
 		// Update checker
