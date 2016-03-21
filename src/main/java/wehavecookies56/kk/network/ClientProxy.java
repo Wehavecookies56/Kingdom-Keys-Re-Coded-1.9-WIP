@@ -55,8 +55,8 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void preInit () {
-		B3DLoader.instance.addDomain(Reference.MODID);
-		OBJLoader.instance.addDomain(Reference.MODID);
+		B3DLoader.INSTANCE.addDomain(Reference.MODID);
+		OBJLoader.INSTANCE.addDomain(Reference.MODID);
 		ModelLoader.setCustomModelResourceLocation(ModItems.AllforOne, 0, new ModelResourceLocation(Reference.MODID + ":" + Strings.AllforOne, "inventory"));
 		ModelLoader.setCustomModelResourceLocation(ModItems.Arpeggio, 0, new ModelResourceLocation(Reference.MODID + ":" + Strings.Arpeggio, "inventory"));
 		ModelLoader.setCustomModelResourceLocation(ModItems.BlazeofGlory, 0, new ModelResourceLocation(Reference.MODID + ":" + Strings.BlazeofGlory, "inventory"));

@@ -18,7 +18,7 @@ public class ModelPrometheus extends ModelBase {
 
 	public ModelPrometheus () {
 		try {
-			model = (OBJModel) OBJLoader.instance.loadModel(new ResourceLocation("kk:models/item/prometheus.obj"));
+			model = (OBJModel) OBJLoader.INSTANCE.loadModel(new ResourceLocation("kk:models/item/prometheus.obj"));
 			modelParts = ModelHelper.getModelsForGroups(model);
 		} catch (Exception e) {
 			e.printStackTrace();

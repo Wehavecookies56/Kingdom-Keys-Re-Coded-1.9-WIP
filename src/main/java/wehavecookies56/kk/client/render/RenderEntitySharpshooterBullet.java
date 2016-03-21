@@ -1,6 +1,5 @@
 package wehavecookies56.kk.client.render;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.lwjgl.opengl.GL11;
@@ -21,8 +20,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.Attributes;
 import net.minecraftforge.client.model.IModel;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
-import net.minecraftforge.client.model.TRSRTransformation;
 import net.minecraftforge.client.model.b3d.B3DLoader;
+import net.minecraftforge.common.model.TRSRTransformation;
 import wehavecookies56.kk.entities.projectiles.EntitySharpshooterBullet;
 import wehavecookies56.kk.lib.Reference;
 import wehavecookies56.kk.lib.Strings;
@@ -68,7 +67,7 @@ public class RenderEntitySharpshooterBullet extends Render<EntitySharpshooterBul
 			IModel model = null;
 
 			try {
-				model = B3DLoader.instance.loadModel(this.model);
+				model = B3DLoader.INSTANCE.loadModel(this.model);
 			} catch (Exception e) {
 				model = ModelLoaderRegistry.getMissingModel();
 			}

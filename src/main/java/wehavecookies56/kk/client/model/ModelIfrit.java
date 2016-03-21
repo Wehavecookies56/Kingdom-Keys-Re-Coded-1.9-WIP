@@ -18,7 +18,7 @@ public class ModelIfrit extends ModelBase {
 
 	public ModelIfrit () {
 		try {
-			model = (OBJModel) OBJLoader.instance.loadModel(new ResourceLocation("kk:models/item/ifrit.obj"));
+			model = (OBJModel) OBJLoader.INSTANCE.loadModel(new ResourceLocation("kk:models/item/ifrit.obj"));
 			modelParts = ModelHelper.getModelsForGroups(model);
 		} catch (Exception e) {
 			e.printStackTrace();

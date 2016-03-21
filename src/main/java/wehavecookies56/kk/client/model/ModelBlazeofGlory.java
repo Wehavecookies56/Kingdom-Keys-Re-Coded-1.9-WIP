@@ -18,7 +18,7 @@ public class ModelBlazeofGlory extends ModelBase {
 
 	public ModelBlazeofGlory () {
 		try {
-			model = (OBJModel) OBJLoader.instance.loadModel(new ResourceLocation("kk:models/item/blazeofglory.obj"));
+			model = (OBJModel) OBJLoader.INSTANCE.loadModel(new ResourceLocation("kk:models/item/blazeofglory.obj"));
 			modelParts = ModelHelper.getModelsForGroups(model);
 		} catch (Exception e) {
 			e.printStackTrace();
