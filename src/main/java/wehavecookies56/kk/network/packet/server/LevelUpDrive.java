@@ -3,6 +3,7 @@ package wehavecookies56.kk.network.packet.server;
 import java.io.IOException;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextFormatting;
@@ -11,6 +12,8 @@ import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.inventory.InventoryDriveForms;
 import wehavecookies56.kk.lib.Strings;
 import wehavecookies56.kk.network.packet.AbstractMessage.AbstractServerMessage;
+import wehavecookies56.kk.network.packet.PacketDispatcher;
+import wehavecookies56.kk.network.packet.client.SyncDriveData;
 import wehavecookies56.kk.util.TextHelper;
 
 public class LevelUpDrive extends AbstractServerMessage<LevelUpDrive> {
@@ -72,9 +75,10 @@ public class LevelUpDrive extends AbstractServerMessage<LevelUpDrive> {
 			default:
 			break;
 		}
+		PacketDispatcher.sendTo(new SyncDriveData(player.getCapability(KingdomKeys.DRIVE_STATE, null), player.getCapability(KingdomKeys.PLAYER_STATS, null)), (EntityPlayerMP) player);
 		if(isLevelUp)
 		{//TODO
-			player.getCapability(KingdomKeys.DRIVE_STATE, null).setDriveLevel(form, finalLevel+1);
+			player.getCapability(KingdomKeys.DRIVE_STATE, null).setDriveLevel(form, formLevel+1);
 			System.out.println(form+" level: "+(formLevel+1));
 		}
 		else

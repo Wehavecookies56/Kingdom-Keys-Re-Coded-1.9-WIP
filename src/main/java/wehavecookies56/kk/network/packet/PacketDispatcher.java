@@ -18,6 +18,7 @@ import wehavecookies56.kk.network.packet.client.SpawnStopParticles;
 import wehavecookies56.kk.network.packet.client.SpawnThunderEntity;
 import wehavecookies56.kk.network.packet.client.SpawnThunderParticles;
 import wehavecookies56.kk.network.packet.client.SyncDriveData;
+import wehavecookies56.kk.network.packet.client.SyncMagicData;
 import wehavecookies56.kk.network.packet.client.SyncMaterialData;
 import wehavecookies56.kk.network.packet.client.SyncMunnyData;
 import wehavecookies56.kk.network.packet.client.SyncRecipeData;
@@ -26,7 +27,6 @@ import wehavecookies56.kk.network.packet.server.CreateFromSynthesisRecipe;
 import wehavecookies56.kk.network.packet.server.DeSummonKeyblade;
 import wehavecookies56.kk.network.packet.server.DriveFormPacket;
 import wehavecookies56.kk.network.packet.server.DriveOrbPickup;
-import wehavecookies56.kk.network.packet.server.OpenMenu;
 import wehavecookies56.kk.network.packet.server.GiveItemInSlot;
 import wehavecookies56.kk.network.packet.server.GlidePacket;
 import wehavecookies56.kk.network.packet.server.HpOrbPickup;
@@ -38,10 +38,12 @@ import wehavecookies56.kk.network.packet.server.MasterFormPacket;
 import wehavecookies56.kk.network.packet.server.MunnyPickup;
 import wehavecookies56.kk.network.packet.server.OpenGui;
 import wehavecookies56.kk.network.packet.server.OpenMaterials;
+import wehavecookies56.kk.network.packet.server.OpenMenu;
 import wehavecookies56.kk.network.packet.server.PlaySoundAtPlayer;
 import wehavecookies56.kk.network.packet.server.PotionConsume;
 import wehavecookies56.kk.network.packet.server.RemoveItemInSlot;
 import wehavecookies56.kk.network.packet.server.SummonKeyblade;
+import wehavecookies56.kk.network.packet.server.SyncData;
 import wehavecookies56.kk.network.packet.server.SyncStatMessagesPacket;
 import wehavecookies56.kk.network.packet.server.SynthesisMaterialPickup;
 import wehavecookies56.kk.network.packet.server.TakeMaterials;
@@ -76,7 +78,9 @@ public class PacketDispatcher {
 		registerMessage(SyncRecipeData.class);
 		registerMessage(SyncMaterialData.class);
 		registerMessage(SyncDriveData.class);
+		registerMessage(SyncMagicData.class);
 		registerMessage(SyncMunnyData.class);
+		registerMessage(SyncData.class);
 
 		// Client to Server
 		registerMessage(MunnyPickup.class);

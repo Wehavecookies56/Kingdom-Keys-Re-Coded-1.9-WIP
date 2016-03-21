@@ -2,6 +2,7 @@ package wehavecookies56.kk.client.input;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.MouseEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -19,11 +20,13 @@ import wehavecookies56.kk.lib.Constants;
 import wehavecookies56.kk.lib.Strings;
 import wehavecookies56.kk.magic.Magic;
 import wehavecookies56.kk.network.packet.PacketDispatcher;
+import wehavecookies56.kk.network.packet.client.SyncDriveData;
 import wehavecookies56.kk.network.packet.server.AntiPoints;
 import wehavecookies56.kk.network.packet.server.DeSummonKeyblade;
 import wehavecookies56.kk.network.packet.server.DriveFormPacket;
 import wehavecookies56.kk.network.packet.server.OpenMenu;
 import wehavecookies56.kk.network.packet.server.SummonKeyblade;
+import wehavecookies56.kk.network.packet.server.SyncData;
 import wehavecookies56.kk.util.GuiHelper;
 import wehavecookies56.kk.util.KeyboardHelper;
 
@@ -135,6 +138,8 @@ public class InputHandler {
 		World world = mc.theWorld;
 		IPlayerStats STATS = player.getCapability(KingdomKeys.PLAYER_STATS, null);
 		IDriveState DS = player.getCapability(KingdomKeys.DRIVE_STATE, null);
+
+		PacketDispatcher.sendToServer(new SyncData());
 
 		switch (GuiCommandMenu.selected) {
 			case GuiCommandMenu.MAGIC:
