@@ -1,0 +1,14 @@
+{
+    "pools": [
+        {
+            "rolls": 100,
+            "entries": [
+                {
+                    "type": "item",
+                    "name": "kk:recipe",
+                    "weight": 20
+                }
+            ]
+        }
+    ]
+}

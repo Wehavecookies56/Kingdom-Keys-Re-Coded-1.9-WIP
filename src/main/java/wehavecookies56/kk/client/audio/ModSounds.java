@@ -26,10 +26,10 @@ public class ModSounds {
 	;
 	
 	public static void init() {
-		kupo = registerSound("kupo");
+		kupo = getSound("kupo");
 	}
 	
-	public static SoundEvent registerSound(String loc) {
+	public static SoundEvent getSound(String loc) {
 		SoundEvent soundEvent = SoundEvent.soundEventRegistry.getObject(new ResourceLocation(Reference.MODID, loc));
 		return soundEvent;
 	}
