@@ -72,6 +72,7 @@ import wehavecookies56.kk.item.ModItems;
 import wehavecookies56.kk.lib.Reference;
 import wehavecookies56.kk.lib.Strings;
 import wehavecookies56.kk.network.packet.PacketDispatcher;
+import wehavecookies56.kk.network.packet.client.SyncDriveData;
 import wehavecookies56.kk.network.packet.server.DeSummonKeyblade;
 import wehavecookies56.kk.network.packet.server.DriveOrbPickup;
 import wehavecookies56.kk.network.packet.server.HpOrbPickup;
@@ -581,11 +582,14 @@ public class EventHandler {
 			// if(dp < 1000) //Not pickup orb when full
 			{
 				DriveOrbPickup packet = new DriveOrbPickup(event.item.getEntityItem());
-				if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) 
+				if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) {
 					PacketDispatcher.sendToServer(packet);
+				}
 				if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
 					event.item.getEntityItem().stackSize--;
 					STATS.addDP(event.item.getEntityItem().getTagCompound().getInteger("amount"));
+					EntityPlayer player = event.entityPlayer;
+					PacketDispatcher.sendTo(new SyncDriveData(player.getCapability(KingdomKeys.DRIVE_STATE, null), player.getCapability(KingdomKeys.PLAYER_STATS, null)), (EntityPlayerMP) player);
 				}
 			}
 		} else if (event.item.getEntityItem().getItem() == ModItems.MagicOrb) {

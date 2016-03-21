@@ -17,6 +17,7 @@ import wehavecookies56.kk.network.packet.client.SpawnFireParticles;
 import wehavecookies56.kk.network.packet.client.SpawnStopParticles;
 import wehavecookies56.kk.network.packet.client.SpawnThunderEntity;
 import wehavecookies56.kk.network.packet.client.SpawnThunderParticles;
+import wehavecookies56.kk.network.packet.client.SyncDriveData;
 import wehavecookies56.kk.network.packet.client.SyncMaterialData;
 import wehavecookies56.kk.network.packet.client.SyncRecipeData;
 import wehavecookies56.kk.network.packet.server.AntiPoints;
@@ -73,6 +74,7 @@ public class PacketDispatcher {
 		registerMessage(SpawnDriveFormParticles.class);
 		registerMessage(SyncRecipeData.class);
 		registerMessage(SyncMaterialData.class);
+		registerMessage(SyncDriveData.class);
 
 		// Client to Server
 		registerMessage(MunnyPickup.class);
