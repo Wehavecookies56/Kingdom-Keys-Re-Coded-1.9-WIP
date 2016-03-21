@@ -39,7 +39,7 @@ public class CommandDriveLevel implements ICommand {
 
 	@Override
 	public String getCommandUsage (ICommandSender sender) {
-		return "/drivelevel <form> [player]";
+		return "/drivelevel <form> [level (can be negative)]";
 	}
 
 	@Override
@@ -75,19 +75,19 @@ public class CommandDriveLevel implements ICommand {
 		switch(args[0])
 		{
 		case "valor":
-			PacketDispatcher.sendToServer(new LevelUpDrive(Strings.Form_Valor, true));
+			PacketDispatcher.sendToServer(new LevelUpDrive(Strings.Form_Valor, true, Integer.parseInt(args[1].toString())));
 			break;
 		case "wisdom":
-			PacketDispatcher.sendToServer(new LevelUpDrive(Strings.Form_Wisdom, true));
+			PacketDispatcher.sendToServer(new LevelUpDrive(Strings.Form_Wisdom, true, Integer.parseInt(args[1].toString())));
 			break;
 		case "limit":
-			PacketDispatcher.sendToServer(new LevelUpDrive(Strings.Form_Limit, true));
+			PacketDispatcher.sendToServer(new LevelUpDrive(Strings.Form_Limit, true, Integer.parseInt(args[1].toString())));
 			break;
 		case "master":
-			PacketDispatcher.sendToServer(new LevelUpDrive(Strings.Form_Master, true));
+			PacketDispatcher.sendToServer(new LevelUpDrive(Strings.Form_Master, true, Integer.parseInt(args[1].toString())));
 			break;
 		case "final":
-			PacketDispatcher.sendToServer(new LevelUpDrive(Strings.Form_Final, true));
+			PacketDispatcher.sendToServer(new LevelUpDrive(Strings.Form_Final, true, Integer.parseInt(args[1].toString())));
 			break;
 		}		
 	}

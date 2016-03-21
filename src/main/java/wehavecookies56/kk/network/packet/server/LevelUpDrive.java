@@ -20,6 +20,7 @@ public class LevelUpDrive extends AbstractServerMessage<LevelUpDrive> {
 
 	String form;
 	boolean isLevelUp = false;
+	int levels;
 
 	public LevelUpDrive () {}
 
@@ -27,21 +28,24 @@ public class LevelUpDrive extends AbstractServerMessage<LevelUpDrive> {
 		this.form = form;
 	}
 	
-	public LevelUpDrive (String form, boolean levelup) {
+	public LevelUpDrive (String form, boolean levelup, int level) {
 		this.form = form;
 		this.isLevelUp = levelup;
+		this.levels = level;
 	}
 	
 	@Override
 	protected void read (PacketBuffer buffer) throws IOException {
 		form = buffer.readStringFromBuffer(40);
 		isLevelUp = buffer.readBoolean();
+		levels = buffer.readInt();
 	}
 
 	@Override
 	protected void write (PacketBuffer buffer) throws IOException {
 		buffer.writeString(form);
 		buffer.writeBoolean(isLevelUp);
+		buffer.writeInt(levels);
 	}
 
 	@Override
@@ -78,7 +82,7 @@ public class LevelUpDrive extends AbstractServerMessage<LevelUpDrive> {
 		PacketDispatcher.sendTo(new SyncDriveData(player.getCapability(KingdomKeys.DRIVE_STATE, null), player.getCapability(KingdomKeys.PLAYER_STATS, null)), (EntityPlayerMP) player);
 		if(isLevelUp)
 		{//TODO
-			player.getCapability(KingdomKeys.DRIVE_STATE, null).setDriveLevel(form, formLevel+1);
+			player.getCapability(KingdomKeys.DRIVE_STATE, null).setDriveLevel(form, formLevel+levels);
 			System.out.println(form+" level: "+(formLevel+1));
 		}
 		else

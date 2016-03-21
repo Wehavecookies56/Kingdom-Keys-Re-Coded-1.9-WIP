@@ -57,13 +57,13 @@ public class DriveFormValor extends DriveForm {
 			{
 				switch(player.getCapability(KingdomKeys.DRIVE_STATE, null).getDriveLevel(Strings.Form_Final))
 				{
-				case 1:
+				case 0:
 					player.motionY += Constants.VALOR_JUMP_1;
 					break;
-				case 2:
+				case 1:
 					player.motionY += Constants.VALOR_JUMP_2;
 					break;
-				case 3:
+				case 2:
 					player.motionY += Constants.VALOR_JUMP_3;
 					break;
 				}
