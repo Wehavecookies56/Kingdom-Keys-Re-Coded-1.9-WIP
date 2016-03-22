@@ -14,6 +14,7 @@ import wehavecookies56.kk.api.recipes.RecipeRegistry;
 import wehavecookies56.kk.capabilities.DriveStateCapability.IDriveState;
 import wehavecookies56.kk.capabilities.PlayerStatsCapability.IPlayerStats;
 import wehavecookies56.kk.capabilities.SynthesisRecipeCapability.ISynthesisRecipe;
+import wehavecookies56.kk.item.ItemDriveForm;
 import wehavecookies56.kk.network.packet.AbstractMessage.AbstractClientMessage;
 
 public class SyncDriveInventory extends AbstractClientMessage<SyncDriveInventory> {

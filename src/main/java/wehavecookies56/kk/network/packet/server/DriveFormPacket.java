@@ -3,12 +3,15 @@ package wehavecookies56.kk.network.packet.server;
 import java.io.IOException;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.relauncher.Side;
 import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.api.driveforms.DriveForm;
 import wehavecookies56.kk.api.driveforms.DriveFormRegistry;
 import wehavecookies56.kk.network.packet.AbstractMessage.AbstractServerMessage;
+import wehavecookies56.kk.network.packet.PacketDispatcher;
+import wehavecookies56.kk.network.packet.client.SyncDriveData;
 
 public class DriveFormPacket extends AbstractServerMessage<DriveFormPacket> {
 
@@ -46,6 +49,7 @@ public class DriveFormPacket extends AbstractServerMessage<DriveFormPacket> {
 			player.getCapability(KingdomKeys.DRIVE_STATE, null).setInDrive(false);
 			player.getCapability(KingdomKeys.DRIVE_STATE, null).setActiveDriveName("none");
 			if (!player.getCapability(KingdomKeys.CHEAT_MODE, null).getCheatMode()) player.getCapability(KingdomKeys.PLAYER_STATS, null).setDP(0);
+			PacketDispatcher.sendTo(new SyncDriveData(player.getCapability(KingdomKeys.DRIVE_STATE, null), player.getCapability(KingdomKeys.PLAYER_STATS, null)), (EntityPlayerMP) player);
 		}
 		if (DriveFormRegistry.isDriveFormRegistered(form)) DriveFormRegistry.get(form).initDrive(player);
 	}

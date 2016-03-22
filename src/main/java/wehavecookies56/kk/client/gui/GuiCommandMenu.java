@@ -1,6 +1,7 @@
 package wehavecookies56.kk.client.gui;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.lwjgl.input.Mouse;
@@ -17,6 +18,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.capabilities.DriveStateCapability.IDriveState;
 import wehavecookies56.kk.capabilities.PlayerStatsCapability.IPlayerStats;
+import wehavecookies56.kk.item.ItemDriveForm;
 import wehavecookies56.kk.lib.Constants;
 import wehavecookies56.kk.lib.Reference;
 import wehavecookies56.kk.lib.Strings;
@@ -54,9 +56,9 @@ public class GuiCommandMenu extends GuiScreen {
 	public static int potionselected = 0;
 	public static int driveselected = 0;
 	public static boolean FireUnlocked = true, BlizzardUnlocked, ThunderUnlocked, CureUnlocked, GravityUnlocked, AeroUnlocked, StopUnlocked, ValorUnlocked, WisdomUnlocked, LimitUnlocked, MasterUnlocked, FinalUnlocked;
-
+	
 	ResourceLocation texture = new ResourceLocation(Reference.MODID, "textures/gui/commandmenu.png");
-
+	
 	@SubscribeEvent (priority = EventPriority.NORMAL)
 	public void onRenderOverlayPost (RenderGameOverlayEvent event) {
 		if (event.type == RenderGameOverlayEvent.ElementType.TEXT && !mc.ingameGUI.getChatGUI().getChatOpen()) {
@@ -92,6 +94,11 @@ public class GuiCommandMenu extends GuiScreen {
 		IDriveState DS = mc.thePlayer.getCapability(KingdomKeys.DRIVE_STATE, null);
 		IPlayerStats STATS = mc.thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null);
 
+		this.driveCommands = new ArrayList<String>();
+		this.driveCommands.clear();
+		for (int i = 0; i < Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.DRIVE_STATE, null).getInventoryDriveForms().getSizeInventory(); i++)
+			if (Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.DRIVE_STATE, null).getInventoryDriveForms().getStackInSlot(i) != null) this.driveCommands.add(((ItemDriveForm) Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.DRIVE_STATE, null).getInventoryDriveForms().getStackInSlot(i).getItem()).getDriveFormName());	
+		
 		// Magic:"+magicselected+" Drive:"+driveselected);
 		//System.out.println("Is KH1 Fire?: "+ExtendedPlayer.get(Minecraft.getMinecraft().thePlayer).getKH1Fire());
 		float scale = 1.05f;
@@ -129,7 +136,7 @@ public class GuiCommandMenu extends GuiScreen {
 				else
 					drawString(mc.fontRendererObj, TextHelper.localize(Strings.Gui_CommandMenu_Drive_Revert), 6 + textX, 4, 0xFFFFFF);
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			} else if (DS.getDriveFormsList().isEmpty() || STATS.getDP() <= 0)
+			} else if (this.driveCommands.isEmpty() || STATS.getDP() <= 0)
 				drawString(mc.fontRendererObj, TextHelper.localize(Strings.Gui_CommandMenu_Drive), 6 + textX, 4, 0x888888);
 			else
 				drawString(mc.fontRendererObj, TextHelper.localize(Strings.Gui_CommandMenu_Drive), 6 + textX, 4, 0xFFFFFF);
@@ -345,7 +352,6 @@ public class GuiCommandMenu extends GuiScreen {
 		}
 
 		// Drive form submenu //
-		driveCommands = DS.getDriveFormsList();
 		if (driveCommands == null) {} else if (!driveCommands.isEmpty()) {
 			// DRIVE TOP
 			GL11.glPushMatrix();

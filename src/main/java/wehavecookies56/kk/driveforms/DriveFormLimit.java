@@ -1,6 +1,7 @@
 package wehavecookies56.kk.driveforms;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ResourceLocation;
 import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.api.driveforms.DriveForm;
@@ -8,6 +9,7 @@ import wehavecookies56.kk.lib.Reference;
 import wehavecookies56.kk.lib.Strings;
 import wehavecookies56.kk.network.packet.PacketDispatcher;
 import wehavecookies56.kk.network.packet.client.SpawnDriveFormParticles;
+import wehavecookies56.kk.network.packet.client.SyncDriveData;
 import wehavecookies56.kk.util.SoundHelper;
 
 public class DriveFormLimit extends DriveForm {
@@ -37,6 +39,7 @@ public class DriveFormLimit extends DriveForm {
 	public void initDrive (EntityPlayer player) {
 		player.getCapability(KingdomKeys.DRIVE_STATE, null).setActiveDriveName(getName());
 		player.getCapability(KingdomKeys.DRIVE_STATE, null).setInDrive(true);
+		PacketDispatcher.sendTo(new SyncDriveData(player.getCapability(KingdomKeys.DRIVE_STATE, null), player.getCapability(KingdomKeys.PLAYER_STATS, null)), (EntityPlayerMP) player);
 		PacketDispatcher.sendToAllAround(new SpawnDriveFormParticles(player), player, 64.0D);
 		SoundHelper.playSoundAtEntity(player.worldObj, player, SoundHelper.Drive, 0.5f, 1);
 	}
@@ -55,5 +58,6 @@ public class DriveFormLimit extends DriveForm {
 		player.getCapability(KingdomKeys.PLAYER_STATS, null).setDP(0);
 		player.getCapability(KingdomKeys.DRIVE_STATE, null).setInDrive(false);
 		player.getCapability(KingdomKeys.DRIVE_STATE, null).setActiveDriveName("none");
+		PacketDispatcher.sendTo(new SyncDriveData(player.getCapability(KingdomKeys.DRIVE_STATE, null), player.getCapability(KingdomKeys.PLAYER_STATS, null)), (EntityPlayerMP) player);
 	}
 }

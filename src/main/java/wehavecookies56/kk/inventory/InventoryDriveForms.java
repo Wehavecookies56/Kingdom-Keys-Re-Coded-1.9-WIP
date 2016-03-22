@@ -39,10 +39,7 @@ public class InventoryDriveForms extends AbstractInventory {
 	}
 
 	@Override
-	public void markDirty () {
-		Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.DRIVE_STATE, null).getDriveFormsList().clear();
-		for (int i = 0; i < getSizeInventory(); i++)
-			if (getStackInSlot(i) != null) Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.DRIVE_STATE, null).getDriveFormsList().add(((ItemDriveForm) getStackInSlot(i).getItem()).getDriveFormName());
+	public void markDirty () {		
 		super.markDirty();
 	}
 

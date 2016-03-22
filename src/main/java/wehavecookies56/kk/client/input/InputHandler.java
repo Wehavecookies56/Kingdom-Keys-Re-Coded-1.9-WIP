@@ -1,8 +1,10 @@
 package wehavecookies56.kk.client.input;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.MouseEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -13,6 +15,7 @@ import wehavecookies56.kk.capabilities.PlayerStatsCapability.IPlayerStats;
 import wehavecookies56.kk.capabilities.SummonKeybladeCapability.ISummonKeyblade;
 import wehavecookies56.kk.client.gui.GuiCommandMenu;
 import wehavecookies56.kk.driveforms.ModDriveForms;
+import wehavecookies56.kk.item.ItemDriveForm;
 import wehavecookies56.kk.item.ItemKKPotion;
 import wehavecookies56.kk.item.ItemKeyblade;
 import wehavecookies56.kk.item.ItemKeychain;
@@ -20,18 +23,18 @@ import wehavecookies56.kk.lib.Constants;
 import wehavecookies56.kk.lib.Strings;
 import wehavecookies56.kk.magic.Magic;
 import wehavecookies56.kk.network.packet.PacketDispatcher;
-import wehavecookies56.kk.network.packet.client.SyncDriveData;
 import wehavecookies56.kk.network.packet.server.AntiPoints;
 import wehavecookies56.kk.network.packet.server.DeSummonKeyblade;
 import wehavecookies56.kk.network.packet.server.DriveFormPacket;
 import wehavecookies56.kk.network.packet.server.OpenMenu;
 import wehavecookies56.kk.network.packet.server.SummonKeyblade;
-import wehavecookies56.kk.network.packet.server.SyncData;
 import wehavecookies56.kk.util.GuiHelper;
 import wehavecookies56.kk.util.KeyboardHelper;
 
 public class InputHandler {
 
+	List<String> driveCommands;
+	
 	private Keybinds getPressedKey () {
 		for (Keybinds key : Keybinds.values())
 			if (key.isPressed()) return key;
@@ -65,6 +68,10 @@ public class InputHandler {
 		EntityPlayer player = mc.thePlayer;
 		IPlayerStats STATS = player.getCapability(KingdomKeys.PLAYER_STATS, null);
 		IDriveState DS = player.getCapability(KingdomKeys.DRIVE_STATE, null);
+		this.driveCommands = new ArrayList<String>();
+		this.driveCommands.clear();
+		for (int i = 0; i < Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.DRIVE_STATE, null).getInventoryDriveForms().getSizeInventory(); i++)
+			if (Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.DRIVE_STATE, null).getInventoryDriveForms().getStackInSlot(i) != null) this.driveCommands.add(((ItemDriveForm) Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.DRIVE_STATE, null).getInventoryDriveForms().getStackInSlot(i).getItem()).getDriveFormName());	
 		// Mainmenu
 		if (GuiCommandMenu.submenu == GuiCommandMenu.SUB_MAIN) {
 			if (GuiCommandMenu.selected == GuiCommandMenu.ATTACK)
@@ -90,7 +97,7 @@ public class InputHandler {
 		else if (GuiCommandMenu.submenu == GuiCommandMenu.SUB_DRIVE) if (GuiCommandMenu.driveselected > 0) {
 			GuiCommandMenu.driveselected--;
 			GuiCommandMenu.submenu = GuiCommandMenu.SUB_DRIVE;
-		} else if (GuiCommandMenu.driveselected <= 1) GuiCommandMenu.driveselected = DS.getDriveFormsList().size() - 1;
+		} else if (GuiCommandMenu.driveselected <= 1) GuiCommandMenu.driveselected = this.driveCommands.size() - 1;
 	}
 
 	public void commandDown () {
@@ -98,6 +105,10 @@ public class InputHandler {
 		EntityPlayer player = mc.thePlayer;
 		IPlayerStats STATS = player.getCapability(KingdomKeys.PLAYER_STATS, null);
 		IDriveState DS = player.getCapability(KingdomKeys.DRIVE_STATE, null);
+		this.driveCommands = new ArrayList<String>();
+		this.driveCommands.clear();
+		for (int i = 0; i < Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.DRIVE_STATE, null).getInventoryDriveForms().getSizeInventory(); i++)
+			if (Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.DRIVE_STATE, null).getInventoryDriveForms().getStackInSlot(i) != null) this.driveCommands.add(((ItemDriveForm) Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.DRIVE_STATE, null).getInventoryDriveForms().getStackInSlot(i).getItem()).getDriveFormName());	
 		// Mainmenu
 		if (GuiCommandMenu.submenu == GuiCommandMenu.SUB_MAIN) {
 			if (GuiCommandMenu.selected == GuiCommandMenu.DRIVE)
@@ -123,11 +134,11 @@ public class InputHandler {
 		}
 		// InsideDrive
 		else if (GuiCommandMenu.submenu == GuiCommandMenu.SUB_DRIVE) {
-			if (GuiCommandMenu.driveselected < DS.getDriveFormsList().size() - 1) {
+			if (GuiCommandMenu.driveselected < this.driveCommands.size() - 1) {
 				GuiCommandMenu.driveselected++;
 				GuiCommandMenu.submenu = GuiCommandMenu.SUB_DRIVE;
 			} else {
-				if (GuiCommandMenu.driveselected >= DS.getDriveFormsList().size() - 1) GuiCommandMenu.driveselected = 0;
+				if (GuiCommandMenu.driveselected >= this.driveCommands.size() - 1) GuiCommandMenu.driveselected = 0;
 			}
 		}
 	}
@@ -138,9 +149,11 @@ public class InputHandler {
 		World world = mc.theWorld;
 		IPlayerStats STATS = player.getCapability(KingdomKeys.PLAYER_STATS, null);
 		IDriveState DS = player.getCapability(KingdomKeys.DRIVE_STATE, null);
-
-		PacketDispatcher.sendToServer(new SyncData());
-
+		this.driveCommands = new ArrayList<String>();
+		this.driveCommands.clear();
+		for (int i = 0; i < Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.DRIVE_STATE, null).getInventoryDriveForms().getSizeInventory(); i++)
+			if (Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.DRIVE_STATE, null).getInventoryDriveForms().getStackInSlot(i) != null) this.driveCommands.add(((ItemDriveForm) Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.DRIVE_STATE, null).getInventoryDriveForms().getStackInSlot(i).getItem()).getDriveFormName());	
+		
 		switch (GuiCommandMenu.selected) {
 			case GuiCommandMenu.MAGIC:
 				if (GuiCommandMenu.submenu == GuiCommandMenu.SUB_MAIN) {
@@ -182,7 +195,7 @@ public class InputHandler {
 							GuiCommandMenu.selected = GuiCommandMenu.ATTACK;
 							//TODO world.playSound(player.posX, player.posY, player.posZ, SoundHelper.Select, 1f, 1f, false);
 						}
-					} else if (DS.getDriveFormsList().isEmpty() || STATS.getDP() <= 0) {
+					} else if (this.driveCommands.isEmpty() || STATS.getDP() <= 0) {
 						//TODO world.playSound(player.posX, player.posY, player.posZ, SoundHelper.Error, 1f, 1f, false);
 						GuiCommandMenu.selected = GuiCommandMenu.ATTACK;
 					} else {
@@ -216,11 +229,10 @@ public class InputHandler {
 		}
 
 		if (GuiCommandMenu.selected == GuiCommandMenu.DRIVE && GuiCommandMenu.submenu == GuiCommandMenu.SUB_DRIVE) {
-			if (DS.getDriveFormsList().isEmpty()) {} else if ((STATS.getDP() >= Constants.getCost((String) DS.getDriveFormsList().get(GuiCommandMenu.driveselected)))) {
-				PacketDispatcher.sendToServer(new SyncData());
+			if (this.driveCommands.isEmpty()) {} else if ((STATS.getDP() >= Constants.getCost((String) this.driveCommands.get(GuiCommandMenu.driveselected)))) {
 
 				if(!antiFormCheck()){
-					ModDriveForms.getDriveForm(player, world, (String) DS.getDriveFormsList().get(GuiCommandMenu.driveselected));
+					ModDriveForms.getDriveForm(player, world, (String) this.driveCommands.get(GuiCommandMenu.driveselected));
 				}
 				GuiCommandMenu.selected = GuiCommandMenu.ATTACK;
 				GuiCommandMenu.submenu = GuiCommandMenu.SUB_MAIN;
