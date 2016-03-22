@@ -19,6 +19,7 @@ import wehavecookies56.kk.item.ItemDriveForm;
 import wehavecookies56.kk.item.ItemKKPotion;
 import wehavecookies56.kk.item.ItemKeyblade;
 import wehavecookies56.kk.item.ItemKeychain;
+import wehavecookies56.kk.item.ItemSpellOrb;
 import wehavecookies56.kk.lib.Constants;
 import wehavecookies56.kk.lib.Strings;
 import wehavecookies56.kk.magic.Magic;
@@ -33,6 +34,8 @@ import wehavecookies56.kk.util.KeyboardHelper;
 
 public class InputHandler {
 
+	List<String> magicCommands;
+	List<String> itemsCommands;
 	List<String> driveCommands;
 	
 	private Keybinds getPressedKey () {
@@ -68,8 +71,16 @@ public class InputHandler {
 		EntityPlayer player = mc.thePlayer;
 		IPlayerStats STATS = player.getCapability(KingdomKeys.PLAYER_STATS, null);
 		IDriveState DS = player.getCapability(KingdomKeys.DRIVE_STATE, null);
+		this.magicCommands = new ArrayList<String>();
+		this.magicCommands.clear();
+		this.itemsCommands = new ArrayList<String>();
+		this.itemsCommands.clear();
 		this.driveCommands = new ArrayList<String>();
 		this.driveCommands.clear();
+		for (int i = 0; i < Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.MAGIC_STATE, null).getInventorySpells().getSizeInventory(); i++)
+			if (Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.MAGIC_STATE, null).getInventorySpells().getStackInSlot(i) != null) this.magicCommands.add(((ItemSpellOrb) Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.MAGIC_STATE, null).getInventorySpells().getStackInSlot(i).getItem()).getMagicName());
+		for (int i = 0; i < Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryPotionsMenu().getSizeInventory(); i++)
+			if (Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryPotionsMenu().getStackInSlot(i) != null) this.itemsCommands.add(((ItemKKPotion) Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryPotionsMenu().getStackInSlot(i).getItem()).getItemName());
 		for (int i = 0; i < Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.DRIVE_STATE, null).getInventoryDriveForms().getSizeInventory(); i++)
 			if (Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.DRIVE_STATE, null).getInventoryDriveForms().getStackInSlot(i) != null) this.driveCommands.add(((ItemDriveForm) Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.DRIVE_STATE, null).getInventoryDriveForms().getStackInSlot(i).getItem()).getDriveFormName());	
 		// Mainmenu
@@ -105,8 +116,16 @@ public class InputHandler {
 		EntityPlayer player = mc.thePlayer;
 		IPlayerStats STATS = player.getCapability(KingdomKeys.PLAYER_STATS, null);
 		IDriveState DS = player.getCapability(KingdomKeys.DRIVE_STATE, null);
+		this.magicCommands = new ArrayList<String>();
+		this.magicCommands.clear();
+		this.itemsCommands = new ArrayList<String>();
+		this.itemsCommands.clear();
 		this.driveCommands = new ArrayList<String>();
 		this.driveCommands.clear();
+		for (int i = 0; i < Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.MAGIC_STATE, null).getInventorySpells().getSizeInventory(); i++)
+			if (Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.MAGIC_STATE, null).getInventorySpells().getStackInSlot(i) != null) this.magicCommands.add(((ItemSpellOrb) Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.MAGIC_STATE, null).getInventorySpells().getStackInSlot(i).getItem()).getMagicName());
+		for (int i = 0; i < Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryPotionsMenu().getSizeInventory(); i++)
+			if (Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryPotionsMenu().getStackInSlot(i) != null) this.itemsCommands.add(((ItemKKPotion) Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryPotionsMenu().getStackInSlot(i).getItem()).getItemName());
 		for (int i = 0; i < Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.DRIVE_STATE, null).getInventoryDriveForms().getSizeInventory(); i++)
 			if (Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.DRIVE_STATE, null).getInventoryDriveForms().getStackInSlot(i) != null) this.driveCommands.add(((ItemDriveForm) Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.DRIVE_STATE, null).getInventoryDriveForms().getStackInSlot(i).getItem()).getDriveFormName());	
 		// Mainmenu
@@ -149,8 +168,16 @@ public class InputHandler {
 		World world = mc.theWorld;
 		IPlayerStats STATS = player.getCapability(KingdomKeys.PLAYER_STATS, null);
 		IDriveState DS = player.getCapability(KingdomKeys.DRIVE_STATE, null);
+		this.magicCommands = new ArrayList<String>();
+		this.magicCommands.clear();
+		this.itemsCommands = new ArrayList<String>();
+		this.itemsCommands.clear();
 		this.driveCommands = new ArrayList<String>();
 		this.driveCommands.clear();
+		for (int i = 0; i < Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.MAGIC_STATE, null).getInventorySpells().getSizeInventory(); i++)
+			if (Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.MAGIC_STATE, null).getInventorySpells().getStackInSlot(i) != null) this.magicCommands.add(((ItemSpellOrb) Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.MAGIC_STATE, null).getInventorySpells().getStackInSlot(i).getItem()).getMagicName());
+		for (int i = 0; i < Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryPotionsMenu().getSizeInventory(); i++)
+			if (Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryPotionsMenu().getStackInSlot(i) != null) this.itemsCommands.add(((ItemKKPotion) Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryPotionsMenu().getStackInSlot(i).getItem()).getItemName());
 		for (int i = 0; i < Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.DRIVE_STATE, null).getInventoryDriveForms().getSizeInventory(); i++)
 			if (Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.DRIVE_STATE, null).getInventoryDriveForms().getStackInSlot(i) != null) this.driveCommands.add(((ItemDriveForm) Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.DRIVE_STATE, null).getInventoryDriveForms().getStackInSlot(i).getItem()).getDriveFormName());	
 		

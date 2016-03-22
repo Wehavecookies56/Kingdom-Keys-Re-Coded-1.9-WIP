@@ -75,15 +75,15 @@ import wehavecookies56.kk.lib.Strings;
 import wehavecookies56.kk.network.packet.PacketDispatcher;
 import wehavecookies56.kk.network.packet.client.SyncDriveData;
 import wehavecookies56.kk.network.packet.client.SyncDriveInventory;
+import wehavecookies56.kk.network.packet.client.SyncItemsInventory;
 import wehavecookies56.kk.network.packet.client.SyncMagicData;
+import wehavecookies56.kk.network.packet.client.SyncMagicInventory;
 import wehavecookies56.kk.network.packet.client.SyncMunnyData;
-import wehavecookies56.kk.network.packet.client.SyncSpellInventory;
 import wehavecookies56.kk.network.packet.server.DeSummonKeyblade;
 import wehavecookies56.kk.network.packet.server.DriveOrbPickup;
 import wehavecookies56.kk.network.packet.server.HpOrbPickup;
 import wehavecookies56.kk.network.packet.server.MagicOrbPickup;
 import wehavecookies56.kk.network.packet.server.MunnyPickup;
-import wehavecookies56.kk.network.packet.server.SyncData;
 
 public class EventHandler {
 	
@@ -410,7 +410,8 @@ public class EventHandler {
 	@SubscribeEvent
 	public void OnEntityJoinWorld (EntityJoinWorldEvent event) {
 		if (!event.entity.worldObj.isRemote && event.entity instanceof EntityPlayer) {
-			PacketDispatcher.sendTo(new SyncSpellInventory(event.entity.getCapability(KingdomKeys.PLAYER_STATS, null)), (EntityPlayerMP) event.entity);
+			PacketDispatcher.sendTo(new SyncMagicInventory(event.entity.getCapability(KingdomKeys.MAGIC_STATE, null)), (EntityPlayerMP) event.entity);
+			PacketDispatcher.sendTo(new SyncItemsInventory(event.entity.getCapability(KingdomKeys.PLAYER_STATS, null)), (EntityPlayerMP) event.entity);
 			PacketDispatcher.sendTo(new SyncDriveInventory(event.entity.getCapability(KingdomKeys.DRIVE_STATE, null)), (EntityPlayerMP) event.entity);
 			PacketDispatcher.sendTo(new SyncDriveData(event.entity.getCapability(KingdomKeys.DRIVE_STATE, null), event.entity.getCapability(KingdomKeys.PLAYER_STATS, null)), (EntityPlayerMP) event.entity);
 			PacketDispatcher.sendTo(new SyncMagicData(event.entity.getCapability(KingdomKeys.MAGIC_STATE, null), event.entity.getCapability(KingdomKeys.PLAYER_STATS, null)), (EntityPlayerMP) event.entity);

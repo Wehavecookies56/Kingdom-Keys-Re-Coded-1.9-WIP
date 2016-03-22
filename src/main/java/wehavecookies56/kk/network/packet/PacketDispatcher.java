@@ -19,11 +19,12 @@ import wehavecookies56.kk.network.packet.client.SpawnThunderEntity;
 import wehavecookies56.kk.network.packet.client.SpawnThunderParticles;
 import wehavecookies56.kk.network.packet.client.SyncDriveData;
 import wehavecookies56.kk.network.packet.client.SyncDriveInventory;
+import wehavecookies56.kk.network.packet.client.SyncItemsInventory;
 import wehavecookies56.kk.network.packet.client.SyncMagicData;
+import wehavecookies56.kk.network.packet.client.SyncMagicInventory;
 import wehavecookies56.kk.network.packet.client.SyncMaterialData;
 import wehavecookies56.kk.network.packet.client.SyncMunnyData;
 import wehavecookies56.kk.network.packet.client.SyncRecipeData;
-import wehavecookies56.kk.network.packet.client.SyncSpellInventory;
 import wehavecookies56.kk.network.packet.server.AntiPoints;
 import wehavecookies56.kk.network.packet.server.CreateFromSynthesisRecipe;
 import wehavecookies56.kk.network.packet.server.DeSummonKeyblade;
@@ -83,7 +84,8 @@ public class PacketDispatcher {
 		registerMessage(SyncMagicData.class);
 		registerMessage(SyncMunnyData.class);
 		registerMessage(SyncData.class);
-		registerMessage(SyncSpellInventory.class);
+		registerMessage(SyncMagicInventory.class);
+		registerMessage(SyncItemsInventory.class);
 		registerMessage(SyncDriveInventory.class);
 
 		// Client to Server

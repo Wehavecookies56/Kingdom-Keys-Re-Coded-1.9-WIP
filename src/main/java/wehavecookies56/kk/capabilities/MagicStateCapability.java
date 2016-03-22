@@ -5,6 +5,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
+import wehavecookies56.kk.inventory.InventoryDriveForms;
+import wehavecookies56.kk.inventory.InventorySpells;
+import wehavecookies56.kk.item.ItemSpellOrb;
 import wehavecookies56.kk.lib.Strings;
 
 public class MagicStateCapability {
@@ -14,6 +17,9 @@ public class MagicStateCapability {
 		int getMagicLevel(String magic);
 		void setKH1Fire(boolean kh1fire);
 		void setMagicLevel(String magic, int level);
+		
+		InventorySpells getInventorySpells();
+
 	}
 
 	public static class Storage implements IStorage<IMagicState> {
@@ -30,6 +36,9 @@ public class MagicStateCapability {
 			properties.setInteger("MagicLevelStop", instance.getMagicLevel(Strings.Spell_Stop));
 			
 			properties.setBoolean("KH1Fire", instance.getKH1Fire());
+			
+			instance.getInventorySpells().writeToNBT(properties);
+
 
 			return properties;
 		}
@@ -45,6 +54,10 @@ public class MagicStateCapability {
 			instance.setMagicLevel(Strings.Spell_Stop, properties.getInteger("MagicLevelStop"));
 			
 			instance.setKH1Fire(properties.getBoolean("KH1Fire"));
+			
+			instance.getInventorySpells().readFromNBT(properties);
+			
+			
 
 		}
 	}
@@ -52,6 +65,8 @@ public class MagicStateCapability {
 	public static class Default implements IMagicState {
         private int fireLevel = 1, blizzardLevel = 1, thunderLevel = 1, cureLevel = 1, aeroLevel = 1, stopLevel = 1;
 		private boolean kh1fire = false;
+		private final InventorySpells inventorySpells = new InventorySpells();
+
 
 		@Override
 		public int getMagicLevel(String magic) {
@@ -100,6 +115,9 @@ public class MagicStateCapability {
         {
         	return this.kh1fire;
         }
+        
+		@Override public InventorySpells getInventorySpells(){return this.inventorySpells;}
+
     }
 }
 

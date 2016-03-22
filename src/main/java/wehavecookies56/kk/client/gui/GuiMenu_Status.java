@@ -5,8 +5,11 @@ import java.util.Arrays;
 
 import net.minecraft.client.gui.GuiButton;
 import wehavecookies56.kk.KingdomKeys;
+import wehavecookies56.kk.capabilities.DriveStateCapability.IDriveState;
+import wehavecookies56.kk.capabilities.MagicStateCapability.IMagicState;
 import wehavecookies56.kk.capabilities.PlayerStatsCapability.IPlayerStats;
 import wehavecookies56.kk.entities.PlayerLevel;
+import wehavecookies56.kk.lib.Strings;
 import wehavecookies56.kk.util.GuiHelper;
 
 public class GuiMenu_Status extends GuiMenu_Bars {
@@ -90,6 +93,9 @@ public class GuiMenu_Status extends GuiMenu_Bars {
 	@Override
 	public void drawScreen (int mouseX, int mouseY, float partialTicks) {
 		super.drawScreen(mouseX, mouseY, partialTicks);
+		final IPlayerStats STATS = mc.thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null);
+		IMagicState ms = mc.thePlayer.getCapability(KingdomKeys.MAGIC_STATE, null);
+		IDriveState ds = mc.thePlayer.getCapability(KingdomKeys.DRIVE_STATE, null);
 		switch (selected) {
 			case STATS_PLAYER:
 				drawRect(125, ((-140 / 16) + 75) + 10, 200, ((-140 / 16) + 75) + 20, 0xFFFFFF);
@@ -117,7 +123,6 @@ public class GuiMenu_Status extends GuiMenu_Bars {
 				drawString(fontRendererObj, "Aero level", 270, ((-140 / 16) + 75) + 70, 0xFFFFFF);
 				drawString(fontRendererObj, "Stop level", 270, ((-140 / 16) + 75) + 82, 0xFFFFFF);
 
-				final IPlayerStats STATS = mc.thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null);
 				
 				drawString(fontRendererObj, "" + STATS.getLevel(), 230, ((-140 / 16) + 75) + 10, 0xFFD900);
 				drawString(fontRendererObj, "" + STATS.getExperience(), 230, ((-140 / 16) + 75) + 22, 0xFFD900);
@@ -135,31 +140,40 @@ public class GuiMenu_Status extends GuiMenu_Bars {
 				drawString(fontRendererObj, "0%", 230, ((-140 / 16) + 75) + 166, 0xFFD900);
 				drawString(fontRendererObj, "0%", 230, ((-140 / 16) + 75) + 178, 0xFFD900);
 
-				/*TODO
-				drawString(fontRendererObj, "" + ep.getMagicLevel("Fire"), 370, ((-140 / 16) + 75) + 10, 0xFFD900);
-				drawString(fontRendererObj, "" + ep.getMagicLevel("Blizzard"), 370, ((-140 / 16) + 75) + 22, 0xFFD900);
-				drawString(fontRendererObj, "" + ep.getMagicLevel("Thunder"), 370, ((-140 / 16) + 75) + 34, 0xFFD900);
-				drawString(fontRendererObj, "" + ep.getMagicLevel("Cure"), 370, ((-140 / 16) + 75) + 46, 0xFFD900);
-				drawString(fontRendererObj, "" + ep.getMagicLevel("Gravity"), 370, ((-140 / 16) + 75) + 58, 0xFFD900);
-				drawString(fontRendererObj, "" + ep.getMagicLevel("Aero"), 370, ((-140 / 16) + 75) + 70, 0xFFD900);
-				drawString(fontRendererObj, "" + ep.getMagicLevel("Stop"), 370, ((-140 / 16) + 75) + 82, 0xFFD900);
-				*/
+				drawString(fontRendererObj, "" + ms.getMagicLevel("Fire"), 370, ((-140 / 16) + 75) + 10, 0xFFD900);
+				drawString(fontRendererObj, "" + ms.getMagicLevel("Blizzard"), 370, ((-140 / 16) + 75) + 22, 0xFFD900);
+				drawString(fontRendererObj, "" + ms.getMagicLevel("Thunder"), 370, ((-140 / 16) + 75) + 34, 0xFFD900);
+				drawString(fontRendererObj, "" + ms.getMagicLevel("Cure"), 370, ((-140 / 16) + 75) + 46, 0xFFD900);
+				drawString(fontRendererObj, "" + ms.getMagicLevel("Gravity"), 370, ((-140 / 16) + 75) + 58, 0xFFD900);
+				drawString(fontRendererObj, "" + ms.getMagicLevel("Aero"), 370, ((-140 / 16) + 75) + 70, 0xFFD900);
+				drawString(fontRendererObj, "" + ms.getMagicLevel("Stop"), 370, ((-140 / 16) + 75) + 82, 0xFFD900);
+				
 
 				break;
 			case STATS_VALOR:
-
+				drawRect(125, ((-140 / 16) + 75) + 10, 200, ((-140 / 16) + 75) + 20, 0xFFFFFF);
+				drawString(fontRendererObj, "Level", 125, ((-140 / 16) + 75) + 10, 0xFFFFFF);
+				drawString(fontRendererObj, "" + ds.getDriveLevel(Strings.Form_Valor), 230, ((-140 / 16) + 75) + 10, 0xFFD900);
 				break;
 			case STATS_WISDOM:
-
+				drawRect(125, ((-140 / 16) + 75) + 10, 200, ((-140 / 16) + 75) + 20, 0xFFFFFF);
+				drawString(fontRendererObj, "Level", 125, ((-140 / 16) + 75) + 10, 0xFFFFFF);
+				drawString(fontRendererObj, "" + ds.getDriveLevel(Strings.Form_Wisdom), 230, ((-140 / 16) + 75) + 10, 0xFFD900);
 				break;
 			case STATS_LIMIT:
-
+				drawRect(125, ((-140 / 16) + 75) + 10, 200, ((-140 / 16) + 75) + 20, 0xFFFFFF);
+				drawString(fontRendererObj, "Level", 125, ((-140 / 16) + 75) + 10, 0xFFFFFF);
+				drawString(fontRendererObj, "" + ds.getDriveLevel(Strings.Form_Limit), 230, ((-140 / 16) + 75) + 10, 0xFFD900);
 				break;
 			case STATS_MASTER:
-
+				drawRect(125, ((-140 / 16) + 75) + 10, 200, ((-140 / 16) + 75) + 20, 0xFFFFFF);
+				drawString(fontRendererObj, "Level", 125, ((-140 / 16) + 75) + 10, 0xFFFFFF);
+				drawString(fontRendererObj, "" + ds.getDriveLevel(Strings.Form_Master), 230, ((-140 / 16) + 75) + 10, 0xFFD900);
 				break;
 			case STATS_FINAL:
-
+				drawRect(125, ((-140 / 16) + 75) + 10, 200, ((-140 / 16) + 75) + 20, 0xFFFFFF);
+				drawString(fontRendererObj, "Level", 125, ((-140 / 16) + 75) + 10, 0xFFFFFF);
+				drawString(fontRendererObj, "" + ds.getDriveLevel(Strings.Form_Final), 230, ((-140 / 16) + 75) + 10, 0xFFD900);
 				break;
 		}
 	}

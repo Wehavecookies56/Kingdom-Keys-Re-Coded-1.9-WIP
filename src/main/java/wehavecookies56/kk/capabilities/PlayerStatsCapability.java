@@ -53,7 +53,6 @@ public class PlayerStatsCapability {
 		
 		InventoryKeychain getInventoryKeychain();
 		InventoryPotionsMenu getInventoryPotionsMenu();
-		InventorySpells getInventorySpells();
 
 		List getSpellsList();
 		List getItemsList();
@@ -78,7 +77,6 @@ public class PlayerStatsCapability {
 			
 			instance.getInventoryKeychain().writeToNBT(properties);
 			instance.getInventoryPotionsMenu().writeToNBT(properties);
-			instance.getInventorySpells().writeToNBT(properties);
 
 			return properties;
 		}
@@ -99,14 +97,7 @@ public class PlayerStatsCapability {
 			
 			instance.getInventoryKeychain().readFromNBT(properties);
 			instance.getInventoryPotionsMenu().readFromNBT(properties);
-			instance.getInventorySpells().readFromNBT(properties);
 			
-			instance.getSpellsList().clear();
-			for (int i = 0; i < instance.getInventorySpells().getSizeInventory(); i++) {
-				if (instance.getInventorySpells().getStackInSlot(i) != null) {
-					instance.getSpellsList().add(((ItemSpellOrb) instance.getInventorySpells().getStackInSlot(i).getItem()).getMagicName());
-				}
-			}
 			
 			instance.getItemsList().clear();
 			for (int i = 0; i < instance.getInventoryPotionsMenu().getSizeInventory(); i++)
@@ -140,7 +131,6 @@ public class PlayerStatsCapability {
 		
 		@Override public InventoryKeychain getInventoryKeychain(){return this.inventoryKeychain;}
 		@Override public InventoryPotionsMenu getInventoryPotionsMenu(){return this.inventoryPotions;}
-		@Override public InventorySpells getInventorySpells(){return this.inventorySpells;}
 		
 		@Override public List getSpellsList(){return this.spells;}
 		@Override public List getItemsList(){return this.items;}

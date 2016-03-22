@@ -73,7 +73,7 @@ public class CommonProxy implements IGuiHandler {
 		else if (ID == KingdomKeys.GUI_POTIONS_INV)
 			return new ContainerPotionsMenu(player, player.inventory, player.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryPotionsMenu());
 		else if (ID == KingdomKeys.GUI_SPELLS_INV)
-			return new ContainerSpells(player, player.inventory, player.getCapability(KingdomKeys.PLAYER_STATS, null).getInventorySpells());
+			return new ContainerSpells(player, player.inventory, player.getCapability(KingdomKeys.MAGIC_STATE, null).getInventorySpells());
 		else if (ID == KingdomKeys.GUI_DRIVE_INV)
 			return new ContainerDriveForms(player, player.inventory, player.getCapability(KingdomKeys.DRIVE_STATE, null).getInventoryDriveForms());
 		else if (ID == KingdomKeys.GUI_KKCHEST_INV) {
@@ -103,7 +103,7 @@ public class CommonProxy implements IGuiHandler {
 		else if (ID == KingdomKeys.GUI_POTIONS_INV)
 			return new GuiPotions(player, player.inventory, player.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryPotionsMenu());
 		else if (ID == KingdomKeys.GUI_SPELLS_INV)
-			return new GuiSpells(player, player.inventory, player.getCapability(KingdomKeys.PLAYER_STATS, null).getInventorySpells());
+			return new GuiSpells(player, player.inventory, player.getCapability(KingdomKeys.MAGIC_STATE, null).getInventorySpells());
 		else if (ID == KingdomKeys.GUI_DRIVE_INV)
 			return new GuiDriveForms(player, player.inventory, player.getCapability(KingdomKeys.DRIVE_STATE, null).getInventoryDriveForms());
 		else if (ID == KingdomKeys.GUI_KKCHEST_INV) {
