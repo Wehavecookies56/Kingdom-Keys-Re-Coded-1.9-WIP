@@ -758,7 +758,7 @@ public class EventHandler {
 		IPlayerStats STATS = event.player.getCapability(KingdomKeys.PLAYER_STATS, null);
 		IDriveState DS = event.player.getCapability(KingdomKeys.DRIVE_STATE, null);
 		
-		if(event.side.isClient()){
+		/*if(event.side.isClient()){
 			System.out.println("Client MP: "+STATS.getMP());
 			System.out.println("Client: "+STATS.getRecharge());
 			System.out.println("Client Max MP: "+STATS.getMaxMP());
@@ -767,7 +767,7 @@ public class EventHandler {
 			System.out.println("Server MP: "+STATS.getMP());
 			System.out.println("Server: "+STATS.getRecharge());
 			System.out.println("Server Max MP: "+STATS.getMaxMP());
-		}
+		}*/
 
 		if (!DS.getInDrive()) 
 			if (STATS.getMP() <= 0 || STATS.getRecharge()) {
