@@ -44,9 +44,6 @@ public class InventoryPotionsMenu extends AbstractInventory {
 
 	@Override
 	public void markDirty () {
-		Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null).getItemsList().clear();
-		for (int i = 0; i < getSizeInventory(); i++)
-			if (getStackInSlot(i) != null) Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null).getItemsList().add(((ItemKKPotion) getStackInSlot(i).getItem()).getItemName());
 		super.markDirty();
 	}
 

@@ -39,9 +39,6 @@ public class InventorySpells extends AbstractInventory {
 
 	@Override
 	public void markDirty () {
-		Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null).getSpellsList().clear();
-		for (int i = 0; i < getSizeInventory(); i++)
-			if (getStackInSlot(i) != null) Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null).getSpellsList().add(((ItemSpellOrb) getStackInSlot(i).getItem()).getMagicName());
 		super.markDirty();
 	}
 
