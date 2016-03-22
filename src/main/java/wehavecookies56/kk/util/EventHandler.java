@@ -757,7 +757,7 @@ public class EventHandler {
 	public void onPlayerTick (PlayerTickEvent event) {
 		IPlayerStats STATS = event.player.getCapability(KingdomKeys.PLAYER_STATS, null);
 		IDriveState DS = event.player.getCapability(KingdomKeys.DRIVE_STATE, null);
-
+		
 		if (!DS.getInDrive()) 
 			if (STATS.getMP() <= 0 || STATS.getRecharge()) {
 				STATS.setRecharge(true);
