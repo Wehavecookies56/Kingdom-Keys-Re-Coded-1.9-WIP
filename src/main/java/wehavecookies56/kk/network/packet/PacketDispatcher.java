@@ -46,7 +46,6 @@ import wehavecookies56.kk.network.packet.server.PlaySoundAtPlayer;
 import wehavecookies56.kk.network.packet.server.PotionConsume;
 import wehavecookies56.kk.network.packet.server.RemoveItemInSlot;
 import wehavecookies56.kk.network.packet.server.SummonKeyblade;
-import wehavecookies56.kk.network.packet.server.SyncData;
 import wehavecookies56.kk.network.packet.server.SyncStatMessagesPacket;
 import wehavecookies56.kk.network.packet.server.SynthesisMaterialPickup;
 import wehavecookies56.kk.network.packet.server.TakeMaterials;
@@ -83,7 +82,6 @@ public class PacketDispatcher {
 		registerMessage(SyncDriveData.class);
 		registerMessage(SyncMagicData.class);
 		registerMessage(SyncMunnyData.class);
-		registerMessage(SyncData.class);
 		registerMessage(SyncMagicInventory.class);
 		registerMessage(SyncItemsInventory.class);
 		registerMessage(SyncDriveInventory.class);

@@ -9,7 +9,6 @@ import wehavecookies56.kk.lib.Strings;
 import wehavecookies56.kk.network.packet.PacketDispatcher;
 import wehavecookies56.kk.network.packet.server.AntiPoints;
 import wehavecookies56.kk.network.packet.server.DriveFormPacket;
-import wehavecookies56.kk.network.packet.server.SyncData;
 
 public class ModDriveForms {
 	

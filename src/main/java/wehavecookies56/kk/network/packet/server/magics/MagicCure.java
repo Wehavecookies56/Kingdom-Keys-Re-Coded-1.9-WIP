@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -12,7 +13,9 @@ import wehavecookies56.kk.entities.magic.EntityCura;
 import wehavecookies56.kk.entities.magic.EntityCuraga;
 import wehavecookies56.kk.entities.magic.EntityCure;
 import wehavecookies56.kk.lib.Strings;
+import wehavecookies56.kk.network.packet.PacketDispatcher;
 import wehavecookies56.kk.network.packet.AbstractMessage.AbstractServerMessage;
+import wehavecookies56.kk.network.packet.client.SyncMagicData;
 
 public class MagicCure extends AbstractServerMessage<MagicCure> {
 
@@ -53,6 +56,7 @@ public class MagicCure extends AbstractServerMessage<MagicCure> {
 				world.spawnEntityInWorld(new EntityCuraga(world, player, player.posX, player.posY, player.posZ));
 				break;
 		}
+		PacketDispatcher.sendTo(new SyncMagicData(player.getCapability(KingdomKeys.MAGIC_STATE, null), player.getCapability(KingdomKeys.PLAYER_STATS, null)), (EntityPlayerMP) player);
 
 	}
 }

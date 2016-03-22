@@ -613,6 +613,7 @@ public class EventHandler {
 			if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
 				event.item.getEntityItem().stackSize--;
 				STATS.addMP(event.item.getEntityItem().getTagCompound().getInteger("amount"));
+				PacketDispatcher.sendTo(new SyncMagicData(event.entityPlayer.getCapability(KingdomKeys.MAGIC_STATE, null), STATS), (EntityPlayerMP) event.entityPlayer);
 			}
 		} else if (event.item.getEntityItem().getItem() == Item.getItemFromBlock(ModBlocks.NormalBlox) || event.item.getEntityItem().getItem() == Item.getItemFromBlock(ModBlocks.HardBlox) || event.item.getEntityItem().getItem() == Item.getItemFromBlock(ModBlocks.MetalBlox)) {
 			AchievementHelper.addAchievement(event.entityPlayer, ModAchievements.getBlox);

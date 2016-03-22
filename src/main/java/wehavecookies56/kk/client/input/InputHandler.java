@@ -72,15 +72,15 @@ public class InputHandler {
 		IPlayerStats STATS = player.getCapability(KingdomKeys.PLAYER_STATS, null);
 		IDriveState DS = player.getCapability(KingdomKeys.DRIVE_STATE, null);
 		this.magicCommands = new ArrayList<String>();
-		this.magicCommands.clear();
 		this.itemsCommands = new ArrayList<String>();
-		this.itemsCommands.clear();
 		this.driveCommands = new ArrayList<String>();
-		this.driveCommands.clear();
+		this.magicCommands.clear();
 		for (int i = 0; i < Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.MAGIC_STATE, null).getInventorySpells().getSizeInventory(); i++)
 			if (Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.MAGIC_STATE, null).getInventorySpells().getStackInSlot(i) != null) this.magicCommands.add(((ItemSpellOrb) Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.MAGIC_STATE, null).getInventorySpells().getStackInSlot(i).getItem()).getMagicName());
+		this.itemsCommands.clear();
 		for (int i = 0; i < Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryPotionsMenu().getSizeInventory(); i++)
 			if (Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryPotionsMenu().getStackInSlot(i) != null) this.itemsCommands.add(((ItemKKPotion) Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryPotionsMenu().getStackInSlot(i).getItem()).getItemName());
+		this.driveCommands.clear();
 		for (int i = 0; i < Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.DRIVE_STATE, null).getInventoryDriveForms().getSizeInventory(); i++)
 			if (Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.DRIVE_STATE, null).getInventoryDriveForms().getStackInSlot(i) != null) this.driveCommands.add(((ItemDriveForm) Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.DRIVE_STATE, null).getInventoryDriveForms().getStackInSlot(i).getItem()).getDriveFormName());	
 		// Mainmenu
@@ -95,14 +95,14 @@ public class InputHandler {
 			if (GuiCommandMenu.magicselected > 0) {
 				GuiCommandMenu.magicselected--;
 				GuiCommandMenu.submenu = GuiCommandMenu.SUB_MAGIC;
-			} else if (GuiCommandMenu.magicselected <= 1) GuiCommandMenu.magicselected = STATS.getSpellsList().size() - 1;
+			} else if (GuiCommandMenu.magicselected <= 1) GuiCommandMenu.magicselected = this.magicCommands.size() - 1;
 		}
 		// InsideItems
 		else if (GuiCommandMenu.submenu == GuiCommandMenu.SUB_ITEMS) {
 			if (GuiCommandMenu.potionselected > 0) {
 				GuiCommandMenu.potionselected--;
 				GuiCommandMenu.submenu = GuiCommandMenu.SUB_ITEMS;
-			} else if (GuiCommandMenu.potionselected <= 1) GuiCommandMenu.potionselected = STATS.getItemsList().size() - 1;
+			} else if (GuiCommandMenu.potionselected <= 1) GuiCommandMenu.potionselected = this.itemsCommands.size() - 1;
 		}
 		// InsideDrive
 		else if (GuiCommandMenu.submenu == GuiCommandMenu.SUB_DRIVE) if (GuiCommandMenu.driveselected > 0) {
@@ -117,15 +117,16 @@ public class InputHandler {
 		IPlayerStats STATS = player.getCapability(KingdomKeys.PLAYER_STATS, null);
 		IDriveState DS = player.getCapability(KingdomKeys.DRIVE_STATE, null);
 		this.magicCommands = new ArrayList<String>();
-		this.magicCommands.clear();
 		this.itemsCommands = new ArrayList<String>();
-		this.itemsCommands.clear();
 		this.driveCommands = new ArrayList<String>();
-		this.driveCommands.clear();
+		
+		this.magicCommands.clear();
 		for (int i = 0; i < Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.MAGIC_STATE, null).getInventorySpells().getSizeInventory(); i++)
 			if (Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.MAGIC_STATE, null).getInventorySpells().getStackInSlot(i) != null) this.magicCommands.add(((ItemSpellOrb) Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.MAGIC_STATE, null).getInventorySpells().getStackInSlot(i).getItem()).getMagicName());
+		this.itemsCommands.clear();
 		for (int i = 0; i < Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryPotionsMenu().getSizeInventory(); i++)
 			if (Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryPotionsMenu().getStackInSlot(i) != null) this.itemsCommands.add(((ItemKKPotion) Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryPotionsMenu().getStackInSlot(i).getItem()).getItemName());
+		this.driveCommands.clear();
 		for (int i = 0; i < Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.DRIVE_STATE, null).getInventoryDriveForms().getSizeInventory(); i++)
 			if (Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.DRIVE_STATE, null).getInventoryDriveForms().getStackInSlot(i) != null) this.driveCommands.add(((ItemDriveForm) Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.DRIVE_STATE, null).getInventoryDriveForms().getStackInSlot(i).getItem()).getDriveFormName());	
 		// Mainmenu
@@ -137,18 +138,18 @@ public class InputHandler {
 		}
 		// InsideMagic
 		else if (GuiCommandMenu.submenu == GuiCommandMenu.SUB_MAGIC) {
-			if (GuiCommandMenu.magicselected < STATS.getSpellsList().size() - 1) {
+			if (GuiCommandMenu.magicselected < this.magicCommands.size() - 1) {
 				GuiCommandMenu.magicselected++;
 				GuiCommandMenu.submenu = GuiCommandMenu.SUB_MAGIC;
-			} else if (GuiCommandMenu.magicselected >= STATS.getSpellsList().size() - 1) GuiCommandMenu.magicselected = 0;
+			} else if (GuiCommandMenu.magicselected >= this.magicCommands.size() - 1) GuiCommandMenu.magicselected = 0;
 		}
 		// InsideItems
 		else if (GuiCommandMenu.submenu == GuiCommandMenu.SUB_ITEMS) {
-			if (GuiCommandMenu.potionselected < STATS.getItemsList().size() - 1) {
+			if (GuiCommandMenu.potionselected < this.itemsCommands.size() - 1) {
 				GuiCommandMenu.potionselected++;
 				GuiCommandMenu.submenu = GuiCommandMenu.SUB_ITEMS;
 			} else {
-				if (GuiCommandMenu.potionselected >= STATS.getItemsList().size() - 1) GuiCommandMenu.potionselected = 0;
+				if (GuiCommandMenu.potionselected >= this.itemsCommands.size() - 1) GuiCommandMenu.potionselected = 0;
 			}
 		}
 		// InsideDrive
@@ -184,7 +185,7 @@ public class InputHandler {
 		switch (GuiCommandMenu.selected) {
 			case GuiCommandMenu.MAGIC:
 				if (GuiCommandMenu.submenu == GuiCommandMenu.SUB_MAIN) {
-					if (!STATS.getRecharge() && (!STATS.getSpellsList().isEmpty() && !DS.getActiveDriveName().equals(Strings.Form_Valor))) {
+					if (!STATS.getRecharge() && (!this.magicCommands.isEmpty() && !DS.getActiveDriveName().equals(Strings.Form_Valor))) {
 						GuiCommandMenu.magicselected = 0;
 						GuiCommandMenu.submenu = GuiCommandMenu.SUB_MAGIC;
 						//TODO world.playSound(player.posX, player.posY, player.posZ, SoundHelper.Select, 1f, 1f, false);
@@ -198,7 +199,7 @@ public class InputHandler {
 
 			case GuiCommandMenu.ITEMS:
 				if (GuiCommandMenu.submenu == GuiCommandMenu.SUB_MAIN) {
-					if (!STATS.getItemsList().isEmpty()) {
+					if (!this.itemsCommands.isEmpty()) {
 						GuiCommandMenu.submenu = GuiCommandMenu.SUB_ITEMS;
 						GuiCommandMenu.potionselected = 0;
 						//TODO world.playSound(player.posX, player.posY, player.posZ, SoundHelper.Select, 1f, 1f, false);
@@ -235,10 +236,10 @@ public class InputHandler {
 				break;
 		}
 		if (GuiCommandMenu.selected == GuiCommandMenu.MAGIC && GuiCommandMenu.submenu == GuiCommandMenu.SUB_MAGIC) {
-			if (STATS.getSpellsList().isEmpty()) 
+			if (this.magicCommands.isEmpty()) 
 			{} 
-			else if (!STATS.getRecharge() || Constants.getCost((String) STATS.getSpellsList().get(GuiCommandMenu.magicselected)) == -1 && STATS.getMP() > 0) {
-				Magic.getMagic(player, world, (String) STATS.getSpellsList().get(GuiCommandMenu.magicselected));
+			else if (!STATS.getRecharge() || Constants.getCost((String) this.magicCommands.get(GuiCommandMenu.magicselected)) == -1 && STATS.getMP() > 0) {
+				Magic.getMagic(player, world, (String) this.magicCommands.get(GuiCommandMenu.magicselected));
 				GuiCommandMenu.selected = GuiCommandMenu.ATTACK;
 				GuiCommandMenu.submenu = GuiCommandMenu.SUB_MAIN;
 				//TODO world.playSound(player.posX, player.posY, player.posZ, SoundHelper.Select, 1f, 1f, false);
@@ -246,8 +247,8 @@ public class InputHandler {
 		}
 
 		if (GuiCommandMenu.selected == GuiCommandMenu.ITEMS && GuiCommandMenu.submenu == GuiCommandMenu.SUB_ITEMS) {
-			if (STATS.getItemsList().isEmpty()) {} else if (!STATS.getItemsList().isEmpty()) {
-				ItemKKPotion.getItem(player, world, (String) STATS.getItemsList().get(GuiCommandMenu.potionselected), GuiCommandMenu.potionselected);
+			if (this.itemsCommands.isEmpty()) {} else if (!this.itemsCommands.isEmpty()) {
+				ItemKKPotion.getItem(player, world, (String) this.itemsCommands.get(GuiCommandMenu.potionselected), GuiCommandMenu.potionselected);
 
 				GuiCommandMenu.selected = GuiCommandMenu.ATTACK;
 				GuiCommandMenu.submenu = GuiCommandMenu.SUB_MAIN;

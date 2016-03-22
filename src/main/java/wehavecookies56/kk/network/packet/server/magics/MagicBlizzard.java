@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -16,6 +17,7 @@ import wehavecookies56.kk.lib.Strings;
 import wehavecookies56.kk.network.packet.AbstractMessage.AbstractServerMessage;
 import wehavecookies56.kk.network.packet.PacketDispatcher;
 import wehavecookies56.kk.network.packet.client.SpawnBlizzardParticles;
+import wehavecookies56.kk.network.packet.client.SyncMagicData;
 
 public class MagicBlizzard extends AbstractServerMessage<MagicBlizzard> {
 
@@ -35,6 +37,7 @@ public class MagicBlizzard extends AbstractServerMessage<MagicBlizzard> {
 	public void process (EntityPlayer player, Side side) {
 		if (!player.getCapability(KingdomKeys.CHEAT_MODE, null).getCheatMode()) player.getCapability(KingdomKeys.PLAYER_STATS, null).remMP(Constants.getCost(Strings.Spell_Blizzard));
 		World world = player.worldObj;
+		
 		switch (player.getCapability(KingdomKeys.MAGIC_STATE, null).getMagicLevel(Strings.Spell_Blizzard)) {
 			case 1:
 				world.spawnEntityInWorld(new EntityBlizzard(world, player));
@@ -49,6 +52,7 @@ public class MagicBlizzard extends AbstractServerMessage<MagicBlizzard> {
 				PacketDispatcher.sendToAllAround(new SpawnBlizzardParticles(new EntityBlizzaga(world), 1), player, 64.0D);
 				break;
 		}
+		PacketDispatcher.sendTo(new SyncMagicData(player.getCapability(KingdomKeys.MAGIC_STATE, null), player.getCapability(KingdomKeys.PLAYER_STATS, null)), (EntityPlayerMP) player);
 	}
 
 }

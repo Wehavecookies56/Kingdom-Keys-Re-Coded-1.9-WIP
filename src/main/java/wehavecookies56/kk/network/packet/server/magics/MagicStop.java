@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -16,6 +17,7 @@ import wehavecookies56.kk.lib.Strings;
 import wehavecookies56.kk.network.packet.AbstractMessage.AbstractServerMessage;
 import wehavecookies56.kk.network.packet.PacketDispatcher;
 import wehavecookies56.kk.network.packet.client.SpawnStopParticles;
+import wehavecookies56.kk.network.packet.client.SyncMagicData;
 
 public class MagicStop extends AbstractServerMessage<MagicStop> {
 
@@ -49,6 +51,7 @@ public class MagicStop extends AbstractServerMessage<MagicStop> {
 				PacketDispatcher.sendToAllAround(new SpawnStopParticles(player,3), player, 64.0D);
 				break;
 		}
+		PacketDispatcher.sendTo(new SyncMagicData(player.getCapability(KingdomKeys.MAGIC_STATE, null), player.getCapability(KingdomKeys.PLAYER_STATS, null)), (EntityPlayerMP) player);
 	}
 
 }

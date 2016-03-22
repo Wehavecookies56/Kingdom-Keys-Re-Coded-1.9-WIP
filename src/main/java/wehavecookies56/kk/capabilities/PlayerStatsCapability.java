@@ -53,9 +53,6 @@ public class PlayerStatsCapability {
 		
 		InventoryKeychain getInventoryKeychain();
 		InventoryPotionsMenu getInventoryPotionsMenu();
-
-		List getSpellsList();
-		List getItemsList();
 		
 	}
 
@@ -97,12 +94,6 @@ public class PlayerStatsCapability {
 			
 			instance.getInventoryKeychain().readFromNBT(properties);
 			instance.getInventoryPotionsMenu().readFromNBT(properties);
-			
-			
-			instance.getItemsList().clear();
-			for (int i = 0; i < instance.getInventoryPotionsMenu().getSizeInventory(); i++)
-				if (instance.getInventoryPotionsMenu().getStackInSlot(i) != null) instance.getItemsList().add(((ItemKKPotion) instance.getInventoryPotionsMenu().getStackInSlot(i).getItem()).getItemName());
-			
 		}
 	}
 	
@@ -126,14 +117,8 @@ public class PlayerStatsCapability {
 		private final InventoryPotionsMenu inventoryPotions = new InventoryPotionsMenu();
 		private final InventorySpells inventorySpells = new InventorySpells();
 		
-		private static List<String> spells = new ArrayList<String>();
-		private static List<String> items = new ArrayList<String>();
-		
 		@Override public InventoryKeychain getInventoryKeychain(){return this.inventoryKeychain;}
 		@Override public InventoryPotionsMenu getInventoryPotionsMenu(){return this.inventoryPotions;}
-		
-		@Override public List getSpellsList(){return this.spells;}
-		@Override public List getItemsList(){return this.items;}
 
         @Override public double getMP() { return this.mp; }
         @Override public double getMaxMP() { return this.maxMP; }

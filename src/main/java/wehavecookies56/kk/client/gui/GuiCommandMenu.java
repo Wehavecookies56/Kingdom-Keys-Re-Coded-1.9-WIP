@@ -97,15 +97,16 @@ public class GuiCommandMenu extends GuiScreen {
 		IPlayerStats STATS = mc.thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null);
 
 		this.spells = new ArrayList<String>();
-		this.spells.clear();
 		this.items = new ArrayList<String>();
-		this.items.clear();
 		this.driveCommands = new ArrayList<String>();
-		this.driveCommands.clear();
+		
+		this.spells.clear();
 		for (int i = 0; i < Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.MAGIC_STATE, null).getInventorySpells().getSizeInventory(); i++)
 			if (Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.MAGIC_STATE, null).getInventorySpells().getStackInSlot(i) != null) this.spells.add(((ItemSpellOrb) Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.MAGIC_STATE, null).getInventorySpells().getStackInSlot(i).getItem()).getMagicName());
+		this.items.clear();
 		for (int i = 0; i < Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryPotionsMenu().getSizeInventory(); i++)
 			if (Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryPotionsMenu().getStackInSlot(i) != null) this.items.add(((ItemKKPotion) Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryPotionsMenu().getStackInSlot(i).getItem()).getItemName());
+		this.driveCommands.clear();
 		for (int i = 0; i < Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.DRIVE_STATE, null).getInventoryDriveForms().getSizeInventory(); i++)
 			if (Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.DRIVE_STATE, null).getInventoryDriveForms().getStackInSlot(i) != null) this.driveCommands.add(((ItemDriveForm) Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.DRIVE_STATE, null).getInventoryDriveForms().getStackInSlot(i).getItem()).getDriveFormName());	
 		// Magic:"+magicselected+" Drive:"+driveselected);
@@ -179,7 +180,7 @@ public class GuiCommandMenu extends GuiScreen {
 					drawTexturedModalRect(0, 0, TOP_WIDTH, 0, TOP_WIDTH + MENU_WIDTH, v + MENU_HEIGHT);
 			}
 
-			if (STATS.getItemsList().isEmpty())
+			if (this.items.isEmpty())
 				drawString(mc.fontRendererObj, TextHelper.localize(Strings.Gui_CommandMenu_Items), 6 + textX, 4, 0x888888);
 			else
 				drawString(mc.fontRendererObj, TextHelper.localize(Strings.Gui_CommandMenu_Items), 6 + textX, 4, 0xFFFFFF);
@@ -217,7 +218,7 @@ public class GuiCommandMenu extends GuiScreen {
 				drawString(mc.fontRendererObj, TextHelper.localize(Strings.Gui_CommandMenu_Magic), 6 + textX, 4, 0x888888);
 			} else {
 				//if (!ExtendedPlayer.get(mc.thePlayer).getRecharge() && !spells.isEmpty() && !ExtendedPlayer.get(mc.thePlayer).getDriveInUse().equals("Valor"))
-				if (!STATS.getRecharge() && (!STATS.getSpellsList().isEmpty() && !DS.getActiveDriveName().equals(Strings.Form_Valor))) 
+				if (!STATS.getRecharge() && (!this.spells.isEmpty() && !DS.getActiveDriveName().equals(Strings.Form_Valor))) 
 
 					drawString(mc.fontRendererObj, TextHelper.localize(Strings.Gui_CommandMenu_Magic), 6 + textX, 4, 0xFFFFFF);
 				else
@@ -273,7 +274,6 @@ public class GuiCommandMenu extends GuiScreen {
 		}
 		GL11.glPopMatrix();
 		// Magic submenu //
-		spells = STATS.getSpellsList();
 		if (spells == null) {} else if (!spells.isEmpty()) {
 			// MAGIC TOP
 			GL11.glPushMatrix();
@@ -319,7 +319,6 @@ public class GuiCommandMenu extends GuiScreen {
 			}
 		}
 		// Items submenu //
-		items = STATS.getItemsList();
 		if (items == null) {} else if (!items.isEmpty()) {
 			// Items TOP
 			GL11.glPushMatrix();
