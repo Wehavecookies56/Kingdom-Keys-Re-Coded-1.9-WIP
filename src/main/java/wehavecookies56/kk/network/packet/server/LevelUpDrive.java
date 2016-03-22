@@ -14,6 +14,7 @@ import wehavecookies56.kk.lib.Strings;
 import wehavecookies56.kk.network.packet.AbstractMessage.AbstractServerMessage;
 import wehavecookies56.kk.network.packet.PacketDispatcher;
 import wehavecookies56.kk.network.packet.client.SyncDriveData;
+import wehavecookies56.kk.network.packet.client.SyncDriveInventory;
 import wehavecookies56.kk.util.TextHelper;
 
 public class LevelUpDrive extends AbstractServerMessage<LevelUpDrive> {
@@ -107,5 +108,6 @@ public class LevelUpDrive extends AbstractServerMessage<LevelUpDrive> {
 	
 			}
 		}
+		PacketDispatcher.sendTo(new SyncDriveInventory(player.getCapability(KingdomKeys.DRIVE_STATE, null)), (EntityPlayerMP) player);
 	}
 }

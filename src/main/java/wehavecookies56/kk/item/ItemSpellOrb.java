@@ -3,6 +3,7 @@ package wehavecookies56.kk.item;
 import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
@@ -11,6 +12,7 @@ import net.minecraft.world.World;
 import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.lib.Constants;
 import wehavecookies56.kk.network.packet.PacketDispatcher;
+import wehavecookies56.kk.network.packet.client.SyncMagicData;
 import wehavecookies56.kk.network.packet.server.magics.LevelUpMagic;
 import wehavecookies56.kk.util.TextHelper;
 
@@ -25,7 +27,9 @@ public abstract class ItemSpellOrb extends Item {
 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World world, EntityPlayer player, EnumHand hand) {
-		if (world.isRemote) PacketDispatcher.sendToServer(new LevelUpMagic(this.magic));
+		if (world.isRemote) {
+			PacketDispatcher.sendToServer(new LevelUpMagic(this.magic));
+		}
 		return super.onItemRightClick(itemStackIn, world, player, hand);
 	}
 	

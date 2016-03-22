@@ -3,6 +3,7 @@ package wehavecookies56.kk.network.packet.server.magics;
 import java.io.IOException;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextFormatting;
@@ -10,7 +11,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.inventory.InventorySpells;
 import wehavecookies56.kk.lib.Constants;
+import wehavecookies56.kk.network.packet.PacketDispatcher;
 import wehavecookies56.kk.network.packet.AbstractMessage.AbstractServerMessage;
+import wehavecookies56.kk.network.packet.client.SyncMagicData;
+import wehavecookies56.kk.network.packet.client.SyncMagicInventory;
 import wehavecookies56.kk.util.TextHelper;
 
 public class LevelUpMagic extends AbstractServerMessage<LevelUpMagic> {
@@ -65,6 +69,7 @@ public class LevelUpMagic extends AbstractServerMessage<LevelUpMagic> {
 			} else {
 				TextHelper.sendFormattedChatMessage("Can't level up " + TextHelper.localize(Constants.getMagicName(magic, player.getCapability(KingdomKeys.MAGIC_STATE, null).getMagicLevel(magic))) + ", it is already at the max level!", TextFormatting.YELLOW, player);
 			}
-		}		
+		}
+		PacketDispatcher.sendTo(new SyncMagicInventory(player.getCapability(KingdomKeys.MAGIC_STATE, null)), (EntityPlayerMP) player);
 	}
 }
