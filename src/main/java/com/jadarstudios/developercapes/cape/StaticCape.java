@@ -7,11 +7,16 @@
 package com.jadarstudios.developercapes.cape;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.net.URL;
+import java.util.Map;
 
+import com.google.common.collect.Maps;
 import com.jadarstudios.developercapes.DevCapes;
 import com.jadarstudios.developercapes.HDImageBuffer;
+import com.mojang.authlib.minecraft.MinecraftProfileTexture.Type;
 
+import io.netty.util.internal.MpscLinkedQueueNode;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.network.NetworkPlayerInfo;
@@ -41,18 +46,18 @@ public class StaticCape extends AbstractCape {
 
 		// mmdanggg2: using reflection to modify the private locationCape, hacky
 		// but it works.
-		// Wehavecookies56: Added obfuscated field names for reflection
+		// Wehavecookies56: Added obfuscated field names for reflection and fixed for 1.9
 		try {
 			Field playerInfoF = ReflectionHelper.findField(AbstractClientPlayer.class, "playerInfo", "field_175157_a");
 			playerInfoF.setAccessible(true);
 			NetworkPlayerInfo nci = (NetworkPlayerInfo) playerInfoF.get(player);
-
-			Field locationCapeF = ReflectionHelper.findField(NetworkPlayerInfo.class, "locationCape", "field_178862_f");
-			locationCapeF.setAccessible(true);
-			locationCapeF.set(nci, location);
+						
+			Field playerTexturesF = ReflectionHelper.findField(NetworkPlayerInfo.class, "playerTextures", "field_187107_a");
+			playerTexturesF.setAccessible(true);
+		    ((Map) playerTexturesF.get(nci)).put(Type.CAPE, location);
 
 			playerInfoF.setAccessible(false);
-			locationCapeF.setAccessible(false);
+			playerTexturesF.setAccessible(false);
 
 		} catch (Exception e) {
 			e.printStackTrace();

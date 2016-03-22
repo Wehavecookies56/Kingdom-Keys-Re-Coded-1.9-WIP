@@ -1,12 +1,16 @@
 package wehavecookies56.kk.api.driveforms;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.google.common.collect.ImmutableMap;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import wehavecookies56.kk.KingdomKeys;
+import wehavecookies56.kk.item.ItemDriveForm;
 
 public class DriveFormRegistry {
 
@@ -44,7 +48,11 @@ public class DriveFormRegistry {
 	}
 
 	public static boolean isDriveFormKnown (EntityPlayer player, String name) {
-		return player.getCapability(KingdomKeys.DRIVE_STATE, null).getDriveFormsList().contains(name);
+		List<String> driveCommands = new ArrayList<String>();
+		driveCommands.clear();
+		for (int i = 0; i < Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.DRIVE_STATE, null).getInventoryDriveForms().getSizeInventory(); i++)
+			if (Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.DRIVE_STATE, null).getInventoryDriveForms().getStackInSlot(i) != null) driveCommands.add(((ItemDriveForm) Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.DRIVE_STATE, null).getInventoryDriveForms().getStackInSlot(i).getItem()).getDriveFormName());	
+		return driveCommands.contains(name);
 	}
 
 }
