@@ -140,13 +140,13 @@ public class GuiMenu_Status extends GuiMenu_Bars {
 				drawString(fontRendererObj, "0%", 230, ((-140 / 16) + 75) + 166, 0xFFD900);
 				drawString(fontRendererObj, "0%", 230, ((-140 / 16) + 75) + 178, 0xFFD900);
 
-				drawString(fontRendererObj, "" + ms.getMagicLevel("Fire"), 370, ((-140 / 16) + 75) + 10, 0xFFD900);
-				drawString(fontRendererObj, "" + ms.getMagicLevel("Blizzard"), 370, ((-140 / 16) + 75) + 22, 0xFFD900);
-				drawString(fontRendererObj, "" + ms.getMagicLevel("Thunder"), 370, ((-140 / 16) + 75) + 34, 0xFFD900);
-				drawString(fontRendererObj, "" + ms.getMagicLevel("Cure"), 370, ((-140 / 16) + 75) + 46, 0xFFD900);
-				drawString(fontRendererObj, "" + ms.getMagicLevel("Gravity"), 370, ((-140 / 16) + 75) + 58, 0xFFD900);
-				drawString(fontRendererObj, "" + ms.getMagicLevel("Aero"), 370, ((-140 / 16) + 75) + 70, 0xFFD900);
-				drawString(fontRendererObj, "" + ms.getMagicLevel("Stop"), 370, ((-140 / 16) + 75) + 82, 0xFFD900);
+				drawString(fontRendererObj, "" + ms.getMagicLevel(Strings.Spell_Fire), 370, ((-140 / 16) + 75) + 10, 0xFFD900);
+				drawString(fontRendererObj, "" + ms.getMagicLevel(Strings.Spell_Blizzard), 370, ((-140 / 16) + 75) + 22, 0xFFD900);
+				drawString(fontRendererObj, "" + ms.getMagicLevel(Strings.Spell_Thunder), 370, ((-140 / 16) + 75) + 34, 0xFFD900);
+				drawString(fontRendererObj, "" + ms.getMagicLevel(Strings.Spell_Cure), 370, ((-140 / 16) + 75) + 46, 0xFFD900);
+				drawString(fontRendererObj, "" + ms.getMagicLevel(Strings.Spell_Gravity), 370, ((-140 / 16) + 75) + 58, 0xFFD900);
+				drawString(fontRendererObj, "" + ms.getMagicLevel(Strings.Spell_Aero), 370, ((-140 / 16) + 75) + 70, 0xFFD900);
+				drawString(fontRendererObj, "" + ms.getMagicLevel(Strings.Spell_Stop), 370, ((-140 / 16) + 75) + 82, 0xFFD900);
 				
 
 				break;

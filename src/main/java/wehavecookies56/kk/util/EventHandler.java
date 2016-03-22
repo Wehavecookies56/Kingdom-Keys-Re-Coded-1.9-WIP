@@ -757,15 +757,35 @@ public class EventHandler {
 	public void onPlayerTick (PlayerTickEvent event) {
 		IPlayerStats STATS = event.player.getCapability(KingdomKeys.PLAYER_STATS, null);
 		IDriveState DS = event.player.getCapability(KingdomKeys.DRIVE_STATE, null);
-		if (!DS.getInDrive()) if (STATS.getMP() <= 0 || STATS.getRecharge()) {
-			STATS.setRecharge(true);
+		
+		if(event.side.isClient()){
+			System.out.println("Client MP: "+STATS.getMP());
+			System.out.println("Client: "+STATS.getRecharge());
+			System.out.println("Client Max MP: "+STATS.getMaxMP());
+		}
+		else{
+			System.out.println("Server MP: "+STATS.getMP());
+			System.out.println("Server: "+STATS.getRecharge());
+			System.out.println("Server Max MP: "+STATS.getMaxMP());
+		}
+
+		if (!DS.getInDrive()) 
+			if (STATS.getMP() <= 0 || STATS.getRecharge()) {
+				STATS.setRecharge(true);
 			if (STATS.getMP() != STATS.getMaxMP()) {
 				STATS.addMP(0.1);
-				if (STATS.getMP() > STATS.getMaxMP()) STATS.setMP(STATS.getMaxMP());
+				if (STATS.getMP() > STATS.getMaxMP()) 
+					STATS.setMP(STATS.getMaxMP());
 
 			} else {
 				STATS.setMP(STATS.getMaxMP());
 				STATS.setRecharge(false);
+				if(event.side.isServer())
+				{
+					PacketDispatcher.sendTo(new SyncMagicData(event.player.getCapability(KingdomKeys.MAGIC_STATE, null), event.player.getCapability(KingdomKeys.PLAYER_STATS, null)), (EntityPlayerMP)event.player);
+
+					//PacketDispatcher.sendTo(new SyncMagicData(KingdomKeys.MAGIC_STATE, KingdomKeys.PLAYER_STATS), event.player);
+				}
 			}
 		}
 		if (!DS.getActiveDriveName().equals("none") && DriveFormRegistry.isDriveFormRegistered(DS.getActiveDriveName())) DriveFormRegistry.get(DS.getActiveDriveName()).update(event.player);
