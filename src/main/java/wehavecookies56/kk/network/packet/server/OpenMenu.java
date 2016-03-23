@@ -10,6 +10,8 @@ import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.achievements.ModAchievements;
 import wehavecookies56.kk.network.packet.AbstractMessage;
 import wehavecookies56.kk.network.packet.PacketDispatcher;
+import wehavecookies56.kk.network.packet.client.SyncDriveData;
+import wehavecookies56.kk.network.packet.client.SyncMagicData;
 import wehavecookies56.kk.network.packet.client.SyncMunnyData;
 import wehavecookies56.kk.util.AchievementHelper;
 
@@ -31,5 +33,7 @@ public class OpenMenu extends AbstractMessage<OpenMenu> {
 	public void process (EntityPlayer player, Side side) {
 		AchievementHelper.addAchievement(player, ModAchievements.openMenu);
 		PacketDispatcher.sendTo(new SyncMunnyData(player.getCapability(KingdomKeys.MUNNY, null)), (EntityPlayerMP) player);
+		PacketDispatcher.sendTo(new SyncMagicData(player.getCapability(KingdomKeys.MAGIC_STATE, null), player.getCapability(KingdomKeys.PLAYER_STATS, null)), (EntityPlayerMP) player);
+		PacketDispatcher.sendTo(new SyncDriveData(player.getCapability(KingdomKeys.DRIVE_STATE, null), player.getCapability(KingdomKeys.PLAYER_STATS, null)), (EntityPlayerMP) player);
 	}
 }
