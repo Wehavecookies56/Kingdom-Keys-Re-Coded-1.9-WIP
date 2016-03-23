@@ -51,7 +51,6 @@ public class PlayerStatsCapability {
 		void setMaxMP(double mp);
 		void setRecharge(boolean recharge);
 		
-		InventoryKeychain getInventoryKeychain();
 		InventoryPotionsMenu getInventoryPotionsMenu();
 		
 	}
@@ -72,7 +71,6 @@ public class PlayerStatsCapability {
 			properties.setDouble("Max MP", instance.getMaxMP());
 			properties.setBoolean("Recharge", instance.getRecharge());
 			
-			instance.getInventoryKeychain().writeToNBT(properties);
 			instance.getInventoryPotionsMenu().writeToNBT(properties);
 
 			return properties;
@@ -92,7 +90,6 @@ public class PlayerStatsCapability {
 			instance.setMaxMP(properties.getDouble("Max MP"));
 			instance.setRecharge(properties.getBoolean("Recharge"));
 			
-			instance.getInventoryKeychain().readFromNBT(properties);
 			instance.getInventoryPotionsMenu().readFromNBT(properties);
 		}
 	}
@@ -113,11 +110,8 @@ public class PlayerStatsCapability {
 		private boolean recharge = false;
 		private boolean cheatMode = false;
 		
-		private final InventoryKeychain inventoryKeychain = new InventoryKeychain();
 		private final InventoryPotionsMenu inventoryPotions = new InventoryPotionsMenu();
-		private final InventorySpells inventorySpells = new InventorySpells();
 		
-		@Override public InventoryKeychain getInventoryKeychain(){return this.inventoryKeychain;}
 		@Override public InventoryPotionsMenu getInventoryPotionsMenu(){return this.inventoryPotions;}
 
         @Override public double getMP() { return this.mp; }

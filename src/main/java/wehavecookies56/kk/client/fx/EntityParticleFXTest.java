@@ -32,6 +32,7 @@ public class EntityParticleFXTest extends EntityFX {
 		Tessellator tess = Tessellator.getInstance();
 		GL11.glDepthMask(false);
 		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glTexParameterf(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_LINEAR);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		GL11.glAlphaFunc(GL11.GL_GREATER, 0.003921569F);
 		worldRenderer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX_COLOR);

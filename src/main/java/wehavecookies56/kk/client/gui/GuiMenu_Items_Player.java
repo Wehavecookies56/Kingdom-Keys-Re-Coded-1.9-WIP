@@ -41,7 +41,7 @@ public class GuiMenu_Items_Player extends GuiMenu_Bars {
 	}
 
 	private void updateButtons () {
-		keychain.enabled = mc.thePlayer.getCapability(KingdomKeys.SUMMON_KEYBLADE, null).getKeybladeSummoned() == false;
+		keychain.enabled = mc.thePlayer.getCapability(KingdomKeys.SUMMON_KEYBLADE, null).getIsKeybladeSummoned() == false;
 		updateScreen();
 	}
 

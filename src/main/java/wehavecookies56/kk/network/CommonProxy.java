@@ -69,7 +69,7 @@ public class CommonProxy implements IGuiHandler {
 		TileEntity te = world.getTileEntity(xyz);
 
 		if (ID == KingdomKeys.GUI_KEYCHAIN_INV)
-			return new ContainerKeychain(player, player.inventory, player.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryKeychain());
+			return new ContainerKeychain(player, player.inventory, player.getCapability(KingdomKeys.SUMMON_KEYBLADE, null).getInventoryKeychain());
 		else if (ID == KingdomKeys.GUI_POTIONS_INV)
 			return new ContainerPotionsMenu(player, player.inventory, player.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryPotionsMenu());
 		else if (ID == KingdomKeys.GUI_SPELLS_INV)
@@ -99,7 +99,7 @@ public class CommonProxy implements IGuiHandler {
 		TileEntity te = world.getTileEntity(xyz);
 
 		if (ID == KingdomKeys.GUI_KEYCHAIN_INV)
-			return new GuiKeychains(player, player.inventory, player.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryKeychain());
+			return new GuiKeychains(player, player.inventory, player.getCapability(KingdomKeys.SUMMON_KEYBLADE, null).getInventoryKeychain());
 		else if (ID == KingdomKeys.GUI_POTIONS_INV)
 			return new GuiPotions(player, player.inventory, player.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryPotionsMenu());
 		else if (ID == KingdomKeys.GUI_SPELLS_INV)

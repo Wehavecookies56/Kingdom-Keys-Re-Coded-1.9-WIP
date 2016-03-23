@@ -3,11 +3,14 @@ package wehavecookies56.kk.network.packet.server;
 import java.io.IOException;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.relauncher.Side;
 import wehavecookies56.kk.KingdomKeys;
+import wehavecookies56.kk.network.packet.PacketDispatcher;
 import wehavecookies56.kk.network.packet.AbstractMessage.AbstractServerMessage;
+import wehavecookies56.kk.network.packet.client.SyncKeybladeData;
 import wehavecookies56.kk.util.SoundHelper;
 
 public class DeSummonKeyblade extends AbstractServerMessage<DeSummonKeyblade> {
@@ -35,6 +38,7 @@ public class DeSummonKeyblade extends AbstractServerMessage<DeSummonKeyblade> {
 		player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
 		SoundHelper.playSoundAtEntity(player.worldObj, player, SoundHelper.UnSummon, 0.5f, 1);
 		player.getCapability(KingdomKeys.SUMMON_KEYBLADE, null).setIsKeybladeSummoned(false);
+		PacketDispatcher.sendTo(new SyncKeybladeData(player.getCapability(KingdomKeys.SUMMON_KEYBLADE, null)), (EntityPlayerMP) player);
 	}
 
 }

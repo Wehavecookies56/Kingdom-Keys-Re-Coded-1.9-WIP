@@ -20,6 +20,7 @@ import wehavecookies56.kk.network.packet.client.SpawnThunderParticles;
 import wehavecookies56.kk.network.packet.client.SyncDriveData;
 import wehavecookies56.kk.network.packet.client.SyncDriveInventory;
 import wehavecookies56.kk.network.packet.client.SyncItemsInventory;
+import wehavecookies56.kk.network.packet.client.SyncKeybladeData;
 import wehavecookies56.kk.network.packet.client.SyncMagicData;
 import wehavecookies56.kk.network.packet.client.SyncMagicInventory;
 import wehavecookies56.kk.network.packet.client.SyncMaterialData;
@@ -85,6 +86,7 @@ public class PacketDispatcher {
 		registerMessage(SyncMagicInventory.class);
 		registerMessage(SyncItemsInventory.class);
 		registerMessage(SyncDriveInventory.class);
+		registerMessage(SyncKeybladeData.class);
 
 		// Client to Server
 		registerMessage(MunnyPickup.class);

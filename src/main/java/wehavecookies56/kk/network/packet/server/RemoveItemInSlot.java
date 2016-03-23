@@ -49,7 +49,7 @@ public class RemoveItemInSlot extends AbstractServerMessage<RemoveItemInSlot> {
 	@Override
 	public void process (EntityPlayer player, Side side) {
 		if (inv.equals("keychain")) {
-			keychain = player.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryKeychain();
+			keychain = player.getCapability(KingdomKeys.SUMMON_KEYBLADE, null).getInventoryKeychain();
 			keychain.setInventorySlotContents(slot, null);
 		}
 

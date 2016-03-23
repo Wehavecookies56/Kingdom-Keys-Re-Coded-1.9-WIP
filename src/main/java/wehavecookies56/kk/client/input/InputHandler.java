@@ -5,6 +5,7 @@ import java.util.List;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.MouseEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -317,16 +318,18 @@ public class InputHandler {
 				commandBack();
 				break;
 			case SUMMON_KEYBLADE:
-				if (mc.thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryKeychain().getStackInSlot(0) == null) {
+				if (mc.thePlayer.getCapability(KingdomKeys.SUMMON_KEYBLADE, null).getInventoryKeychain().getStackInSlot(0) == null) {
 					//TODO Minecraft.getMinecraft().theWorld.playSound(Minecraft.getMinecraft().thePlayer.posX, Minecraft.getMinecraft().thePlayer.posY, Minecraft.getMinecraft().thePlayer.posZ, SoundHelper.Error, 2f, 1f, false);
+					System.out.println("Empty keychain inventory");
 					break;
 				}
-				if (SUMMON.getKeybladeSummoned() == false && player.inventory.getCurrentItem() == null && mc.thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryKeychain().getStackInSlot(0).getItem() instanceof ItemKeychain) {
-					PacketDispatcher.sendToServer(new SummonKeyblade(((ItemKeychain) mc.thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryKeychain().getStackInSlot(0).getItem()).getKeyblade()));
-				} else if (player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem() instanceof ItemKeyblade && SUMMON.getKeybladeSummoned() == true) {
+				if (SUMMON.getIsKeybladeSummoned() == false && player.getHeldItem(EnumHand.MAIN_HAND) == null && mc.thePlayer.getCapability(KingdomKeys.SUMMON_KEYBLADE, null).getInventoryKeychain().getStackInSlot(0).getItem() instanceof ItemKeychain) {
+					PacketDispatcher.sendToServer(new SummonKeyblade(((ItemKeychain) mc.thePlayer.getCapability(KingdomKeys.SUMMON_KEYBLADE, null).getInventoryKeychain().getStackInSlot(0).getItem()).getKeyblade()));
+				} else if (player.getHeldItem(EnumHand.MAIN_HAND) != null && player.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ItemKeyblade && SUMMON.getIsKeybladeSummoned() == true) {
 					PacketDispatcher.sendToServer(new DeSummonKeyblade(player.inventory.getCurrentItem()));
-				} else
+				} else {
 					break;
+				}
 				break;
 			case SCROLL_ACTIVATOR:
 				break;

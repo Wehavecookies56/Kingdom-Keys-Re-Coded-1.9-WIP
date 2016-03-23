@@ -76,6 +76,7 @@ import wehavecookies56.kk.network.packet.PacketDispatcher;
 import wehavecookies56.kk.network.packet.client.SyncDriveData;
 import wehavecookies56.kk.network.packet.client.SyncDriveInventory;
 import wehavecookies56.kk.network.packet.client.SyncItemsInventory;
+import wehavecookies56.kk.network.packet.client.SyncKeybladeData;
 import wehavecookies56.kk.network.packet.client.SyncMagicData;
 import wehavecookies56.kk.network.packet.client.SyncMagicInventory;
 import wehavecookies56.kk.network.packet.client.SyncMunnyData;
@@ -415,6 +416,7 @@ public class EventHandler {
 			PacketDispatcher.sendTo(new SyncDriveInventory(event.entity.getCapability(KingdomKeys.DRIVE_STATE, null)), (EntityPlayerMP) event.entity);
 			PacketDispatcher.sendTo(new SyncDriveData(event.entity.getCapability(KingdomKeys.DRIVE_STATE, null), event.entity.getCapability(KingdomKeys.PLAYER_STATS, null)), (EntityPlayerMP) event.entity);
 			PacketDispatcher.sendTo(new SyncMagicData(event.entity.getCapability(KingdomKeys.MAGIC_STATE, null), event.entity.getCapability(KingdomKeys.PLAYER_STATS, null)), (EntityPlayerMP) event.entity);
+			PacketDispatcher.sendTo(new SyncKeybladeData(event.entity.getCapability(KingdomKeys.SUMMON_KEYBLADE, null)), (EntityPlayerMP) event.entity);
 			IFirstTimeJoin FTJ = event.entity.getCapability(KingdomKeys.FIRST_TIME_JOIN, null);
 			if (!FTJ.getFirstTimeJoin()) {
 				((EntityPlayer) event.entity).inventory.addItemStackToInventory(new ItemStack(ModItems.WoodenKeyblade));
@@ -453,9 +455,9 @@ public class EventHandler {
 		if (!event.entity.worldObj.isRemote && event.entity instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) event.entity;
 			ISummonKeyblade SUMMON = player.getCapability(KingdomKeys.SUMMON_KEYBLADE, null);
-			if (SUMMON.getKeybladeSummoned()) {
+			if (SUMMON.getIsKeybladeSummoned()) {
 				PacketDispatcher.sendToServer(new DeSummonKeyblade(player.inventory.getCurrentItem()));
-				SUMMON.setKeybladeSummoned(false, null, null);
+				SUMMON.setIsKeybladeSummoned(false);
 			}
 		}
 
@@ -473,7 +475,7 @@ public class EventHandler {
 			if (event.drops.get(i).getEntityItem().getItem() instanceof ItemKeyblade && (event.drops.get(i).getEntityItem().getItem() != ModItems.WoodenKeyblade && event.drops.get(i).getEntityItem().getItem() != ModItems.WoodenStick)) {
 				event.drops.remove(i);
 				
-				event.entity.getCapability(KingdomKeys.SUMMON_KEYBLADE, null).setKeybladeSummoned(false, null, null);
+				event.entity.getCapability(KingdomKeys.SUMMON_KEYBLADE, null).setIsKeybladeSummoned(false);
 				i = 0;
 			}
 		if (event.source.getSourceOfDamage() instanceof EntityPlayer) {
@@ -725,7 +727,7 @@ public class EventHandler {
 			event.entityItem.isDead = true;
 			ItemStack itemStack = event.entityItem.getEntityItem();
 			
-			event.player.getCapability(KingdomKeys.SUMMON_KEYBLADE, null).setKeybladeSummoned(false, null, null);
+			event.player.getCapability(KingdomKeys.SUMMON_KEYBLADE, null).setIsKeybladeSummoned(false);
 		} else if (event.entityItem.getEntityItem().getItem() instanceof ItemMunny) {
 			event.setCanceled(true);
 			event.player.getCapability(KingdomKeys.MUNNY, null).addMunny(event.entityItem.getEntityItem().getTagCompound().getInteger("amount"));

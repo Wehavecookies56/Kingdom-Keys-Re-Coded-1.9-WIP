@@ -11,6 +11,7 @@ import net.minecraft.command.PlayerNotFoundException;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextFormatting;
 import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.item.ItemKeyblade;
@@ -80,11 +81,11 @@ public class CommandRemoveKeychain implements ICommand {
 		if (sender.getCommandSenderEntity() instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) sender.getCommandSenderEntity();
 			if (args.length == 0) {
-				if (player.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryKeychain().getStackInSlot(0) != null) {
+				if (player.getCapability(KingdomKeys.SUMMON_KEYBLADE, null).getInventoryKeychain().getStackInSlot(0) != null) {
 					PacketDispatcher.sendToServer(new RemoveItemInSlot("keychain", 0));
 					PacketDispatcher.sendToAllAround(new RemoveItemInSlot("keychain", 0), (EntityPlayer) sender.getCommandSenderEntity(), 1);
 
-					if (sender.getCommandSenderEntity().getCapability(KingdomKeys.SUMMON_KEYBLADE, null).getKeybladeSummoned()) if (player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem() instanceof ItemKeyblade) // props.isKeybladeSummoned()
+					if (sender.getCommandSenderEntity().getCapability(KingdomKeys.SUMMON_KEYBLADE, null).getIsKeybladeSummoned()) if (player.getHeldItem(EnumHand.MAIN_HAND) != null && player.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ItemKeyblade) // props.isKeybladeSummoned()
 																																											// ==
 																																											// true
 						PacketDispatcher.sendToServer(new DeSummonKeyblade(player.inventory.getCurrentItem()));
@@ -94,9 +95,9 @@ public class CommandRemoveKeychain implements ICommand {
 			} else if (args.length == 1) {
 				EntityPlayerMP playermp = args.length == 1 ? server.getPlayerList().getPlayerByUUID(UUID.fromString(args[0])) : getCommandSenderAsPlayer(sender);
 
-				if (playermp.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryKeychain().getStackInSlot(0) != null) {
+				if (playermp.getCapability(KingdomKeys.SUMMON_KEYBLADE, null).getInventoryKeychain().getStackInSlot(0) != null) {
 					PacketDispatcher.sendToServer(new RemoveItemInSlot("keychain", 0));
-					if (playermp.getCapability(KingdomKeys.SUMMON_KEYBLADE, null).getKeybladeSummoned()) if (playermp.inventory.getCurrentItem() != null && playermp.inventory.getCurrentItem().getItem() instanceof ItemKeyblade) PacketDispatcher.sendToServer(new DeSummonKeyblade(playermp.inventory.getCurrentItem()));
+					if (playermp.getCapability(KingdomKeys.SUMMON_KEYBLADE, null).getIsKeybladeSummoned()) if (playermp.getHeldItem(EnumHand.MAIN_HAND) != null && playermp.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ItemKeyblade) PacketDispatcher.sendToServer(new DeSummonKeyblade(playermp.getHeldItem(EnumHand.MAIN_HAND)));
 					TextHelper.sendFormattedChatMessage(args[0] + "'s keychain has been removed!", TextFormatting.YELLOW, (EntityPlayer) sender.getCommandSenderEntity());
 				} else
 					TextHelper.sendFormattedChatMessage("The chain slot has no chain!", TextFormatting.RED, (EntityPlayer) sender.getCommandSenderEntity());
