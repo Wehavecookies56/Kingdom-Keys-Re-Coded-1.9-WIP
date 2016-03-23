@@ -7,8 +7,7 @@
         },
         "model": "kk:lostmemory.b3d"
     },
-
-    "variants": {
+	"variants": {
         "inventory": [
             {
                 "transform": {
@@ -18,14 +17,14 @@
                         "scale": 0.02
                     },
                     "gui": {
-                        "rotation": [ { "x": -40 }, { "y": 0 }, { "z": 0 } ],
-                        "translation": [ 0.2, -0.1, 0 ],
-                        "scale": 0.025
+                        "rotation": [ { "x": 45 }, { "y": 10 }, { "z": -45 } ],
+                        "translation": [ -0.2, -0.2, 0 ],
+                        "scale": 0.01
                     },
                     "firstperson": {
                         "rotation": [ { "x": 180 }, { "y": 180 }, { "z": 170 } ],
                         "translation": [ 0, -0.1, 0 ],
-                        "scale": 0.0135
+                        "scale": 0.013
                     },
                     "ground": {
                         "scale": 0.03
