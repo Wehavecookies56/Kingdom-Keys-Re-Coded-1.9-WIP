@@ -93,16 +93,22 @@ public class MagicStateCapability {
 			{
 			case Strings.Spell_Fire:
 				fireLevel = level;
+				break;
 			case Strings.Spell_Blizzard:
 				blizzardLevel = level;
+				break;
 			case Strings.Spell_Thunder:
 				thunderLevel = level;
+				break;
 			case Strings.Spell_Cure:
 				cureLevel = level;
+				break;
 			case Strings.Spell_Aero:
 				aeroLevel = level;
+				break;
 			case Strings.Spell_Stop:
 				stopLevel = level;
+				break;
 			}			
 		}
         @Override

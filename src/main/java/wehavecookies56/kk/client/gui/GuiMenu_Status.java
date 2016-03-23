@@ -96,6 +96,7 @@ public class GuiMenu_Status extends GuiMenu_Bars {
 		final IPlayerStats STATS = mc.thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null);
 		IMagicState ms = mc.thePlayer.getCapability(KingdomKeys.MAGIC_STATE, null);
 		IDriveState ds = mc.thePlayer.getCapability(KingdomKeys.DRIVE_STATE, null);
+		//System.out.println(ds.getDriveLevel(Strings.Form_Valor)+" "+ds.getDriveLevel(Strings.Form_Wisdom)+" "+ds.getDriveLevel(Strings.Form_Limit)+" "+ds.getDriveLevel(Strings.Form_Master)+" "+ds.getDriveLevel(Strings.Form_Final));
 		switch (selected) {
 			case STATS_PLAYER:
 				drawRect(125, ((-140 / 16) + 75) + 10, 200, ((-140 / 16) + 75) + 20, 0xFFFFFF);

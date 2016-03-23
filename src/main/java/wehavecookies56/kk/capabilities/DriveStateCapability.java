@@ -100,14 +100,19 @@ public class DriveStateCapability {
 			switch (drive) {
 				case Strings.Form_Valor:
 					valor = level;
+					break;
 				case Strings.Form_Wisdom:
 					wisdom = level;
+					break;
 				case Strings.Form_Limit:
 					limit = level;
+					break;
 				case Strings.Form_Master:
 					master = level;
+					break;
 				case Strings.Form_Final:
 					Final = level;
+					break;
 			}
 		}
 		@Override

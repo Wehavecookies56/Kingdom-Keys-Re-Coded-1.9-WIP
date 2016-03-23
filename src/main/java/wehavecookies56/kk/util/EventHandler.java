@@ -760,6 +760,20 @@ public class EventHandler {
 		IPlayerStats STATS = event.player.getCapability(KingdomKeys.PLAYER_STATS, null);
 		IDriveState DS = event.player.getCapability(KingdomKeys.DRIVE_STATE, null);
 		
+		/*if(event.side.isClient())
+		{
+			System.out.println("Valor Client: "+event.player.getCapability(KingdomKeys.DRIVE_STATE, null).getDriveLevel(Strings.Form_Valor));
+			System.out.println("Wisdom Client: "+event.player.getCapability(KingdomKeys.DRIVE_STATE, null).getDriveLevel(Strings.Form_Wisdom));
+			System.out.println("Limit Client: "+event.player.getCapability(KingdomKeys.DRIVE_STATE, null).getDriveLevel(Strings.Form_Limit));
+			System.out.println("Master Client: "+event.player.getCapability(KingdomKeys.DRIVE_STATE, null).getDriveLevel(Strings.Form_Master));
+			System.out.println("Final Client: "+event.player.getCapability(KingdomKeys.DRIVE_STATE, null).getDriveLevel(Strings.Form_Final));
+		}else{
+			System.out.println("Valor Server: "+event.player.getCapability(KingdomKeys.DRIVE_STATE, null).getDriveLevel(Strings.Form_Valor));
+			System.out.println("Wisdom Server: "+event.player.getCapability(KingdomKeys.DRIVE_STATE, null).getDriveLevel(Strings.Form_Wisdom));
+			System.out.println("Limit Server: "+event.player.getCapability(KingdomKeys.DRIVE_STATE, null).getDriveLevel(Strings.Form_Limit));
+			System.out.println("Master Server: "+event.player.getCapability(KingdomKeys.DRIVE_STATE, null).getDriveLevel(Strings.Form_Master));
+			System.out.println("Final Server: "+event.player.getCapability(KingdomKeys.DRIVE_STATE, null).getDriveLevel(Strings.Form_Final));
+		}*/
 		if (!DS.getInDrive()) 
 			if (STATS.getMP() <= 0 || STATS.getRecharge()) {
 				STATS.setRecharge(true);

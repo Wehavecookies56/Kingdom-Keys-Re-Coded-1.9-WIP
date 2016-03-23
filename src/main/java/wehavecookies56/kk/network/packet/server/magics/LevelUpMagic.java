@@ -70,6 +70,7 @@ public class LevelUpMagic extends AbstractServerMessage<LevelUpMagic> {
 				TextHelper.sendFormattedChatMessage("Can't level up " + TextHelper.localize(Constants.getMagicName(magic, player.getCapability(KingdomKeys.MAGIC_STATE, null).getMagicLevel(magic))) + ", it is already at the max level!", TextFormatting.YELLOW, player);
 			}
 		}
+		PacketDispatcher.sendTo(new SyncMagicData(player.getCapability(KingdomKeys.MAGIC_STATE, null), player.getCapability(KingdomKeys.PLAYER_STATS, null)), (EntityPlayerMP) player);
 		PacketDispatcher.sendTo(new SyncMagicInventory(player.getCapability(KingdomKeys.MAGIC_STATE, null)), (EntityPlayerMP) player);
 	}
 }
