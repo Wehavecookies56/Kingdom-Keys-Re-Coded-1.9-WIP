@@ -73,24 +73,27 @@ public class CommandDriveLevel implements ICommand {
 	@Override
 	public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
 		System.out.println(args[0]+", "+args[1]);
-		switch(args[0])
+		if(sender.getCommandSenderEntity().worldObj.isRemote)
 		{
-		case "valor":
-			PacketDispatcher.sendToServer(new LevelUpDrive(Strings.Form_Valor, true, Integer.parseInt(args[1].toString())));
-			break;
-		case "wisdom":
-			PacketDispatcher.sendToServer(new LevelUpDrive(Strings.Form_Wisdom, true, Integer.parseInt(args[1].toString())));
-			break;
-		case "limit":
-			PacketDispatcher.sendToServer(new LevelUpDrive(Strings.Form_Limit, true, Integer.parseInt(args[1].toString())));
-			break;
-		case "master":
-			PacketDispatcher.sendToServer(new LevelUpDrive(Strings.Form_Master, true, Integer.parseInt(args[1].toString())));
-			break;
-		case "final":
-			PacketDispatcher.sendToServer(new LevelUpDrive(Strings.Form_Final, true, Integer.parseInt(args[1].toString())));
-			break;
-		}		
+			switch(args[0])
+			{
+			case "valor":
+				PacketDispatcher.sendToServer(new LevelUpDrive(Strings.Form_Valor, true, Integer.parseInt(args[1].toString())));
+				break;
+			case "wisdom":
+				PacketDispatcher.sendToServer(new LevelUpDrive(Strings.Form_Wisdom, true, Integer.parseInt(args[1].toString())));
+				break;
+			case "limit":
+				PacketDispatcher.sendToServer(new LevelUpDrive(Strings.Form_Limit, true, Integer.parseInt(args[1].toString())));
+				break;
+			case "master":
+				PacketDispatcher.sendToServer(new LevelUpDrive(Strings.Form_Master, true, Integer.parseInt(args[1].toString())));
+				break;
+			case "final":
+				PacketDispatcher.sendToServer(new LevelUpDrive(Strings.Form_Final, true, Integer.parseInt(args[1].toString())));
+				break;
+			}
+		}
 	}
 
 	@Override

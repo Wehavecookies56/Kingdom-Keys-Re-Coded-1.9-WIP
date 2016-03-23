@@ -55,8 +55,13 @@ public class DriveFormMaster extends DriveForm {
 			player.motionX *= 1.18D;
 			player.motionZ *= 1.18D;
 		}
+		boolean j = false;
+		if(player.worldObj.isRemote)
+		{
+			j = Minecraft.getMinecraft().gameSettings.keyBindJump.isKeyDown();
+		}
 		
-		if (Minecraft.getMinecraft().gameSettings.keyBindJump.isKeyDown())
+		if (j)
 		{
 			if(player.motionY > 0)
 			{

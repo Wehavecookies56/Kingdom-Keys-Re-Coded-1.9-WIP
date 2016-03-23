@@ -51,7 +51,13 @@ public class DriveFormFinal extends DriveForm {
 
 	@Override
 	public void update (EntityPlayer player) {
-		if (Minecraft.getMinecraft().gameSettings.keyBindJump.isKeyDown())
+		boolean j = false;
+		if(player.worldObj.isRemote)
+		{
+			j = Minecraft.getMinecraft().gameSettings.keyBindJump.isKeyDown();
+		}
+		
+		if (j)
 		{
 			if(player.motionY > 0)
 			{

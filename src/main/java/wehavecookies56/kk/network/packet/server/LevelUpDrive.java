@@ -51,35 +51,8 @@ public class LevelUpDrive extends AbstractServerMessage<LevelUpDrive> {
 
 	@Override
 	public void process (EntityPlayer player, Side side) {
-		int valorLevel = player.getCapability(KingdomKeys.DRIVE_STATE, null).getDriveLevel(Strings.Form_Valor);
-		int wisdomLevel = player.getCapability(KingdomKeys.DRIVE_STATE, null).getDriveLevel(Strings.Form_Wisdom);
-		int limitLevel = player.getCapability(KingdomKeys.DRIVE_STATE, null).getDriveLevel(Strings.Form_Limit);
-		int masterLevel = player.getCapability(KingdomKeys.DRIVE_STATE, null).getDriveLevel(Strings.Form_Master);
-		int finalLevel = player.getCapability(KingdomKeys.DRIVE_STATE, null).getDriveLevel(Strings.Form_Final);
-
 		int hasDriveInSlot = -1, nullSlot = -1;
-		
-		int formLevel = 0;
-		switch(form)
-		{
-			case Strings.Form_Valor:
-				formLevel = valorLevel;
-				break;
-			case Strings.Form_Wisdom:
-				formLevel = wisdomLevel;
-				break;
-			case Strings.Form_Limit:
-				formLevel = limitLevel;
-				break;
-			case Strings.Form_Master:
-				formLevel = masterLevel;
-				break;
-			case Strings.Form_Final:
-				formLevel = finalLevel;
-				break;
-			default:
-			break;
-		}
+				
 		PacketDispatcher.sendTo(new SyncDriveData(player.getCapability(KingdomKeys.DRIVE_STATE, null), player.getCapability(KingdomKeys.PLAYER_STATS, null)), (EntityPlayerMP) player);
 		if(isLevelUp)
 		{//TODO

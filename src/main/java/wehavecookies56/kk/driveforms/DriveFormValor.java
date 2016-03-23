@@ -52,9 +52,13 @@ public class DriveFormValor extends DriveForm {
 			player.motionX *= Constants.VALOR_SPEED;
 			player.motionZ *= Constants.VALOR_SPEED;
 		}
+		boolean j = false;
+		if(player.worldObj.isRemote)
+		{
+			j = Minecraft.getMinecraft().gameSettings.keyBindJump.isKeyDown();
+		}
 		
-		
-		if (Minecraft.getMinecraft().gameSettings.keyBindJump.isKeyDown())
+		if (j)
 		{
 			if(player.motionY > 0)
 			{
