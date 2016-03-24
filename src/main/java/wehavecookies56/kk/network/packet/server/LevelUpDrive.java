@@ -13,6 +13,7 @@ import wehavecookies56.kk.inventory.InventoryDriveForms;
 import wehavecookies56.kk.lib.Strings;
 import wehavecookies56.kk.network.packet.AbstractMessage.AbstractServerMessage;
 import wehavecookies56.kk.network.packet.PacketDispatcher;
+import wehavecookies56.kk.network.packet.client.ShowOverlayPacket;
 import wehavecookies56.kk.network.packet.client.SyncDriveData;
 import wehavecookies56.kk.network.packet.client.SyncDriveInventory;
 import wehavecookies56.kk.util.TextHelper;
@@ -75,9 +76,11 @@ public class LevelUpDrive extends AbstractServerMessage<LevelUpDrive> {
 			if (hasDriveInSlot == -1) {
 				player.getCapability(KingdomKeys.DRIVE_STATE, null).getInventoryDriveForms().setInventorySlotContents(nullSlot, player.getHeldItem(EnumHand.MAIN_HAND));
 				player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
-				TextHelper.sendFormattedChatMessage("Succesfully learnt "+form+" Form!", TextFormatting.YELLOW, player);
+		    //	PacketDispatcher.sendTo(new ShowOverlayPacket("munny", event.getEntityItem().getEntityItem().getTagCompound().getInteger("amount")), (EntityPlayerMP) event.getPlayer());
+
+				TextHelper.sendFormattedChatMessage("Succesfully learnt "+TextHelper.localize(form), TextFormatting.YELLOW, player);
 			} else {
-				TextHelper.sendFormattedChatMessage("Already learnt "+form+" Form!", TextFormatting.YELLOW, player);
+				TextHelper.sendFormattedChatMessage("Already learnt "+TextHelper.localize(form), TextFormatting.YELLOW, player);
 	
 			}
 		}

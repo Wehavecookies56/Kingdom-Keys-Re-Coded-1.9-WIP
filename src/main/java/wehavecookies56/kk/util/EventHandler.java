@@ -78,6 +78,7 @@ import wehavecookies56.kk.item.ModItems;
 import wehavecookies56.kk.lib.Reference;
 import wehavecookies56.kk.lib.Strings;
 import wehavecookies56.kk.network.packet.PacketDispatcher;
+import wehavecookies56.kk.network.packet.client.ShowOverlayPacket;
 import wehavecookies56.kk.network.packet.client.SyncDriveData;
 import wehavecookies56.kk.network.packet.client.SyncDriveInventory;
 import wehavecookies56.kk.network.packet.client.SyncItemsInventory;
@@ -629,26 +630,15 @@ public class EventHandler {
 		if (event.getItem().getEntityItem().getItem() instanceof ItemMunny) {
             final IMunny munny = event.getEntityPlayer().getCapability(KingdomKeys.MUNNY, null);
 			MunnyPickup packet = new MunnyPickup(event.getItem().getEntityItem());
-			if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) PacketDispatcher.sendToServer(packet);
-			if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
-				event.getItem().getEntityItem().stackSize--;
-				munny.addMunny(event.getItem().getEntityItem().getTagCompound().getInteger("amount"));
-				PacketDispatcher.sendTo(new SyncMunnyData(munny), (EntityPlayerMP) event.getEntityPlayer());
-				
-			}
+			event.getItem().getEntityItem().stackSize--;
+			munny.addMunny(event.getItem().getEntityItem().getTagCompound().getInteger("amount"));
+			PacketDispatcher.sendTo(new SyncMunnyData(munny), (EntityPlayerMP) event.getEntityPlayer());
+	    	PacketDispatcher.sendTo(new ShowOverlayPacket("munny", event.getItem().getEntityItem().getTagCompound().getInteger("amount")), (EntityPlayerMP) event.getEntityPlayer());
+			
 		} else if (event.getItem().getEntityItem().getItem() instanceof ItemHpOrb) {
 			if (event.getEntityPlayer().getHeldItem(EnumHand.MAIN_HAND) != null) if (event.getEntityPlayer().getHeldItem(EnumHand.MAIN_HAND).getItem() == ModItems.EmptyBottle) return;
-
 			IPlayerStats STATS = event.getEntityPlayer().getCapability(KingdomKeys.PLAYER_STATS, null);
 			HpOrbPickup packet = new HpOrbPickup(event.getItem().getEntityItem());
-			if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) {
-				if (event.getEntityPlayer().getHealth() >= STATS.getHP()) return;
-				if (event.getEntityPlayer().getHealth() < STATS.getHP() - 1)
-					event.getEntityPlayer().heal(2);
-				else
-					event.getEntityPlayer().heal(1);
-				PacketDispatcher.sendToServer(packet);
-			}
 			if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
 				if (event.getEntityPlayer().getHealth() >= STATS.getHP()) {
 					event.getItem().getEntityItem().stackSize--;
@@ -666,9 +656,6 @@ public class EventHandler {
 			// if(dp < 1000) //Not pickup orb when full
 			{
 				DriveOrbPickup packet = new DriveOrbPickup(event.getItem().getEntityItem());
-				if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) {
-					PacketDispatcher.sendToServer(packet);
-				}
 				if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
 					event.getItem().getEntityItem().stackSize--;
 					STATS.addDP(event.getItem().getEntityItem().getTagCompound().getInteger("amount"));
@@ -682,7 +669,6 @@ public class EventHandler {
 			double mp = STATS.getMP();
 			if (event.getEntityPlayer().getHeldItem(EnumHand.MAIN_HAND) != null) if (event.getEntityPlayer().getHeldItem(EnumHand.MAIN_HAND).getItem() == ModItems.EmptyBottle) return;
 			MagicOrbPickup packet = new MagicOrbPickup(event.getItem().getEntityItem());
-			if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) PacketDispatcher.sendToServer(packet);
 			if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER) {
 				event.getItem().getEntityItem().stackSize--;
 				STATS.addMP(event.getItem().getEntityItem().getTagCompound().getInteger("amount"));
@@ -801,6 +787,8 @@ public class EventHandler {
 			event.getPlayer().getCapability(KingdomKeys.SUMMON_KEYBLADE, null).setIsKeybladeSummoned(false);
 		} else if (event.getEntityItem().getEntityItem().getItem() instanceof ItemMunny) {
 			event.setCanceled(true);
+	    	PacketDispatcher.sendTo(new ShowOverlayPacket("munny", event.getEntityItem().getEntityItem().getTagCompound().getInteger("amount")), (EntityPlayerMP) event.getPlayer());
+
 			event.getPlayer().getCapability(KingdomKeys.MUNNY, null).addMunny(event.getEntityItem().getEntityItem().getTagCompound().getInteger("amount"));
 		}
 	}

@@ -41,18 +41,15 @@ public class ShowOverlayPacket extends AbstractClientMessage<ShowOverlayPacket> 
 	public void process (EntityPlayer player, Side side) {
 		if (this.type.equals("exp")) {
 			GuiOverlay.showExp = true;
-			Minecraft.getMinecraft();
 			GuiOverlay.timeExp = (int) Minecraft.getSystemTime() / 1000;
 		}
 		if (this.type.equals("munny")) {
 			GuiOverlay.showMunny = true;
-			Minecraft.getMinecraft();
 			GuiOverlay.timeMunny = (int) Minecraft.getSystemTime() / 1000;
 			GuiOverlay.munnyGet = this.munny;
 		}
 		if (this.type.equals("levelup")) {
 			GuiOverlay.showLevelUp = true;
-			Minecraft.getMinecraft();
 			GuiOverlay.timeLevelUp = (int) Minecraft.getSystemTime() / 1000;
 		}
 	}
