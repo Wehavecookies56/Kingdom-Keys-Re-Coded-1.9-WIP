@@ -7,6 +7,8 @@ import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import wehavecookies56.kk.lib.Strings;
+import wehavecookies56.kk.network.packet.PacketDispatcher;
+import wehavecookies56.kk.network.packet.server.GiveItemInSlot;
 import wehavecookies56.kk.util.EventHandler;
 
 public class ItemIceCream extends ItemFood {
@@ -16,7 +18,7 @@ public class ItemIceCream extends ItemFood {
 	public ItemIceCream (int food, boolean wolf) {
 		super(food, wolf);
 		setUnlocalizedName(Strings.Potion);
-		//setAlwaysEdible();
+		setAlwaysEdible();
 	}
 
 	@Override
@@ -28,10 +30,12 @@ public class ItemIceCream extends ItemFood {
 	public void onFoodEaten (ItemStack item, World world, EntityPlayer player) {
 		if (!player.capabilities.isCreativeMode && world.isRemote) {
 			win = EventHandler.randomWithRange(0, 20);
+			//ItemStack item = ItemStack(ModItems.WinnerStick);
 			if (win == 3)
-				player.inventory.addItemStackToInventory(new ItemStack(ModItems.WinnerStick));
+				PacketDispatcher.sendToServer(new GiveItemInSlot(new ItemStack(ModItems.WinnerStick)));
+			//player.inventory.addItemStackToInventory(new ItemStack(ModItems.WinnerStick));
 			else
-				player.inventory.addItemStackToInventory(new ItemStack(Items.stick));
+				PacketDispatcher.sendToServer(new GiveItemInSlot(new ItemStack(Items.stick)));
 		}
 	}
 }

@@ -17,6 +17,16 @@ public class GiveItemInSlot extends AbstractMessage<GiveItemInSlot> {
 	boolean shouldDrop = false;
 	public GiveItemInSlot () {}
 
+	public GiveItemInSlot (ItemStack itemstack) 
+	{
+		//this.player = player;
+		this.itemstack = itemstack;
+		this.slot = 100;
+		this.x = 0;
+		this.y = 0;
+		this.z = 0;
+	}
+	
 	public GiveItemInSlot (ItemStack itemstack, int slot) 
 	{
 		//this.player = player;
@@ -64,6 +74,9 @@ public class GiveItemInSlot extends AbstractMessage<GiveItemInSlot> {
 	{
 		if(!player.worldObj.isRemote){
 			if(!shouldDrop){return;}
+			if(slot == 100)			{
+				player.inventory.setInventorySlotContents(player.inventory.getFirstEmptyStack(), itemstack);
+			}
 			if(slot >= 0){
 				player.inventory.setInventorySlotContents(slot, itemstack);
 			} else {
