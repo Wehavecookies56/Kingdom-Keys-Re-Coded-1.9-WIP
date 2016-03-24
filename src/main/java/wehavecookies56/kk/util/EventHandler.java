@@ -1,7 +1,10 @@
 package wehavecookies56.kk.util;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+import java.util.Map.Entry;
 
 import com.mojang.authlib.GameProfile;
 
@@ -51,6 +54,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.achievements.ModAchievements;
 import wehavecookies56.kk.api.driveforms.DriveFormRegistry;
+import wehavecookies56.kk.api.materials.MaterialRegistry;
+import wehavecookies56.kk.api.recipes.RecipeRegistry;
 import wehavecookies56.kk.block.ModBlocks;
 import wehavecookies56.kk.capabilities.CheatModeCapability.ICheatMode;
 import wehavecookies56.kk.capabilities.DriveStateCapability.IDriveState;
@@ -402,9 +407,75 @@ public class EventHandler {
 	@SubscribeEvent
 	public void PlayerClone (PlayerEvent.Clone event) {
 		if (event.wasDeath) {
-			IFirstTimeJoin ftjbefore = event.original.getCapability(KingdomKeys.FIRST_TIME_JOIN, null);
-			IFirstTimeJoin ftjafter = event.entityPlayer.getCapability(KingdomKeys.FIRST_TIME_JOIN, null);
-			ftjafter.setFirstTimeJoin(ftjbefore.getFirstTimeJoin());
+			IFirstTimeJoin ftjBefore = event.original.getCapability(KingdomKeys.FIRST_TIME_JOIN, null);
+			IFirstTimeJoin ftjAfter = event.entityPlayer.getCapability(KingdomKeys.FIRST_TIME_JOIN, null);
+			ftjAfter.setFirstTimeJoin(ftjBefore.getFirstTimeJoin());
+			IMunny munnyBefore = event.original.getCapability(KingdomKeys.MUNNY, null);
+			IMunny munnyAfter = event.entityPlayer.getCapability(KingdomKeys.MUNNY, null);
+			munnyAfter.setMunny(munnyBefore.getMunny());
+			IDriveState dsBefore = event.original.getCapability(KingdomKeys.DRIVE_STATE, null);
+			IDriveState dsAfter = event.entityPlayer.getCapability(KingdomKeys.DRIVE_STATE, null);
+			dsAfter.setActiveDriveName(dsBefore.getActiveDriveName());
+			dsAfter.setAntiPoints(dsBefore.getAntiPoints());
+			dsAfter.setDriveExp(Strings.Form_Valor, dsBefore.getDriveExp(Strings.Form_Valor));
+			dsAfter.setDriveExp(Strings.Form_Wisdom, dsBefore.getDriveExp(Strings.Form_Wisdom));
+			dsAfter.setDriveExp(Strings.Form_Limit, dsBefore.getDriveExp(Strings.Form_Limit));
+			dsAfter.setDriveExp(Strings.Form_Master, dsBefore.getDriveExp(Strings.Form_Master));
+			dsAfter.setDriveExp(Strings.Form_Final, dsBefore.getDriveExp(Strings.Form_Final));
+			dsAfter.setDriveLevel(Strings.Form_Valor, dsBefore.getDriveLevel(Strings.Form_Valor));
+			dsAfter.setDriveLevel(Strings.Form_Wisdom, dsBefore.getDriveLevel(Strings.Form_Wisdom));
+			dsAfter.setDriveLevel(Strings.Form_Limit, dsBefore.getDriveLevel(Strings.Form_Limit));
+			dsAfter.setDriveLevel(Strings.Form_Master, dsBefore.getDriveLevel(Strings.Form_Master));
+			dsAfter.setDriveLevel(Strings.Form_Final, dsBefore.getDriveLevel(Strings.Form_Final));
+			dsAfter.setInDrive(dsBefore.getInDrive());
+			for (int i = 0; i < dsBefore.getInventoryDriveForms().getSizeInventory(); i++) {
+				dsAfter.getInventoryDriveForms().setInventorySlotContents(i, dsBefore.getInventoryDriveForms().getStackInSlot(i));
+			}
+			IMagicState magicBefore = event.original.getCapability(KingdomKeys.MAGIC_STATE, null);
+			IMagicState magicAfter = event.entityPlayer.getCapability(KingdomKeys.MAGIC_STATE, null);
+			magicAfter.setKH1Fire(magicBefore.getKH1Fire());
+			magicAfter.setMagicLevel(Strings.Spell_Fire, magicBefore.getMagicLevel(Strings.Spell_Fire));
+			magicAfter.setMagicLevel(Strings.Spell_Blizzard, magicBefore.getMagicLevel(Strings.Spell_Blizzard));
+			magicAfter.setMagicLevel(Strings.Spell_Thunder, magicBefore.getMagicLevel(Strings.Spell_Thunder));
+			magicAfter.setMagicLevel(Strings.Spell_Cure, magicBefore.getMagicLevel(Strings.Spell_Cure));
+			magicAfter.setMagicLevel(Strings.Spell_Stop, magicBefore.getMagicLevel(Strings.Spell_Stop));
+			magicAfter.setMagicLevel(Strings.Spell_Aero, magicBefore.getMagicLevel(Strings.Spell_Aero));
+			for (int i = 0; i < magicBefore.getInventorySpells().getSizeInventory(); i++) {
+				magicAfter.getInventorySpells().setInventorySlotContents(i, magicBefore.getInventorySpells().getStackInSlot(i));
+			}
+			ISummonKeyblade skBefore = event.original.getCapability(KingdomKeys.SUMMON_KEYBLADE, null);
+			ISummonKeyblade skAfter = event.entityPlayer.getCapability(KingdomKeys.SUMMON_KEYBLADE, null);
+			skAfter.setIsKeybladeSummoned(skBefore.getIsKeybladeSummoned());
+			for (int i = 0; i < skBefore.getInventoryKeychain().getSizeInventory(); i++) {
+				skAfter.getInventoryKeychain().setInventorySlotContents(i, skBefore.getInventoryKeychain().getStackInSlot(i));
+			}
+			IPlayerStats statsBefore = event.original.getCapability(KingdomKeys.PLAYER_STATS, null);
+			IPlayerStats statsAfter = event.entityPlayer.getCapability(KingdomKeys.PLAYER_STATS, null);
+			statsAfter.setDefense(statsBefore.getDefense());
+			statsAfter.setDP(statsBefore.getDP());
+			statsAfter.setExperience(statsBefore.getExperience());
+			statsAfter.setHP(statsBefore.getHP());
+			statsAfter.setLevel(statsBefore.getLevel());
+			statsAfter.setMagic(statsBefore.getMagic());
+			statsAfter.setMaxMP(statsBefore.getMaxMP());
+			statsAfter.setMP(statsBefore.getMP());
+			statsAfter.setRecharge(statsBefore.getRecharge());
+			statsAfter.setStrength(statsBefore.getStrength());
+			for (int i = 0; i < statsBefore.getInventoryPotionsMenu().getSizeInventory(); i++) {
+				statsAfter.getInventoryPotionsMenu().setInventorySlotContents(i, statsBefore.getInventoryPotionsMenu().getStackInSlot(i));
+			}
+			ISynthesisRecipe recipesBefore = event.original.getCapability(KingdomKeys.SYNTHESIS_RECIPES, null);
+			ISynthesisRecipe recipesAfter = event.entityPlayer.getCapability(KingdomKeys.SYNTHESIS_RECIPES, null);
+			for (int i = 0; i < recipesBefore.getKnownRecipes().size(); i++) {
+				recipesAfter.learnRecipe(RecipeRegistry.get(recipesBefore.getKnownRecipes().get(i)));
+			}
+			ISynthesisMaterial materialsBefore = event.original.getCapability(KingdomKeys.SYNTHESIS_MATERIALS, null);
+			ISynthesisMaterial materialsAfter = event.entityPlayer.getCapability(KingdomKeys.SYNTHESIS_MATERIALS, null);
+			Iterator<Entry<String, Integer>> it = materialsBefore.getKnownMaterialsMap().entrySet().iterator();
+			while (it.hasNext()) {
+				Map.Entry<String, Integer> pair = (Map.Entry<String, Integer>) it.next();
+				materialsAfter.setMaterial(MaterialRegistry.get(pair.getKey().toString()), pair.getValue());
+			}
 		}
 	}
 	
