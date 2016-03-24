@@ -32,10 +32,10 @@ public class ItemIceCream extends ItemFood {
 			win = EventHandler.randomWithRange(0, 20);
 			//ItemStack item = ItemStack(ModItems.WinnerStick);
 			if (win == 3)
-				PacketDispatcher.sendToServer(new GiveItemInSlot(new ItemStack(ModItems.WinnerStick)));
+				PacketDispatcher.sendToServer(new GiveItemInSlot(new ItemStack(ModItems.WinnerStick), player.inventory.getFirstEmptyStack()));
 			//player.inventory.addItemStackToInventory(new ItemStack(ModItems.WinnerStick));
 			else
-				PacketDispatcher.sendToServer(new GiveItemInSlot(new ItemStack(Items.stick)));
+				PacketDispatcher.sendToServer(new GiveItemInSlot(new ItemStack(Items.stick), player.inventory.getFirstEmptyStack()));
 		}
 	}
 }

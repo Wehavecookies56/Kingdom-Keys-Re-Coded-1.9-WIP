@@ -32,7 +32,7 @@
                         "scale": 0.013
                     },
                     "firstperson_lefthand": {
-                        "rotation": [ { "x": 180 }, { "y": 180 }, { "z": 170 } ],
+                        "rotation": [ { "x": 180 }, { "y": 0 }, { "z": 190 } ],
                         "translation": [ 0, -0.1, 0 ],
                         "scale": 0.013
                     },
