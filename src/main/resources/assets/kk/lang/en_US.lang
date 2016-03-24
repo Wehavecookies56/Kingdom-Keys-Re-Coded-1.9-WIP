@@ -11,6 +11,9 @@ achievement.openMenu.desc=Press the '%1$s' key to open the menu.
 achievement.getBlox=Is this a bug?
 achievement.getBlox.desc=Get a Bug Blox
 
+achievement.getRecipe=A recipe?
+achievement.getRecpie.desc=Get a Recipe
+
 achievement.getSynthesisTable=Will I be able to make better items?
 achievement.getSynthesisTable.desc=Get a Synthesis Table
 

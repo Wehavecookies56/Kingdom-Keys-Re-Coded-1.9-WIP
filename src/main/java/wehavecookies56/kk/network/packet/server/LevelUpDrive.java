@@ -75,9 +75,9 @@ public class LevelUpDrive extends AbstractServerMessage<LevelUpDrive> {
 			if (hasDriveInSlot == -1) {
 				player.getCapability(KingdomKeys.DRIVE_STATE, null).getInventoryDriveForms().setInventorySlotContents(nullSlot, player.getHeldItem(EnumHand.MAIN_HAND));
 				player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
-				TextHelper.sendFormattedChatMessage("Succesfully learnt " + form + " Form!", TextFormatting.YELLOW, player);
+				TextHelper.sendFormattedChatMessage("Succesfully learnt "+form+" Form!", TextFormatting.YELLOW, player);
 			} else {
-				TextHelper.sendFormattedChatMessage("Already learnt " + form + " Form!", TextFormatting.YELLOW, player);
+				TextHelper.sendFormattedChatMessage("Already learnt "+form+" Form!", TextFormatting.YELLOW, player);
 	
 			}
 		}
