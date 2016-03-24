@@ -2,20 +2,33 @@ package wehavecookies56.kk.item.org;
 
 import java.util.List;
 
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
+import net.minecraft.item.IItemPropertyGetter;
+import net.minecraft.item.ItemShield;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import wehavecookies56.kk.lib.Strings;
 
-public class ItemFrozenPride extends ItemSword {
+public class ItemFrozenPride extends ItemShield {
 
-	public ItemFrozenPride (ToolMaterial material) {
-		super(material);
-		setMaxStackSize(1);
+	public ItemFrozenPride () {
+		this.maxStackSize = 1;
+        this.addPropertyOverride(new ResourceLocation("blocking"), new IItemPropertyGetter()
+        {
+            @SideOnly(Side.CLIENT)
+            public float apply(ItemStack stack, World worldIn, EntityLivingBase entityIn)
+            {
+                return entityIn != null && entityIn.isHandActive() && entityIn.getActiveItemStack() == stack ? 1.0F : 0.0F;
+            }
+        });
 	}
 
 	@Override
