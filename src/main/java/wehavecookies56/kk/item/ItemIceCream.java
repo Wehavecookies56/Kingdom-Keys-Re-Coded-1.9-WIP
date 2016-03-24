@@ -29,13 +29,25 @@ public class ItemIceCream extends ItemFood {
 	@Override
 	public void onFoodEaten (ItemStack item, World world, EntityPlayer player) {
 		if (!player.capabilities.isCreativeMode && world.isRemote) {
+			int slot;
 			win = EventHandler.randomWithRange(0, 20);
-			//ItemStack item = ItemStack(ModItems.WinnerStick);
-			if (win == 3)
-				PacketDispatcher.sendToServer(new GiveItemInSlot(new ItemStack(ModItems.WinnerStick), player.inventory.getFirstEmptyStack()));
-			//player.inventory.addItemStackToInventory(new ItemStack(ModItems.WinnerStick));
-			else
-				PacketDispatcher.sendToServer(new GiveItemInSlot(new ItemStack(Items.stick), player.inventory.getFirstEmptyStack()));
+			System.out.println("WinnerStick Slot: "+player.inventory.getSlotFor(new ItemStack(ModItems.WinnerStick)));
+			if (win == 3){
+				if(player.inventory.hasItemStack(new ItemStack(ModItems.WinnerStick))){
+					PacketDispatcher.sendToServer(new GiveItemInSlot(new ItemStack(ModItems.WinnerStick), player.inventory.getSlotFor(new ItemStack(ModItems.WinnerStick)),true));
+				}else{
+					PacketDispatcher.sendToServer(new GiveItemInSlot(new ItemStack(ModItems.WinnerStick), player.inventory.getFirstEmptyStack(), false));
+				}
+			}/*else{
+				if(player.inventory.hasItemStack(new ItemStack(Items.stick))){
+					slot = player.inventory.getSlotFor(new ItemStack(Items.stick));
+					System.out.println(player.inventory.getSlotFor(new ItemStack(Items.stick)));
+
+				}else{
+					slot = player.inventory.getFirstEmptyStack();
+				}
+				PacketDispatcher.sendToServer(new GiveItemInSlot(new ItemStack(Items.stick), slot));
+				}*/
 		}
 	}
 }

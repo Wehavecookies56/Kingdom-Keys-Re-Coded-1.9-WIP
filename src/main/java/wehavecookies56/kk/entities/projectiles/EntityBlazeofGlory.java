@@ -57,7 +57,6 @@ public class EntityBlazeofGlory extends EntityThrowable implements IThrowableEnt
 		
 		if (returning) {
 			this.rotationYaw = (rotation + 1) % 360;
-			ItemStack item = new ItemStack(ModItems.BlazeofGlory);
 			List entityTagetList = this.worldObj.getEntitiesWithinAABB(
 			Entity.class, this.getEntityBoundingBox().expand(1.0D, 1.0D, 1.0D));
 			for (int i = 0; i < entityTagetList.size(); i++) {
@@ -65,10 +64,6 @@ public class EntityBlazeofGlory extends EntityThrowable implements IThrowableEnt
 				if (entityTarget != null && entityTarget instanceof EntityPlayer) {
 					EntityPlayer owner = (EntityPlayer) entityTarget;
 					if (owner == this.getThrower()) {
-						if (item != null) {
-							int slot = owner.inventory.getFirstEmptyStack();
-							PacketDispatcher.sendToServer(new GiveItemInSlot(item, slot, this.posX, this.posY, this.posZ, false));
-						}
 						this.setDead();
 					}
 				}
