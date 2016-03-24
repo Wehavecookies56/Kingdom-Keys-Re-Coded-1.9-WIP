@@ -72,7 +72,6 @@ public class CommandDriveLevel implements ICommand {
 
 	@Override
 	public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
-		System.out.println(args[0]+", "+args[1]);
 		if(sender.getCommandSenderEntity().worldObj.isRemote)
 		{
 			switch(args[0])

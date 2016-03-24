@@ -14,6 +14,9 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import wehavecookies56.kk.KingdomKeys;
+import wehavecookies56.kk.network.packet.PacketDispatcher;
+import wehavecookies56.kk.network.packet.client.SyncCheatModeData;
+import wehavecookies56.kk.network.packet.client.SyncMagicData;
 import wehavecookies56.kk.util.TextHelper;
 
 public class CommandCheatMode implements ICommand {
@@ -80,8 +83,10 @@ public class CommandCheatMode implements ICommand {
 				entityplayermp.getCapability(KingdomKeys.CHEAT_MODE, null).setCheatMode(true);
 				TextHelper.sendFormattedChatMessage(args[1] + " is now in Cheat Mode", TextFormatting.GREEN, (EntityPlayer) sender.getCommandSenderEntity());
 			}
-		} else
+		} else{
 			TextHelper.sendFormattedChatMessage("Invalid arguments, usage: " + getCommandUsage(sender), TextFormatting.GREEN, (EntityPlayer) sender.getCommandSenderEntity());
+		}
+		PacketDispatcher.sendTo(new SyncCheatModeData(sender.getCommandSenderEntity().getCapability(KingdomKeys.CHEAT_MODE, null), sender.getCommandSenderEntity().getCapability(KingdomKeys.PLAYER_STATS, null)), (EntityPlayerMP) sender.getCommandSenderEntity());
 	}
 	
 	@Override

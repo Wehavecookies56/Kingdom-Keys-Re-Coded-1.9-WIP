@@ -215,7 +215,8 @@ public class InputHandler {
 			case GuiCommandMenu.DRIVE:
 				if (GuiCommandMenu.submenu == GuiCommandMenu.SUB_MAIN) {
 					if (DS.getInDrive()) {// Revert
-						if (DS.getActiveDriveName().equals(Strings.Form_Anti) && player.getCapability(KingdomKeys.CHEAT_MODE, null).getCheatMode() == false) {
+						System.out.println(player.getCapability(KingdomKeys.CHEAT_MODE, null).getCheatMode());
+						if (DS.getActiveDriveName().equals(Strings.Form_Anti) && !player.getCapability(KingdomKeys.CHEAT_MODE, null).getCheatMode()) {
 							GuiCommandMenu.selected = GuiCommandMenu.ATTACK;
 							//TODO world.playSound(player.posX, player.posY, player.posZ, SoundHelper.Error, 2f, 1f, false);
 						} else {

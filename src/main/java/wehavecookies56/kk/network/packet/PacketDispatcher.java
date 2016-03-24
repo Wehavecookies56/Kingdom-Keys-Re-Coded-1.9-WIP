@@ -17,6 +17,7 @@ import wehavecookies56.kk.network.packet.client.SpawnFireParticles;
 import wehavecookies56.kk.network.packet.client.SpawnStopParticles;
 import wehavecookies56.kk.network.packet.client.SpawnThunderEntity;
 import wehavecookies56.kk.network.packet.client.SpawnThunderParticles;
+import wehavecookies56.kk.network.packet.client.SyncCheatModeData;
 import wehavecookies56.kk.network.packet.client.SyncDriveData;
 import wehavecookies56.kk.network.packet.client.SyncDriveInventory;
 import wehavecookies56.kk.network.packet.client.SyncItemsInventory;
@@ -87,6 +88,7 @@ public class PacketDispatcher {
 		registerMessage(SyncItemsInventory.class);
 		registerMessage(SyncDriveInventory.class);
 		registerMessage(SyncKeybladeData.class);
+		registerMessage(SyncCheatModeData.class);
 
 		// Client to Server
 		registerMessage(MunnyPickup.class);

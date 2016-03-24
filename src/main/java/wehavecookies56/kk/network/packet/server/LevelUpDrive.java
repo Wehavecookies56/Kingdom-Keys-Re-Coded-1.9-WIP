@@ -57,7 +57,7 @@ public class LevelUpDrive extends AbstractServerMessage<LevelUpDrive> {
 		if(isLevelUp)
 		{//TODO
 			player.getCapability(KingdomKeys.DRIVE_STATE, null).setDriveLevel(form, levels);
-			System.out.println(form+" level: "+(player.getCapability(KingdomKeys.DRIVE_STATE, null).getDriveLevel(form)));
+			//System.out.println(form+" level: "+(player.getCapability(KingdomKeys.DRIVE_STATE, null).getDriveLevel(form)));
 		}
 		else
 		{

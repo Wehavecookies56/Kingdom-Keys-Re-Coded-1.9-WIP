@@ -72,7 +72,6 @@ public class GuiDrive extends GuiScreen {
 		double dp = STATS.getDP();
 
 		currDrive = (float) ((oneValue * dp) - getCurrBar(dp) * guiLength);
-		//System.out.println(dp);
 		if (dp == 100 || dp == 200 || dp == 300 || dp == 400 || dp == 500 || dp == 600 || dp == 700 || dp == 800 || dp == 900) currDrive = 0;
 
 		if (event.type == RenderGameOverlayEvent.ElementType.TEXT) {
