@@ -13,7 +13,7 @@ public class GiveItemInSlot extends AbstractMessage<GiveItemInSlot> {
 	ItemStack itemstack;
 	int slot;
 	double x,y,z;
-	boolean alreadyHasItem;
+	boolean alreadyHasItem = false;
 	public GiveItemInSlot () {}
 	
 	public GiveItemInSlot (ItemStack itemstack, int slot, boolean alreadyHasItem) 

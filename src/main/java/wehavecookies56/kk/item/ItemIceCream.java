@@ -32,22 +32,20 @@ public class ItemIceCream extends ItemFood {
 			int slot;
 			win = EventHandler.randomWithRange(0, 20);
 			System.out.println("WinnerStick Slot: "+player.inventory.getSlotFor(new ItemStack(ModItems.WinnerStick)));
-			if (win == 3){
+			if (win == 6){
 				if(player.inventory.hasItemStack(new ItemStack(ModItems.WinnerStick))){
 					PacketDispatcher.sendToServer(new GiveItemInSlot(new ItemStack(ModItems.WinnerStick), player.inventory.getSlotFor(new ItemStack(ModItems.WinnerStick)),true));
 				}else{
 					PacketDispatcher.sendToServer(new GiveItemInSlot(new ItemStack(ModItems.WinnerStick), player.inventory.getFirstEmptyStack(), false));
 				}
-			}/*else{
-				if(player.inventory.hasItemStack(new ItemStack(Items.stick))){
-					slot = player.inventory.getSlotFor(new ItemStack(Items.stick));
-					System.out.println(player.inventory.getSlotFor(new ItemStack(Items.stick)));
-
+			}else{
+				if(player.inventory.hasItemStack(new ItemStack(Items.stick)))
+				{
+					PacketDispatcher.sendToServer(new GiveItemInSlot(new ItemStack(Items.stick), player.inventory.getSlotFor(new ItemStack(ModItems.WinnerStick)),true));
 				}else{
-					slot = player.inventory.getFirstEmptyStack();
-				}
-				PacketDispatcher.sendToServer(new GiveItemInSlot(new ItemStack(Items.stick), slot));
-				}*/
+					PacketDispatcher.sendToServer(new GiveItemInSlot(new ItemStack(Items.stick), player.inventory.getFirstEmptyStack(), false));
+				}	
+			}
 		}
 	}
 }

@@ -95,7 +95,7 @@ public abstract class ItemKKPotion extends ItemFood {
 		 * ExtendedPlayer.get(player).addMp(ExtendedPlayer.get(player).getMaxMp(
 		 * )); player.heal(player.getMaxHealth()); }
 		 */
-		if (!player.capabilities.isCreativeMode) PacketDispatcher.sendToServer(new GiveItemInSlot(new ItemStack(ModItems.EmptyBottle), player.inventory.getFirstEmptyStack()));
+		if (!player.capabilities.isCreativeMode) PacketDispatcher.sendToServer(new GiveItemInSlot(new ItemStack(ModItems.EmptyBottle), player.inventory.getFirstEmptyStack(),false));
 	}
 
 	/**
