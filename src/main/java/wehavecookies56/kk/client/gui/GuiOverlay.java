@@ -33,10 +33,10 @@ public class GuiOverlay extends GuiScreen {
 	@SubscribeEvent
 	@SideOnly (Side.CLIENT)
 	public void RenderGameOverlayEvent (RenderGameOverlayEvent event) {
-		if (event.type == ElementType.TEXT) {
+		if (event.getType() == ElementType.TEXT) {
 			Minecraft mc = Minecraft.getMinecraft();
-			int screenWidth = event.resolution.getScaledWidth();
-			int screenHeight = event.resolution.getScaledHeight();
+			int screenWidth = event.getResolution().getScaledWidth();
+			int screenHeight = event.getResolution().getScaledHeight();
 			IPlayerStats STATS = mc.thePlayer.getCapability(KingdomKeys.PLAYER_STATS, null);
 			String reqExp = "" + (Arrays.stream(PlayerLevel.expNeeded, 0, STATS.getLevel()).sum() - STATS.getExperience());
 			if (showExp) {
@@ -67,7 +67,7 @@ public class GuiOverlay extends GuiScreen {
 					GL11.glPushMatrix();
 					{
 						mc.renderEngine.bindTexture(texture);
-						int width = event.resolution.getScaledWidth();
+						int width = event.getResolution().getScaledWidth();
 						GL11.glPushMatrix();
 						{
 							GL11.glTranslatef((width - 153.6f - 2), 0, 0);
@@ -113,7 +113,7 @@ public class GuiOverlay extends GuiScreen {
 					GL11.glPushMatrix();
 					{
 						mc.renderEngine.bindTexture(texture);
-						int width = event.resolution.getScaledWidth();
+						int width = event.getResolution().getScaledWidth();
 						GL11.glTranslatef((width - 256.0f * 0.6f - 2), 36.0f * 0.6f, 0);
 						GL11.glScalef(0.6f, height, 1);
 						drawTexturedModalRect(0, 0, 0, 36, 256, 1);
@@ -123,7 +123,7 @@ public class GuiOverlay extends GuiScreen {
 					GL11.glPushMatrix();
 					{
 						mc.renderEngine.bindTexture(texture);
-						int width = event.resolution.getScaledWidth();
+						int width = event.getResolution().getScaledWidth();
 						GL11.glTranslatef((width - 256.0f * 0.6f - 2), height + (36.0f * 0.6f), 0);
 						GL11.glScalef(0.6f, 0.6f, 1);
 						drawTexturedModalRect(0, 0, 0, 37, 256, 14);
@@ -138,7 +138,7 @@ public class GuiOverlay extends GuiScreen {
 					for (int i = 0; i < PlayerLevel.messages.size(); i++) {
 						GL11.glPushMatrix();
 						{
-							int width = event.resolution.getScaledWidth();
+							int width = event.getResolution().getScaledWidth();
 
 							if (PlayerLevel.messages.get(i).toString().equals("str"))
 								message = strMessage;

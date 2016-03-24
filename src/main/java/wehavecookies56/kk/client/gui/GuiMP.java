@@ -22,15 +22,15 @@ public class GuiMP extends GuiScreen {
 
 	@SubscribeEvent
 	public void onRenderOverlayPost (RenderGameOverlayEvent event) {
-		if (event.type == RenderGameOverlayEvent.ElementType.TEXT) {
+		if (event.getType() == RenderGameOverlayEvent.ElementType.TEXT) {
 
 			Minecraft mc = Minecraft.getMinecraft();
 			EntityPlayer player = mc.thePlayer;
 
 			mc.renderEngine.bindTexture(new ResourceLocation(Reference.MODID, "textures/gui/mpbar.png"));
 
-			int screenWidth = event.resolution.getScaledWidth();
-			int screenHeight = event.resolution.getScaledHeight();
+			int screenWidth = event.getResolution().getScaledWidth();
+			int screenHeight = event.getResolution().getScaledHeight();
 
 			IPlayerStats STATS = player.getCapability(KingdomKeys.PLAYER_STATS, null);
 			float oneMP = (noborderguiwidth / (float) STATS.getMaxMP());

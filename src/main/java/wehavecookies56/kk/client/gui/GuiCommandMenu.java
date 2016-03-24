@@ -63,13 +63,13 @@ public class GuiCommandMenu extends GuiScreen {
 	
 	@SubscribeEvent (priority = EventPriority.NORMAL)
 	public void onRenderOverlayPost (RenderGameOverlayEvent event) {
-		if (event.type == RenderGameOverlayEvent.ElementType.TEXT && !mc.ingameGUI.getChatGUI().getChatOpen()) {
+		if (event.getType() == RenderGameOverlayEvent.ElementType.TEXT && !mc.ingameGUI.getChatGUI().getChatOpen()) {
 			GL11.glPushMatrix();
 			{
 				// drawTexturedModalRect(0, mc.displayHeight/2 - MENU_HEIGHT,
 				// TOP_WIDTH, 0, TOP_WIDTH + MENU_WIDTH, MENU_HEIGHT);
 				//System.out.println(Minecraft.getMinecraft().thePlayer.getCapability(KingdomKeys.DRIVE_STATE, null).getDriveLevel(Strings.Form_Valor));
-				drawCommandMenu(event.resolution.getScaledWidth(), event.resolution.getScaledHeight());
+				drawCommandMenu(event.getResolution().getScaledWidth(), event.getResolution().getScaledHeight());
 			}
 			GL11.glPopMatrix();
 		}

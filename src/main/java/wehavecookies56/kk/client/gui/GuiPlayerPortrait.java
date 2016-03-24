@@ -19,9 +19,9 @@ public class GuiPlayerPortrait extends GuiScreen {
 	@SubscribeEvent
 	public void onRenderOverlayPost (RenderGameOverlayEvent event) {
 		Minecraft mc = Minecraft.getMinecraft();
-		int screenWidth = event.resolution.getScaledWidth();
-		int screenHeight = event.resolution.getScaledHeight();
-		if (event.type == RenderGameOverlayEvent.ElementType.TEXT) {
+		int screenWidth = event.getResolution().getScaledWidth();
+		int screenHeight = event.getResolution().getScaledHeight();
+		if (event.getType() == RenderGameOverlayEvent.ElementType.TEXT) {
 			GL11.glColor3f(1, 1, 1);
 			ResourceLocation skin = ((AbstractClientPlayer) mc.thePlayer).getLocationSkin();
 			mc.getTextureManager().bindTexture(skin);

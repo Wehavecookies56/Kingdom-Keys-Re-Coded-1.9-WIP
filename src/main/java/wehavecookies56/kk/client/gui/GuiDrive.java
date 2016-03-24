@@ -74,12 +74,12 @@ public class GuiDrive extends GuiScreen {
 		currDrive = (float) ((oneValue * dp) - getCurrBar(dp) * guiLength);
 		if (dp == 100 || dp == 200 || dp == 300 || dp == 400 || dp == 500 || dp == 600 || dp == 700 || dp == 800 || dp == 900) currDrive = 0;
 
-		if (event.type == RenderGameOverlayEvent.ElementType.TEXT) {
+		if (event.getType() == RenderGameOverlayEvent.ElementType.TEXT) {
 			int guiWidth = 95;
 			int guiBarWidth = 83;
 			int guiHeight = 18;
-			int screenWidth = event.resolution.getScaledWidth();
-			int screenHeight = event.resolution.getScaledHeight();
+			int screenWidth = event.getResolution().getScaledWidth();
+			int screenHeight = event.getResolution().getScaledHeight();
 			EntityPlayer player = mc.thePlayer;
 
 			mc.renderEngine.bindTexture(texture);

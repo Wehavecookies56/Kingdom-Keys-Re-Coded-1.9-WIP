@@ -118,16 +118,16 @@ public class GuiHP extends GuiScreen {
 
 	@SubscribeEvent
 	public void onRenderOverlayPost (RenderGameOverlayEvent event) {
-		if (event.type.equals(ElementType.HEALTH) && event.isCancelable()) if (!Config.EnableHeartsOnHUD) event.setCanceled(true);
-		if (event.type == RenderGameOverlayEvent.ElementType.TEXT) {
+		if (event.getType().equals(ElementType.HEALTH) && event.isCancelable()) if (!Config.EnableHeartsOnHUD) event.setCanceled(true);
+		if (event.getType() == RenderGameOverlayEvent.ElementType.TEXT) {
 
 			Minecraft mc = Minecraft.getMinecraft();
 			EntityPlayer player = mc.thePlayer;
 
 			mc.renderEngine.bindTexture(new ResourceLocation(Reference.MODID, "textures/gui/hpbar.png"));
 
-			int screenWidth = event.resolution.getScaledWidth();
-			int screenHeight = event.resolution.getScaledHeight();
+			int screenWidth = event.getResolution().getScaledWidth();
+			int screenHeight = event.getResolution().getScaledHeight();
 
 			float oneHeart = (noborderguiwidth / player.getMaxHealth());
 			int currHealth = noborderguiwidth - (int) (oneHeart * player.getHealth());

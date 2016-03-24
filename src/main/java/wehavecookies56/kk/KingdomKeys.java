@@ -147,7 +147,7 @@ public class KingdomKeys {
 	// Sync config when changed
 	@SubscribeEvent
 	public void OnConfigChanged (ConfigChangedEvent.OnConfigChangedEvent event) {
-		if (event.modID.equals(Reference.MODID)) Config.syncConfig();
+		if (event.getModID().equals(Reference.MODID)) Config.syncConfig();
 	}
 
 	@EventHandler
