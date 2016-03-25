@@ -3,8 +3,10 @@ package wehavecookies56.kk.driveforms;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
 import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.api.driveforms.DriveForm;
+import wehavecookies56.kk.client.audio.ModSounds;
 import wehavecookies56.kk.lib.Reference;
 import wehavecookies56.kk.lib.Strings;
 import wehavecookies56.kk.network.packet.PacketDispatcher;
@@ -41,7 +43,7 @@ public class DriveFormLimit extends DriveForm {
 		player.getCapability(KingdomKeys.DRIVE_STATE, null).setInDrive(true);
 		PacketDispatcher.sendTo(new SyncDriveData(player.getCapability(KingdomKeys.DRIVE_STATE, null), player.getCapability(KingdomKeys.PLAYER_STATS, null)), (EntityPlayerMP) player);
 		PacketDispatcher.sendToAllAround(new SpawnDriveFormParticles(player), player, 64.0D);
-		SoundHelper.playSoundAtEntity(player.worldObj, player, SoundHelper.Drive, 0.5f, 1);
+		player.worldObj.playSound((EntityPlayer)null, player.getPosition(), ModSounds.drive, SoundCategory.MASTER, 1.0f, 1.0f);
 	}
 
 	@Override

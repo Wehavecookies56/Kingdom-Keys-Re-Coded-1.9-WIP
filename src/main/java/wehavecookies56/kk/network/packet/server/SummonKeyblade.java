@@ -6,8 +6,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.SoundCategory;
 import net.minecraftforge.fml.relauncher.Side;
 import wehavecookies56.kk.KingdomKeys;
+import wehavecookies56.kk.client.audio.ModSounds;
 import wehavecookies56.kk.item.ItemKeyblade;
 import wehavecookies56.kk.network.packet.AbstractMessage.AbstractServerMessage;
 import wehavecookies56.kk.network.packet.PacketDispatcher;
@@ -37,7 +39,7 @@ public class SummonKeyblade extends AbstractServerMessage<SummonKeyblade> {
 	@Override
 	public void process (EntityPlayer player, Side side) {
 		player.inventory.setInventorySlotContents(player.inventory.currentItem, stack);
-		SoundHelper.playSoundAtEntity(player.worldObj, player, SoundHelper.Summon, 0.5f, 1);
+		player.worldObj.playSound((EntityPlayer)null, player.getPosition(), ModSounds.summon, SoundCategory.MASTER, 1.0f, 1.0f);
 		player.getCapability(KingdomKeys.SUMMON_KEYBLADE, null).setIsKeybladeSummoned(true);
 		PacketDispatcher.sendTo(new SyncKeybladeData(player.getCapability(KingdomKeys.SUMMON_KEYBLADE, null)), (EntityPlayerMP) player);
 	}

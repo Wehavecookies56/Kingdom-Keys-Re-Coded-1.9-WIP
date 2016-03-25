@@ -5,8 +5,10 @@ import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 import wehavecookies56.kk.KingdomKeys;
+import wehavecookies56.kk.client.audio.ModSounds;
 import wehavecookies56.kk.inventory.InventoryPotionsMenu;
 import wehavecookies56.kk.lib.Strings;
 import wehavecookies56.kk.network.packet.PacketDispatcher;
@@ -46,21 +48,21 @@ public abstract class ItemKKPotion extends ItemFood {
 		switch (item) {
 			case "potion":
 				((ItemKKPotion) ModItems.Potion).getPotionEffect(player);
-				//Minecraft.getMinecraft().theWorld.playSound(Minecraft.getMinecraft().thePlayer.posX, Minecraft.getMinecraft().thePlayer.posY, Minecraft.getMinecraft().thePlayer.posZ, SoundHelper.Potion, 1f, 1f, false);
+				player.worldObj.playSound((EntityPlayer)null, player.getPosition(), ModSounds.potion, SoundCategory.MASTER, 1.0f, 1.0f);
 				player.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryPotionsMenu().setInventorySlotContents(slot, null);
 				PacketDispatcher.sendToServer(new PotionConsume("potion"));
 				PacketDispatcher.sendToServer(new RemoveItemInSlot("potion", slot, true));
 				break;
 			case "ether":
 				((ItemKKPotion) ModItems.Ether).getPotionEffect(player);
-				//Minecraft.getMinecraft().theWorld.playSound(Minecraft.getMinecraft().thePlayer.posX, Minecraft.getMinecraft().thePlayer.posY, Minecraft.getMinecraft().thePlayer.posZ, SoundHelper.Potion, 1f, 1f, false);
+				player.worldObj.playSound((EntityPlayer)null, player.getPosition(), ModSounds.potion, SoundCategory.MASTER, 1.0f, 1.0f);
 				player.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryPotionsMenu().setInventorySlotContents(slot, null);
 				PacketDispatcher.sendToServer(new PotionConsume("ether"));
 				PacketDispatcher.sendToServer(new RemoveItemInSlot("potion", slot, true));
 				break;
 			case "elixir":
 				((ItemKKPotion) ModItems.Elixir).getPotionEffect(player);
-				//Minecraft.getMinecraft().theWorld.playSound(Minecraft.getMinecraft().thePlayer.posX, Minecraft.getMinecraft().thePlayer.posY, Minecraft.getMinecraft().thePlayer.posZ, SoundHelper.Potion, 1f, 1f, false);
+				player.worldObj.playSound((EntityPlayer)null, player.getPosition(), ModSounds.potion, SoundCategory.MASTER, 1.0f, 1.0f);
 				player.getCapability(KingdomKeys.PLAYER_STATS, null).getInventoryPotionsMenu().setInventorySlotContents(slot, null);	
 				PacketDispatcher.sendToServer(new PotionConsume("elixir"));
 				PacketDispatcher.sendToServer(new RemoveItemInSlot("potion", slot, true));
@@ -112,7 +114,7 @@ public abstract class ItemKKPotion extends ItemFood {
 	public void usePotion (EntityPlayer player, InventoryPotionsMenu inventory, int slot) {
 		if (inventory.getStackInSlot(slot) != null) if (inventory.getStackInSlot(slot).getItem() instanceof ItemKKPotion) {
 			inventory.setInventorySlotContents(slot, null);
-			//Minecraft.getMinecraft().theWorld.playSound(Minecraft.getMinecraft().thePlayer.posX, Minecraft.getMinecraft().thePlayer.posY, Minecraft.getMinecraft().thePlayer.posZ, SoundHelper.Potion, 1f, 1f, false);
+			player.worldObj.playSound((EntityPlayer)null, player.getPosition(), ModSounds.potion, SoundCategory.MASTER, 1.0f, 1.0f);
 			PacketDispatcher.sendToServer(new RemoveItemInSlot("potion", slot, true));
 		}
 	}
