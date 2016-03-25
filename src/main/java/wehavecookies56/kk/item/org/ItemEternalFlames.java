@@ -50,8 +50,9 @@ public class ItemEternalFlames extends ItemSword {
 	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStack, World world, EntityPlayer player, EnumHand hand) {
 		if (!player.isSneaking()) {
 			world.playSound(player.posX, player.posY, player.posZ, SoundEvents.entity_ghast_shoot, SoundCategory.PLAYERS, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F), false);
-			System.out.println("Spawn");
-			world.spawnEntityInWorld(new EntityEternalFlames(world, player));
+			EntityEternalFlames entity = new EntityEternalFlames(world, player);
+			world.spawnEntityInWorld(entity);
+			entity.func_184538_a(player, player.rotationPitch, player.rotationYaw, 0, 1f, 1);
 			player.swingArm(EnumHand.MAIN_HAND);
 		}
 		return ActionResult.newResult(EnumActionResult.SUCCESS, itemStack);

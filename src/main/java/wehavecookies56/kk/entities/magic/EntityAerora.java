@@ -57,7 +57,6 @@ public class EntityAerora extends Entity {
 		double distance = 3.0D;
 		AxisAlignedBB aabb = player.getEntityBoundingBox().expand(3, 3, 3);
 		List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(player, aabb);
-		// TODO CHECK FOR ENTITIES AND DAMAGE THEM
 		if (!list.isEmpty()) for (int i = 0; i < list.size(); i++) {
 			Entity e = (Entity) list.get(i);
 			if (e instanceof EntityLivingBase) {

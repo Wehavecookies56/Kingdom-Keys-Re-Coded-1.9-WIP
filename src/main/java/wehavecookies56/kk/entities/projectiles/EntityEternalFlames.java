@@ -37,16 +37,20 @@ public class EntityEternalFlames extends EntityThrowable implements IThrowableEn
 	protected float getGravityVelocity () {
 		return 0.0F;
 	}
+	
+	@Override
+	public void func_184538_a(Entity p_184538_1_, float p_184538_2_, float p_184538_3_, float p_184538_4_, float p_184538_5_, float p_184538_6_) {
+		super.func_184538_a(p_184538_1_, p_184538_2_, p_184538_3_, p_184538_4_, p_184538_5_, p_184538_6_);
+	}
 		
 	boolean returning = false;
 
 	@Override
 	public void onUpdate () 
 	{
-		super.onUpdate();
 		int rotation = 0;
 		//this.worldObj.spawnParticle(EnumParticleTypes.FLAME, this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
-		//KingdomKeys.proxy.spawnTestParticle(worldObj, posX + worldObj.rand.nextDouble() * width * 2.0F - width, posY + worldObj.rand.nextDouble() * height, posZ + worldObj.rand.nextDouble() * width * 2.0F - width, worldObj.rand.nextGaussian() * 0.02D, worldObj.rand.nextGaussian() * 0.02D, worldObj.rand.nextGaussian() * 0.02D);
+		KingdomKeys.proxy.spawnTestParticle(worldObj, posX + worldObj.rand.nextDouble() * width * 2.0F - width, posY + worldObj.rand.nextDouble() * height, posZ + worldObj.rand.nextDouble() * width * 2.0F - width, worldObj.rand.nextGaussian() * 0.02D, worldObj.rand.nextGaussian() * 0.02D, worldObj.rand.nextGaussian() * 0.02D);
 		this.rotationYaw = (rotation + 1) % 360;
 				
 		if (ticksExisted > 15) {
@@ -71,6 +75,7 @@ public class EntityEternalFlames extends EntityThrowable implements IThrowableEn
 				}
 			}
 		}		
+		super.onUpdate();
 	}
 
 	@Override

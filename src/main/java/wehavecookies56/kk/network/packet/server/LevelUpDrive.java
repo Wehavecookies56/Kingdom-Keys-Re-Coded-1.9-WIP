@@ -56,7 +56,7 @@ public class LevelUpDrive extends AbstractServerMessage<LevelUpDrive> {
 				
 		PacketDispatcher.sendTo(new SyncDriveData(player.getCapability(KingdomKeys.DRIVE_STATE, null), player.getCapability(KingdomKeys.PLAYER_STATS, null)), (EntityPlayerMP) player);
 		if(isLevelUp)
-		{//TODO
+		{
 			player.getCapability(KingdomKeys.DRIVE_STATE, null).setDriveLevel(form, levels);
 			//System.out.println(form+" level: "+(player.getCapability(KingdomKeys.DRIVE_STATE, null).getDriveLevel(form)));
 		}

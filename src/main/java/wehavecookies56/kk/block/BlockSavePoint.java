@@ -11,6 +11,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
@@ -18,6 +19,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import wehavecookies56.kk.KingdomKeys;
+import wehavecookies56.kk.client.audio.ModSounds;
 import wehavecookies56.kk.network.packet.PacketDispatcher;
 import wehavecookies56.kk.network.packet.client.SpawnCureParticles;
 import wehavecookies56.kk.util.TextHelper;
@@ -61,7 +63,7 @@ public class BlockSavePoint extends Block {
 					player.setSpawnChunk(pos, true, 0);
 					player.setSpawnPoint(pos, true);
 					TextHelper.sendFormattedChatMessage("Spawn point saved!", TextFormatting.GREEN, player);
-					//world.playSoundAtEntity(player, SoundHelper.SaveSpawn, 1, 1);
+					world.playSound(player, player.getPosition(), ModSounds.savespawn, SoundCategory.BLOCKS, 1.0f, 1.0f);
 				}
 					
 				if(!(player.getHealth() == player.getMaxHealth()))
@@ -69,7 +71,7 @@ public class BlockSavePoint extends Block {
 					player.heal(4);
 					player.getCapability(KingdomKeys.PLAYER_STATS, null).setMP(100);
 					if (player.getFoodStats().getFoodLevel() < 20) player.getFoodStats().addStats(4, 0);
-					//world.playSoundAtEntity(player, SoundHelper.SavePoint, 1, 1);
+					world.playSound(player, player.getPosition(), ModSounds.savepoint, SoundCategory.BLOCKS, 1.0f, 1.0f);
 					PacketDispatcher.sendToAllAround(new SpawnCureParticles(pos, true), player, 64.0D);
 				}
 			}
@@ -90,7 +92,7 @@ public class BlockSavePoint extends Block {
 	
 	@Override
 	public AxisAlignedBB getCollisionBoundingBox(IBlockState state, World world, BlockPos pos) {
-		return new AxisAlignedBB(pos.add(0, 0, 0), pos.add(1, 0.1, 1));
+		return new AxisAlignedBB(new BlockPos(0, 0, 0), new BlockPos(1, 0.1, 1));
 	}
 
 	@Override

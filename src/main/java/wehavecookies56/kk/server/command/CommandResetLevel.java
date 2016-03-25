@@ -110,7 +110,6 @@ public class CommandResetLevel implements ICommand {
 	@Override
 	public List<String> getTabCompletionOptions(MinecraftServer server, ICommandSender sender, String[] args,
 			net.minecraft.util.math.BlockPos pos) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	

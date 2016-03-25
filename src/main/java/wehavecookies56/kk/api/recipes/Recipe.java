@@ -15,8 +15,6 @@ public abstract class Recipe {
 	public abstract Map<Material, Integer> getRequirements ();
 
 	public boolean useRecipe (EntityPlayer player) {
-		// TODO Remove Required Materials from Synthesis Table
-
 		return true;
 	}
 }

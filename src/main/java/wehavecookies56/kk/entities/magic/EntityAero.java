@@ -57,7 +57,7 @@ public class EntityAero extends Entity {
 		double distance = 3.0D;
 		AxisAlignedBB aabb = player.getEntityBoundingBox().expand(2, 2, 2);
 		List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(player, aabb);
-		// TODO CHECK FOR ENTITIES AND DAMAGE THEM
+
 		if (!list.isEmpty()) for (int i = 0; i < list.size(); i++) {
 			Entity e = (Entity) list.get(i);
 			if (e instanceof EntityLivingBase) {

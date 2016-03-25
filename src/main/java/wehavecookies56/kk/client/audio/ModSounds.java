@@ -13,6 +13,19 @@ public class ModSounds {
 
 	public static final SoundEvent 
 	kupo,
+	summon,
+	alarm,
+	unsummon,
+	sharpshooterbullet,
+	error,
+	select,
+	cancel,
+	move,
+	drive,
+	antidrive,
+	potion,
+	savepoint,
+	savespawn,
 	Birth_by_Sleep_A_Link_to_the_Future,
 	Darkness_of_the_Unknown,
 	Dearly_Beloved_Symphony_Version,
@@ -26,12 +39,12 @@ public class ModSounds {
 	Simple_And_Clean_PLANITb_Remix,
 	Sinister_Sundown,
 	The_13th_Anthology
-	//TODO The rest of the sounds, records and music
+	//TODO music
 	;
 	
 	private static SoundEvent getRegisteredSoundEvent(String id)
     {
-		Field soundEventId = ReflectionHelper.findField(SoundEvent.class, "soundEventId");
+		Field soundEventId = ReflectionHelper.findField(SoundEvent.class, "soundEventId", "field_187507_c");
 		try {
 			SoundEvent.soundEventRegistry.register((int) soundEventId.get(new SoundEvent(new ResourceLocation(Reference.MODID, id))), new ResourceLocation(Reference.MODID, id), new SoundEvent(new ResourceLocation(Reference.MODID, id)));
 		} catch (IllegalArgumentException | IllegalAccessException e) {
@@ -58,6 +71,19 @@ public class ModSounds {
         else
         {
             kupo = getRegisteredSoundEvent("kupo");
+            summon = getRegisteredSoundEvent("summon");
+            alarm = getRegisteredSoundEvent("alarm");
+            unsummon = getRegisteredSoundEvent("unsummon");
+            sharpshooterbullet = getRegisteredSoundEvent("sharpshooterbullet");
+            error = getRegisteredSoundEvent("error");
+            select = getRegisteredSoundEvent("select");
+            cancel = getRegisteredSoundEvent("cancel");
+            move = getRegisteredSoundEvent("move");
+            drive = getRegisteredSoundEvent("drive");
+            antidrive = getRegisteredSoundEvent("antidrive");
+            potion = getRegisteredSoundEvent("potion");
+            savepoint = getRegisteredSoundEvent("savepoint");
+            savespawn = getRegisteredSoundEvent("savespawn");
             Birth_by_Sleep_A_Link_to_the_Future = getRegisteredSoundEvent("records.Birth by Sleep -A Link to the Future-");
             Darkness_of_the_Unknown = getRegisteredSoundEvent("records.Darkness of the Unknown");
             Dearly_Beloved_Symphony_Version = getRegisteredSoundEvent("records.Dearly Beloved -Symphony Version-");

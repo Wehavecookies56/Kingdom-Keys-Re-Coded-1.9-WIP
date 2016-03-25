@@ -61,6 +61,11 @@ public class EntityParticleFXTest extends EntityFX {
 	}
 	
 	@Override
+	public int getBrightnessForRender(float p_189214_1_) {
+		return 100;
+	}
+	
+	@Override
 	public int getFXLayer () {
 		return 3;
 	}

@@ -41,6 +41,7 @@ import wehavecookies56.kk.entities.TileEntitySynthesisTable;
 import wehavecookies56.kk.entities.block.EntityBlastBlox;
 import wehavecookies56.kk.entities.magic.EntityFire;
 import wehavecookies56.kk.entities.magic.EntityThunder;
+import wehavecookies56.kk.entities.projectiles.EntityEternalFlames;
 import wehavecookies56.kk.item.ModItems;
 import wehavecookies56.kk.item.ModItemsRecipes;
 import wehavecookies56.kk.lib.Config;
@@ -189,9 +190,10 @@ public class KingdomKeys {
 		// Proxy used as Gui handler
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
 
-		EntityRegistry.registerModEntity(EntityBlastBlox.class, "blastblox", 0, instance, 16, 1, false);
-		EntityRegistry.registerModEntity(EntityFire.class, "fire", 1, instance, 16, 1, false);
-		EntityRegistry.registerModEntity(EntityThunder.class, "thunder", 2, instance, 16, 1, false);
+		EntityRegistry.registerModEntity(EntityEternalFlames.class, "eternalflames", 1000, instance, 64, 10, true);
+		EntityRegistry.registerModEntity(EntityBlastBlox.class, "blastblox", 1001, instance, 16, 1, false);
+		EntityRegistry.registerModEntity(EntityFire.class, "fire", 1002, instance, 16, 1, false);
+		EntityRegistry.registerModEntity(EntityThunder.class, "thunder", 1003, instance, 16, 1, false);
 
 		Lists.init();
 
