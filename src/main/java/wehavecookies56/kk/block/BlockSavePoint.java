@@ -63,7 +63,7 @@ public class BlockSavePoint extends Block {
 					player.setSpawnChunk(pos, true, 0);
 					player.setSpawnPoint(pos, true);
 					TextHelper.sendFormattedChatMessage("Spawn point saved!", TextFormatting.GREEN, player);
-					world.playSound(player, player.getPosition(), ModSounds.savespawn, SoundCategory.BLOCKS, 1.0f, 1.0f);
+					world.playSound((EntityPlayer)null, player.getPosition(), ModSounds.savespawn, SoundCategory.BLOCKS, 1.0f, 1.0f);
 				}
 					
 				if(!(player.getHealth() == player.getMaxHealth()))
@@ -71,7 +71,7 @@ public class BlockSavePoint extends Block {
 					player.heal(4);
 					player.getCapability(KingdomKeys.PLAYER_STATS, null).setMP(100);
 					if (player.getFoodStats().getFoodLevel() < 20) player.getFoodStats().addStats(4, 0);
-					world.playSound(player, player.getPosition(), ModSounds.savepoint, SoundCategory.BLOCKS, 1.0f, 1.0f);
+					world.playSound((EntityPlayer)null, player.getPosition(), ModSounds.savepoint, SoundCategory.BLOCKS, 1.0f, 1.0f);
 					PacketDispatcher.sendToAllAround(new SpawnCureParticles(pos, true), player, 64.0D);
 				}
 			}
@@ -91,10 +91,15 @@ public class BlockSavePoint extends Block {
 	}
 	
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState state, World world, BlockPos pos) {
+	public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World world, BlockPos pos) {
 		return new AxisAlignedBB(new BlockPos(0, 0, 0), new BlockPos(1, 0.1, 1));
 	}
 
+	@Override
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState worldIn, World pos, BlockPos state) {
+		return new AxisAlignedBB(new BlockPos(0, 0, 0), new BlockPos(1, 0.1, 1));
+	}
+	
 	@Override
 	public boolean isOpaqueCube(IBlockState state) {
 		return false;

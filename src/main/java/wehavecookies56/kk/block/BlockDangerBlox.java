@@ -23,10 +23,13 @@ public class BlockDangerBlox extends BlockBlox {
 	
 	@Override
 	public AxisAlignedBB getCollisionBoundingBox (IBlockState worldIn, World pos, BlockPos state) {
-		float f = 0.0625F;
-		return new AxisAlignedBB(state.getX() + f, state.getY(), state.getZ() + f, state.getX() + 1 - f, state.getY() + 1 - f, state.getZ() + 1 - f);
+		return new AxisAlignedBB(0.0625D, 0.0D, 0.0625D, 0.9375D, 1.0D, 0.9375D).offset(state);
 	}
 	
+	@Override
+	public AxisAlignedBB getSelectedBoundingBox(IBlockState blockState, World worldIn, BlockPos pos) {
+		return new AxisAlignedBB(0.0625D, 0.0D, 0.0625D, 0.9375D, 0.9375D, 0.9375D);
+	}
 
 	@Override
 	public void onEntityCollidedWithBlock (World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {

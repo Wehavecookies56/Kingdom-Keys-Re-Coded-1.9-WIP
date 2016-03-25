@@ -85,10 +85,12 @@ public class BlockGhostBlox extends BlockBlox {
 	}
 	
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState worldIn, World pos, BlockPos state) {
-		if (worldIn.getValue(VISIBLE).intValue() == 0)
-			return super.getCollisionBoundingBox(worldIn, pos, state);
+	public AxisAlignedBB getSelectedBoundingBox(IBlockState worldIn, World pos, BlockPos state) {
+		if (worldIn.getValue(VISIBLE).intValue() == 0) {
+			return new AxisAlignedBB(new BlockPos(0, 0, 0), new BlockPos(1, 1, 1));
+		}
 		else
 			return new AxisAlignedBB(new BlockPos(0, 0, 0), new BlockPos(0, 0, 0));
 	}
+	
 }
