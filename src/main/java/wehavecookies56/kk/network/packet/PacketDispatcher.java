@@ -28,6 +28,7 @@ import wehavecookies56.kk.network.packet.client.SyncMaterialData;
 import wehavecookies56.kk.network.packet.client.SyncMunnyData;
 import wehavecookies56.kk.network.packet.client.SyncRecipeData;
 import wehavecookies56.kk.network.packet.server.AntiPoints;
+import wehavecookies56.kk.network.packet.server.AttackEntity;
 import wehavecookies56.kk.network.packet.server.CreateFromSynthesisRecipe;
 import wehavecookies56.kk.network.packet.server.DeSummonKeyblade;
 import wehavecookies56.kk.network.packet.server.DriveFormPacket;
@@ -122,6 +123,7 @@ public class PacketDispatcher {
 		registerMessage(RemoveItemInSlot.class);
 		registerMessage(GiveItemInSlot.class);
 		registerMessage(PotionConsume.class);
+		registerMessage(AttackEntity.class);
 		
 		registerMessage(SetKH1Fire.class);
 

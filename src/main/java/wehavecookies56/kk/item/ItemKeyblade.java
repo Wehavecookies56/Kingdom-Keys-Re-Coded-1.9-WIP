@@ -2,25 +2,60 @@ package wehavecookies56.kk.item;
 
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.BlockDoor.EnumDoorHalf;
+import net.minecraft.client.Minecraft;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.EnumAction;
+import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import wehavecookies56.kk.KingdomKeys;
 import wehavecookies56.kk.capabilities.PlayerStatsCapability.IPlayerStats;
+import wehavecookies56.kk.network.packet.PacketDispatcher;
+import wehavecookies56.kk.network.packet.server.AttackEntity;
 
 public class ItemKeyblade extends ItemSword {
 
 	public ItemKeyblade (ToolMaterial material) {
 		super(material);
 		setMaxStackSize(1);
+	}
+	
+	@Override
+	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer player, EnumHand hand) {
+		if(player.isSneaking()) {
+			
+		} else {
+			if (worldIn.isRemote){
+				RayTraceResult rtr = Minecraft.getMinecraft().objectMouseOver;
+				if (player.getHeldItem(EnumHand.OFF_HAND) != null) {
+					if(player.swingProgress <= 0)
+						player.swingArm(hand.OFF_HAND);
+					if (rtr.entityHit != null) {
+						PacketDispatcher.sendToServer(new AttackEntity(rtr.entityHit.getEntityId()));
+						return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStackIn);
+					}
+					return new ActionResult<ItemStack>(EnumActionResult.FAIL, itemStackIn);
+				}
+				
+			}
+		}
+		return super.onItemRightClick(itemStackIn, worldIn, player, hand);
 	}
 
 	@Override
@@ -49,4 +84,5 @@ public class ItemKeyblade extends ItemSword {
 		}
 		return super.onItemUse(stack, player, world, pos, hand, facing, hitX, hitY, hitZ);
 	}
+	
 }

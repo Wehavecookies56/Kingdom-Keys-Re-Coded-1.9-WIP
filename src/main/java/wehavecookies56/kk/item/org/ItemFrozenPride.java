@@ -15,12 +15,14 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import wehavecookies56.kk.item.ModItems;
 import wehavecookies56.kk.lib.Strings;
 
 public class ItemFrozenPride extends ItemShield {
 
 	public ItemFrozenPride () {
 		this.maxStackSize = 1;
+		this.setCreativeTab(ModItems.tabKingdomKeys);
         this.addPropertyOverride(new ResourceLocation("blocking"), new IItemPropertyGetter()
         {
             @SideOnly(Side.CLIENT)
