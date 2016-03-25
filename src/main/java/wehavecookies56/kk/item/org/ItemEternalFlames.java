@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumRarity;
@@ -18,32 +19,11 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import wehavecookies56.kk.entities.projectiles.EntityEternalFlames;
 
-public class ItemEternalFlames extends ItemSword {
+public class ItemEternalFlames extends ItemChakram {
+		
 	public ItemEternalFlames (ToolMaterial material) {
 		super(material);
 		setMaxStackSize(1);
-	}
-
-	@Override
-	@SideOnly (Side.CLIENT)
-	public EnumRarity getRarity (ItemStack par1ItemStack) {
-		return EnumRarity.UNCOMMON;
-	}
-
-	@Override
-	public boolean hitEntity (ItemStack item, EntityLivingBase entity, EntityLivingBase p_77644_3_) {
-		entity.setFire(5);
-		return super.hitEntity(item, entity, p_77644_3_);
-	}
-	
-	@Override
-	public void onPlayerStoppedUsing(ItemStack stack, World world, EntityLivingBase player, int timeLeft) {
-		
-	}
-	
-	@Override
-	public ItemStack onItemUseFinish(ItemStack stack, World world, EntityLivingBase player) {
-		return super.onItemUseFinish(stack, world, player);
 	}
 	
 	@Override
@@ -53,14 +33,9 @@ public class ItemEternalFlames extends ItemSword {
 			EntityEternalFlames entity = new EntityEternalFlames(world, player);
 			world.spawnEntityInWorld(entity);
 			entity.func_184538_a(player, player.rotationPitch, player.rotationYaw, 0, 1f, 1);
-			player.swingArm(EnumHand.MAIN_HAND);
+			player.swingArm(hand);
 		}
 		return ActionResult.newResult(EnumActionResult.SUCCESS, itemStack);
 	}
 
-	@Override
-	@SideOnly (Side.CLIENT)
-	public void addInformation (ItemStack itemStack, EntityPlayer player, List<String> dataList, boolean bool) {
-		dataList.add("VIII Axel");
-	}
 }

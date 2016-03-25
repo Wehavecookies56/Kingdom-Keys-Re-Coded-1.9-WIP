@@ -190,7 +190,6 @@ public class KingdomKeys {
 		// Proxy used as Gui handler
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
 
-		EntityRegistry.registerModEntity(EntityEternalFlames.class, "eternalflames", 1000, instance, 64, 10, true);
 		EntityRegistry.registerModEntity(EntityBlastBlox.class, "blastblox", 1001, instance, 16, 1, false);
 		EntityRegistry.registerModEntity(EntityFire.class, "fire", 1002, instance, 16, 1, false);
 		EntityRegistry.registerModEntity(EntityThunder.class, "thunder", 1003, instance, 16, 1, false);

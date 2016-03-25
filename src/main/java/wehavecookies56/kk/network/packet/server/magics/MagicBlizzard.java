@@ -40,15 +40,21 @@ public class MagicBlizzard extends AbstractServerMessage<MagicBlizzard> {
 		
 		switch (player.getCapability(KingdomKeys.MAGIC_STATE, null).getMagicLevel(Strings.Spell_Blizzard)) {
 			case 1:
-				world.spawnEntityInWorld(new EntityBlizzard(world, player));
+				EntityBlizzard entityBlizzard = new EntityBlizzard(world, player);
+				world.spawnEntityInWorld(entityBlizzard);
+				entityBlizzard.func_184538_a(player, player.rotationPitch, player.rotationYaw, 0, 1, 0);
 				PacketDispatcher.sendToAllAround(new SpawnBlizzardParticles(new EntityBlizzard(world), 1), player, 64.0D);
 				break;
 			case 2:
-				world.spawnEntityInWorld(new EntityBlizzara(world, player));
+				EntityBlizzara entityBlizzara = new EntityBlizzara(world, player);
+				world.spawnEntityInWorld(entityBlizzara);
+				entityBlizzara.func_184538_a(player, player.rotationPitch, player.rotationYaw, 0, 1, 0);
 				PacketDispatcher.sendToAllAround(new SpawnBlizzardParticles(new EntityBlizzara(world), 1), player, 64.0D);
 				break;
 			case 3:
-				world.spawnEntityInWorld(new EntityBlizzaga(world, player));
+				EntityBlizzaga entityBlizzaga = new EntityBlizzaga(world, player);
+				world.spawnEntityInWorld(entityBlizzaga);
+				entityBlizzaga.func_184538_a(player, player.rotationPitch, player.rotationYaw, 0, 1, 0);
 				PacketDispatcher.sendToAllAround(new SpawnBlizzardParticles(new EntityBlizzaga(world), 1), player, 64.0D);
 				break;
 		}
