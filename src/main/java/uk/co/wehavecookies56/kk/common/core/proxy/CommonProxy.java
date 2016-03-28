@@ -1,6 +1,7 @@
 package uk.co.wehavecookies56.kk.common.core.proxy;
 
 import java.io.File;
+import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,9 +22,7 @@ import uk.co.wehavecookies56.kk.api.driveforms.DriveFormRegistry;
 import uk.co.wehavecookies56.kk.api.materials.MaterialRegistry;
 import uk.co.wehavecookies56.kk.api.recipes.RecipeRegistry;
 import uk.co.wehavecookies56.kk.common.KingdomKeys;
-import uk.co.wehavecookies56.kk.common.core.handler.ConfigHandler;
-import uk.co.wehavecookies56.kk.common.core.handler.EventHandler;
-import uk.co.wehavecookies56.kk.common.core.handler.GuiHandler;
+import uk.co.wehavecookies56.kk.common.core.handler.*;
 import uk.co.wehavecookies56.kk.common.achievement.ModAchievements;
 import uk.co.wehavecookies56.kk.common.block.ModBlocks;
 import uk.co.wehavecookies56.kk.common.crafting.ModBlocksRecipes;
@@ -44,7 +43,6 @@ import uk.co.wehavecookies56.kk.common.synthesis.ModSynthesisMaterials;
 import uk.co.wehavecookies56.kk.common.network.UpdateChecker;
 import uk.co.wehavecookies56.kk.common.network.packet.PacketDispatcher;
 import uk.co.wehavecookies56.kk.common.synthesis.ModSynthesisRecipes;
-import uk.co.wehavecookies56.kk.common.core.handler.FuelHandler;
 import uk.co.wehavecookies56.kk.common.crafting.KKOreDictionary;
 import uk.co.wehavecookies56.kk.common.core.helper.LogHelper;
 import uk.co.wehavecookies56.kk.common.world.ChestGen;
@@ -59,6 +57,12 @@ public class CommonProxy {
 		// ConfigHandler
 		ConfigHandler.init(new File(event.getModConfigurationDirectory().getPath() + File.separator + Reference.MODID + File.separator + "MainConfig.cfg"));
 		LogHelper.info("Configuration loaded");
+
+		try {
+			UsernameHandler.init(event);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
 
 		// World generation
 		GameRegistry.registerWorldGenerator(new WorldGenBlox(), 2);
