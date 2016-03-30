@@ -45,6 +45,7 @@ public class ModSounds {
     {
 		Field soundEventId = ReflectionHelper.findField(SoundEvent.class, "soundEventId", "field_187507_c");
 		try {
+            soundEventId.set(new SoundEvent(new ResourceLocation(Reference.MODID, id)), (int) soundEventId.get(new SoundEvent(new ResourceLocation(Reference.MODID, id))) + 1);
 			SoundEvent.soundEventRegistry.register((int) soundEventId.get(new SoundEvent(new ResourceLocation(Reference.MODID, id))), new ResourceLocation(Reference.MODID, id), new SoundEvent(new ResourceLocation(Reference.MODID, id)));
 		} catch (IllegalArgumentException | IllegalAccessException e) {
 			e.printStackTrace();

@@ -1,4 +1,4 @@
-﻿package uk.co.wehavecookies56.kk.common.core.handler;
+package uk.co.wehavecookies56.kk.common.core.handler;
 
 import com.google.common.collect.HashBiMap;
 import com.google.gson.JsonArray;
