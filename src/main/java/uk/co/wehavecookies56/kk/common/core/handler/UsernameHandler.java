@@ -1,4 +1,4 @@
-package uk.co.wehavecookies56.kk.common.core.handler;
+﻿package uk.co.wehavecookies56.kk.common.core.handler;
 
 import com.google.common.collect.HashBiMap;
 import com.google.gson.JsonArray;
@@ -86,25 +86,41 @@ public class UsernameHandler {
             event.setCanceled(true);
 
             List players = player.worldObj.playerEntities;
-            String nameFormat;
-            String chatFormat;
-            String prefixFormat;
-            String prefix;
+            String nameFormat = null;
+            String chatFormat = null;
+            String prefixFormat = null;
+            String prefix = null;
 
             for (int i = 0; i < players.size(); i++)
             {
                 if (this.usernamePropsRegistry.containsKey(event.getUsername())) {
-                    if (this.usernamePropsRegistry.get(event.getUsername()).containsKey("nameformat"))
+                	
+                    if (this.usernamePropsRegistry.get(event.getUsername()).containsKey("nameformat")){
                         nameFormat = this.usernamePropsRegistry.get(event.getUsername()).get("nameformat");
+	                    if(nameFormat.contains("Â"))
+	                    	nameFormat = nameFormat.substring(1, nameFormat.length());
+                    }
                     else nameFormat = "§f";
-                    if (this.usernamePropsRegistry.get(event.getUsername()).containsKey("chatformat"))
+                   
+                    if (this.usernamePropsRegistry.get(event.getUsername()).containsKey("chatformat")){
                         chatFormat = this.usernamePropsRegistry.get(event.getUsername()).get("chatformat");
-                    else chatFormat = "§f";
-                    if (this.usernamePropsRegistry.get(event.getUsername()).containsKey("prefixformat"))
+                        if(chatFormat.contains("Â"))
+                        	chatFormat = chatFormat.substring(1, chatFormat.length());
+                    }
+	                else chatFormat = "§f";
+                   
+	                if (this.usernamePropsRegistry.get(event.getUsername()).containsKey("prefixformat")){
                         prefixFormat = this.usernamePropsRegistry.get(event.getUsername()).get("prefixformat");
+                        if(prefixFormat.contains("Â"))
+                        	prefixFormat = prefixFormat.substring(1, prefixFormat.length());
+	                }
                     else prefixFormat = "§f";
-                    if (this.usernamePropsRegistry.get(event.getUsername()).containsKey("prefix"))
+                    
+                    if (this.usernamePropsRegistry.get(event.getUsername()).containsKey("prefix")){
                         prefix = this.usernamePropsRegistry.get(event.getUsername()).get("prefix");
+	                    if(prefix.contains("Â"))
+	                    	prefix = prefix.substring(1, prefix.length());
+	                }
                     else prefix = "";
                 } else {
                     nameFormat = chatFormat = prefixFormat = "§f";

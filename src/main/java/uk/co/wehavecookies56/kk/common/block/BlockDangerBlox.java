@@ -36,10 +36,9 @@ public class BlockDangerBlox extends BlockBlox {
 	public void onEntityCollidedWithBlock (World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
 		if (entityIn instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) entityIn;
-			if (player.inventory.armorItemInSlot(0) != null) {
-				ItemStack itemstack = player.inventory.armorItemInSlot(0);
-			} else
+			if (player.inventory.armorInventory[0] == null) {
 				entityIn.attackEntityFrom(DamageSource.magic, 3.0F);
+			}
 		} else
 			entityIn.attackEntityFrom(DamageSource.magic, 3);
 	}
