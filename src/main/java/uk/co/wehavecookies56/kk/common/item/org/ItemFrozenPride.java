@@ -33,13 +33,6 @@ public class ItemFrozenPride extends ItemShield {
 	@Override
 	public void onUpdate (ItemStack item, World world, Entity entity, int p_77663_4_, boolean p_77663_5_) {
 		EntityPlayer player = (EntityPlayer) entity;
-		/* TODO Blocking gone
-		if (player.getHeldItem(EnumHand.MAIN_HAND) != null && player.getHeldItem(EnumHand.MAIN_HAND).getItem() == ModItems.FrozenPride) if (player.isBlocking())
-			player.setInWeb();
-		else {
-			// player.capability.setPlayerWalkSpeed(0.1F);
-		}
-		*/
 		super.onUpdate(item, world, entity, p_77663_4_, p_77663_5_);
 	}
 

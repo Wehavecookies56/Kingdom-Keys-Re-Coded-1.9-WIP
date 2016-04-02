@@ -319,10 +319,6 @@ public class EventHandler {
 		            	ModCapabilities.SYNTHESIS_MATERIALS.getStorage().readNBT(ModCapabilities.SYNTHESIS_MATERIALS, inst, null, nbt);
 		            }
 		        });
-
-		//if (event.entity instanceof EntityPlayer && ExtendedPlayer.get((EntityPlayer) event.entity) == null) ExtendedPlayer.register((EntityPlayer) event.entity);
-		//if (event.entity instanceof EntityPlayer && ExtendedPlayerRecipes.get((EntityPlayer) event.entity) == null) ExtendedPlayerRecipes.register((EntityPlayer) event.entity);
-		//if (event.entity instanceof EntityPlayer && ExtendedPlayerMaterials.get((EntityPlayer) event.entity) == null) ExtendedPlayerMaterials.register((EntityPlayer) event.entity);
 	}
 
 	@SideOnly (Side.CLIENT)
@@ -555,6 +551,13 @@ public class EventHandler {
 				event.getEntityLiving().entityDropItem(new ItemStack(ModItems.Heart), 2);
 			else if (event.getEntity() instanceof EntityMob) {
 				event.getEntityLiving().entityDropItem(new ItemStack(ModItems.DarkHeart), 2);
+				int recipeRand = randomWithRange(1, 100);
+				if(recipeRand <= 1){
+					event.getEntityLiving().entityDropItem(new ItemStack(ModItems.Recipe), 1);
+				}
+				if (event.getEntity() instanceof EntityDragon || event.getEntity() instanceof EntityWither) 
+					event.getEntityLiving().entityDropItem(new ItemStack(ModItems.Recipe), 1);
+				
 				if (event.getEntity() instanceof EntityWitch) {
 					int rand;
 					rand = randomWithRange(1, 30);
@@ -567,16 +570,13 @@ public class EventHandler {
 					else if (rand == 13)
 						event.getEntityLiving().entityDropItem(new ItemStack(ModItems.LevelUpMagicCure), 1);
 					else if (rand == 17) {
-						// event.getEntityLiving().entityDropItem(new
-						// ItemStack(ModItems.LevelUpMagicGravity), 1);
+						// event.getEntityLiving().entityDropItem(new ItemStack(ModItems.LevelUpMagicGravity), 1);
 					}
-
 					else if (rand == 21)
 						event.getEntityLiving().entityDropItem(new ItemStack(ModItems.LevelUpMagicAero), 1);
-					else if (rand == 25) {
-						// event.getEntityLiving().entityDropItem(new
-						// ItemStack(ModItems.LevelUpMagicStop), 1);
-					}
+					else if (rand == 25) 
+						event.getEntityLiving().entityDropItem(new ItemStack(ModItems.LevelUpMagicStop), 1);
+					
 				}
 			} else if (event.getEntity() instanceof EntityAgeable)
 				event.getEntityLiving().entityDropItem(new ItemStack(ModItems.PureHeart), 2);

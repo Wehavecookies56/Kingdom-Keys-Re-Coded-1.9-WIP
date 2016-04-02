@@ -42,6 +42,8 @@ public class GuiCommandMenu extends GuiScreen {
 
 	int MENU_WIDTH = 71;
 	int MENU_HEIGHT = 15;
+	
+	int alpha = 50;
 
 	int textX = 0;
 
@@ -116,6 +118,8 @@ public class GuiCommandMenu extends GuiScreen {
 		// DRIVE
 		GL11.glPushMatrix();
 		{
+			GL11.glColor4ub((byte) 80, (byte) 80, (byte) 80, (byte) this.alpha);
+
 			int u;
 			int v = 0;
 			int x = 0;
@@ -123,7 +127,8 @@ public class GuiCommandMenu extends GuiScreen {
 			mc.renderEngine.bindTexture(texture);
 			GL11.glTranslatef(x, (height - MENU_HEIGHT * scale * DRIVE), 0);
 			GL11.glScalef(scale, scale, scale);
-			if (submenu != 0) GL11.glColor3ub((byte) 80, (byte) 80, (byte) 80);
+			if (submenu != 0) GL11.glColor4ub((byte) 80, (byte) 80, (byte) 80, (byte) this.alpha);
+
 			if (selected == DRIVE) { // Selected
 				textX = 5;
 				if (EventHandler.isHostiles)
@@ -139,23 +144,28 @@ public class GuiCommandMenu extends GuiScreen {
 				else
 					drawTexturedModalRect(0, 0, TOP_WIDTH, 0, TOP_WIDTH + MENU_WIDTH, v + MENU_HEIGHT);
 			}
-
-			if (DS.getInDrive()) {
-				if (DS.getActiveDriveName().equals(Strings.Form_Anti))
-					drawString(mc.fontRendererObj, TextHelper.localize(Strings.Gui_CommandMenu_Drive_Revert), 6 + textX, 4, 0x888888);
+			if(this.submenu == 0)
+			{
+				if (DS.getInDrive()) {
+					
+					if (DS.getActiveDriveName().equals(Strings.Form_Anti))
+						drawString(mc.fontRendererObj, TextHelper.localize(Strings.Gui_CommandMenu_Drive_Revert), 6 + textX, 4, 0x888888);
+					else
+						drawString(mc.fontRendererObj, TextHelper.localize(Strings.Gui_CommandMenu_Drive_Revert), 6 + textX, 4, 0xFFFFFF);
+					GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+				} else if (this.driveCommands.isEmpty() || STATS.getDP() <= 0)
+					drawString(mc.fontRendererObj, TextHelper.localize(Strings.Gui_CommandMenu_Drive), 6 + textX, 4, 0x888888);
 				else
-					drawString(mc.fontRendererObj, TextHelper.localize(Strings.Gui_CommandMenu_Drive_Revert), 6 + textX, 4, 0xFFFFFF);
-				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			} else if (this.driveCommands.isEmpty() || STATS.getDP() <= 0)
-				drawString(mc.fontRendererObj, TextHelper.localize(Strings.Gui_CommandMenu_Drive), 6 + textX, 4, 0x888888);
-			else
-				drawString(mc.fontRendererObj, TextHelper.localize(Strings.Gui_CommandMenu_Drive), 6 + textX, 4, 0xFFFFFF);
+					drawString(mc.fontRendererObj, TextHelper.localize(Strings.Gui_CommandMenu_Drive), 6 + textX, 4, 0xFFFFFF);
+			}
 
 		}
 		GL11.glPopMatrix();
 		// ITEMS
 		GL11.glPushMatrix();
 		{
+			GL11.glColor4ub((byte) 80, (byte) 80, (byte) 80, (byte) this.alpha);
+
 			int u;
 			int v = 0;
 			int x = 0;
@@ -163,7 +173,7 @@ public class GuiCommandMenu extends GuiScreen {
 			mc.renderEngine.bindTexture(texture);
 			GL11.glTranslatef(x, (height - MENU_HEIGHT * scale * ITEMS), 0);
 			GL11.glScalef(scale, scale, scale);
-			if (submenu != 0) GL11.glColor3ub((byte) 80, (byte) 80, (byte) 80);
+			if (submenu != 0) GL11.glColor4ub((byte) 80, (byte) 80, (byte) 80, (byte) this.alpha);
 			if (selected == ITEMS) { // Selected
 				textX = 5;
 				if (EventHandler.isHostiles)
@@ -179,25 +189,28 @@ public class GuiCommandMenu extends GuiScreen {
 				else
 					drawTexturedModalRect(0, 0, TOP_WIDTH, 0, TOP_WIDTH + MENU_WIDTH, v + MENU_HEIGHT);
 			}
-
-			if (this.items.isEmpty())
-				drawString(mc.fontRendererObj, TextHelper.localize(Strings.Gui_CommandMenu_Items), 6 + textX, 4, 0x888888);
-			else
-				drawString(mc.fontRendererObj, TextHelper.localize(Strings.Gui_CommandMenu_Items), 6 + textX, 4, 0xFFFFFF);
-
+			if(this.submenu == 0)
+			{
+				if (this.items.isEmpty())
+					drawString(mc.fontRendererObj, TextHelper.localize(Strings.Gui_CommandMenu_Items), 6 + textX, 4, 0x888888);
+				else
+					drawString(mc.fontRendererObj, TextHelper.localize(Strings.Gui_CommandMenu_Items), 6 + textX, 4, 0xFFFFFF);
+			}
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		}
 		GL11.glPopMatrix();
 		// MAGIC
 		GL11.glPushMatrix();
 		{
+			GL11.glColor4ub((byte) 80, (byte) 80, (byte) 80, (byte) this.alpha);
+
 			int u;
 			int v = 0;
 			int x = 0;
 			mc.renderEngine.bindTexture(texture);
 			GL11.glTranslatef(x, (height - MENU_HEIGHT * scale * MAGIC), 0);
 			GL11.glScalef(scale, scale, scale);
-			if (submenu != 0) GL11.glColor3ub((byte) 80, (byte) 80, (byte) 80);
+			if (submenu != 0) GL11.glColor4ub((byte) 80, (byte) 80, (byte) 80, (byte) this.alpha);
 			if (selected == MAGIC) { // Selected
 				textX = 5;
 				if (EventHandler.isHostiles)
@@ -213,23 +226,27 @@ public class GuiCommandMenu extends GuiScreen {
 				else
 					drawTexturedModalRect(0, 0, TOP_WIDTH, 0, TOP_WIDTH + MENU_WIDTH, v + MENU_HEIGHT);
 			}
-
-			if (spells == null) {
-				drawString(mc.fontRendererObj, TextHelper.localize(Strings.Gui_CommandMenu_Magic), 6 + textX, 4, 0x888888);
-			} else {
-				//if (!ExtendedPlayer.get(mc.thePlayer).getRecharge() && !spells.isEmpty() && !ExtendedPlayer.get(mc.thePlayer).getDriveInUse().equals("Valor"))
-				if (!STATS.getRecharge() && (!this.spells.isEmpty() && !DS.getActiveDriveName().equals(Strings.Form_Valor))) 
-
-					drawString(mc.fontRendererObj, TextHelper.localize(Strings.Gui_CommandMenu_Magic), 6 + textX, 4, 0xFFFFFF);
-				else
+			if(this.submenu == 0)
+			{
+				if (spells == null) {
 					drawString(mc.fontRendererObj, TextHelper.localize(Strings.Gui_CommandMenu_Magic), 6 + textX, 4, 0x888888);
-				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+				} else {
+					//if (!ExtendedPlayer.get(mc.thePlayer).getRecharge() && !spells.isEmpty() && !ExtendedPlayer.get(mc.thePlayer).getDriveInUse().equals("Valor"))
+					if (!STATS.getRecharge() && (!this.spells.isEmpty() && !DS.getActiveDriveName().equals(Strings.Form_Valor))) 
+	
+						drawString(mc.fontRendererObj, TextHelper.localize(Strings.Gui_CommandMenu_Magic), 6 + textX, 4, 0xFFFFFF);
+					else
+						drawString(mc.fontRendererObj, TextHelper.localize(Strings.Gui_CommandMenu_Magic), 6 + textX, 4, 0x888888);
+					GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+				}
 			}
 		}
 		GL11.glPopMatrix();
 		// ATTACK
 		GL11.glPushMatrix();
 		{
+			GL11.glColor4ub((byte) 80, (byte) 80, (byte) 80, (byte) this.alpha);
+
 			int u;
 			int v = 0;
 			int x = 0;
@@ -237,7 +254,7 @@ public class GuiCommandMenu extends GuiScreen {
 			GL11.glTranslatef(x, (height - MENU_HEIGHT * scale * ATTACK), 0);
 			GL11.glScalef(scale, scale, scale);
 
-			if (submenu != 0) GL11.glColor3ub((byte) 80, (byte) 80, (byte) 80);
+			if (submenu != 0) 	GL11.glColor4ub((byte) 80, (byte) 80, (byte) 80, (byte) this.alpha);
 
 			if (selected == ATTACK) { // Selected
 
@@ -255,22 +272,31 @@ public class GuiCommandMenu extends GuiScreen {
 				else
 					drawTexturedModalRect(0, 0, TOP_WIDTH, 0, TOP_WIDTH + MENU_WIDTH, v + MENU_HEIGHT);
 			}
+			if(this.submenu == 0)
+			{
 			drawString(mc.fontRendererObj, TextHelper.localize(Strings.Gui_CommandMenu_Attack), 6 + textX, 4, 0xFFFFFF);
+			}
 
 		}
 		GL11.glPopMatrix();
 		// TOP
 		GL11.glPushMatrix();
 		{
+			GL11.glColor4ub((byte) 80, (byte) 80, (byte) 80, (byte) this.alpha);
+
 			mc.renderEngine.bindTexture(texture);
 			GL11.glTranslatef(0, (height - MENU_HEIGHT * scale * TOP), 0);
 			GL11.glScalef(scale, scale, scale);
-			if (submenu != 0) GL11.glColor3ub((byte) 80, (byte) 80, (byte) 80);
+			if (submenu != 0) GL11.glColor4ub((byte) 80, (byte) 80, (byte) 80, (byte) this.alpha);
+
 			if (EventHandler.isHostiles)
 				drawTexturedModalRect(0, 0, 0, 15, TOP_WIDTH, TOP_HEIGHT);
 			else
 				drawTexturedModalRect(0, 0, 0, 0, TOP_WIDTH, TOP_HEIGHT);
+			if(this.submenu == 0)
+			{
 			drawString(mc.fontRendererObj, TextHelper.localize(Strings.Gui_CommandMenu_Command), 6, 4, 0xFFFFFF);
+			}
 		}
 		GL11.glPopMatrix();
 		// Magic submenu //
@@ -278,6 +304,7 @@ public class GuiCommandMenu extends GuiScreen {
 			// MAGIC TOP
 			GL11.glPushMatrix();
 			{
+				GL11.glColor4ub((byte) 80, (byte) 80, (byte) 80, (byte) this.alpha);
 				mc.renderEngine.bindTexture(texture);
 				GL11.glTranslatef(5, (height - MENU_HEIGHT * scale * (spells.size() + 1)), 0);
 				GL11.glScalef(scale, scale, scale);
@@ -290,6 +317,7 @@ public class GuiCommandMenu extends GuiScreen {
 			for (int i = 0; i < spells.size(); i++) {
 				GL11.glPushMatrix();
 				{
+					GL11.glColor4ub((byte) 80, (byte) 80, (byte) 80, (byte) this.alpha);
 					int u;
 					int v;
 					int x;
@@ -323,6 +351,7 @@ public class GuiCommandMenu extends GuiScreen {
 			// Items TOP
 			GL11.glPushMatrix();
 			{
+				GL11.glColor4ub((byte) 80, (byte) 80, (byte) 80, (byte) this.alpha);
 				mc.renderEngine.bindTexture(texture);
 				GL11.glTranslatef(5, (height - MENU_HEIGHT * scale * (items.size() + 1)), 0);
 				GL11.glScalef(scale, scale, scale);
@@ -336,6 +365,7 @@ public class GuiCommandMenu extends GuiScreen {
 			for (int i = 0; i < items.size(); i++) {
 				GL11.glPushMatrix();
 				{
+					GL11.glColor4ub((byte) 80, (byte) 80, (byte) 80, (byte) this.alpha);
 					int u;
 					int v;
 					int x;
@@ -364,6 +394,7 @@ public class GuiCommandMenu extends GuiScreen {
 			// DRIVE TOP
 			GL11.glPushMatrix();
 			{
+				GL11.glColor4ub((byte) 80, (byte) 80, (byte) 80, (byte) this.alpha);
 				mc.renderEngine.bindTexture(texture);
 				GL11.glTranslatef(5, (height - MENU_HEIGHT * scale * (driveCommands.size() + 1)), 0);
 				GL11.glScalef(1.25f, scale, scale);
@@ -373,6 +404,7 @@ public class GuiCommandMenu extends GuiScreen {
 
 			GL11.glPushMatrix();
 			{
+				GL11.glColor4ub((byte) 80, (byte) 80, (byte) 80, (byte) this.alpha);
 				GL11.glTranslatef(5, (height - MENU_HEIGHT * scale * (driveCommands.size() + 1)), 0);
 				GL11.glScalef(scale, scale, scale);
 				if (submenu == SUB_DRIVE) drawString(mc.fontRendererObj, TextHelper.localize(Strings.Gui_CommandMenu_Drive_Title), 6, 4, 0xFFFFFF);
@@ -381,6 +413,7 @@ public class GuiCommandMenu extends GuiScreen {
 			for (int i = 0; i < driveCommands.size(); i++) {
 				GL11.glPushMatrix();
 				{
+					GL11.glColor4ub((byte) 80, (byte) 80, (byte) 80, (byte) this.alpha);
 					int u;
 					int v;
 					int x;
@@ -402,6 +435,7 @@ public class GuiCommandMenu extends GuiScreen {
 
 				GL11.glPushMatrix();
 				{
+					GL11.glColor4ub((byte) 80, (byte) 80, (byte) 80, (byte) this.alpha);
 					int x;
 					x = (driveselected == i) ? 10 : 5;
 					GL11.glTranslatef(x, (height - MENU_HEIGHT * scale * (driveCommands.size() - i)), 0);

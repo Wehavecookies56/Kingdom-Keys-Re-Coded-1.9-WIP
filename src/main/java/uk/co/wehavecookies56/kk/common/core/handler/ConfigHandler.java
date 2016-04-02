@@ -34,7 +34,6 @@ public class ConfigHandler {
 	public static int[] interfaceColour = new int[] { 255, 0, 0 };
 	public static Property interfaceColourProperty, EnableHeartsOnHUDProperty, EnableCustomMusicProperty;
 
-
 	public static void init(File file) {
 		config = new Configuration(file);
 		config.load();
@@ -42,7 +41,6 @@ public class ConfigHandler {
 
 		MinecraftForge.EVENT_BUS.register(new ConfigHandler());
 	}
-
 
 	public static void load() {
 
