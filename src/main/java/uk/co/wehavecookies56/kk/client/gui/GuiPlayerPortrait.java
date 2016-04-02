@@ -15,10 +15,13 @@ import uk.co.wehavecookies56.kk.common.lib.Strings;
 import uk.co.wehavecookies56.kk.common.capability.DriveStateCapability;
 
 public class GuiPlayerPortrait extends GuiScreen {
+//					GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+	int alpha = 255;
 
 	@SubscribeEvent
 	public void onRenderOverlayPost (RenderGameOverlayEvent event) {
 		Minecraft mc = Minecraft.getMinecraft();
+		if(!mc.thePlayer.getCapability(ModCapabilities.PLAYER_STATS, null).getHudMode()) return;
 		int screenWidth = event.getResolution().getScaledWidth();
 		int screenHeight = event.getResolution().getScaledHeight();
 		if (event.getType() == RenderGameOverlayEvent.ElementType.TEXT) {
@@ -39,7 +42,9 @@ public class GuiPlayerPortrait extends GuiScreen {
 			}
 
 			DriveStateCapability.IDriveState DS = mc.thePlayer.getCapability(ModCapabilities.DRIVE_STATE, null);
-			if (DS.getActiveDriveName().equals(Strings.Form_Anti)) GL11.glColor3ub((byte) 30, (byte) 30, (byte) 30);
+			if (DS.getActiveDriveName().equals(Strings.Form_Anti)) 			
+				GL11.glColor4ub((byte) 255, (byte) 255, (byte) 255, (byte) this.alpha);
+
 
 			// HEAD
 			int headWidth = 32;
@@ -67,6 +72,7 @@ public class GuiPlayerPortrait extends GuiScreen {
 
 			GL11.glPushMatrix();
 			{
+
 				GL11.glTranslatef((screenWidth - hatWidth * scale) - scaledHatPosX, (screenHeight - hatHeight * scale) - scaledHatPosY, 0);
 				GL11.glScalef(scale, scale, scale);
 				this.drawTexturedModalRect(0, 0, 160, 32, hatWidth, hatHeight);
@@ -83,6 +89,7 @@ public class GuiPlayerPortrait extends GuiScreen {
 
 			GL11.glPushMatrix();
 			{
+
 				GL11.glTranslatef((screenWidth - bodyWidth * scale) - scaledBodyPosX, (screenHeight - bodyHeight * scale) - scaledBodyPosY, 0);
 				GL11.glScalef(scale, scale, scale);
 				this.drawTexturedModalRect(0, 0, 80, 80, bodyWidth, bodyHeight);
@@ -99,6 +106,8 @@ public class GuiPlayerPortrait extends GuiScreen {
 
 			GL11.glPushMatrix();
 			{
+
+
 				GL11.glTranslatef((screenWidth - bodyWidth * scale) - scaledBodyPosX, (screenHeight - bodyHeight * scale) - scaledBodyPosY, 0);
 				GL11.glScalef(scale, scale, scale);
 				this.drawTexturedModalRect(0, 0, 80, 148, bodyWidth, bodyHeight);
@@ -119,6 +128,8 @@ public class GuiPlayerPortrait extends GuiScreen {
 
 			GL11.glPushMatrix();
 			{
+
+
 				GL11.glTranslatef((screenWidth - armWidth * scale) - scaledArmRPosX, (screenHeight - armHeight * scale) - scaledArmRPosY, 0);
 				GL11.glScalef(scale, scale, scale);
 				this.drawTexturedModalRect(0, 0, 176, 80, armWidth, armHeight);
@@ -127,6 +138,8 @@ public class GuiPlayerPortrait extends GuiScreen {
 
 			GL11.glPushMatrix();
 			{
+
+
 				GL11.glTranslatef((screenWidth - armWidth * scale) - scaledArmLPosX, (screenHeight - armHeight * scale) - scaledArmLPosY, 0);
 				GL11.glScalef(scale, scale, scale);
 				this.drawTexturedModalRect(0, 0, 176, 80, armWidth, armHeight);
@@ -148,6 +161,8 @@ public class GuiPlayerPortrait extends GuiScreen {
 
 			GL11.glPushMatrix();
 			{
+
+
 				GL11.glTranslatef((screenWidth - gloveWidth * scale) - scaledgloveRPosX, (screenHeight - gloveHeight * scale) - scaledgloveRPosY, 0);
 				GL11.glScalef(scale, scale, scale);
 				this.drawTexturedModalRect(0, 0, 176, 150, gloveWidth, gloveHeight);
@@ -156,6 +171,8 @@ public class GuiPlayerPortrait extends GuiScreen {
 
 			GL11.glPushMatrix();
 			{
+
+
 				GL11.glTranslatef((screenWidth - gloveWidth * scale) - scaledgloveLPosX, (screenHeight - gloveHeight * scale) - scaledgloveLPosY, 0);
 				GL11.glScalef(scale, scale, scale);
 				this.drawTexturedModalRect(0, 0, 176, 150, gloveWidth, gloveHeight);

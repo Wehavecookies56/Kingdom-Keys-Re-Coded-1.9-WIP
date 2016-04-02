@@ -11,7 +11,6 @@ public class CheatModeCapability {
 
 	public interface ICheatMode {
 		boolean getCheatMode();
-		
 		void setCheatMode(boolean mode);
 	}
 	

@@ -20,6 +20,7 @@ import uk.co.wehavecookies56.kk.common.network.packet.client.SpawnThunderParticl
 import uk.co.wehavecookies56.kk.common.network.packet.client.SyncCheatModeData;
 import uk.co.wehavecookies56.kk.common.network.packet.client.SyncDriveData;
 import uk.co.wehavecookies56.kk.common.network.packet.client.SyncDriveInventory;
+import uk.co.wehavecookies56.kk.common.network.packet.client.SyncHudData;
 import uk.co.wehavecookies56.kk.common.network.packet.client.SyncItemsInventory;
 import uk.co.wehavecookies56.kk.common.network.packet.client.SyncKeybladeData;
 import uk.co.wehavecookies56.kk.common.network.packet.client.SyncMagicData;
@@ -90,6 +91,7 @@ public class PacketDispatcher {
 		registerMessage(SyncDriveInventory.class);
 		registerMessage(SyncKeybladeData.class);
 		registerMessage(SyncCheatModeData.class);
+		registerMessage(SyncHudData.class);
 
 		// Client to Server
 		registerMessage(MunnyPickup.class);

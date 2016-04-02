@@ -7,8 +7,6 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-import uk.co.wehavecookies56.kk.common.lib.Reference;
-import uk.co.wehavecookies56.kk.common.core.proxy.CommonProxy;
 import uk.co.wehavecookies56.kk.common.core.command.CommandCheatMode;
 import uk.co.wehavecookies56.kk.common.core.command.CommandDriveLevel;
 import uk.co.wehavecookies56.kk.common.core.command.CommandGiveMunny;
@@ -16,7 +14,10 @@ import uk.co.wehavecookies56.kk.common.core.command.CommandLearnRecipe;
 import uk.co.wehavecookies56.kk.common.core.command.CommandLevelUp;
 import uk.co.wehavecookies56.kk.common.core.command.CommandRemoveKeychain;
 import uk.co.wehavecookies56.kk.common.core.command.CommandResetLevel;
+import uk.co.wehavecookies56.kk.common.core.command.CommandShowHud;
 import uk.co.wehavecookies56.kk.common.core.helper.LogHelper;
+import uk.co.wehavecookies56.kk.common.core.proxy.CommonProxy;
+import uk.co.wehavecookies56.kk.common.lib.Reference;
 
 @Mod (name = Reference.MODNAME, modid = Reference.MODID, version = Reference.MODVER, guiFactory = Reference.GUIFACTORY, modLanguage = "java")
 public class KingdomKeys {
@@ -45,6 +46,7 @@ public class KingdomKeys {
 		e.registerServerCommand(new CommandResetLevel());
 		e.registerServerCommand(new CommandLevelUp());
 		e.registerServerCommand(new CommandDriveLevel());
+		e.registerServerCommand(new CommandShowHud());
 
 		LogHelper.info("Commands loaded");
 	}

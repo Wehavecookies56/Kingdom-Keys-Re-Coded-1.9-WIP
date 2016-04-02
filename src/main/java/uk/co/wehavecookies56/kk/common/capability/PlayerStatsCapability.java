@@ -46,6 +46,9 @@ public class PlayerStatsCapability {
 		
 		InventoryPotionsMenu getInventoryPotionsMenu();
 		
+		boolean getHudMode();
+		void setHudMode(boolean mode);
+		
 	}
 
 	public static class Storage implements IStorage<IPlayerStats> {
@@ -63,6 +66,8 @@ public class PlayerStatsCapability {
 			properties.setDouble("MP", instance.getMP());
 			properties.setDouble("Max MP", instance.getMaxMP());
 			properties.setBoolean("Recharge", instance.getRecharge());
+			
+			properties.setBoolean("HUD", instance.getHudMode());
 			
 			instance.getInventoryPotionsMenu().writeToNBT(properties);
 
@@ -82,7 +87,7 @@ public class PlayerStatsCapability {
 			instance.setMP(properties.getDouble("MP"));
 			instance.setMaxMP(properties.getDouble("Max MP"));
 			instance.setRecharge(properties.getBoolean("Recharge"));
-			
+			instance.setHudMode(properties.getBoolean("HUD"));
 			instance.getInventoryPotionsMenu().readFromNBT(properties);
 		}
 	}
@@ -102,6 +107,7 @@ public class PlayerStatsCapability {
         private double maxDP = 1000;
 		private boolean recharge = false;
 		private boolean cheatMode = false;
+		private boolean hudmode = true;
 		
 		private final InventoryPotionsMenu inventoryPotions = new InventoryPotionsMenu();
 		
@@ -120,6 +126,7 @@ public class PlayerStatsCapability {
 		@Override public double getDP() { return this.dp; }
 		@Override public double getMaxDP() { return this.maxDP; }
 		@Override public boolean getRecharge() { return this.recharge; }
+		@Override public boolean getHudMode() {return this.hudmode;}
 		
 		@Override public boolean setLevel(int level) { if (level <= this.maxLevel) { this.level = level; return true; } return false;}
 		@Override public boolean setExperience(int experience) { if (experience <= this.maxExperience) { this.experience = experience; return true; } return false; }
@@ -156,5 +163,6 @@ public class PlayerStatsCapability {
         @Override public void remMP(double mp) { if (mp + this.mp < 0) this.mp = 0; else this.mp -= mp; }
         @Override public void setMaxMP(double maxMP) { this.maxMP = maxMP;}
 		@Override public void setRecharge(boolean recharge) { this.recharge = recharge; }
+		@Override public void setHudMode(boolean hud) { this.hudmode = hud; }
     }
 }

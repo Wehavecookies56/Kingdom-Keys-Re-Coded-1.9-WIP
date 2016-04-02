@@ -76,6 +76,7 @@ import uk.co.wehavecookies56.kk.common.network.packet.PacketDispatcher;
 import uk.co.wehavecookies56.kk.common.network.packet.client.ShowOverlayPacket;
 import uk.co.wehavecookies56.kk.common.network.packet.client.SyncDriveData;
 import uk.co.wehavecookies56.kk.common.network.packet.client.SyncDriveInventory;
+import uk.co.wehavecookies56.kk.common.network.packet.client.SyncHudData;
 import uk.co.wehavecookies56.kk.common.network.packet.client.SyncItemsInventory;
 import uk.co.wehavecookies56.kk.common.network.packet.client.SyncKeybladeData;
 import uk.co.wehavecookies56.kk.common.network.packet.client.SyncMagicData;
@@ -478,6 +479,7 @@ public class EventHandler {
 	@SubscribeEvent
 	public void OnEntityJoinWorld (EntityJoinWorldEvent event) {
 		if (!event.getEntity().worldObj.isRemote && event.getEntity() instanceof EntityPlayer) {
+			PacketDispatcher.sendTo(new SyncHudData(event.getEntity().getCapability(ModCapabilities.PLAYER_STATS, null)), (EntityPlayerMP) event.getEntity());
 			PacketDispatcher.sendTo(new SyncMagicInventory(event.getEntity().getCapability(ModCapabilities.MAGIC_STATE, null)), (EntityPlayerMP) event.getEntity());
 			PacketDispatcher.sendTo(new SyncItemsInventory(event.getEntity().getCapability(ModCapabilities.PLAYER_STATS, null)), (EntityPlayerMP) event.getEntity());
 			PacketDispatcher.sendTo(new SyncDriveInventory(event.getEntity().getCapability(ModCapabilities.DRIVE_STATE, null)), (EntityPlayerMP) event.getEntity());
@@ -525,6 +527,8 @@ public class EventHandler {
 			if (SUMMON.getIsKeybladeSummoned()) {
 				PacketDispatcher.sendToServer(new DeSummonKeyblade(player.inventory.getCurrentItem()));
 				SUMMON.setIsKeybladeSummoned(false);
+				PacketDispatcher.sendTo(new SyncKeybladeData(SUMMON), (EntityPlayerMP) player);
+
 			}
 		}
 
@@ -784,6 +788,8 @@ public class EventHandler {
 			ItemStack itemStack = event.getEntityItem().getEntityItem();
 			
 			event.getPlayer().getCapability(ModCapabilities.SUMMON_KEYBLADE, null).setIsKeybladeSummoned(false);
+			PacketDispatcher.sendTo(new SyncKeybladeData(event.getPlayer().getCapability(ModCapabilities.SUMMON_KEYBLADE, null)), (EntityPlayerMP) event.getPlayer());
+
 		} else if (event.getEntityItem().getEntityItem().getItem() instanceof ItemMunny) {
 			event.setCanceled(true);
 	    	PacketDispatcher.sendTo(new ShowOverlayPacket("munny", event.getEntityItem().getEntityItem().getTagCompound().getInteger("amount")), (EntityPlayerMP) event.getPlayer());

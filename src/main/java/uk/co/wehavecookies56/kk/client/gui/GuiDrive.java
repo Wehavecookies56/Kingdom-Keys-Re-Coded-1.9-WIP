@@ -67,6 +67,7 @@ public class GuiDrive extends GuiScreen {
 
 	@SubscribeEvent
 	public void onRenderOverlayPost (RenderGameOverlayEvent event) {
+		if(!mc.thePlayer.getCapability(ModCapabilities.PLAYER_STATS, null).getHudMode()) return;
 
 		PlayerStatsCapability.IPlayerStats STATS = mc.thePlayer.getCapability(ModCapabilities.PLAYER_STATS, null);
 		double dp = STATS.getDP();
