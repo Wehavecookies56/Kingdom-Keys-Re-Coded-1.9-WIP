@@ -46,6 +46,7 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.event.FMLEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
@@ -525,9 +526,12 @@ public class EventHandler {
 			EntityPlayer player = (EntityPlayer) event.getEntity();
 			SummonKeybladeCapability.ISummonKeyblade SUMMON = player.getCapability(ModCapabilities.SUMMON_KEYBLADE, null);
 			if (SUMMON.getIsKeybladeSummoned()) {
+				if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) {
 				PacketDispatcher.sendToServer(new DeSummonKeyblade(player.inventory.getCurrentItem()));
-				SUMMON.setIsKeybladeSummoned(false);
 				PacketDispatcher.sendTo(new SyncKeybladeData(SUMMON), (EntityPlayerMP) player);
+				}else{
+				SUMMON.setIsKeybladeSummoned(false);
+				}
 
 			}
 		}
