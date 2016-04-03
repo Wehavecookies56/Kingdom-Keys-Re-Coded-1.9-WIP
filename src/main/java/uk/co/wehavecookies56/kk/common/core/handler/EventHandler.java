@@ -527,10 +527,10 @@ public class EventHandler {
 			SummonKeybladeCapability.ISummonKeyblade SUMMON = player.getCapability(ModCapabilities.SUMMON_KEYBLADE, null);
 			if (SUMMON.getIsKeybladeSummoned()) {
 				if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT) {
-				PacketDispatcher.sendToServer(new DeSummonKeyblade(player.inventory.getCurrentItem()));
-				PacketDispatcher.sendTo(new SyncKeybladeData(SUMMON), (EntityPlayerMP) player);
+					PacketDispatcher.sendToServer(new DeSummonKeyblade(player.inventory.getCurrentItem()));
+					PacketDispatcher.sendTo(new SyncKeybladeData(SUMMON), (EntityPlayerMP) player);
 				}else{
-				SUMMON.setIsKeybladeSummoned(false);
+					SUMMON.setIsKeybladeSummoned(false);
 				}
 
 			}
@@ -1646,7 +1646,7 @@ public class EventHandler {
 		}
 
 		else if (event.getState().getBlock() == ModBlocks.RarePrizeBlox) {
-			int drop = randomWithRange(1, 28);
+			int drop = randomWithRange(1, 35);
 			if (drop == 1) {
 				ItemStack munny = new ItemStack(ModItems.Munny, 1);
 				munny.setTagCompound(new NBTTagCompound());
@@ -1771,6 +1771,21 @@ public class EventHandler {
 				ItemStack OrichalcumPlus = new ItemStack(ModItems.SynthesisMaterial, randomWithRange(1, 3));
 				ItemStacks.createSynthesisItem(OrichalcumPlus, Strings.SM_OrichalcumPlus, "S");
 				event.getDrops().add(OrichalcumPlus);
+			} else if (drop == 31) {
+				ItemStack valorForm = new ItemStack(ModItems.LevelUpValor, randomWithRange(1, 3));
+				event.getDrops().add(valorForm);
+			} else if (drop == 32) {
+				ItemStack wisdomForm = new ItemStack(ModItems.LevelUpWisdom, randomWithRange(1, 3));
+				event.getDrops().add(wisdomForm);
+			} else if (drop == 33) {
+				ItemStack limitForm = new ItemStack(ModItems.LevelUpLimit, randomWithRange(1, 3));
+				event.getDrops().add(limitForm);
+			} else if (drop == 34) {
+				ItemStack masterForm = new ItemStack(ModItems.LevelUpMaster, randomWithRange(1, 3));
+				event.getDrops().add(masterForm);
+			} else if (drop == 35) {
+				ItemStack finalForm = new ItemStack(ModItems.LevelUpFinal, randomWithRange(1, 3));
+				event.getDrops().add(finalForm);
 			}
 		}
 	}
