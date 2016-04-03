@@ -861,34 +861,34 @@ public class EventHandler {
 				}
 			}
 		}
-		if (!DS.getActiveDriveName().equals("none") && DriveFormRegistry.isDriveFormRegistered(DS.getActiveDriveName())) DriveFormRegistry.get(DS.getActiveDriveName()).update(event.player);
-		if (event.player != null) {
-			List<Entity> entities = event.player.worldObj.getEntitiesWithinAABBExcludingEntity(event.player, event.player.getEntityBoundingBox().expand(16.0D, 10.0D, 16.0D));
-			List<Entity> bossEntities = event.player.worldObj.getEntitiesWithinAABBExcludingEntity(event.player, event.player.getEntityBoundingBox().expand(150.0D, 100.0D, 150.0D));
-			if (!bossEntities.isEmpty()) {
-				for (int i = 0; i < bossEntities.size(); i++) {
-					if (bossEntities.get(i) instanceof EntityDragon || bossEntities.get(i) instanceof EntityWither) {
-						isBoss = true;
-						break;
-					} else {
-						isBoss = false;
-					}
+		if (!DS.getActiveDriveName().equals("none") && DriveFormRegistry.isDriveFormRegistered(DS.getActiveDriveName())) {
+			DriveFormRegistry.get(DS.getActiveDriveName()).update(event.player);
+		}
+		List<Entity> entities = event.player.worldObj.getEntitiesWithinAABBExcludingEntity(event.player, event.player.getEntityBoundingBox().expand(16.0D, 10.0D, 16.0D));
+		List<Entity> bossEntities = event.player.worldObj.getEntitiesWithinAABBExcludingEntity(event.player, event.player.getEntityBoundingBox().expand(150.0D, 100.0D, 150.0D));
+		if (!bossEntities.isEmpty()) {
+			for (int i = 0; i < bossEntities.size(); i++) {
+				if (bossEntities.get(i) instanceof EntityDragon || bossEntities.get(i) instanceof EntityWither) {
+					isBoss = true;
+					break;
+				} else {
+					isBoss = false;
 				}
-			} else {
-				isBoss = false;
 			}
-			if (!entities.isEmpty()) {
-				for (int i = 0; i < entities.size(); i++) {
-					if (entities.get(i) instanceof EntityMob) {
-						isHostiles = true;
-						break;
-					} else {
-						isHostiles = false;
-					}
+		} else {
+			isBoss = false;
+		}
+		if (!entities.isEmpty()) {
+			for (int i = 0; i < entities.size(); i++) {
+				if (entities.get(i) instanceof EntityMob) {
+					isHostiles = true;
+					break;
+				} else {
+					isHostiles = false;
 				}
-			} else {
-				isHostiles = false;
 			}
+		} else {
+			isHostiles = false;
 		}
 
 	}

@@ -115,12 +115,6 @@ public class DriveFormFinal extends DriveForm {
 					player.getCapability(ModCapabilities.PLAYER_STATS, null).setDP(0);
 				}
 			}else{
-				player.getCapability(ModCapabilities.PLAYER_STATS, null).setDP(0);
-				player.getCapability(ModCapabilities.DRIVE_STATE, null).setInDrive(false);
-				player.getCapability(ModCapabilities.DRIVE_STATE, null).setActiveDriveName("none");
-				PacketDispatcher.sendTo(new SyncDriveData(player.getCapability(ModCapabilities.DRIVE_STATE, null), player.getCapability(ModCapabilities.PLAYER_STATS, null)), (EntityPlayerMP) player);
-				System.out.println("Update():"+player);
-
 				endDrive(player);
 			}
 		}
@@ -128,12 +122,11 @@ public class DriveFormFinal extends DriveForm {
 
 	@Override
 	public void endDrive (EntityPlayer player) {
-		System.out.println("EndDrive():"+player);
-		/*player.getCapability(ModCapabilities.PLAYER_STATS, null).setDP(0);
+		player.getCapability(ModCapabilities.PLAYER_STATS, null).setDP(0);
 		player.getCapability(ModCapabilities.DRIVE_STATE, null).setInDrive(false);
 		player.getCapability(ModCapabilities.DRIVE_STATE, null).setActiveDriveName("none");
-		PacketDispatcher.sendTo(new SyncDriveData(player.getCapability(ModCapabilities.DRIVE_STATE, null), player.getCapability(ModCapabilities.PLAYER_STATS, null)), (EntityPlayerMP) player);
-		*/
+		if (!player.worldObj.isRemote)
+			PacketDispatcher.sendTo(new SyncDriveData(player.getCapability(ModCapabilities.DRIVE_STATE, null), player.getCapability(ModCapabilities.PLAYER_STATS, null)), (EntityPlayerMP) player);
 	}
 
 }
