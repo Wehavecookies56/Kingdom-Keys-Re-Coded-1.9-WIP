@@ -61,12 +61,15 @@ public class ConfigHandler {
 
 		//INTERFACE
 		guiAlpha = configProperty("Gui Alpha (W.I.P.)", "Sets the Command Menu and Bars opacity (0-255)", guiAlpha, INTERFACE);
-		EnableHeartsOnHUD = configProperty("Enable hearts on HUD", "Toggles rendering of hearts on the HUD", EnableHeartsOnHUD, INTERFACE);
+		EnableHeartsOnHUDProperty = configBooleanProperty("Enable hearts on HUD", "Toggles rendering of hearts on the HUD", EnableHeartsOnHUD, INTERFACE);
+		EnableHeartsOnHUD = EnableHeartsOnHUDProperty.getBoolean();
+
 		interfaceColourProperty = configProperty("Interface colour", "Set the colour of the interface with RGB values", interfaceColour, INTERFACE);
 		interfaceColour = interfaceColourProperty.getIntList();
 
 		//SOUND
-		EnableCustomMusic = configProperty("Enable custom music", "Toggles the custom music that plays, requires the music resource pack", EnableCustomMusic, SOUND);
+		EnableCustomMusicProperty = configBooleanProperty("Enable custom music", "Toggles the custom music that plays, requires the music resource pack", EnableCustomMusic, SOUND);
+		EnableCustomMusic = EnableCustomMusicProperty.getBoolean();
 		ForceEnableCustomMusic = configProperty("Force Enable custom music", "Force toggles the custom music that plays regardless of whether the resource pack is loaded", ForceEnableCustomMusic, SOUND);
 
 		//ITEMS
@@ -375,6 +378,12 @@ public class ConfigHandler {
 	}
 
 	public static Property configProperty(String name, String description, int[] defaultValue, String category) {
+		Property property = config.get(category, name, defaultValue);
+		property.setComment(description);
+		return property;
+	}
+
+	public static Property configBooleanProperty(String name, String description, boolean defaultValue, String category) {
 		Property property = config.get(category, name, defaultValue);
 		property.setComment(description);
 		return property;
