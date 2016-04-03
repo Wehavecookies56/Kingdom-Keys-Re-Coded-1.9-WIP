@@ -110,7 +110,10 @@ public class DriveFormFinal extends DriveForm {
 			player.getCapability(ModCapabilities.PLAYER_STATS, null).remDP(0.1);
 			if (player.getCapability(ModCapabilities.PLAYER_STATS, null).getDP() < 0) player.getCapability(ModCapabilities.PLAYER_STATS, null).setDP(0);
 		} else
-			endDrive(player);
+			player.getCapability(ModCapabilities.PLAYER_STATS, null).setDP(0);
+		player.getCapability(ModCapabilities.DRIVE_STATE, null).setInDrive(false);
+		player.getCapability(ModCapabilities.DRIVE_STATE, null).setActiveDriveName("none");
+		PacketDispatcher.sendTo(new SyncDriveData(player.getCapability(ModCapabilities.DRIVE_STATE, null), player.getCapability(ModCapabilities.PLAYER_STATS, null)), (EntityPlayerMP) player);
 	}
 
 	@Override

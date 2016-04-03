@@ -60,7 +60,8 @@ public class InputHandler {
 			prob = 10;
 		else if (ap > 4 && ap <= 9)
 			prob = 25;
-		else if (ap >= 10) prob = 40;
+		else if (ap >= 10)
+			prob = 40;
 
 		if (random * 100 < prob) {
 			PacketDispatcher.sendToServer(new DriveFormPacket(Strings.Form_Anti));
