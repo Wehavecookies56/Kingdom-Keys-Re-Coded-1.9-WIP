@@ -964,6 +964,7 @@ public class Strings {
 	;
 	
 	public static final String 
+	KKChestInventory = "container.kkchest",
 	KeychainInventory = "container.keychain",
 	SynthBagInventory = "container.synthbag",
 	SynthesisBagSInventory = "container.synthesisbagsinventory",

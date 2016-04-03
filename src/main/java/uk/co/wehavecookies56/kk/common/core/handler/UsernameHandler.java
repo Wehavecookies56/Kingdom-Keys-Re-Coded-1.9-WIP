@@ -97,28 +97,28 @@ public class UsernameHandler {
                 	
                     if (this.usernamePropsRegistry.get(event.getUsername()).containsKey("nameformat")){
                         nameFormat = this.usernamePropsRegistry.get(event.getUsername()).get("nameformat");
-	                    if(nameFormat.contains("Ã‚"))
+	                    if(nameFormat.contains("Â"))
 	                    	nameFormat = nameFormat.substring(1, nameFormat.length());
                     }
                     else nameFormat = "Â§f";
                    
                     if (this.usernamePropsRegistry.get(event.getUsername()).containsKey("chatformat")){
                         chatFormat = this.usernamePropsRegistry.get(event.getUsername()).get("chatformat");
-                        if(chatFormat.contains("Ã‚"))
+                        if(chatFormat.contains("Â"))
                         	chatFormat = chatFormat.substring(1, chatFormat.length());
                     }
 	                else chatFormat = "Â§f";
                    
 	                if (this.usernamePropsRegistry.get(event.getUsername()).containsKey("prefixformat")){
                         prefixFormat = this.usernamePropsRegistry.get(event.getUsername()).get("prefixformat");
-                        if(prefixFormat.contains("Ã‚"))
+                        if(prefixFormat.contains("Â"))
                         	prefixFormat = prefixFormat.substring(1, prefixFormat.length());
 	                }
                     else prefixFormat = "Â§f";
                     
                     if (this.usernamePropsRegistry.get(event.getUsername()).containsKey("prefix")){
                         prefix = this.usernamePropsRegistry.get(event.getUsername()).get("prefix");
-	                    if(prefix.contains("Ã‚"))
+	                    if(prefix.contains("Â"))
 	                    	prefix = prefix.substring(1, prefix.length());
 	                }
                     else prefix = "";

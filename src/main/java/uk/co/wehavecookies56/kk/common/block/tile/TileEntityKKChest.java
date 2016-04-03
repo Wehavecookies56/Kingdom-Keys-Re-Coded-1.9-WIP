@@ -11,6 +11,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
+import uk.co.wehavecookies56.kk.common.core.helper.TextHelper;
+import uk.co.wehavecookies56.kk.common.lib.Strings;
 
 public class TileEntityKKChest extends TileEntity implements IInventory {
 	final int NUMBER_OF_SLOTS = 9;
@@ -145,6 +147,6 @@ public class TileEntityKKChest extends TileEntity implements IInventory {
 
 	@Override
 	public String getName () {
-		return "container.kk.kkchest";
+		return TextHelper.localize(Strings.KKChestInventory);
 	}
 }

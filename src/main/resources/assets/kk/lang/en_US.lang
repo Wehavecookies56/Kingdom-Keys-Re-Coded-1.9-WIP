@@ -625,13 +625,14 @@ gui.menu.config.title=Config
 gui.menu.config.colour.desc=Change the interface color by entering a RGB value
 gui.menu.config.hearts=Show hearts on hud
 gui.menu.config.music=Enable custom music
+gui.menu.config.fire=Kingdom Hearts 2 Fire?
 
 #Containers
 container.keychain=Place a keychain here
 container.spellsinventory=Place Spell Orbs here
 container.potionsinventory=Place potions here
 container.driveinventory=Place Form Orbs here
-container.kk.kkchest=Chest
+container.kkchest=Chest
 container.synthbag=Place a Synthesis Bag here
 container.synthesisbagsinventory=Small Synthesis Material Bag
 container.synthesisbagminventory=Medium Synthesis Material Bag

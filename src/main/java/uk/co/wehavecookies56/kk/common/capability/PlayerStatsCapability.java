@@ -160,7 +160,7 @@ public class PlayerStatsCapability {
         @Override public void remDP(double dp) { if (dp + this.dp < 0) this.dp = 0; else this.dp -= dp; }
         @Override public boolean setMP(double mp) { if (mp <= this.maxMP) {this.mp = mp; return true; } return false; }
         @Override public void addMP(double mp) { if (mp + this.mp > this.maxMP) this.mp = this.maxMP; else this.mp += mp; }
-        @Override public void remMP(double mp) { if (mp + this.mp < 0) this.mp = 0; else this.mp -= mp; }
+        @Override public void remMP(double mp) { if (this.mp - mp < 0) this.mp = 0;	else this.mp -= mp; }
         @Override public void setMaxMP(double maxMP) { this.maxMP = maxMP;}
 		@Override public void setRecharge(boolean recharge) { this.recharge = recharge; }
 		@Override public void setHudMode(boolean hud) { this.hudmode = hud; }
