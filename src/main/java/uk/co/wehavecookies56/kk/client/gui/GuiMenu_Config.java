@@ -75,8 +75,8 @@ public class GuiMenu_Config extends GuiMenu_Bars {
 		buttonList.add(showHearts = new GuiButton(HEARTS, mc.fontRendererObj.getStringWidth(TextHelper.localize(Strings.Gui_Menu_Config_Hearts)) + 15, 115, 100, 20, String.valueOf(ConfigHandler.EnableHeartsOnHUD)));
 		buttonList.add(musicToggle = new GuiButton(MUSIC, mc.fontRendererObj.getStringWidth(TextHelper.localize(Strings.Gui_Menu_Config_Music)) + 15, 135, 100, 20, String.valueOf(ConfigHandler.EnableCustomMusic)));
 	    buttonList.add(fire = new GuiButton(FIRE, mc.fontRendererObj.getStringWidth(TextHelper.localize(Strings.Gui_Menu_Config_Fire)) + 15, 155, 100, 20, String.valueOf(Minecraft.getMinecraft().thePlayer.getCapability(ModCapabilities.MAGIC_STATE, null).getKH1Fire())));
-		back = new GuiButton(BACK, 10, 0, 100, 20, TextHelper.localize(Strings.Gui_Menu_Items_Button_Back));
-		buttonList.add(back = new GuiButton(BACK, 5, (mc.displayHeight / 2) - (mc.displayHeight / 8), 100, 20, TextHelper.localize(Strings.Gui_Menu_Items_Button_Back)));
+		buttonList.add(back = new GuiButton(BACK, 5, 175, 100, 20, TextHelper.localize(Strings.Gui_Menu_Items_Button_Back)));
+
 		this.r.setText(String.valueOf(ConfigHandler.interfaceColour[0]));
 		this.g.setText(String.valueOf(ConfigHandler.interfaceColour[1]));
 		this.b.setText(String.valueOf(ConfigHandler.interfaceColour[2]));

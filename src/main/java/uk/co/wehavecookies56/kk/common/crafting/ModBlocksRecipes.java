@@ -6,6 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import uk.co.wehavecookies56.kk.common.block.ModBlocks;
+import uk.co.wehavecookies56.kk.common.item.ModItems;
 
 public class ModBlocksRecipes {
 
@@ -29,6 +30,7 @@ public class ModBlocksRecipes {
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.GhostBlox), "GNG", "GRG", "GNG", 'G', "blockGlass", 'N', ModBlocks.NormalBlox, 'R', "blockRedstone"));
 
 		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.SynthesisTable), "HIH", "NCN", "HIH", 'H', ModBlocks.HardBlox, 'I', "ingotIron", 'N', ModBlocks.NormalBlox, 'C', Blocks.crafting_table));
-
+		
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.KKChest), "HGH", "GCG", "HGH", 'H', ModItems.Heart, 'G', Items.gold_ingot, 'C', Blocks.chest));
 	}
 }
