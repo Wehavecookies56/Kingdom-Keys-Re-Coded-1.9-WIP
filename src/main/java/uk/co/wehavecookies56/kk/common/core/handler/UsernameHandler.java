@@ -98,24 +98,24 @@ public class UsernameHandler {
                     if (this.usernamePropsRegistry.get(event.getUsername()).containsKey("nameformat")){
                         nameFormat = this.usernamePropsRegistry.get(event.getUsername()).get("nameformat");
                     }
-                    else nameFormat = "§f";
+                    else nameFormat = "\u00A7f";
                    
                     if (this.usernamePropsRegistry.get(event.getUsername()).containsKey("chatformat")){
                         chatFormat = this.usernamePropsRegistry.get(event.getUsername()).get("chatformat");
                     }
-	                else chatFormat = "§f";
+	                else chatFormat = "\u00A7f";
                    
 	                if (this.usernamePropsRegistry.get(event.getUsername()).containsKey("prefixformat")){
                         prefixFormat = this.usernamePropsRegistry.get(event.getUsername()).get("prefixformat");
 	                }
-                    else prefixFormat = "§f";
+                    else prefixFormat = "\u00A7f";
                     
                     if (this.usernamePropsRegistry.get(event.getUsername()).containsKey("prefix")){
                         prefix = this.usernamePropsRegistry.get(event.getUsername()).get("prefix");
 	                }
                     else prefix = "";
                 } else {
-                    nameFormat = chatFormat = prefixFormat = "§f";
+                    nameFormat = chatFormat = prefixFormat = "\u00A7f";
                     prefix = "";
                 }
                 EntityPlayer target = (EntityPlayer) players.get(i);
