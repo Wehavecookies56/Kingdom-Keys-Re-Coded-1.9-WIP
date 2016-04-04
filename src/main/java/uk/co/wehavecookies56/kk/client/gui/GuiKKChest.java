@@ -22,7 +22,7 @@ public class GuiKKChest extends GuiContainer {
 		super(new ContainerKKChest(invPlayer, tile));
 		tileEntityKKChest = tile;
 		xSize = 176;
-		ySize = 133;
+		ySize = 186;
 	}
 
 	@Override

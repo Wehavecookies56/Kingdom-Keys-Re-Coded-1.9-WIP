@@ -15,7 +15,7 @@ import uk.co.wehavecookies56.kk.common.core.helper.TextHelper;
 import uk.co.wehavecookies56.kk.common.lib.Strings;
 
 public class TileEntityKKChest extends TileEntity implements IInventory {
-	final int NUMBER_OF_SLOTS = 9;
+	final int NUMBER_OF_SLOTS = 36;
 	private ItemStack[] itemStacks = new ItemStack[NUMBER_OF_SLOTS];
 
 	@Override

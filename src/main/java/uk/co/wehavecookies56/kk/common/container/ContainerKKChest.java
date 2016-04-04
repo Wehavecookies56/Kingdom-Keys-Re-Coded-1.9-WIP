@@ -6,6 +6,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import uk.co.wehavecookies56.kk.common.block.tile.TileEntityKKChest;
+import uk.co.wehavecookies56.kk.common.container.slot.SlotSynthesisBag;
 
 public class ContainerKKChest extends Container {
 
@@ -19,21 +20,24 @@ public class ContainerKKChest extends Container {
 
 	private final int VANILLA_FIRST_SLOT_INDEX = 0;
 	private final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
-	private final int TE_INVENTORY_SLOT_COUNT = 9;
+	private final int TE_INVENTORY_COLUMN_COUNT = 9;
+	private final int TE_INVENTORY_ROW_COUNT = 4;
+
+	private final int TE_INVENTORY_SLOT_COUNT = TE_INVENTORY_ROW_COUNT * TE_INVENTORY_COLUMN_COUNT;
 
 	public ContainerKKChest (InventoryPlayer invPlayer, TileEntityKKChest tileEntityKKChest) {
 		this.tileEntityKKChest = tileEntityKKChest;
 
-		final int SLOT_X_SPACING = 18;
+		/*final int SLOT_X_SPACING = 18;
 		final int SLOT_Y_SPACING = 18;
 		final int HOTBAR_XPOS = 8;
-		final int HOTBAR_YPOS = 109;
-		for (int x = 0; x < HOTBAR_SLOT_COUNT; x++) {
+		final int HOTBAR_YPOS = 109;*/
+		/*for (int x = 0; x < HOTBAR_SLOT_COUNT; x++) {
 			int slotNumber = x;
 			addSlotToContainer(new Slot(invPlayer, slotNumber, HOTBAR_XPOS + SLOT_X_SPACING * x, HOTBAR_YPOS));
-		}
+		}*/
 
-		final int PLAYER_INVENTORY_XPOS = 8;
+		/*final int PLAYER_INVENTORY_XPOS = 8;
 		final int PLAYER_INVENTORY_YPOS = 51;
 		for (int y = 0; y < PLAYER_INVENTORY_ROW_COUNT; y++)
 			for (int x = 0; x < PLAYER_INVENTORY_COLUMN_COUNT; x++) {
@@ -41,15 +45,23 @@ public class ContainerKKChest extends Container {
 				int xpos = PLAYER_INVENTORY_XPOS + x * SLOT_X_SPACING;
 				int ypos = PLAYER_INVENTORY_YPOS + y * SLOT_Y_SPACING;
 				addSlotToContainer(new Slot(invPlayer, slotNumber, xpos, ypos));
-			}
+			}*/
 
 		if (TE_INVENTORY_SLOT_COUNT != tileEntityKKChest.getSizeInventory()) System.err.println("Mismatched slot count in ContainerBasic(" + TE_INVENTORY_SLOT_COUNT + ") and TileInventory (" + tileEntityKKChest.getSizeInventory() + ")");
-		final int TILE_INVENTORY_XPOS = 8;
-		final int TILE_INVENTORY_YPOS = 20;
-		for (int x = 0; x < TE_INVENTORY_SLOT_COUNT; x++) {
-			int slotNumber = x;
-			addSlotToContainer(new Slot(tileEntityKKChest, slotNumber, TILE_INVENTORY_XPOS + SLOT_X_SPACING * x, TILE_INVENTORY_YPOS));
-		}
+		
+		int i;
+		int j;
+		
+		for (i = 0; i < 4; i++)
+			for (j = 0; j < 9; j++)
+				addSlotToContainer(new SlotSynthesisBag(tileEntityKKChest, j + i * 7, 8 + j * 18, 20 + i * 18));
+
+		for (i = 0; i < 3; ++i)
+			for (j = 0; j < 9; ++j)
+				addSlotToContainer(new Slot(invPlayer, j + i * 9 + 9, 8 + j * 18, 105 + i * 18));
+
+		for (i = 0; i < 9; ++i)
+			addSlotToContainer(new Slot(invPlayer, i, 8 + i * 18, 163));
 	}
 
 	@Override

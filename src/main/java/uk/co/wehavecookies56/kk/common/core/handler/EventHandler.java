@@ -387,7 +387,7 @@ public class EventHandler {
 		}
 		Item kkchest = Item.getItemFromBlock(ModBlocks.KKChest);
 		if (event.getItemStack().getItem() == kkchest) {
-			event.getToolTip().add(TextHelper.localize(Strings.KKChestDesc_1));
+			//event.getToolTip().add(TextHelper.localize(Strings.KKChestDesc_1));
 			if (!KeyboardHelper.isShiftDown())
 				event.getToolTip().add(TextFormatting.ITALIC + TextHelper.localize(Strings.HoldForInfo));
 			else
