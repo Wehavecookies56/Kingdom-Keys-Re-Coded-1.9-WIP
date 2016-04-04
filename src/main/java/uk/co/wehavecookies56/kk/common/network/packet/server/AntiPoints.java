@@ -37,6 +37,10 @@ public class AntiPoints extends AbstractMessage.AbstractServerMessage<AntiPoints
 		if (this.operation.equals("+"))
 			player.getCapability(ModCapabilities.DRIVE_STATE, null).setAntiPoints(player.getCapability(ModCapabilities.DRIVE_STATE, null).getAntiPoints() + points);
 		else if (this.operation.equals("-")) 
-			player.getCapability(ModCapabilities.DRIVE_STATE, null).setAntiPoints(player.getCapability(ModCapabilities.DRIVE_STATE, null).getAntiPoints() - points);
+			if(player.getCapability(ModCapabilities.DRIVE_STATE, null).getAntiPoints()-points < 0){
+				player.getCapability(ModCapabilities.DRIVE_STATE, null).setAntiPoints(0);
+			}else{
+				player.getCapability(ModCapabilities.DRIVE_STATE, null).setAntiPoints(player.getCapability(ModCapabilities.DRIVE_STATE, null).getAntiPoints() - points);
+			}
 	}
 }

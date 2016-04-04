@@ -97,33 +97,33 @@ public class UsernameHandler {
                 	
                     if (this.usernamePropsRegistry.get(event.getUsername()).containsKey("nameformat")){
                         nameFormat = this.usernamePropsRegistry.get(event.getUsername()).get("nameformat");
-	                    if(nameFormat.contains("ï¿½"))
+	                    if(!nameFormat.startsWith("§"))
 	                    	nameFormat = nameFormat.substring(1, nameFormat.length());
                     }
-                    else nameFormat = "Â§f";
+                    else nameFormat = "§f";
                    
                     if (this.usernamePropsRegistry.get(event.getUsername()).containsKey("chatformat")){
                         chatFormat = this.usernamePropsRegistry.get(event.getUsername()).get("chatformat");
-                        if(chatFormat.contains("ï¿½"))
+                        
+	                    if(!chatFormat.startsWith("§"))
                         	chatFormat = chatFormat.substring(1, chatFormat.length());
+
                     }
-	                else chatFormat = "Â§f";
+	                else chatFormat = "§f";
                    
 	                if (this.usernamePropsRegistry.get(event.getUsername()).containsKey("prefixformat")){
                         prefixFormat = this.usernamePropsRegistry.get(event.getUsername()).get("prefixformat");
-                        if(prefixFormat.contains("ï¿½"))
+	                    if(!prefixFormat.startsWith("§"))
                         	prefixFormat = prefixFormat.substring(1, prefixFormat.length());
 	                }
-                    else prefixFormat = "Â§f";
+                    else prefixFormat = "§f";
                     
                     if (this.usernamePropsRegistry.get(event.getUsername()).containsKey("prefix")){
                         prefix = this.usernamePropsRegistry.get(event.getUsername()).get("prefix");
-	                    if(prefix.contains("ï¿½"))
-	                    	prefix = prefix.substring(1, prefix.length());
 	                }
                     else prefix = "";
                 } else {
-                    nameFormat = chatFormat = prefixFormat = "Â§f";
+                    nameFormat = chatFormat = prefixFormat = "§f";
                     prefix = "";
                 }
                 EntityPlayer target = (EntityPlayer) players.get(i);

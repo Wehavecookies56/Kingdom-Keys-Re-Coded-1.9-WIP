@@ -63,6 +63,9 @@ public class InputHandler {
 		else if (ap >= 10)
 			prob = 40;
 
+		/*System.out.println("AP: "+ap);
+		System.out.println("Prob: "+prob+"%");*/
+
 		if (random * 100 < prob) {
 			PacketDispatcher.sendToServer(new DriveFormPacket(Strings.Form_Anti));
 			GuiCommandMenu.selected = GuiCommandMenu.ATTACK;
