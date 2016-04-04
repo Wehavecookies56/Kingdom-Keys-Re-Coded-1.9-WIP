@@ -97,33 +97,25 @@ public class UsernameHandler {
                 	
                     if (this.usernamePropsRegistry.get(event.getUsername()).containsKey("nameformat")){
                         nameFormat = this.usernamePropsRegistry.get(event.getUsername()).get("nameformat");
-	                    if(!nameFormat.startsWith("§"))
-	                    	nameFormat = nameFormat.substring(1, nameFormat.length());
                     }
-                    else nameFormat = "§f";
+                    else nameFormat = "Â§f";
                    
                     if (this.usernamePropsRegistry.get(event.getUsername()).containsKey("chatformat")){
                         chatFormat = this.usernamePropsRegistry.get(event.getUsername()).get("chatformat");
-                        
-	                    if(!chatFormat.startsWith("§"))
-                        	chatFormat = chatFormat.substring(1, chatFormat.length());
-
                     }
-	                else chatFormat = "§f";
+	                else chatFormat = "Â§f";
                    
 	                if (this.usernamePropsRegistry.get(event.getUsername()).containsKey("prefixformat")){
                         prefixFormat = this.usernamePropsRegistry.get(event.getUsername()).get("prefixformat");
-	                    if(!prefixFormat.startsWith("§"))
-                        	prefixFormat = prefixFormat.substring(1, prefixFormat.length());
 	                }
-                    else prefixFormat = "§f";
+                    else prefixFormat = "Â§f";
                     
                     if (this.usernamePropsRegistry.get(event.getUsername()).containsKey("prefix")){
                         prefix = this.usernamePropsRegistry.get(event.getUsername()).get("prefix");
 	                }
                     else prefix = "";
                 } else {
-                    nameFormat = chatFormat = prefixFormat = "§f";
+                    nameFormat = chatFormat = prefixFormat = "Â§f";
                     prefix = "";
                 }
                 EntityPlayer target = (EntityPlayer) players.get(i);
