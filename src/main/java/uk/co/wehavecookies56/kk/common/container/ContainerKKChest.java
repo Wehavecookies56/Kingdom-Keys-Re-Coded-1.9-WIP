@@ -28,25 +28,6 @@ public class ContainerKKChest extends Container {
 	public ContainerKKChest (InventoryPlayer invPlayer, TileEntityKKChest tileEntityKKChest) {
 		this.tileEntityKKChest = tileEntityKKChest;
 
-		/*final int SLOT_X_SPACING = 18;
-		final int SLOT_Y_SPACING = 18;
-		final int HOTBAR_XPOS = 8;
-		final int HOTBAR_YPOS = 109;*/
-		/*for (int x = 0; x < HOTBAR_SLOT_COUNT; x++) {
-			int slotNumber = x;
-			addSlotToContainer(new Slot(invPlayer, slotNumber, HOTBAR_XPOS + SLOT_X_SPACING * x, HOTBAR_YPOS));
-		}*/
-
-		/*final int PLAYER_INVENTORY_XPOS = 8;
-		final int PLAYER_INVENTORY_YPOS = 51;
-		for (int y = 0; y < PLAYER_INVENTORY_ROW_COUNT; y++)
-			for (int x = 0; x < PLAYER_INVENTORY_COLUMN_COUNT; x++) {
-				int slotNumber = HOTBAR_SLOT_COUNT + y * PLAYER_INVENTORY_COLUMN_COUNT + x;
-				int xpos = PLAYER_INVENTORY_XPOS + x * SLOT_X_SPACING;
-				int ypos = PLAYER_INVENTORY_YPOS + y * SLOT_Y_SPACING;
-				addSlotToContainer(new Slot(invPlayer, slotNumber, xpos, ypos));
-			}*/
-
 		if (TE_INVENTORY_SLOT_COUNT != tileEntityKKChest.getSizeInventory()) System.err.println("Mismatched slot count in ContainerBasic(" + TE_INVENTORY_SLOT_COUNT + ") and TileInventory (" + tileEntityKKChest.getSizeInventory() + ")");
 		
 		int i;
