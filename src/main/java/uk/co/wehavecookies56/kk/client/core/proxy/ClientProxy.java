@@ -176,14 +176,14 @@ public class ClientProxy extends CommonProxy
 		registerKeyBindings();
 		MinecraftForge.EVENT_BUS.register(new ClientEventHandler());
 		ModAchievements.openMenu.setStatStringFormatter(new IStatStringFormat() {
-			@Override
-			public String formatString(String s) {
-				try {
-					return String.format(s, Keyboard.getKeyName(InputHandler.Keybinds.OPENMENU.getKeybind().getKeyCode()));
-				} catch (Exception e) {
-					return s;
-				}
+		@Override
+		public String formatString(String s) {
+			try {
+				return String.format(s, Keyboard.getKeyName(InputHandler.Keybinds.OPENMENU.getKeybind().getKeyCode()));
+			} catch (Exception e) {
+				return s;
 			}
+		}
 		});
 		//ModelPlayerAPI.register(Reference.MODID, ModelPlayerDrive.class);
 		//RenderPlayerAPI.register(Reference.MODID, RenderPlayerDrive.class);

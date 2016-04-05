@@ -170,6 +170,10 @@ public class Strings {
 	Gui_Synthesis_Main_Recipes_ReqMaterials = Gui_Synthesis_Main_Recipes + ".requiredmaterials",
 	Gui_Synthesis_Main_Recipes_Create = Gui_Synthesis_Main_Recipes + ".create";
 
+	//Chat Messages
+	public static final String
+	RecipeLearn = "chat.recipeLearn",
+	RecipeRepeat = "chat.recipeRepeat";
 	// Blocks
 	public static final String
 	// Blox

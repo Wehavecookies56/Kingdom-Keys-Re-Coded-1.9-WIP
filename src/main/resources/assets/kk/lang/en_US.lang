@@ -702,3 +702,9 @@ form.limit=Limit Form
 form.master=Master Form
 form.final=Final Form
 form.anti=Anti Form
+
+############################
+#Chat messages
+############################
+chat.recipeLearn=Successfully learnt the recipe for '%1$s'
+chat.recipeRepeat=Recipe for '%1$s' was not learnt because you have already learnt it
