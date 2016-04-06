@@ -35,7 +35,7 @@ public class ContainerKKChest extends Container {
 		
 		for (i = 0; i < 4; i++)
 			for (j = 0; j < 9; j++)
-				addSlotToContainer(new SlotSynthesisBag(tileEntityKKChest, j + i * 7, 8 + j * 18, 20 + i * 18));
+				addSlotToContainer(new Slot(tileEntityKKChest, j + i * 7, 8 + j * 18, 20 + i * 18));
 
 		for (i = 0; i < 3; ++i)
 			for (j = 0; j < 9; ++j)

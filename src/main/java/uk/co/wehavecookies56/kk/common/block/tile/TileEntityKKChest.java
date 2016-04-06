@@ -15,7 +15,7 @@ import uk.co.wehavecookies56.kk.common.core.helper.TextHelper;
 import uk.co.wehavecookies56.kk.common.lib.Strings;
 
 public class TileEntityKKChest extends TileEntity implements IInventory {
-	//ItemStack keyblade;
+	ItemStack keyblade;
 	final int NUMBER_OF_SLOTS = 36;
 	private ItemStack[] itemStacks = new ItemStack[NUMBER_OF_SLOTS];
 
@@ -86,9 +86,13 @@ public class TileEntityKKChest extends TileEntity implements IInventory {
 				dataForAllSlots.appendTag(dataForThisSlot);
 			}
 		parentNBTTagCompound.setTag("Items", dataForAllSlots);
-		
-		//keyblade.writeToNBT(new NBTTagCompound().setTag("Keyblade", parentNBTTagCompound));
-		}
+
+		NBTTagCompound keybladeCompound = new NBTTagCompound();
+		if (keyblade != null)
+			keyblade.writeToNBT(keybladeCompound);
+		parentNBTTagCompound.setTag("Keyblade", keybladeCompound);
+
+	}
 
 	@Override
 	public void readFromNBT (NBTTagCompound parentNBTTagCompound) {
@@ -101,9 +105,10 @@ public class TileEntityKKChest extends TileEntity implements IInventory {
 			NBTTagCompound dataForOneSlot = dataForAllSlots.getCompoundTagAt(i);
 			int slotIndex = dataForOneSlot.getByte("Slot") & 255;
 			if (slotIndex >= 0 && slotIndex < this.itemStacks.length) this.itemStacks[slotIndex] = ItemStack.loadItemStackFromNBT(dataForOneSlot);
-			
-			//keyblade = ItemStack.loadItemStackFromNBT(parentNBTTagCompound.getCompoundTag("Keyblade"));
 		}
+
+		NBTTagCompound keybladeCompound = parentNBTTagCompound.getCompoundTag("Keyblade");
+		keyblade = ItemStack.loadItemStackFromNBT(keybladeCompound);
 	}
 
 	@Override
@@ -152,5 +157,13 @@ public class TileEntityKKChest extends TileEntity implements IInventory {
 	@Override
 	public String getName () {
 		return TextHelper.localize(Strings.KKChestInventory);
+	}
+
+	public ItemStack getKeyblade() {
+		return keyblade;
+	}
+
+	public void setKeyblade(ItemStack keyblade) {
+		this.keyblade = keyblade;
 	}
 }

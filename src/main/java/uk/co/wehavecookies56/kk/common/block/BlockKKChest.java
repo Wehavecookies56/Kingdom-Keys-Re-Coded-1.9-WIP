@@ -21,13 +21,16 @@ import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import uk.co.wehavecookies56.kk.common.KingdomKeys;
 import uk.co.wehavecookies56.kk.common.block.tile.TileEntityKKChest;
 import uk.co.wehavecookies56.kk.common.item.ItemKeyblade;
 import uk.co.wehavecookies56.kk.common.item.ModItems;
-import uk.co.wehavecookies56.kk.client.core.helper.GuiHelper;
+import uk.co.wehavecookies56.kk.common.lib.GuiIDs;
 
 public class BlockKKChest extends BlockContainer implements ITileEntityProvider {
 	protected Random rand = new Random();
@@ -49,10 +52,30 @@ public class BlockKKChest extends BlockContainer implements ITileEntityProvider 
 	
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
-		if (world.isRemote) return true;
-		if (player.getHeldItem(EnumHand.MAIN_HAND) != null && player.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ItemKeyblade) if (player.getHeldItem(EnumHand.MAIN_HAND).getItem() != ModItems.WoodenKeyblade && player.getHeldItem(EnumHand.MAIN_HAND).getItem() != ModItems.WoodenStick && player.getHeldItem(EnumHand.MAIN_HAND).getItem() != ModItems.DreamSword) {
-			GuiHelper.openKKChest(player, world, pos);
-			return true;
+		if (!world.isRemote) {
+			if (player.getHeldItem(EnumHand.MAIN_HAND) != null && player.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ItemKeyblade)
+				if (player.getHeldItem(EnumHand.MAIN_HAND).getItem() != ModItems.WoodenKeyblade && player.getHeldItem(EnumHand.MAIN_HAND).getItem() != ModItems.WoodenStick && player.getHeldItem(EnumHand.MAIN_HAND).getItem() != ModItems.DreamSword) {
+					if (world.getTileEntity(pos) instanceof TileEntityKKChest) {
+						TileEntityKKChest te = (TileEntityKKChest) world.getTileEntity(pos);
+						if (te.getKeyblade() == null) {
+							te.setKeyblade(player.getHeldItemMainhand());
+							te.markDirty();
+
+							player.addChatComponentMessage(new TextComponentString(TextFormatting.GREEN + "Set " + heldItem.getDisplayName() + " as the keyblade to unlock the chest"));
+
+							player.openGui(KingdomKeys.instance, GuiIDs.GUI_KKCHEST_INV, world, pos.getX(), pos.getY(), pos.getZ());
+							return true;
+						} else if (te.getKeyblade().getItem() != null && te.getKeyblade().getItem() == player.getHeldItemMainhand().getItem()) {
+							player.openGui(KingdomKeys.instance, GuiIDs.GUI_KKCHEST_INV, world, pos.getX(), pos.getY(), pos.getZ());
+							return true;
+						} else if (hand == EnumHand.MAIN_HAND){
+							player.addChatComponentMessage(new TextComponentString(TextFormatting.RED + "The chest is locked"));
+							return false;
+						} else {
+							return false;
+						}
+					}
+				}
 		}
 		return false;
 	}

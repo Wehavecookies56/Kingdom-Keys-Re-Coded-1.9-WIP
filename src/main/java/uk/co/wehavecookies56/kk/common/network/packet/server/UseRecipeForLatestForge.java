@@ -1,3 +1,4 @@
+/*
 package uk.co.wehavecookies56.kk.common.network.packet.server;
 
 import java.io.IOException;
@@ -12,7 +13,6 @@ import uk.co.wehavecookies56.kk.common.capability.SynthesisRecipeCapability;
 import uk.co.wehavecookies56.kk.common.core.helper.TextHelper;
 import uk.co.wehavecookies56.kk.common.lib.Strings;
 import uk.co.wehavecookies56.kk.common.network.packet.AbstractMessage;
-
 public class UseRecipe extends AbstractMessage.AbstractServerMessage<UseRecipe> {
 
 	String recipe1, recipe2, recipe3;
@@ -84,3 +84,4 @@ public class UseRecipe extends AbstractMessage.AbstractServerMessage<UseRecipe> 
 	}
 
 }
+*/
