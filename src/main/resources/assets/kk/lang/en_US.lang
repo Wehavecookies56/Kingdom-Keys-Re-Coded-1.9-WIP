@@ -708,3 +708,6 @@ form.anti=Anti Form
 ############################
 chat.recipeLearn=Successfully learnt the recipe for '%1$s'
 chat.recipeRepeat=Recipe for '%1$s' was not learnt because you have already learnt it
+chat.savepoint=Spawn point saved
+chat.chestLockedSuccess=Chest locked with '%1$s'
+chat.chestLocked=Chest is locked with another keyblade

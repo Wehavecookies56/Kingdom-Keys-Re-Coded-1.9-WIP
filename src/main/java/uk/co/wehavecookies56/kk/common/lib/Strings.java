@@ -173,7 +173,10 @@ public class Strings {
 	//Chat Messages
 	public static final String
 	RecipeLearn = "chat.recipeLearn",
-	RecipeRepeat = "chat.recipeRepeat";
+	RecipeRepeat = "chat.recipeRepeat",
+	SavePointSave = "chat.savePointSave",
+	ChestLockSuccess = "chat.chestLockSuccess",
+	ChestLocked = "chat.chestLocked";
 	// Blocks
 	public static final String
 	// Blox

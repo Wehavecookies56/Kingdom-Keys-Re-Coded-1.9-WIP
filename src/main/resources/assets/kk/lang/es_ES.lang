@@ -627,7 +627,6 @@ gui.menu.config.hearts=Mostrar corazones en el HUD
 gui.menu.config.music=Activar música personalizada
 gui.menu.config.fire=¿Fuego de Kingdom Hearts 2?
 
-
 #Containers
 container.keychain=Pon un llavero aquí
 container.spellsinventory=Pon las magias aquí
@@ -709,3 +708,6 @@ form.anti=Anti Forma
 ############################
 chat.recipeLearn=Aprendida la receta para '%1$s'
 chat.recipeRepeat=Receta para '%1$s' no fue aprendida porque ya la conoces
+chat.savepoint=Punto de guardado establecido
+chat.chestLockedSuccess=Cofre bloqueado con '%1$s'
+chat.chestLocked=El cofre está bloqueado con otra Llave Espada

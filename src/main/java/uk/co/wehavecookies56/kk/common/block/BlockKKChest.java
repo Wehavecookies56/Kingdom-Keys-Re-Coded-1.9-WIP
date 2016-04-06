@@ -28,8 +28,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import uk.co.wehavecookies56.kk.common.KingdomKeys;
 import uk.co.wehavecookies56.kk.common.block.tile.TileEntityKKChest;
-import uk.co.wehavecookies56.kk.common.item.ItemKeyblade;
 import uk.co.wehavecookies56.kk.common.item.ModItems;
+import uk.co.wehavecookies56.kk.common.item.ItemKeyblade;
 import uk.co.wehavecookies56.kk.common.lib.GuiIDs;
 
 public class BlockKKChest extends BlockContainer implements ITileEntityProvider {
@@ -69,7 +69,7 @@ public class BlockKKChest extends BlockContainer implements ITileEntityProvider 
 							player.openGui(KingdomKeys.instance, GuiIDs.GUI_KKCHEST_INV, world, pos.getX(), pos.getY(), pos.getZ());
 							return true;
 						} else if (hand == EnumHand.MAIN_HAND){
-							player.addChatComponentMessage(new TextComponentString(TextFormatting.RED + "The chest is locked"));
+							player.addChatComponentMessage(new TextComponentString(TextFormatting.RED + "The chest is locked with another keyblade"));
 							return false;
 						} else {
 							return false;

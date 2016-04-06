@@ -553,6 +553,8 @@ public class EventHandler {
 				event.getEntity().getCapability(ModCapabilities.SUMMON_KEYBLADE, null).setIsKeybladeSummoned(false);
 				i = 0;
 			}
+		
+		
 		if (event.getSource().getSourceOfDamage() instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) event.getSource().getSourceOfDamage();
 			if (player.getHeldItem(EnumHand.MAIN_HAND) != null) if (player.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ItemKeyblade) if (event.getEntity() instanceof EntityAnimal)
