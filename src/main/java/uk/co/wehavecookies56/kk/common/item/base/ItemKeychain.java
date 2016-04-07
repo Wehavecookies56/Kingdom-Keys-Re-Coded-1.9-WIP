@@ -1,19 +1,17 @@
 package uk.co.wehavecookies56.kk.common.item.base;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
+import net.minecraft.item.ItemSword;
 
-public class ItemKeychain extends Item {
+public class ItemKeychain extends ItemSword {
 
-	ItemKeyblade blade;
-    
-	public ItemKeychain (ItemKeyblade blade) {
+	public ItemKeychain(ItemKeyblade blade, ToolMaterial material) {
+		super(material);
 		this.blade = blade;
-		setMaxStackSize(1);
+		setMaxStackSize(1);	
 	}
-
+	ItemKeyblade blade;
+	
 	public void setKeyblade (ItemKeyblade blade) {
 		this.blade = blade;
 	}
@@ -25,11 +23,5 @@ public class ItemKeychain extends Item {
     public boolean isBookEnchantable(ItemStack stack, ItemStack book){
 		return true;
 	}
-	@Override
-	public int getItemEnchantability()
-    {
-        return 30;
-    }
-
 
 }
