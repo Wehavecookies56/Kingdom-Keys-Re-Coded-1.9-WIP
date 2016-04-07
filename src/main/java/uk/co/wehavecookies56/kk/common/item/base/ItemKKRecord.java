@@ -1,4 +1,4 @@
-package uk.co.wehavecookies56.kk.common.item;
+package uk.co.wehavecookies56.kk.common.item.base;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -17,7 +17,7 @@ public class ItemKKRecord extends ItemRecord {
 
 	float length;
 
-	protected ItemKKRecord (String recordName, SoundEvent sound, String name, CreativeTabs tab, float length) {
+	public ItemKKRecord (String recordName, SoundEvent sound, String name, CreativeTabs tab, float length) {
 		super(recordName, sound);
 		setUnlocalizedName(name);
 		setCreativeTab(tab);

@@ -1,4 +1,4 @@
-package uk.co.wehavecookies56.kk.common.item;
+package uk.co.wehavecookies56.kk.common.item.base;
 
 import java.util.List;
 
@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import uk.co.wehavecookies56.kk.common.lib.Strings;
 import uk.co.wehavecookies56.kk.common.core.helper.TextHelper;
+import uk.co.wehavecookies56.kk.common.item.ModItems;
 
 public class ItemSynthesisMaterial extends Item {
 

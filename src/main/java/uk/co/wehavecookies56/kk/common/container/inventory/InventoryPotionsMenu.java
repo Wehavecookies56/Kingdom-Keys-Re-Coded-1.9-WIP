@@ -4,9 +4,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
-import uk.co.wehavecookies56.kk.common.item.ItemKKPotion;
 import uk.co.wehavecookies56.kk.common.lib.Strings;
 import uk.co.wehavecookies56.kk.common.core.helper.TextHelper;
+import uk.co.wehavecookies56.kk.common.item.base.ItemKKPotion;
 
 public class InventoryPotionsMenu extends AbstractInventory {
 	private final String name = TextHelper.localize(Strings.PotionsInventory);

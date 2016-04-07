@@ -14,11 +14,11 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextFormatting;
 import uk.co.wehavecookies56.kk.common.capability.ModCapabilities;
-import uk.co.wehavecookies56.kk.common.item.ItemKeyblade;
 import uk.co.wehavecookies56.kk.common.network.packet.PacketDispatcher;
 import uk.co.wehavecookies56.kk.common.network.packet.server.DeSummonKeyblade;
 import uk.co.wehavecookies56.kk.common.network.packet.server.RemoveItemInSlot;
 import uk.co.wehavecookies56.kk.common.core.helper.TextHelper;
+import uk.co.wehavecookies56.kk.common.item.base.ItemKeyblade;
 
 public class CommandRemoveKeychain implements ICommand {
 

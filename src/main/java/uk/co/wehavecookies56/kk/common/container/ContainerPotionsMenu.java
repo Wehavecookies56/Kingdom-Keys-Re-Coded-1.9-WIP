@@ -5,9 +5,9 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import uk.co.wehavecookies56.kk.common.item.ItemKKPotion;
 import uk.co.wehavecookies56.kk.common.container.inventory.InventoryPotionsMenu;
 import uk.co.wehavecookies56.kk.common.container.slot.SlotCustom;
+import uk.co.wehavecookies56.kk.common.item.base.ItemKKPotion;
 
 public class ContainerPotionsMenu extends Container {
 	private static final int INV_START = InventoryPotionsMenu.INV_SIZE, INV_END = INV_START + 26, HOTBAR_START = INV_END + 1, HOTBAR_END = HOTBAR_START + 8;

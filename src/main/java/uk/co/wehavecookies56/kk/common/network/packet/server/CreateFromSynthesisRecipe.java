@@ -14,10 +14,10 @@ import uk.co.wehavecookies56.kk.api.materials.Material;
 import uk.co.wehavecookies56.kk.api.recipes.Recipe;
 import uk.co.wehavecookies56.kk.api.recipes.RecipeRegistry;
 import uk.co.wehavecookies56.kk.common.capability.ModCapabilities;
-import uk.co.wehavecookies56.kk.common.item.ItemKeychain;
 import uk.co.wehavecookies56.kk.common.network.packet.PacketDispatcher;
 import uk.co.wehavecookies56.kk.common.network.packet.client.SyncMaterialData;
 import uk.co.wehavecookies56.kk.common.core.helper.AchievementHelper;
+import uk.co.wehavecookies56.kk.common.item.base.ItemKeychain;
 import uk.co.wehavecookies56.kk.common.capability.SynthesisMaterialCapability;
 import uk.co.wehavecookies56.kk.common.network.packet.AbstractMessage;
 

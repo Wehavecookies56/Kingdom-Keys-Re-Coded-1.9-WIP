@@ -10,7 +10,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraftforge.fml.relauncher.Side;
 import uk.co.wehavecookies56.kk.client.sound.ModSounds;
 import uk.co.wehavecookies56.kk.common.capability.ModCapabilities;
-import uk.co.wehavecookies56.kk.common.item.ItemKeyblade;
+import uk.co.wehavecookies56.kk.common.item.base.ItemKeyblade;
 import uk.co.wehavecookies56.kk.common.network.packet.PacketDispatcher;
 import uk.co.wehavecookies56.kk.common.network.packet.client.SyncKeybladeData;
 import uk.co.wehavecookies56.kk.common.network.packet.AbstractMessage;

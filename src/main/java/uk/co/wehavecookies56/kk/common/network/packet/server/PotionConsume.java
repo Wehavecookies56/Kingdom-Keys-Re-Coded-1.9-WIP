@@ -6,8 +6,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.relauncher.Side;
 import uk.co.wehavecookies56.kk.common.capability.ModCapabilities;
-import uk.co.wehavecookies56.kk.common.item.ItemKKPotion;
 import uk.co.wehavecookies56.kk.common.item.ModItems;
+import uk.co.wehavecookies56.kk.common.item.base.ItemKKPotion;
 import uk.co.wehavecookies56.kk.common.network.packet.AbstractMessage;
 
 public class PotionConsume extends AbstractMessage.AbstractServerMessage<PotionConsume> {

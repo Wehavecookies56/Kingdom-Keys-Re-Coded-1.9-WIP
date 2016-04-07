@@ -29,7 +29,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import uk.co.wehavecookies56.kk.common.KingdomKeys;
 import uk.co.wehavecookies56.kk.common.block.tile.TileEntityKKChest;
 import uk.co.wehavecookies56.kk.common.item.ModItems;
-import uk.co.wehavecookies56.kk.common.item.ItemKeyblade;
+import uk.co.wehavecookies56.kk.common.item.base.ItemKeyblade;
 import uk.co.wehavecookies56.kk.common.lib.GuiIDs;
 
 public class BlockKKChest extends BlockContainer implements ITileEntityProvider {

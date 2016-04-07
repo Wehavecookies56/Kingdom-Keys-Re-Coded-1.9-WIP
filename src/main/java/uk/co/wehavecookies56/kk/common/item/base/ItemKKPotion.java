@@ -1,4 +1,4 @@
-package uk.co.wehavecookies56.kk.common.item;
+package uk.co.wehavecookies56.kk.common.item.base;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
@@ -9,6 +9,7 @@ import net.minecraft.world.World;
 import uk.co.wehavecookies56.kk.client.sound.ModSounds;
 import uk.co.wehavecookies56.kk.common.capability.ModCapabilities;
 import uk.co.wehavecookies56.kk.common.container.inventory.InventoryPotionsMenu;
+import uk.co.wehavecookies56.kk.common.item.ModItems;
 import uk.co.wehavecookies56.kk.common.lib.Strings;
 import uk.co.wehavecookies56.kk.common.network.packet.PacketDispatcher;
 import uk.co.wehavecookies56.kk.common.network.packet.server.GiveItemInSlot;

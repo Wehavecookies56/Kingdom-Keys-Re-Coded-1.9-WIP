@@ -4,12 +4,12 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import uk.co.wehavecookies56.kk.common.item.ItemDriveForm;
-import uk.co.wehavecookies56.kk.common.item.ItemKKPotion;
-import uk.co.wehavecookies56.kk.common.item.ItemKeychain;
-import uk.co.wehavecookies56.kk.common.item.ItemSpellOrb;
 import uk.co.wehavecookies56.kk.common.item.ItemSynthesisBagL;
 import uk.co.wehavecookies56.kk.common.item.ItemSynthesisBagM;
 import uk.co.wehavecookies56.kk.common.item.ItemSynthesisBagS;
+import uk.co.wehavecookies56.kk.common.item.base.ItemKKPotion;
+import uk.co.wehavecookies56.kk.common.item.base.ItemKeychain;
+import uk.co.wehavecookies56.kk.common.item.base.ItemSpellOrb;
 
 public class SlotCustom extends Slot {
 	int window;

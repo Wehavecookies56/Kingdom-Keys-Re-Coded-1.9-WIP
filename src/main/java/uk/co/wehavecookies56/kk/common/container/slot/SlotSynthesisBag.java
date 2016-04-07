@@ -4,7 +4,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import uk.co.wehavecookies56.kk.common.item.ItemSynthesisBagS;
-import uk.co.wehavecookies56.kk.common.item.ItemSynthesisMaterial;
+import uk.co.wehavecookies56.kk.common.item.base.ItemSynthesisMaterial;
 
 public class SlotSynthesisBag extends Slot {
 

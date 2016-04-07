@@ -1,6 +1,7 @@
 package uk.co.wehavecookies56.kk.common.item;
 
 import net.minecraft.entity.player.EntityPlayer;
+import uk.co.wehavecookies56.kk.common.item.base.ItemKKPotion;
 import uk.co.wehavecookies56.kk.common.lib.Strings;
 
 public class ItemPotion extends ItemKKPotion {

@@ -1,4 +1,4 @@
-package uk.co.wehavecookies56.kk.common.item;
+package uk.co.wehavecookies56.kk.common.item.base;
 
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.BlockDoor.EnumDoorHalf;
@@ -20,6 +20,7 @@ import uk.co.wehavecookies56.kk.common.capability.ModCapabilities;
 import uk.co.wehavecookies56.kk.common.network.packet.PacketDispatcher;
 import uk.co.wehavecookies56.kk.common.network.packet.server.AttackEntity;
 import uk.co.wehavecookies56.kk.common.capability.PlayerStatsCapability;
+import uk.co.wehavecookies56.kk.common.item.ModItems;
 
 public class ItemKeyblade extends ItemSword {
 

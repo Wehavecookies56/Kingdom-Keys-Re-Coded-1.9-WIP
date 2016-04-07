@@ -4,9 +4,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
-import uk.co.wehavecookies56.kk.common.item.ItemSpellOrb;
 import uk.co.wehavecookies56.kk.common.lib.Strings;
 import uk.co.wehavecookies56.kk.common.core.helper.TextHelper;
+import uk.co.wehavecookies56.kk.common.item.base.ItemSpellOrb;
 
 public class InventoryDriveForms extends AbstractInventory {
 	private final String name = TextHelper.localize(Strings.DriveInventory);

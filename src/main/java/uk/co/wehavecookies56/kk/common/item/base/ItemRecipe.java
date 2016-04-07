@@ -1,4 +1,4 @@
-package uk.co.wehavecookies56.kk.common.item;
+package uk.co.wehavecookies56.kk.common.item.base;
 
 import java.util.Collections;
 import java.util.List;
