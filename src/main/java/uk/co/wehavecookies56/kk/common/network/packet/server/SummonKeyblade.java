@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.SoundCategory;
@@ -11,9 +12,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import uk.co.wehavecookies56.kk.client.sound.ModSounds;
 import uk.co.wehavecookies56.kk.common.capability.ModCapabilities;
 import uk.co.wehavecookies56.kk.common.item.base.ItemKeyblade;
+import uk.co.wehavecookies56.kk.common.network.packet.AbstractMessage;
 import uk.co.wehavecookies56.kk.common.network.packet.PacketDispatcher;
 import uk.co.wehavecookies56.kk.common.network.packet.client.SyncKeybladeData;
-import uk.co.wehavecookies56.kk.common.network.packet.AbstractMessage;
 
 public class SummonKeyblade extends AbstractMessage.AbstractServerMessage<SummonKeyblade> {
 
@@ -37,7 +38,15 @@ public class SummonKeyblade extends AbstractMessage.AbstractServerMessage<Summon
 
 	@Override
 	public void process (EntityPlayer player, Side side) {
-		player.inventory.setInventorySlotContents(player.inventory.currentItem, stack);
+		ItemStack slot = player.getCapability(ModCapabilities.SUMMON_KEYBLADE, null).getInventoryKeychain().getStackInSlot(0);
+		System.out.println("Stack: "+slot.getItem()+" Enchantment list: "+slot.getEnchantmentTagList().getTagType());
+
+		ItemStack OriginalKeybladeItemStack = stack;
+		ItemStack test = slot.copy();
+		test.setItem(OriginalKeybladeItemStack.getItem());
+				
+		
+		player.inventory.setInventorySlotContents(player.inventory.currentItem, test);
 		player.worldObj.playSound((EntityPlayer)null, player.getPosition(), ModSounds.summon, SoundCategory.MASTER, 1.0f, 1.0f);
 		player.getCapability(ModCapabilities.SUMMON_KEYBLADE, null).setIsKeybladeSummoned(true);
 		PacketDispatcher.sendTo(new SyncKeybladeData(player.getCapability(ModCapabilities.SUMMON_KEYBLADE, null)), (EntityPlayerMP) player);
