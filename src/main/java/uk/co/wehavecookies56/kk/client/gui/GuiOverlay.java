@@ -39,7 +39,7 @@ public class GuiOverlay extends GuiScreen {
 			int screenHeight = event.getResolution().getScaledHeight();
 			PlayerStatsCapability.IPlayerStats STATS = mc.thePlayer.getCapability(ModCapabilities.PLAYER_STATS, null);
 			//System.out.println(STATS.getLevel());
-			String reqExp = "" + (Arrays.stream(PlayerLevel.expNeeded, 0, STATS.getLevel()).sum() - STATS.getExperience());
+			String reqExp = ""+PlayerLevel.getExpNeeded(STATS.getLevel(), STATS.getExperience());
 			if (showExp) {
 				mc.fontRendererObj.drawString("Next LV", 5, 5, 0xFFFFFF);
 				mc.fontRendererObj.drawString(reqExp, 5, 5 + mc.fontRendererObj.FONT_HEIGHT, 0xFFFFFF);

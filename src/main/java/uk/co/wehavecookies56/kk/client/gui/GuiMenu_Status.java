@@ -127,7 +127,7 @@ public class GuiMenu_Status extends GuiMenu_Bars {
 				
 				drawString(fontRendererObj, "" + STATS.getLevel(), 230, ((-140 / 16) + 75) + 10, 0xFFD900);
 				drawString(fontRendererObj, "" + STATS.getExperience(), 230, ((-140 / 16) + 75) + 22, 0xFFD900);
-				drawString(fontRendererObj, "" + ((Arrays.stream(PlayerLevel.expNeeded, 0, STATS.getLevel()).sum()) - STATS.getExperience()), 230, ((-140 / 16) + 75) + 34, 0xFFD900);
+				drawString(fontRendererObj, "" + (PlayerLevel.getExpNeeded(STATS.getLevel(), STATS.getExperience())), 230, ((-140 / 16) + 75) + 34, 0xFFD900);
 				drawString(fontRendererObj, "" + (int) mc.thePlayer.getMaxHealth(), 230, ((-140 / 16) + 75) + 46, 0xFFD900);
 				drawString(fontRendererObj, "" + (int) STATS.getMaxMP(), 230, ((-140 / 16) + 75) + 58, 0xFFD900);
 				drawString(fontRendererObj, "N/A", 230, ((-140 / 16) + 75) + 70, 0xFFD900);
