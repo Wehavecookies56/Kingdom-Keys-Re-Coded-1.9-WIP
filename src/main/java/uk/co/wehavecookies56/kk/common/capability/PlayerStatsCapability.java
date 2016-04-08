@@ -130,7 +130,17 @@ public class PlayerStatsCapability {
 		
 		@Override public boolean setLevel(int level) { if (level <= this.maxLevel) { this.level = level; return true; } return false;}
 		@Override public boolean setExperience(int experience) { if (experience <= this.maxExperience) { this.experience = experience; return true; } return false; }
-		@Override public void addExperience(int experience) { if (this.experience + experience <= this.maxExperience) { this.experience += experience; } this.experience = this.maxExperience; }
+		@Override
+		public void addExperience(int experience) { 
+			if (this.experience + experience <= this.maxExperience)
+			{
+				this.experience += experience; 
+			}
+			else
+			{
+				this.experience = this.maxExperience;
+			}
+		}
 		@Override public void setStrength(int strength) { this.strength = strength; }
 		@Override public void addStrength(int strength) { 
 			this.strength += strength; 

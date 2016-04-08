@@ -5,8 +5,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import uk.co.wehavecookies56.kk.common.capability.ModCapabilities;
 import uk.co.wehavecookies56.kk.common.capability.PlayerStatsCapability;
+import uk.co.wehavecookies56.kk.common.capability.PlayerStatsCapability.IPlayerStats;
+import uk.co.wehavecookies56.kk.common.network.packet.PacketDispatcher;
+import uk.co.wehavecookies56.kk.common.network.packet.client.ShowOverlayPacket;
 
 public class PlayerLevel {
 
@@ -27,6 +31,32 @@ public class PlayerLevel {
 		messages = new ArrayList<String>();
 	}
 
+	public static void addExperience(EntityPlayer player, int amount, String type)
+	{
+		if(player != null)
+		{
+			IPlayerStats stats = player.getCapability(ModCapabilities.PLAYER_STATS, null);
+			switch(type)
+			{
+				case "normal":
+						stats.addExperience(amount);
+						PacketDispatcher.sendTo(new ShowOverlayPacket("exp"),(EntityPlayerMP)player);
+						System.out.println("ActualExp: "+stats.getExperience());
+					break;
+				case "valor":
+					break;
+				case "wisdom":
+					break;
+				case "limit":
+					break;
+				case "master":
+					break;
+				case "final":
+					break;
+			}
+		}
+	}
+	
 	public static void LevelUp (EntityPlayer player) {
 		PlayerStatsCapability.IPlayerStats STATS = player.getCapability(ModCapabilities.PLAYER_STATS, null);
 		

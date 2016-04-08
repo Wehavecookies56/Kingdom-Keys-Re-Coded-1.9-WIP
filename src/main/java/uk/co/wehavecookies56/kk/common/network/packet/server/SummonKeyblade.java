@@ -39,11 +39,8 @@ public class SummonKeyblade extends AbstractMessage.AbstractServerMessage<Summon
 	@Override
 	public void process (EntityPlayer player, Side side) {
 		ItemStack slot = player.getCapability(ModCapabilities.SUMMON_KEYBLADE, null).getInventoryKeychain().getStackInSlot(0);
-		System.out.println("Stack: "+slot.getItem()+" Enchantment list: "+slot.getEnchantmentTagList().getTagType());
-
 		ItemStack test = slot.copy();
 		test.setItem(stack.getItem());
-				
 		
 		player.inventory.setInventorySlotContents(player.inventory.currentItem, test);
 		player.worldObj.playSound((EntityPlayer)null, player.getPosition(), ModSounds.summon, SoundCategory.MASTER, 1.0f, 1.0f);
