@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,6 +17,7 @@ import uk.co.wehavecookies56.kk.common.capability.ModCapabilities;
 import uk.co.wehavecookies56.kk.common.capability.MunnyCapability.IMunny;
 import uk.co.wehavecookies56.kk.common.container.ContainerKeychain;
 import uk.co.wehavecookies56.kk.common.container.inventory.InventoryKeychain;
+import uk.co.wehavecookies56.kk.common.lib.GuiIDs;
 import uk.co.wehavecookies56.kk.common.lib.Reference;
 import uk.co.wehavecookies56.kk.common.lib.Strings;
 import uk.co.wehavecookies56.kk.client.core.helper.GuiHelper;
@@ -23,6 +25,9 @@ import uk.co.wehavecookies56.kk.common.core.helper.TextHelper;
 
 public class GuiKeychains extends GuiContainer {
 
+	final int CLEARENCH = 1; 
+	GuiButton clearench;
+	
 	private float xSize_lo;
 
 	private float ySize_lo;
@@ -35,7 +40,17 @@ public class GuiKeychains extends GuiContainer {
 		super(new ContainerKeychain(player, inventoryPlayer, inventoryKeychain));
 		this.inventory = inventoryKeychain;
 	}
-
+	
+	@Override
+	protected void actionPerformed (GuiButton button) throws IOException {
+		switch (button.id) {
+			case CLEARENCH:
+			//	GuiHelper.openInv(GuiIDs.GUI_KEYCHAIN_INV);
+				break;
+		}
+		updateScreen();
+	}
+	
 	@Override
 	protected void keyTyped (char c, int keyCode) throws IOException {
 		super.keyTyped(c, keyCode);
@@ -102,8 +117,12 @@ public class GuiKeychains extends GuiContainer {
 	@Override
 	protected void drawGuiContainerForegroundLayer (int mouseX, int mouseY) {
 		String s = inventory.getName();
+		String ce = "Clear Enchantments";
+		buttonList.add(clearench = new GuiButton(CLEARENCH, xSize / 2 - fontRendererObj.getStringWidth(ce) / 2, 125, 120, 20, ce));
+		
 		fontRendererObj.drawString(s, xSize / 2 - fontRendererObj.getStringWidth(s) / 2, 12, 4210752);
 		fontRendererObj.drawString(I18n.format("container.inventory"), xSize / 2 - fontRendererObj.getStringWidth(I18n.format("container.inventory")) / 2, ySize - 96, 4210752);
+
 	}
 
 	@Override
