@@ -23,5 +23,4 @@ public class ItemKeychain extends ItemSword {
     public boolean isBookEnchantable(ItemStack stack, ItemStack book){
 		return true;
 	}
-
 }

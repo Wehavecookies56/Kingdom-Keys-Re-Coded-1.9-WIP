@@ -559,12 +559,25 @@ public class EventHandler {
 		if (event.getSource().getSourceOfDamage() instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) event.getSource().getSourceOfDamage();
 			if (player.getHeldItem(EnumHand.MAIN_HAND) != null)
-				if (player.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ItemKeyblade || player.getHeldItem(EnumHand.OFF_HAND).getItem() instanceof ItemKeyblade){
+			{
+				if (player.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ItemRealKeyblade)
+				{
 					int recipeRand = randomWithRange(1, 100);
 					if(recipeRand <= 1){
 						event.getEntityLiving().entityDropItem(new ItemStack(ModItems.Recipe), 1);
 					}
 				}
+			}
+			if(player.getHeldItem(EnumHand.OFF_HAND) != null)
+			{
+				if(player.getHeldItem(EnumHand.OFF_HAND).getItem() instanceof ItemRealKeyblade)
+				{
+					int recipeRand = randomWithRange(1, 100);
+					if(recipeRand <= 1){
+						event.getEntityLiving().entityDropItem(new ItemStack(ModItems.Recipe), 1);
+					}
+				}
+			}
 			
 			if (player.getHeldItem(EnumHand.MAIN_HAND) != null)
 			{
