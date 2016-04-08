@@ -107,7 +107,6 @@ public class PacketDispatcher {
 		registerMessage(GiveItemInSlot.class);
 		registerMessage(PotionConsume.class);
 		registerMessage(AttackEntity.class);
-		
 		registerMessage(SetKH1Fire.class);
 
 		// Bidirectional

@@ -42,16 +42,6 @@ public class GuiKeychains extends GuiContainer {
 	}
 	
 	@Override
-	protected void actionPerformed (GuiButton button) throws IOException {
-		switch (button.id) {
-			case CLEARENCH:
-			//	GuiHelper.openInv(GuiIDs.GUI_KEYCHAIN_INV);
-				break;
-		}
-		updateScreen();
-	}
-	
-	@Override
 	protected void keyTyped (char c, int keyCode) throws IOException {
 		super.keyTyped(c, keyCode);
 		if (keyCode == InputHandler.Keybinds.OPENMENU.getKeybind().getKeyCode()) GuiHelper.openMenu_Items();
@@ -116,10 +106,7 @@ public class GuiKeychains extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer (int mouseX, int mouseY) {
-		String s = inventory.getName();
-		String ce = "Clear Enchantments";
-		buttonList.add(clearench = new GuiButton(CLEARENCH, xSize / 2 - fontRendererObj.getStringWidth(ce) / 2, 125, 120, 20, ce));
-		
+		String s = inventory.getName();		
 		fontRendererObj.drawString(s, xSize / 2 - fontRendererObj.getStringWidth(s) / 2, 12, 4210752);
 		fontRendererObj.drawString(I18n.format("container.inventory"), xSize / 2 - fontRendererObj.getStringWidth(I18n.format("container.inventory")) / 2, ySize - 96, 4210752);
 

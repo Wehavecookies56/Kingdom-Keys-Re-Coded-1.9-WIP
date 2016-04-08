@@ -41,9 +41,8 @@ public class SummonKeyblade extends AbstractMessage.AbstractServerMessage<Summon
 		ItemStack slot = player.getCapability(ModCapabilities.SUMMON_KEYBLADE, null).getInventoryKeychain().getStackInSlot(0);
 		System.out.println("Stack: "+slot.getItem()+" Enchantment list: "+slot.getEnchantmentTagList().getTagType());
 
-		ItemStack OriginalKeybladeItemStack = stack;
 		ItemStack test = slot.copy();
-		test.setItem(OriginalKeybladeItemStack.getItem());
+		test.setItem(stack.getItem());
 				
 		
 		player.inventory.setInventorySlotContents(player.inventory.currentItem, test);
