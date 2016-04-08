@@ -6,7 +6,6 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import uk.co.wehavecookies56.kk.common.block.tile.TileEntityKKChest;
-import uk.co.wehavecookies56.kk.common.container.slot.SlotSynthesisBag;
 
 public class ContainerKKChest extends Container {
 

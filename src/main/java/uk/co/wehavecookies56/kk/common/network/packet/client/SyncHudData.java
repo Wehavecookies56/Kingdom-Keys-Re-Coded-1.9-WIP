@@ -3,13 +3,11 @@ package uk.co.wehavecookies56.kk.common.network.packet.client;
 import java.io.IOException;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.PlayerCapabilities;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.relauncher.Side;
 import uk.co.wehavecookies56.kk.common.capability.ModCapabilities;
-import uk.co.wehavecookies56.kk.common.network.packet.AbstractMessage.AbstractClientMessage;
-import uk.co.wehavecookies56.kk.common.capability.CheatModeCapability;
 import uk.co.wehavecookies56.kk.common.capability.PlayerStatsCapability;
+import uk.co.wehavecookies56.kk.common.network.packet.AbstractMessage.AbstractClientMessage;
 
 public class SyncHudData extends AbstractClientMessage<SyncHudData> {
 

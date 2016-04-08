@@ -21,8 +21,11 @@ import uk.co.wehavecookies56.kk.api.materials.MaterialRegistry;
 import uk.co.wehavecookies56.kk.api.recipes.Recipe;
 import uk.co.wehavecookies56.kk.api.recipes.RecipeRegistry;
 import uk.co.wehavecookies56.kk.common.capability.ModCapabilities;
-import uk.co.wehavecookies56.kk.common.core.handler.ConfigHandler;
 import uk.co.wehavecookies56.kk.common.capability.MunnyCapability.IMunny;
+import uk.co.wehavecookies56.kk.common.capability.SynthesisMaterialCapability;
+import uk.co.wehavecookies56.kk.common.capability.SynthesisRecipeCapability;
+import uk.co.wehavecookies56.kk.common.core.handler.ConfigHandler;
+import uk.co.wehavecookies56.kk.common.core.helper.TextHelper;
 import uk.co.wehavecookies56.kk.common.item.ModItems;
 import uk.co.wehavecookies56.kk.common.lib.Constants;
 import uk.co.wehavecookies56.kk.common.lib.Reference;
@@ -31,9 +34,6 @@ import uk.co.wehavecookies56.kk.common.network.packet.PacketDispatcher;
 import uk.co.wehavecookies56.kk.common.network.packet.server.CreateFromSynthesisRecipe;
 import uk.co.wehavecookies56.kk.common.network.packet.server.OpenMaterials;
 import uk.co.wehavecookies56.kk.common.network.packet.server.TakeMaterials;
-import uk.co.wehavecookies56.kk.common.core.helper.TextHelper;
-import uk.co.wehavecookies56.kk.common.capability.SynthesisMaterialCapability;
-import uk.co.wehavecookies56.kk.common.capability.SynthesisRecipeCapability;
 
 public class GuiSynthesis extends GuiTooltip {
 

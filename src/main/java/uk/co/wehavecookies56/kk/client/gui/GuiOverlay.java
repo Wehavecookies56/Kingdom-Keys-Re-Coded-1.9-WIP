@@ -1,7 +1,6 @@
 package uk.co.wehavecookies56.kk.client.gui;
 
 import java.awt.Color;
-import java.util.Arrays;
 
 import org.lwjgl.opengl.GL11;
 
@@ -15,10 +14,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import uk.co.wehavecookies56.kk.common.capability.ModCapabilities;
-import uk.co.wehavecookies56.kk.common.core.handler.ConfigHandler;
-import uk.co.wehavecookies56.kk.common.entity.PlayerLevel;
-import uk.co.wehavecookies56.kk.common.lib.Reference;
 import uk.co.wehavecookies56.kk.common.capability.PlayerStatsCapability;
+import uk.co.wehavecookies56.kk.common.core.handler.ConfigHandler;
+import uk.co.wehavecookies56.kk.common.lib.Reference;
 
 public class GuiOverlay extends GuiScreen {
 	public static boolean showExp;
@@ -39,7 +37,7 @@ public class GuiOverlay extends GuiScreen {
 			int screenHeight = event.getResolution().getScaledHeight();
 			PlayerStatsCapability.IPlayerStats STATS = mc.thePlayer.getCapability(ModCapabilities.PLAYER_STATS, null);
 			//System.out.println(STATS.getLevel());
-			String reqExp = ""+PlayerLevel.getExpNeeded(STATS.getLevel(), STATS.getExperience());
+			String reqExp = ""+STATS.getExpNeeded(STATS.getLevel(), STATS.getExperience());
 			if (showExp) {
 				mc.fontRendererObj.drawString("Next LV", 5, 5, 0xFFFFFF);
 				mc.fontRendererObj.drawString(reqExp, 5, 5 + mc.fontRendererObj.FONT_HEIGHT, 0xFFFFFF);
@@ -62,7 +60,7 @@ public class GuiOverlay extends GuiScreen {
 				ResourceLocation texture = new ResourceLocation(Reference.MODID, "textures/gui/levelup.png");
 				GL11.glPushMatrix();
 				{
-					int height = (mc.fontRendererObj.FONT_HEIGHT - 3) * PlayerLevel.messages.size();
+					int height = (mc.fontRendererObj.FONT_HEIGHT - 3) * STATS.messages.size();
 					GL11.glEnable(GL11.GL_BLEND);
 					GL11.glColor4ub((byte) ConfigHandler.interfaceColour[0], (byte) ConfigHandler.interfaceColour[1], (byte) ConfigHandler.interfaceColour[2], (byte) 255);
 					GL11.glPushMatrix();
@@ -136,18 +134,18 @@ public class GuiOverlay extends GuiScreen {
 					String defMessage = "Defense Increased!";
 					String magMessage = "Magic Increased!";
 					String hpMessage = "Maximum HP Increased!";
-					for (int i = 0; i < PlayerLevel.messages.size(); i++) {
+					for (int i = 0; i < STATS.messages.size(); i++) {
 						GL11.glPushMatrix();
 						{
 							int width = event.getResolution().getScaledWidth();
 
-							if (PlayerLevel.messages.get(i).toString().equals("str"))
+							if (STATS.messages.get(i).toString().equals("str"))
 								message = strMessage;
-							else if (PlayerLevel.messages.get(i).toString().equals("def"))
+							else if (STATS.messages.get(i).toString().equals("def"))
 								message = defMessage;
-							else if (PlayerLevel.messages.get(i).toString().equals("mag"))
+							else if (STATS.messages.get(i).toString().equals("mag"))
 								message = magMessage;
-							else if (PlayerLevel.messages.get(i).toString().equals("hp")) message = hpMessage;
+							else if (STATS.messages.get(i).toString().equals("hp")) message = hpMessage;
 							GL11.glTranslatef((width - 256.0f * 0.8f + (mc.fontRendererObj.getStringWidth("Maximum HP Increased!")) * 0.8f), mc.fontRendererObj.FONT_HEIGHT * 0.8f * i + 23, 0);
 							GL11.glTranslatef(-35, 0, 0);
 							GL11.glScalef(0.8f, 0.8f, 1);

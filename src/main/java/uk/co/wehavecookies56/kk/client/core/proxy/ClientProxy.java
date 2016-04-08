@@ -1,5 +1,7 @@
 package uk.co.wehavecookies56.kk.client.core.proxy;
 
+import org.lwjgl.input.Keyboard;
+
 import com.jadarstudios.developercapes.DevCapes;
 
 //import api.player.model.ModelPlayerAPI;
@@ -24,11 +26,8 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-import org.lwjgl.input.Keyboard;
 import uk.co.wehavecookies56.kk.client.core.handler.ClientEventHandler;
-import uk.co.wehavecookies56.kk.common.core.proxy.CommonProxy;
-import uk.co.wehavecookies56.kk.common.achievement.ModAchievements;
-import uk.co.wehavecookies56.kk.common.block.ModBlocks;
+import uk.co.wehavecookies56.kk.client.core.handler.InputHandler;
 import uk.co.wehavecookies56.kk.client.fx.EntityParticleFXTest;
 import uk.co.wehavecookies56.kk.client.gui.GuiCommandMenu;
 import uk.co.wehavecookies56.kk.client.gui.GuiDrive;
@@ -36,13 +35,16 @@ import uk.co.wehavecookies56.kk.client.gui.GuiHP;
 import uk.co.wehavecookies56.kk.client.gui.GuiMP;
 import uk.co.wehavecookies56.kk.client.gui.GuiOverlay;
 import uk.co.wehavecookies56.kk.client.gui.GuiPlayerPortrait;
-import uk.co.wehavecookies56.kk.client.core.handler.InputHandler;
 import uk.co.wehavecookies56.kk.client.render.RenderEntityBlazeofGlory;
 import uk.co.wehavecookies56.kk.client.render.RenderEntityEternalFlames;
 import uk.co.wehavecookies56.kk.client.render.RenderEntityIfrit;
 import uk.co.wehavecookies56.kk.client.render.RenderEntityPrometheus;
 import uk.co.wehavecookies56.kk.client.render.RenderFactoryBlastBlox;
 import uk.co.wehavecookies56.kk.client.render.RenderFactorySharpshooterBullet;
+import uk.co.wehavecookies56.kk.common.achievement.ModAchievements;
+import uk.co.wehavecookies56.kk.common.block.ModBlocks;
+import uk.co.wehavecookies56.kk.common.core.helper.LogHelper;
+import uk.co.wehavecookies56.kk.common.core.proxy.CommonProxy;
 import uk.co.wehavecookies56.kk.common.entity.block.EntityBlastBlox;
 import uk.co.wehavecookies56.kk.common.entity.projectiles.EntityBlazeofGlory;
 import uk.co.wehavecookies56.kk.common.entity.projectiles.EntityEternalFlames;
@@ -52,7 +54,6 @@ import uk.co.wehavecookies56.kk.common.entity.projectiles.EntitySharpshooterBull
 import uk.co.wehavecookies56.kk.common.item.ModItems;
 import uk.co.wehavecookies56.kk.common.lib.Reference;
 import uk.co.wehavecookies56.kk.common.lib.Strings;
-import uk.co.wehavecookies56.kk.common.core.helper.LogHelper;
 
 public class ClientProxy extends CommonProxy
 {

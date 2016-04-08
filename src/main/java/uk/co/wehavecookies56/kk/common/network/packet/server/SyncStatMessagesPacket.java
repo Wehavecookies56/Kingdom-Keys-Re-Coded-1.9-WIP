@@ -5,7 +5,8 @@ import java.io.IOException;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.relauncher.Side;
-import uk.co.wehavecookies56.kk.common.entity.PlayerLevel;
+import uk.co.wehavecookies56.kk.common.capability.ModCapabilities;
+import uk.co.wehavecookies56.kk.common.capability.PlayerStatsCapability.IPlayerStats;
 import uk.co.wehavecookies56.kk.common.network.packet.AbstractMessage;
 
 public class SyncStatMessagesPacket extends AbstractMessage.AbstractClientMessage<SyncStatMessagesPacket> {
@@ -31,18 +32,19 @@ public class SyncStatMessagesPacket extends AbstractMessage.AbstractClientMessag
 	@Override
 	public void process (EntityPlayer player, Side side) {
 		if (this.stat != null) {
-			if (this.stat.equals("clr")) PlayerLevel.messages.clear();
-			if (this.stat.equals("def")) PlayerLevel.messages.add("def");
-			if (this.stat.equals("str")) PlayerLevel.messages.add("str");
-			if (this.stat.equals("mag")) PlayerLevel.messages.add("mag");
-			if (this.stat.equals("hp")) PlayerLevel.messages.add("hp");
-			if (this.stat.equals("fir")) PlayerLevel.messages.add("fir");
-			if (this.stat.equals("bli")) PlayerLevel.messages.add("bli");
-			if (this.stat.equals("thu")) PlayerLevel.messages.add("thu");
-			if (this.stat.equals("cur")) PlayerLevel.messages.add("cur");
-			if (this.stat.equals("gra")) PlayerLevel.messages.add("gra");
-			if (this.stat.equals("aer")) PlayerLevel.messages.add("aer");
-			if (this.stat.equals("sto")) PlayerLevel.messages.add("sto");
+			IPlayerStats STATS = player.getCapability(ModCapabilities.PLAYER_STATS, null);
+			if (this.stat.equals("clr")) STATS.messages.clear();
+			if (this.stat.equals("def")) STATS.messages.add("def");
+			if (this.stat.equals("str")) STATS.messages.add("str");
+			if (this.stat.equals("mag")) STATS.messages.add("mag");
+			if (this.stat.equals("hp")) STATS.messages.add("hp");
+			if (this.stat.equals("fir")) STATS.messages.add("fir");
+			if (this.stat.equals("bli")) STATS.messages.add("bli");
+			if (this.stat.equals("thu")) STATS.messages.add("thu");
+			if (this.stat.equals("cur")) STATS.messages.add("cur");
+			if (this.stat.equals("gra")) STATS.messages.add("gra");
+			if (this.stat.equals("aer")) STATS.messages.add("aer");
+			if (this.stat.equals("sto")) STATS.messages.add("sto");
 		}
 	}
 

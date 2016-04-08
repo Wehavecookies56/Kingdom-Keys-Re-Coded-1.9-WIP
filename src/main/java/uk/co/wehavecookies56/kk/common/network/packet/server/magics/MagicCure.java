@@ -12,9 +12,9 @@ import uk.co.wehavecookies56.kk.common.entity.magic.EntityCura;
 import uk.co.wehavecookies56.kk.common.entity.magic.EntityCuraga;
 import uk.co.wehavecookies56.kk.common.entity.magic.EntityCure;
 import uk.co.wehavecookies56.kk.common.lib.Strings;
+import uk.co.wehavecookies56.kk.common.network.packet.AbstractMessage;
 import uk.co.wehavecookies56.kk.common.network.packet.PacketDispatcher;
 import uk.co.wehavecookies56.kk.common.network.packet.client.SyncMagicData;
-import uk.co.wehavecookies56.kk.common.network.packet.AbstractMessage;
 
 public class MagicCure extends AbstractMessage.AbstractServerMessage<MagicCure> {
 

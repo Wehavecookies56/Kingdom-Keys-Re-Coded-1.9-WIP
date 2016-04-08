@@ -13,10 +13,10 @@ import uk.co.wehavecookies56.kk.common.entity.magic.EntityStopga;
 import uk.co.wehavecookies56.kk.common.entity.magic.EntityStopra;
 import uk.co.wehavecookies56.kk.common.lib.Constants;
 import uk.co.wehavecookies56.kk.common.lib.Strings;
+import uk.co.wehavecookies56.kk.common.network.packet.AbstractMessage;
 import uk.co.wehavecookies56.kk.common.network.packet.PacketDispatcher;
 import uk.co.wehavecookies56.kk.common.network.packet.client.SpawnStopParticles;
 import uk.co.wehavecookies56.kk.common.network.packet.client.SyncMagicData;
-import uk.co.wehavecookies56.kk.common.network.packet.AbstractMessage;
 
 public class MagicStop extends AbstractMessage.AbstractServerMessage<MagicStop> {
 

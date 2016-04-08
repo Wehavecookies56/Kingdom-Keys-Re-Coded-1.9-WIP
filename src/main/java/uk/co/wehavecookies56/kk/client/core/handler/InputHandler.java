@@ -3,6 +3,8 @@ package uk.co.wehavecookies56.kk.client.core.handler;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.lwjgl.input.Keyboard;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,11 +14,14 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.event.MouseEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
-import org.lwjgl.input.Keyboard;
+import uk.co.wehavecookies56.kk.client.core.helper.GuiHelper;
+import uk.co.wehavecookies56.kk.client.core.helper.KeyboardHelper;
+import uk.co.wehavecookies56.kk.client.gui.GuiCommandMenu;
+import uk.co.wehavecookies56.kk.client.sound.ModSounds;
 import uk.co.wehavecookies56.kk.common.capability.DriveStateCapability.IDriveState;
 import uk.co.wehavecookies56.kk.common.capability.ModCapabilities;
-import uk.co.wehavecookies56.kk.client.sound.ModSounds;
-import uk.co.wehavecookies56.kk.client.gui.GuiCommandMenu;
+import uk.co.wehavecookies56.kk.common.capability.PlayerStatsCapability;
+import uk.co.wehavecookies56.kk.common.capability.SummonKeybladeCapability;
 import uk.co.wehavecookies56.kk.common.driveform.ModDriveForms;
 import uk.co.wehavecookies56.kk.common.item.ItemDriveForm;
 import uk.co.wehavecookies56.kk.common.item.base.ItemKKPotion;
@@ -32,10 +37,6 @@ import uk.co.wehavecookies56.kk.common.network.packet.server.DeSummonKeyblade;
 import uk.co.wehavecookies56.kk.common.network.packet.server.DriveFormPacket;
 import uk.co.wehavecookies56.kk.common.network.packet.server.OpenMenu;
 import uk.co.wehavecookies56.kk.common.network.packet.server.SummonKeyblade;
-import uk.co.wehavecookies56.kk.client.core.helper.GuiHelper;
-import uk.co.wehavecookies56.kk.client.core.helper.KeyboardHelper;
-import uk.co.wehavecookies56.kk.common.capability.PlayerStatsCapability;
-import uk.co.wehavecookies56.kk.common.capability.SummonKeybladeCapability;
 
 public class InputHandler {
 

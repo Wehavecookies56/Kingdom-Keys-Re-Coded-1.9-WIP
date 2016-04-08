@@ -9,9 +9,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import uk.co.wehavecookies56.kk.api.materials.MaterialRegistry;
 import uk.co.wehavecookies56.kk.common.capability.ModCapabilities;
 import uk.co.wehavecookies56.kk.common.item.base.ItemSynthesisMaterial;
-import uk.co.wehavecookies56.kk.common.network.packet.client.SyncMaterialData;
-import uk.co.wehavecookies56.kk.common.network.packet.PacketDispatcher;
 import uk.co.wehavecookies56.kk.common.network.packet.AbstractMessage;
+import uk.co.wehavecookies56.kk.common.network.packet.PacketDispatcher;
+import uk.co.wehavecookies56.kk.common.network.packet.client.SyncMaterialData;
 
 public class OpenMaterials extends AbstractMessage.AbstractServerMessage<OpenMaterials> {
 

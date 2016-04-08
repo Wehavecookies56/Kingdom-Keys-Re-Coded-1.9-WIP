@@ -3,10 +3,10 @@ package uk.co.wehavecookies56.kk.common.synthesis.material;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import uk.co.wehavecookies56.kk.api.materials.Material;
+import uk.co.wehavecookies56.kk.common.item.ItemStacks;
 import uk.co.wehavecookies56.kk.common.item.ModItems;
 import uk.co.wehavecookies56.kk.common.lib.Reference;
 import uk.co.wehavecookies56.kk.common.lib.Strings;
-import uk.co.wehavecookies56.kk.common.item.ItemStacks;
 
 public class MaterialRemembranceStone extends Material {
 

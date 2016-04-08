@@ -72,7 +72,6 @@ import uk.co.wehavecookies56.kk.common.container.inventory.InventorySynthesisBag
 import uk.co.wehavecookies56.kk.common.container.inventory.InventorySynthesisBagS;
 import uk.co.wehavecookies56.kk.common.core.helper.AchievementHelper;
 import uk.co.wehavecookies56.kk.common.core.helper.TextHelper;
-import uk.co.wehavecookies56.kk.common.entity.PlayerLevel;
 import uk.co.wehavecookies56.kk.common.entity.magic.EntityThunder;
 import uk.co.wehavecookies56.kk.common.item.ItemHpOrb;
 import uk.co.wehavecookies56.kk.common.item.ItemMunny;
@@ -546,7 +545,7 @@ public class EventHandler {
 			EntityPlayer player = (EntityPlayer) event.getSource().getSourceOfDamage();
 
 			EntityMob mob = (EntityMob) event.getEntity();
-			PlayerLevel.addExperience(player,(int) (mob.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).getAttributeValue() / 2),"normal");
+			player.getCapability(ModCapabilities.PLAYER_STATS, null).addExperience(player,(int) (mob.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).getAttributeValue() / 2),"normal");
 		}
 	}
 

@@ -1,8 +1,8 @@
 package uk.co.wehavecookies56.kk.common.capability;
 
 import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTTagInt;
 import net.minecraft.nbt.NBTBase.NBTPrimitive;
+import net.minecraft.nbt.NBTTagInt;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.Capability.IStorage;

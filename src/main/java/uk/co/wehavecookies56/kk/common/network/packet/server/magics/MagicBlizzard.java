@@ -13,10 +13,10 @@ import uk.co.wehavecookies56.kk.common.entity.magic.EntityBlizzara;
 import uk.co.wehavecookies56.kk.common.entity.magic.EntityBlizzard;
 import uk.co.wehavecookies56.kk.common.lib.Constants;
 import uk.co.wehavecookies56.kk.common.lib.Strings;
+import uk.co.wehavecookies56.kk.common.network.packet.AbstractMessage;
 import uk.co.wehavecookies56.kk.common.network.packet.PacketDispatcher;
 import uk.co.wehavecookies56.kk.common.network.packet.client.SpawnBlizzardParticles;
 import uk.co.wehavecookies56.kk.common.network.packet.client.SyncMagicData;
-import uk.co.wehavecookies56.kk.common.network.packet.AbstractMessage;
 
 public class MagicBlizzard extends AbstractMessage.AbstractServerMessage<MagicBlizzard> {
 

@@ -1,5 +1,7 @@
 package uk.co.wehavecookies56.kk.common.core.handler;
 
+import java.io.File;
+
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
@@ -7,8 +9,6 @@ import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import uk.co.wehavecookies56.kk.common.lib.Reference;
 import uk.co.wehavecookies56.kk.common.lib.Strings;
-
-import java.io.File;
 
 public class ConfigHandler {
 

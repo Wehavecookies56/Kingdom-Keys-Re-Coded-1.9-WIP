@@ -7,16 +7,13 @@
 package com.jadarstudios.developercapes.cape;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.Map;
 
-import com.google.common.collect.Maps;
 import com.jadarstudios.developercapes.DevCapes;
 import com.jadarstudios.developercapes.HDImageBuffer;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture.Type;
 
-import io.netty.util.internal.MpscLinkedQueueNode;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.network.NetworkPlayerInfo;

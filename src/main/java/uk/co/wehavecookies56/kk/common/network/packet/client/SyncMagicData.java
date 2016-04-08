@@ -7,9 +7,9 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.relauncher.Side;
 import uk.co.wehavecookies56.kk.common.capability.MagicStateCapability.IMagicState;
 import uk.co.wehavecookies56.kk.common.capability.ModCapabilities;
+import uk.co.wehavecookies56.kk.common.capability.PlayerStatsCapability;
 import uk.co.wehavecookies56.kk.common.lib.Strings;
 import uk.co.wehavecookies56.kk.common.network.packet.AbstractMessage.AbstractClientMessage;
-import uk.co.wehavecookies56.kk.common.capability.PlayerStatsCapability;
 
 public class SyncMagicData extends AbstractClientMessage<SyncMagicData> {
 

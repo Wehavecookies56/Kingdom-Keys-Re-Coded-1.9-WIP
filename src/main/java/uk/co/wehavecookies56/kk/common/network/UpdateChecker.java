@@ -12,8 +12,8 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import uk.co.wehavecookies56.kk.common.core.handler.ConfigHandler;
-import uk.co.wehavecookies56.kk.common.lib.Reference;
 import uk.co.wehavecookies56.kk.common.core.helper.LogHelper;
+import uk.co.wehavecookies56.kk.common.lib.Reference;
 
 public class UpdateChecker {
 

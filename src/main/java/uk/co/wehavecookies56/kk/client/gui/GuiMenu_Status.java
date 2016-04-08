@@ -1,16 +1,14 @@
 package uk.co.wehavecookies56.kk.client.gui;
 
 import java.io.IOException;
-import java.util.Arrays;
 
 import net.minecraft.client.gui.GuiButton;
+import uk.co.wehavecookies56.kk.client.core.helper.GuiHelper;
 import uk.co.wehavecookies56.kk.common.capability.DriveStateCapability.IDriveState;
 import uk.co.wehavecookies56.kk.common.capability.MagicStateCapability.IMagicState;
 import uk.co.wehavecookies56.kk.common.capability.ModCapabilities;
-import uk.co.wehavecookies56.kk.common.entity.PlayerLevel;
-import uk.co.wehavecookies56.kk.common.lib.Strings;
-import uk.co.wehavecookies56.kk.client.core.helper.GuiHelper;
 import uk.co.wehavecookies56.kk.common.capability.PlayerStatsCapability;
+import uk.co.wehavecookies56.kk.common.lib.Strings;
 
 public class GuiMenu_Status extends GuiMenu_Bars {
 
@@ -127,7 +125,7 @@ public class GuiMenu_Status extends GuiMenu_Bars {
 				
 				drawString(fontRendererObj, "" + STATS.getLevel(), 230, ((-140 / 16) + 75) + 10, 0xFFD900);
 				drawString(fontRendererObj, "" + STATS.getExperience(), 230, ((-140 / 16) + 75) + 22, 0xFFD900);
-				drawString(fontRendererObj, "" + (PlayerLevel.getExpNeeded(STATS.getLevel(), STATS.getExperience())), 230, ((-140 / 16) + 75) + 34, 0xFFD900);
+				drawString(fontRendererObj, "" + (STATS.getExpNeeded(STATS.getLevel(), STATS.getExperience())), 230, ((-140 / 16) + 75) + 34, 0xFFD900);
 				drawString(fontRendererObj, "" + (int) mc.thePlayer.getMaxHealth(), 230, ((-140 / 16) + 75) + 46, 0xFFD900);
 				drawString(fontRendererObj, "" + (int) STATS.getMaxMP(), 230, ((-140 / 16) + 75) + 58, 0xFFD900);
 				drawString(fontRendererObj, "N/A", 230, ((-140 / 16) + 75) + 70, 0xFFD900);

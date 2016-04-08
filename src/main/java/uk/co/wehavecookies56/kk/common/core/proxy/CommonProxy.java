@@ -22,29 +22,32 @@ import uk.co.wehavecookies56.kk.api.driveforms.DriveFormRegistry;
 import uk.co.wehavecookies56.kk.api.materials.MaterialRegistry;
 import uk.co.wehavecookies56.kk.api.recipes.RecipeRegistry;
 import uk.co.wehavecookies56.kk.common.KingdomKeys;
-import uk.co.wehavecookies56.kk.common.core.handler.*;
 import uk.co.wehavecookies56.kk.common.achievement.ModAchievements;
 import uk.co.wehavecookies56.kk.common.block.ModBlocks;
-import uk.co.wehavecookies56.kk.common.crafting.ModBlocksRecipes;
-import uk.co.wehavecookies56.kk.common.capability.ModCapabilities;
-import uk.co.wehavecookies56.kk.common.driveform.ModDriveForms;
-import uk.co.wehavecookies56.kk.common.entity.PlayerLevel;
 import uk.co.wehavecookies56.kk.common.block.tile.TileEntityKKChest;
 import uk.co.wehavecookies56.kk.common.block.tile.TileEntitySynthesisTable;
+import uk.co.wehavecookies56.kk.common.capability.ModCapabilities;
+import uk.co.wehavecookies56.kk.common.core.handler.ConfigHandler;
+import uk.co.wehavecookies56.kk.common.core.handler.EventHandler;
+import uk.co.wehavecookies56.kk.common.core.handler.FuelHandler;
+import uk.co.wehavecookies56.kk.common.core.handler.GuiHandler;
+import uk.co.wehavecookies56.kk.common.core.handler.UsernameHandler;
+import uk.co.wehavecookies56.kk.common.core.helper.LogHelper;
+import uk.co.wehavecookies56.kk.common.crafting.KKOreDictionary;
+import uk.co.wehavecookies56.kk.common.crafting.ModBlocksRecipes;
+import uk.co.wehavecookies56.kk.common.crafting.ModItemsRecipes;
+import uk.co.wehavecookies56.kk.common.driveform.ModDriveForms;
 import uk.co.wehavecookies56.kk.common.entity.block.EntityBlastBlox;
 import uk.co.wehavecookies56.kk.common.entity.magic.EntityFire;
 import uk.co.wehavecookies56.kk.common.entity.magic.EntityThunder;
 import uk.co.wehavecookies56.kk.common.item.ModItems;
-import uk.co.wehavecookies56.kk.common.crafting.ModItemsRecipes;
 import uk.co.wehavecookies56.kk.common.lib.Constants;
 import uk.co.wehavecookies56.kk.common.lib.Lists;
 import uk.co.wehavecookies56.kk.common.lib.Reference;
-import uk.co.wehavecookies56.kk.common.synthesis.ModSynthesisMaterials;
 import uk.co.wehavecookies56.kk.common.network.UpdateChecker;
 import uk.co.wehavecookies56.kk.common.network.packet.PacketDispatcher;
+import uk.co.wehavecookies56.kk.common.synthesis.ModSynthesisMaterials;
 import uk.co.wehavecookies56.kk.common.synthesis.ModSynthesisRecipes;
-import uk.co.wehavecookies56.kk.common.crafting.KKOreDictionary;
-import uk.co.wehavecookies56.kk.common.core.helper.LogHelper;
 import uk.co.wehavecookies56.kk.common.world.ChestGen;
 import uk.co.wehavecookies56.kk.common.world.WorldGenBlox;
 
@@ -149,7 +152,7 @@ public class CommonProxy {
 	}
 
 	public void postInit (FMLPostInitializationEvent event) {
-		new PlayerLevel();
+		//TODO here was "new PlayerLevel();"
 
 		// Event handler
 		MinecraftForge.EVENT_BUS.register(new EventHandler());

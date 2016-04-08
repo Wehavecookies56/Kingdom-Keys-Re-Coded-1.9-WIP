@@ -13,8 +13,8 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.text.TextFormatting;
 import uk.co.wehavecookies56.kk.common.capability.ModCapabilities;
-import uk.co.wehavecookies56.kk.common.core.helper.TextHelper;
 import uk.co.wehavecookies56.kk.common.capability.PlayerStatsCapability;
+import uk.co.wehavecookies56.kk.common.core.helper.TextHelper;
 
 public class CommandLevelUp implements ICommand {
 
@@ -100,7 +100,7 @@ public class CommandLevelUp implements ICommand {
 				STATS.setHP(20);
 
 				while (STATS.getLevel() < level)
-					STATS.addExperience(20);
+					STATS.addExperience(player, 20, "normal");
 				player.heal(STATS.getHP());
 				TextHelper.sendFormattedChatMessage("Your level is now " + args[0], TextFormatting.YELLOW, (EntityPlayer) sender.getCommandSenderEntity());
 
@@ -126,7 +126,7 @@ public class CommandLevelUp implements ICommand {
 				STATS.setHP(20);
 
 				while (STATS.getLevel() < level)
-					STATS.addExperience(20);
+					STATS.addExperience(player, 20, "normal");
 				entityplayermp.heal(STATS.getHP());
 				TextHelper.sendFormattedChatMessage(args[1] + "'s level is now " + args[0], TextFormatting.YELLOW, (EntityPlayer) sender.getCommandSenderEntity());
 
