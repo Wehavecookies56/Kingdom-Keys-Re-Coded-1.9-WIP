@@ -51,12 +51,14 @@ public class PlayerStatsCapability {
 		void remMP(double mp);
 		void setMaxMP(double mp);
 		void setRecharge(boolean recharge);
-		
+
 		InventoryPotionsMenu getInventoryPotionsMenu();
 		
 		boolean getHudMode();
 		void setHudMode(boolean mode);
-		int getExpNeeded(int level, int experience);		
+		int getExpNeeded(int level, int experience);
+		void LevelUp();
+		void levelUpMessage();
 	}
 
 	public static class Storage implements IStorage<IPlayerStats> {
@@ -201,7 +203,8 @@ public class PlayerStatsCapability {
         @Override public void setMaxMP(double maxMP) { this.maxMP = maxMP;}
 		@Override public void setRecharge(boolean recharge) { this.recharge = recharge; }
 		@Override public void setHudMode(boolean hud) { this.hudmode = hud; }
-		
+
+		@Override
 		public int getExpNeeded(int level, int currentExp) {
 			//int currentLevel = (int) ((level + 300 * (2 ^ (level / 7))) * (level * 0.25));
 			int nextLevel = (int) (((level + 1) + 300 * (2 ^ ((level + 1) / 7))) * ((level + 1) * 0.25));
@@ -209,373 +212,374 @@ public class PlayerStatsCapability {
 			this.remainingExp = needed;
 			return remainingExp;
 		}
-		
-		public static void levelUpMessage (EntityPlayer player) {
+
+		@Override
+		public void levelUpMessage () {
 			messages.clear();
 		}
-		
-		public static void LevelUp (EntityPlayer player) {
-			PlayerStatsCapability.IPlayerStats STATS = player.getCapability(ModCapabilities.PLAYER_STATS, null);
+
+		@Override
+		public void LevelUp () {
 			
-			if (STATS.getLevel() < 1) {
-				STATS.setLevel(STATS.getLevel() + 1);
+			if (this.level < 1) {
+				this.setLevel(this.level + 1);
 				return;
 			}
 
-			if (STATS.getLevel() == 1) if (STATS.getExperience() >= getExpNeeded(STATS.getLevel(), STATS.getExperience())) {
-				STATS.setLevel(STATS.getLevel() + 2);
-				levelUpMessage(player);
-				STATS.addDefense(1);
+			if (this.level == 1) if (this.experience >= getExpNeeded(this.level, this.experience)) {
+				this.setLevel(this.level + 2);
+				levelUpMessage();
+				this.addDefense(1);
 			}
 
-			if (getExpNeeded(STATS.getLevel(), STATS.getExperience()) < 0) STATS.setExperience(getExpNeeded(STATS.getLevel(), STATS.getExperience()));
-			if (STATS.getLevel() > 1) if (STATS.getLevel() != 100 && STATS.getExperience() >= getExpNeeded(STATS.getLevel(), STATS.getExperience())) {
-				STATS.setLevel(STATS.getLevel() + 1);
-				levelUpMessage(player);
-				switch (STATS.getLevel()) {
+			if (getExpNeeded(this.level, this.experience) < 0) this.setExperience(getExpNeeded(this.level, this.experience));
+			if (this.level > 1) if (this.level != 100 && this.experience >= getExpNeeded(this.level, this.experience)) {
+				this.setLevel(this.level + 1);
+				levelUpMessage();
+				switch (this.level) {
 					case 3:
-						STATS.addStrength(1);
+						this.addStrength(1);
 						break;
 					case 4:
-						STATS.addDefense(1);
+						this.addDefense(1);
 						break;
 					case 5:
-						STATS.addStrength(1);
-						STATS.addHP(5);
+						this.addStrength(1);
+						this.addHP(5);
 						break;
 					case 6:
-						STATS.addMagic(1);
-						STATS.addDefense(1);
+						this.addMagic(1);
+						this.addDefense(1);
 						break;
 					case 7:
-						STATS.addStrength(1);
+						this.addStrength(1);
 						break;
 					case 8:
-						STATS.addMagic(1);
+						this.addMagic(1);
 						break;
 					case 9:
-						STATS.addStrength(1);
+						this.addStrength(1);
 						break;
 					case 10:
-						STATS.addMagic(1);
-						STATS.addDefense(1);
-						STATS.addHP(5);
+						this.addMagic(1);
+						this.addDefense(1);
+						this.addHP(5);
 						break;
 					case 11:
-						STATS.addStrength(1);
+						this.addStrength(1);
 						break;
 					case 12:
-						STATS.addMagic(1);
+						this.addMagic(1);
 						break;
 					case 13:
-						STATS.addStrength(1);
+						this.addStrength(1);
 						break;
 					case 14:
-						STATS.addMagic(1);
-						STATS.addDefense(1);
+						this.addMagic(1);
+						this.addDefense(1);
 						break;
 					case 15:
-						STATS.addStrength(1);
-						STATS.addHP(5);
+						this.addStrength(1);
+						this.addHP(5);
 						break;
 					case 16:
-						STATS.addMagic(1);
+						this.addMagic(1);
 						break;
 					case 17:
-						STATS.addStrength(1);
+						this.addStrength(1);
 						break;
 					case 18:
-						STATS.addMagic(1);
-						STATS.addDefense(1);
+						this.addMagic(1);
+						this.addDefense(1);
 						break;
 					case 19:
-						STATS.addStrength(1);
+						this.addStrength(1);
 						break;
 					case 20:
-						STATS.addMagic(1);
-						STATS.addHP(5);
+						this.addMagic(1);
+						this.addHP(5);
 						break;
 					case 21:
-						STATS.addStrength(1);
+						this.addStrength(1);
 						break;
 					case 22:
-						STATS.addMagic(1);
-						STATS.addDefense(1);
+						this.addMagic(1);
+						this.addDefense(1);
 						break;
 					case 23:
-						STATS.addStrength(1);
+						this.addStrength(1);
 						break;
 					case 24:
-						STATS.addMagic(1);
+						this.addMagic(1);
 						break;
 					case 25:
-						STATS.addStrength(1);
-						STATS.addHP(5);
+						this.addStrength(1);
+						this.addHP(5);
 						break;
 					case 26:
-						STATS.addMagic(1);
-						STATS.addDefense(1);
+						this.addMagic(1);
+						this.addDefense(1);
 						break;
 					case 27:
-						STATS.addStrength(1);
-						STATS.addMagic(1);
+						this.addStrength(1);
+						this.addMagic(1);
 						break;
 					case 28:
-						STATS.addMagic(1);
+						this.addMagic(1);
 						break;
 					case 29:
-						STATS.addStrength(1);
+						this.addStrength(1);
 						break;
 					case 30:
-						STATS.addMagic(1);
-						STATS.addDefense(1);
-						STATS.addHP(5);
+						this.addMagic(1);
+						this.addDefense(1);
+						this.addHP(5);
 						break;
 					case 31:
-						STATS.addStrength(1);
+						this.addStrength(1);
 						break;
 					case 32:
-						STATS.addStrength(1);
-						STATS.addMagic(1);
+						this.addStrength(1);
+						this.addMagic(1);
 						break;
 					case 33:
-						STATS.addStrength(1);
+						this.addStrength(1);
 						break;
 					case 34:
-						STATS.addMagic(1);
-						STATS.addDefense(1);
+						this.addMagic(1);
+						this.addDefense(1);
 						break;
 					case 35:
-						STATS.addStrength(1);
-						STATS.addHP(5);
+						this.addStrength(1);
+						this.addHP(5);
 						break;
 					case 36:
-						STATS.addMagic(1);
+						this.addMagic(1);
 						break;
 					case 37:
-						STATS.addStrength(1);
+						this.addStrength(1);
 						break;
 					case 38:
-						STATS.addMagic(1);
-						STATS.addDefense(1);
+						this.addMagic(1);
+						this.addDefense(1);
 						break;
 					case 39:
-						STATS.addStrength(1);
+						this.addStrength(1);
 						break;
 					case 40:
-						STATS.addMagic(1);
-						STATS.addHP(5);
+						this.addMagic(1);
+						this.addHP(5);
 						break;
 					case 41:
-						STATS.addStrength(1);
+						this.addStrength(1);
 						break;
 					case 42:
-						STATS.addMagic(1);
-						STATS.addDefense(1);
+						this.addMagic(1);
+						this.addDefense(1);
 						break;
 					case 43:
-						STATS.addStrength(1);
-						STATS.addMagic(1);
+						this.addStrength(1);
+						this.addMagic(1);
 						break;
 					case 44:
-						STATS.addMagic(1);
+						this.addMagic(1);
 						break;
 					case 45:
-						STATS.addStrength(1);
-						STATS.addHP(5);
+						this.addStrength(1);
+						this.addHP(5);
 						break;
 					case 46:
-						STATS.addMagic(1);
-						STATS.addDefense(1);
+						this.addMagic(1);
+						this.addDefense(1);
 						break;
 					case 47:
-						STATS.addStrength(1);
+						this.addStrength(1);
 						break;
 					case 48:
-						STATS.addStrength(1);
-						STATS.addMagic(1);
+						this.addStrength(1);
+						this.addMagic(1);
 						break;
 					case 49:
-						STATS.addStrength(1);
+						this.addStrength(1);
 						break;
 					case 50:
-						STATS.addMagic(1);
-						STATS.addDefense(1);
-						STATS.addHP(5);
+						this.addMagic(1);
+						this.addDefense(1);
+						this.addHP(5);
 						break;
 					case 51:
-						STATS.addStrength(1);
+						this.addStrength(1);
 						break;
 					case 52:
-						STATS.addMagic(1);
+						this.addMagic(1);
 						break;
 					case 53:
-						STATS.addStrength(1);
+						this.addStrength(1);
 						break;
 					case 54:
-						STATS.addMagic(1);
-						STATS.addDefense(1);
+						this.addMagic(1);
+						this.addDefense(1);
 						break;
 					case 55:
-						STATS.addStrength(1);
-						STATS.addHP(5);
+						this.addStrength(1);
+						this.addHP(5);
 						break;
 					case 56:
-						STATS.addMagic(1);
+						this.addMagic(1);
 						break;
 					case 57:
-						STATS.addStrength(1);
+						this.addStrength(1);
 						break;
 					case 58:
-						STATS.addMagic(1);
-						STATS.addDefense(1);
+						this.addMagic(1);
+						this.addDefense(1);
 						break;
 					case 59:
-						STATS.addStrength(1);
+						this.addStrength(1);
 						break;
 					case 60:
-						STATS.addMagic(1);
-						STATS.addHP(5);
+						this.addMagic(1);
+						this.addHP(5);
 						break;
 					case 61:
-						STATS.addStrength(1);
+						this.addStrength(1);
 						break;
 					case 62:
-						STATS.addMagic(1);
-						STATS.addDefense(1);
+						this.addMagic(1);
+						this.addDefense(1);
 						break;
 					case 63:
-						STATS.addStrength(1);
+						this.addStrength(1);
 						break;
 					case 64:
-						STATS.addMagic(1);
+						this.addMagic(1);
 						break;
 					case 65:
-						STATS.addStrength(1);
-						STATS.addHP(5);
+						this.addStrength(1);
+						this.addHP(5);
 						break;
 					case 66:
-						STATS.addMagic(1);
-						STATS.addDefense(1);
+						this.addMagic(1);
+						this.addDefense(1);
 						break;
 					case 67:
-						STATS.addStrength(1);
+						this.addStrength(1);
 						break;
 					case 68:
-						STATS.addMagic(1);
+						this.addMagic(1);
 						break;
 					case 69:
-						STATS.addStrength(1);
+						this.addStrength(1);
 						break;
 					case 70:
-						STATS.addMagic(1);
-						STATS.addDefense(1);
-						STATS.addHP(5);
+						this.addMagic(1);
+						this.addDefense(1);
+						this.addHP(5);
 						break;
 					case 71:
-						STATS.addStrength(1);
+						this.addStrength(1);
 						break;
 					case 72:
-						STATS.addMagic(1);
+						this.addMagic(1);
 						break;
 					case 73:
-						STATS.addStrength(1);
+						this.addStrength(1);
 						break;
 					case 74:
-						STATS.addMagic(1);
-						STATS.addDefense(1);
+						this.addMagic(1);
+						this.addDefense(1);
 						break;
 					case 75:
-						STATS.addStrength(1);
-						STATS.addHP(5);
+						this.addStrength(1);
+						this.addHP(5);
 						break;
 					case 76:
-						STATS.addMagic(1);
+						this.addMagic(1);
 						break;
 					case 77:
-						STATS.addStrength(1);
+						this.addStrength(1);
 						break;
 					case 78:
-						STATS.addMagic(1);
-						STATS.addDefense(1);
+						this.addMagic(1);
+						this.addDefense(1);
 						break;
 					case 79:
-						STATS.addStrength(1);
+						this.addStrength(1);
 						break;
 					case 80:
-						STATS.addMagic(1);
-						STATS.addHP(5);
+						this.addMagic(1);
+						this.addHP(5);
 						break;
 					case 81:
-						STATS.addStrength(1);
+						this.addStrength(1);
 						break;
 					case 82:
-						STATS.addMagic(1);
-						STATS.addDefense(1);
+						this.addMagic(1);
+						this.addDefense(1);
 						break;
 					case 83:
-						STATS.addStrength(1);
+						this.addStrength(1);
 						break;
 					case 84:
-						STATS.addMagic(1);
+						this.addMagic(1);
 						break;
 					case 85:
-						STATS.addStrength(1);
-						STATS.addHP(5);
+						this.addStrength(1);
+						this.addHP(5);
 						break;
 					case 86:
-						STATS.addMagic(1);
-						STATS.addDefense(1);
+						this.addMagic(1);
+						this.addDefense(1);
 						break;
 					case 87:
-						STATS.addStrength(1);
+						this.addStrength(1);
 						break;
 					case 88:
-						STATS.addMagic(1);
+						this.addMagic(1);
 						break;
 					case 89:
-						STATS.addStrength(1);
+						this.addStrength(1);
 						break;
 					case 90:
-						STATS.addMagic(1);
-						STATS.addDefense(1);
-						STATS.addHP(5);
+						this.addMagic(1);
+						this.addDefense(1);
+						this.addHP(5);
 						break;
 					case 91:
-						STATS.addStrength(1);
+						this.addStrength(1);
 						break;
 					case 92:
-						STATS.addMagic(1);
+						this.addMagic(1);
 						break;
 					case 93:
-						STATS.addStrength(1);
+						this.addStrength(1);
 						break;
 					case 94:
-						STATS.addMagic(1);
-						STATS.addDefense(1);
+						this.addMagic(1);
+						this.addDefense(1);
 						break;
 					case 95:
-						STATS.addStrength(1);
-						STATS.addHP(5);
+						this.addStrength(1);
+						this.addHP(5);
 						break;
 					case 96:
-						STATS.addMagic(1);
+						this.addMagic(1);
 						break;
 					case 97:
-						STATS.addStrength(1);
+						this.addStrength(1);
 						break;
 					case 98:
-						STATS.addMagic(1);
-						STATS.addDefense(1);
+						this.addMagic(1);
+						this.addDefense(1);
 						break;
 					case 99:
-						STATS.addStrength(1);
+						this.addStrength(1);
 						break;
 					case 100:
-						STATS.addStrength(10);
-						STATS.addDefense(10);
-						STATS.addMagic(10);
-						STATS.addHP(5);
+						this.addStrength(10);
+						this.addDefense(10);
+						this.addMagic(10);
+						this.addHP(5);
 						break;
 				}
 			}
