@@ -21,6 +21,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import uk.co.wehavecookies56.kk.api.driveforms.DriveFormRegistry;
 import uk.co.wehavecookies56.kk.api.materials.MaterialRegistry;
 import uk.co.wehavecookies56.kk.api.recipes.RecipeRegistry;
+import uk.co.wehavecookies56.kk.client.sound.ModSounds;
 import uk.co.wehavecookies56.kk.common.KingdomKeys;
 import uk.co.wehavecookies56.kk.common.achievement.ModAchievements;
 import uk.co.wehavecookies56.kk.common.block.ModBlocks;
@@ -104,6 +105,10 @@ public class CommonProxy {
 		ModItemsRecipes.init();
 		ModBlocksRecipes.init();
 		LogHelper.info("Crafting recipe loaded");
+
+		// Sounds
+		ModSounds.registerSounds();
+		LogHelper.info("Sounds loaded");
 
 		// Fuel Handler
 		GameRegistry.registerFuelHandler(new FuelHandler());

@@ -6,6 +6,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import uk.co.wehavecookies56.kk.common.lib.Reference;
 import uk.co.wehavecookies56.kk.common.lib.Strings;
@@ -50,40 +52,41 @@ public class ModBlocks {
 
 	}
 
-	public static void registerBlock (Block block) {
-		GameRegistry.registerBlock(block, block.getUnlocalizedName().substring(5));
+	public static void registerBlock (Block block, String name) {
+		GameRegistry.register(block, new ResourceLocation(Reference.MODID, name));
+		GameRegistry.register(new ItemBlock(block), new ResourceLocation(Reference.MODID, name));
 	}
 
 	public static void register () {
-		GameRegistry.registerBlock(NormalBlox, Strings.NormalBlox);
-		GameRegistry.registerBlock(HardBlox, Strings.HardBlox);
-		GameRegistry.registerBlock(MetalBlox, Strings.MetalBlox);
-		GameRegistry.registerBlock(DangerBlox, Strings.DangerBlox);
-		GameRegistry.registerBlock(BounceBlox, Strings.BounceBlox);
-		GameRegistry.registerBlock(BlastBlox, Strings.BlastBlox);
-		GameRegistry.registerBlock(PrizeBlox, Strings.PrizeBlox);
-		GameRegistry.registerBlock(RarePrizeBlox, Strings.RarePrizeBlox);
-		GameRegistry.registerBlock(GhostBlox, Strings.GhostBlox);
-		GameRegistry.registerBlock(BlazingOre, Strings.BlazingOre);
-		GameRegistry.registerBlock(BrightOre, Strings.BrightOre);
-		GameRegistry.registerBlock(DarkOre, Strings.DarkOre);
-		GameRegistry.registerBlock(DarkOreE, Strings.DarkOreE);
-		GameRegistry.registerBlock(DenseOre, Strings.DenseOre);
-		GameRegistry.registerBlock(EnergyOre, Strings.EnergyOre);
-		GameRegistry.registerBlock(FrostOre, Strings.FrostOre);
-		GameRegistry.registerBlock(LightningOre, Strings.LightningOre);
-		GameRegistry.registerBlock(LucidOre, Strings.LucidOre);
-		GameRegistry.registerBlock(PowerOre, Strings.PowerOre);
-		GameRegistry.registerBlock(PowerOreE, Strings.PowerOreE);
-		GameRegistry.registerBlock(RemembranceOre, Strings.RemembranceOre);
-		GameRegistry.registerBlock(SerenityOre, Strings.SerenityOre);
-		GameRegistry.registerBlock(StormyOre, Strings.StormyOre);
-		GameRegistry.registerBlock(TranquilOre, Strings.TranquilOre);
-		GameRegistry.registerBlock(TwilightOre, Strings.TwilightOre);
-		GameRegistry.registerBlock(SynthesisTable, Strings.SynthesisTable);
-		GameRegistry.registerBlock(KKChest, Strings.KKChest);
-		GameRegistry.registerBlock(SavePoint, Strings.SavePoint);
-		GameRegistry.registerBlock(MagnetBlox, Strings.MagnetBlox);
+		registerBlock(NormalBlox, Strings.NormalBlox);
+		registerBlock(HardBlox, Strings.HardBlox);
+		registerBlock(MetalBlox, Strings.MetalBlox);
+		registerBlock(DangerBlox, Strings.DangerBlox);
+		registerBlock(BounceBlox, Strings.BounceBlox);
+		registerBlock(BlastBlox, Strings.BlastBlox);
+		registerBlock(PrizeBlox, Strings.PrizeBlox);
+		registerBlock(RarePrizeBlox, Strings.RarePrizeBlox);
+		registerBlock(GhostBlox, Strings.GhostBlox);
+		registerBlock(BlazingOre, Strings.BlazingOre);
+		registerBlock(BrightOre, Strings.BrightOre);
+		registerBlock(DarkOre, Strings.DarkOre);
+		registerBlock(DarkOreE, Strings.DarkOreE);
+		registerBlock(DenseOre, Strings.DenseOre);
+		registerBlock(EnergyOre, Strings.EnergyOre);
+		registerBlock(FrostOre, Strings.FrostOre);
+		registerBlock(LightningOre, Strings.LightningOre);
+		registerBlock(LucidOre, Strings.LucidOre);
+		registerBlock(PowerOre, Strings.PowerOre);
+		registerBlock(PowerOreE, Strings.PowerOreE);
+		registerBlock(RemembranceOre, Strings.RemembranceOre);
+		registerBlock(SerenityOre, Strings.SerenityOre);
+		registerBlock(StormyOre, Strings.StormyOre);
+		registerBlock(TranquilOre, Strings.TranquilOre);
+		registerBlock(TwilightOre, Strings.TwilightOre);
+		registerBlock(SynthesisTable, Strings.SynthesisTable);
+		registerBlock(KKChest, Strings.KKChest);
+		registerBlock(SavePoint, Strings.SavePoint);
+		registerBlock(MagnetBlox, Strings.MagnetBlox);
 
 	}
 

@@ -867,9 +867,11 @@ public class EventHandler {
 
 		} else if (event.getEntityItem().getEntityItem().getItem() instanceof ItemMunny) {
 			event.setCanceled(true);
-	    	PacketDispatcher.sendTo(new ShowOverlayPacket("munny", event.getEntityItem().getEntityItem().getTagCompound().getInteger("amount")), (EntityPlayerMP) event.getPlayer());
+	    	if (!event.getPlayer().worldObj.isRemote) {
+				PacketDispatcher.sendTo(new ShowOverlayPacket("munny", event.getEntityItem().getEntityItem().getTagCompound().getInteger("amount")), (EntityPlayerMP) event.getPlayer());
 
-			event.getPlayer().getCapability(ModCapabilities.MUNNY, null).addMunny(event.getEntityItem().getEntityItem().getTagCompound().getInteger("amount"));
+				event.getPlayer().getCapability(ModCapabilities.MUNNY, null).addMunny(event.getEntityItem().getEntityItem().getTagCompound().getInteger("amount"));
+			}
 		}
 	}
 

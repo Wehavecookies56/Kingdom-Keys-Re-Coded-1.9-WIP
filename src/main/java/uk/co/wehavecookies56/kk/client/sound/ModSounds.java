@@ -2,15 +2,17 @@ package uk.co.wehavecookies56.kk.client.sound;
 
 import java.lang.reflect.Field;
 
+import net.minecraft.client.audio.Sound;
 import net.minecraft.init.Bootstrap;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import uk.co.wehavecookies56.kk.common.lib.Reference;
 
 public class ModSounds {
 
-	public static final SoundEvent 
+	public static SoundEvent
 	kupo,
 	summon,
 	alarm,
@@ -40,63 +42,38 @@ public class ModSounds {
 	The_13th_Anthology
 	//TODO music
 	;
-	
-	private static SoundEvent getRegisteredSoundEvent(String id)
-    {
-		Field soundEventId = ReflectionHelper.findField(SoundEvent.class, "soundEventId", "field_187507_c");
-		try {
-            soundEventId.set(new SoundEvent(new ResourceLocation(Reference.MODID, id)), (int) soundEventId.get(new SoundEvent(new ResourceLocation(Reference.MODID, id))) + 1);
-			SoundEvent.soundEventRegistry.register((int) soundEventId.get(new SoundEvent(new ResourceLocation(Reference.MODID, id))), new ResourceLocation(Reference.MODID, id), new SoundEvent(new ResourceLocation(Reference.MODID, id)));
-		} catch (IllegalArgumentException | IllegalAccessException e) {
-			e.printStackTrace();
-		}
-        SoundEvent soundevent = (SoundEvent)SoundEvent.soundEventRegistry.getObject(new ResourceLocation(Reference.MODID, id));
 
-        if (soundevent == null)
-        {
-            throw new IllegalStateException("Invalid Sound requested: " + id);
-        }
-        else
-        {
-            return soundevent;
-        }
+    public static void registerSounds() {
+        kupo = registerSound("kupo");
+        summon = registerSound("summon");
+        alarm = registerSound("alarm");
+        unsummon = registerSound("unsummon");
+        sharpshooterbullet = registerSound("sharpshooterbullet");
+        error = registerSound("error");
+        select = registerSound("select");
+        cancel = registerSound("cancel");
+        move = registerSound("move");
+        drive = registerSound("drive");
+        antidrive = registerSound("antidrive");
+        potion = registerSound("potion");
+        savepoint = registerSound("savepoint");
+        savespawn = registerSound("savespawn");
+        Birth_by_Sleep_A_Link_to_the_Future = registerSound("records.Birth by Sleep -A Link to the Future-");
+        Darkness_of_the_Unknown = registerSound("records.Darkness of the Unknown");
+        Dearly_Beloved_Symphony_Version = registerSound("records.Dearly Beloved -Symphony Version-");
+        Dream_Drop_Distance_The_Next_Awakening = registerSound("records.Dream Drop Distance -The Next Awakening-");
+        Hikari_KINGDOM_Instrumental_Version = registerSound("records.Hikari -KINGDOM Instrumental Version-");
+        L_Oscurita_Dell_Ignoto = registerSound("records.L'Oscurita Dell'Ignoto");
+        Musique_pour_la_tristesse_de_Xion = registerSound("records.Musique pour la tristesse de Xion");
+        No_More_Bugs_Bug_Version = registerSound("records.No More Bugs -Bug Version-");
+        Organization_XIII = registerSound("records.Organization XIII");
+        Sanctuary = registerSound("records.Sanctuary");
+        Simple_And_Clean_PLANITb_Remix = registerSound("records.Simple And Clean PLANITb Remix");
+        Sinister_Sundown = registerSound("records.Sinister Sundown");
+        The_13th_Anthology = registerSound("records.The 13th Anthology");
     }
 
-    static
-    {
-        if (!Bootstrap.isRegistered())
-        {
-            throw new RuntimeException("Accessed Sounds before Bootstrap!");
-        }
-        else
-        {
-            kupo = getRegisteredSoundEvent("kupo");
-            summon = getRegisteredSoundEvent("summon");
-            alarm = getRegisteredSoundEvent("alarm");
-            unsummon = getRegisteredSoundEvent("unsummon");
-            sharpshooterbullet = getRegisteredSoundEvent("sharpshooterbullet");
-            error = getRegisteredSoundEvent("error");
-            select = getRegisteredSoundEvent("select");
-            cancel = getRegisteredSoundEvent("cancel");
-            move = getRegisteredSoundEvent("move");
-            drive = getRegisteredSoundEvent("drive");
-            antidrive = getRegisteredSoundEvent("antidrive");
-            potion = getRegisteredSoundEvent("potion");
-            savepoint = getRegisteredSoundEvent("savepoint");
-            savespawn = getRegisteredSoundEvent("savespawn");
-            Birth_by_Sleep_A_Link_to_the_Future = getRegisteredSoundEvent("records.Birth by Sleep -A Link to the Future-");
-            Darkness_of_the_Unknown = getRegisteredSoundEvent("records.Darkness of the Unknown");
-            Dearly_Beloved_Symphony_Version = getRegisteredSoundEvent("records.Dearly Beloved -Symphony Version-");
-            Dream_Drop_Distance_The_Next_Awakening = getRegisteredSoundEvent("records.Dream Drop Distance -The Next Awakening-");
-            Hikari_KINGDOM_Instrumental_Version = getRegisteredSoundEvent("records.Hikari -KINGDOM Instrumental Version-");
-            L_Oscurita_Dell_Ignoto = getRegisteredSoundEvent("records.L'Oscurita Dell'Ignoto");
-            Musique_pour_la_tristesse_de_Xion = getRegisteredSoundEvent("records.Musique pour la tristesse de Xion");
-            No_More_Bugs_Bug_Version = getRegisteredSoundEvent("records.No More Bugs -Bug Version-");
-            Organization_XIII = getRegisteredSoundEvent("records.Organization XIII");
-            Sanctuary = getRegisteredSoundEvent("records.Sanctuary");
-            Simple_And_Clean_PLANITb_Remix = getRegisteredSoundEvent("records.Simple And Clean PLANITb Remix");
-            Sinister_Sundown = getRegisteredSoundEvent("records.Sinister Sundown");
-            The_13th_Anthology = getRegisteredSoundEvent("records.The 13th Anthology");
-        }
+    public static SoundEvent registerSound(String name) {
+        return GameRegistry.register(new SoundEvent(new ResourceLocation(Reference.MODID, name)).setRegistryName(new ResourceLocation(Reference.MODID, name)));
     }
 }
