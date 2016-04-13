@@ -173,7 +173,7 @@ public class ModItemsRecipes {
 		
 		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.BlazingInfusedCoal), BlazingCrystal, Items.coal);
 		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.FrostInfusedSnowBall), FrostCrystal, Items.snowball);
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.StormyInfusedIron), StormyCrystal, "ingotIron"));
+		//GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.StormyInfusedIron), StormyCrystal, "ingotIron"));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.MythrilInfusedDiamond), MythrilCrystal, "gemDiamond"));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.LightningInfusedGold), LightningCrystal, "ingotGold"));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.BrightInfusedGlowStone), BrightCrystal, "glowstone"));

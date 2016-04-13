@@ -5,6 +5,8 @@ import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.typesafe.config.Config;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IThreadListener;
@@ -61,11 +63,13 @@ public class CommonProxy {
 		// ConfigHandler
 		ConfigHandler.init(new File(event.getModConfigurationDirectory().getPath() + File.separator + Reference.MODID + File.separator + "MainConfig.cfg"));
 		LogHelper.info("Configuration loaded");
-
-		try {
-			UsernameHandler.init(event);
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
+		if(ConfigHandler.chat)
+		{
+			try {
+				UsernameHandler.init(event);
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		// World generation
