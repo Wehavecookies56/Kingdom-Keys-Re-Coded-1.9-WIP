@@ -34,6 +34,9 @@ public class ConfigHandler {
 	public static int[] interfaceColour = new int[] { 255, 0, 0 };
 	
 	public static int guiAlpha = 255;
+	
+	public static boolean chat = true;
+	
 	public static Property interfaceColourProperty, EnableHeartsOnHUDProperty, EnableCustomMusicProperty;
 
 	public static void init(File file) {
@@ -61,6 +64,7 @@ public class ConfigHandler {
 
 		//INTERFACE
 		guiAlpha = configProperty("Gui Alpha (W.I.P.)", "Sets the Command Menu and Bars opacity (0-255)", guiAlpha, INTERFACE);
+		chat = configProperty("Enable Custom Chat", "It makes the chat have custom colors for KK helpers", chat, INTERFACE);
 		EnableHeartsOnHUDProperty = configBooleanProperty("Enable hearts on HUD", "Toggles rendering of hearts on the HUD", EnableHeartsOnHUD, INTERFACE);
 		EnableHeartsOnHUD = EnableHeartsOnHUDProperty.getBoolean();
 
