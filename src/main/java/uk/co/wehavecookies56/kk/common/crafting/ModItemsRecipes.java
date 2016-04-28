@@ -172,9 +172,7 @@ public class ModItemsRecipes {
 		GameRegistry.addShapelessRecipe(MythrilStone, DenseStone, DenseShard, TwilightStone, TwilightShard, SerenityShard);
 		GameRegistry.addShapelessRecipe(MythrilGem, DenseCrystal, DenseGem, TwilightCrystal, TwilightGem);
 		GameRegistry.addShapelessRecipe(MythrilCrystal, DenseCrystal, DenseGem, TwilightCrystal, TwilightGem, SerenityStone);
-
 		
-<<<<<<< HEAD
 		GameRegistry.addRecipe(new ShapelessNBTRecipe(new ItemStack(ModItems.BlazingInfusedCoal), BlazingCrystal, Items.coal));
 		GameRegistry.addRecipe(new ShapelessNBTRecipe(new ItemStack(ModItems.FrostInfusedSnowBall), FrostCrystal, Items.snowball));
 		GameRegistry.addRecipe(new ShapelessNBTRecipe(new ItemStack(ModItems.StormyInfusedIron), StormyCrystal, "ingotIron"));
@@ -182,15 +180,6 @@ public class ModItemsRecipes {
 		GameRegistry.addRecipe(new ShapelessNBTRecipe(new ItemStack(ModItems.LightningInfusedGold), LightningCrystal, "ingotGold"));
 		GameRegistry.addRecipe(new ShapelessNBTRecipe(new ItemStack(ModItems.BrightInfusedGlowStone), BrightCrystal, "glowstone"));
 		GameRegistry.addRecipe(new ShapelessNBTRecipe(new ItemStack(ModItems.DarkInfusedIron), DarkCrystal, "ingotIron"));
-=======
-		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.BlazingInfusedCoal), BlazingCrystal, Items.coal);
-		GameRegistry.addShapelessRecipe(new ItemStack(ModItems.FrostInfusedSnowBall), FrostCrystal, Items.snowball);
-		//GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.StormyInfusedIron), StormyCrystal, "ingotIron"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.MythrilInfusedDiamond), MythrilCrystal, "gemDiamond"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.LightningInfusedGold), LightningCrystal, "ingotGold"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.BrightInfusedGlowStone), BrightCrystal, "glowstone"));
-		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.DarkInfusedIron), DarkCrystal, "ingotIron"));
->>>>>>> 64146f7b2dee47462b88e7831bb1305bcd14eb7b
 
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.IceCream), "stickWood", Items.sugar, Items.water_bucket, Blocks.ice));
 		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.IceCream), "stickWood", Items.sugar, Items.water_bucket, Blocks.packed_ice));
