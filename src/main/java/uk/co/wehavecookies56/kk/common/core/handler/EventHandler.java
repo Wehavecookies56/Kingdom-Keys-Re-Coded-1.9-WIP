@@ -1030,6 +1030,11 @@ public class EventHandler {
 	@SubscribeEvent
 	public void onBlockDestroyed (HarvestDropsEvent event) {
 		int fortune;
+		if(event.isSilkTouching())
+		{
+			return;
+		}
+		
 		if (event.getState().getBlock() == ModBlocks.BlazingOre) {
 			int drop = randomWithRange(1, 4);
 			if (drop == 1) {

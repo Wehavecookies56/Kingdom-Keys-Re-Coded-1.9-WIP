@@ -152,8 +152,11 @@ public class PlayerStatsCapability {
 				switch(type)
 				{
 					case "normal":
-							if (this.experience + amount <= this.maxExperience)
-								this.experience += amount; else this.experience = this.maxExperience;
+							if (this.experience + amount <= this.maxExperience){
+								this.experience += amount; 
+							}else{ 
+								this.experience = this.maxExperience;
+							}
 							PacketDispatcher.sendTo(new ShowOverlayPacket("exp"),(EntityPlayerMP)player);
 							System.out.println("ActualExp: "+stats.getExperience());
 						break;
