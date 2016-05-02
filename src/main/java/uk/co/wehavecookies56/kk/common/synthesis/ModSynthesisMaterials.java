@@ -166,8 +166,8 @@ public class ModSynthesisMaterials {
 		registerMaterial(new MaterialIncompleteKiBlade(ModItems.Chain_IncompleteKiblade.getUnlocalizedName()));
 		registerMaterial(new MaterialNightmaresEnd(ModItems.Chain_NightmaresEnd.getUnlocalizedName()));
 		registerMaterial(new MaterialMirageSplit(ModItems.Chain_MirageSplit.getUnlocalizedName()));
-		registerMaterial(new MaterialStick(Items.stick.getUnlocalizedName()));
-		registerMaterial(new MaterialWoodenSword(Items.wooden_sword.getUnlocalizedName()));
+		registerMaterial(new MaterialStick(Items.STICK.getUnlocalizedName()));
+		registerMaterial(new MaterialWoodenSword(Items.WOODEN_SWORD.getUnlocalizedName()));
 		registerMaterial(new MaterialNormalBlox(ModBlocks.NormalBlox.getUnlocalizedName()));
 		registerMaterial(new MaterialHardBlox(ModBlocks.HardBlox.getUnlocalizedName()));
 		registerMaterial(new MaterialMetalBlox(ModBlocks.MetalBlox.getUnlocalizedName()));

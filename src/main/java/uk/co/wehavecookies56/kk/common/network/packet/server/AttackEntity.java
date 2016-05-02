@@ -100,12 +100,12 @@ public class AttackEntity extends AbstractServerMessage<AttackEntity> {
 
                     if (player.isSprinting() && flag)
                     {
-                        player.worldObj.playSound((EntityPlayer)null, player.posX, player.posY, player.posZ, SoundEvents.entity_player_attack_knockback, player.getSoundCategory(), 1.0F, 1.0F);
+                        player.worldObj.playSound((EntityPlayer)null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_PLAYER_ATTACK_KNOCKBACK, player.getSoundCategory(), 1.0F, 1.0F);
                         ++i;
                         flag1 = true;
                     }
 
-                    flag2 = flag && player.fallDistance > 0.0F && !player.onGround && !player.isOnLadder() && !player.isInWater() && !player.isPotionActive(MobEffects.blindness) && !player.isRiding() && targetEntity instanceof EntityLivingBase;
+                    flag2 = flag && player.fallDistance > 0.0F && !player.onGround && !player.isOnLadder() && !player.isInWater() && !player.isPotionActive(MobEffects.BLINDNESS) && !player.isRiding() && targetEntity instanceof EntityLivingBase;
                     flag2 = flag2 && !player.isSprinting();
 
                     if (flag2)
@@ -176,7 +176,7 @@ public class AttackEntity extends AbstractServerMessage<AttackEntity> {
                                 }
                             }
 
-                            player.worldObj.playSound((EntityPlayer)null, player.posX, player.posY, player.posZ, SoundEvents.entity_player_attack_sweep, player.getSoundCategory(), 1.0F, 1.0F);
+                            player.worldObj.playSound((EntityPlayer)null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, player.getSoundCategory(), 1.0F, 1.0F);
                             player.spawnSweepParticles();
                         }
 
@@ -191,7 +191,7 @@ public class AttackEntity extends AbstractServerMessage<AttackEntity> {
 
                         if (flag2)
                         {
-                            player.worldObj.playSound((EntityPlayer)null, player.posX, player.posY, player.posZ, SoundEvents.entity_player_attack_crit, player.getSoundCategory(), 1.0F, 1.0F);
+                            player.worldObj.playSound((EntityPlayer)null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_PLAYER_ATTACK_CRIT, player.getSoundCategory(), 1.0F, 1.0F);
                             player.onCriticalHit(targetEntity);
                         }
 
@@ -199,11 +199,11 @@ public class AttackEntity extends AbstractServerMessage<AttackEntity> {
                         {
                             if (flag)
                             {
-                                player.worldObj.playSound((EntityPlayer)null, player.posX, player.posY, player.posZ, SoundEvents.entity_player_attack_strong, player.getSoundCategory(), 1.0F, 1.0F);
+                                player.worldObj.playSound((EntityPlayer)null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_PLAYER_ATTACK_STRONG, player.getSoundCategory(), 1.0F, 1.0F);
                             }
                             else
                             {
-                                player.worldObj.playSound((EntityPlayer)null, player.posX, player.posY, player.posZ, SoundEvents.entity_player_attack_weak, player.getSoundCategory(), 1.0F, 1.0F);
+                                player.worldObj.playSound((EntityPlayer)null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_PLAYER_ATTACK_WEAK, player.getSoundCategory(), 1.0F, 1.0F);
                             }
                         }
 
@@ -218,7 +218,7 @@ public class AttackEntity extends AbstractServerMessage<AttackEntity> {
                             ItemStack itemstack2 = player.getHeldItemOffhand();
                             ItemStack itemstack3 = entityplayer.isHandActive() ? entityplayer.getActiveItemStack() : null;
 
-                            if (itemstack2 != null && itemstack3 != null && itemstack2.getItem() instanceof ItemAxe && itemstack3.getItem() == Items.shield)
+                            if (itemstack2 != null && itemstack3 != null && itemstack2.getItem() instanceof ItemAxe && itemstack3.getItem() == Items.SHIELD)
                             {
                                 float f3 = 0.25F + (float)EnchantmentHelper.getEfficiencyModifier(player) * 0.05F;
 
@@ -229,7 +229,7 @@ public class AttackEntity extends AbstractServerMessage<AttackEntity> {
 
                                 if (rand.nextFloat() < f3)
                                 {
-                                    entityplayer.getCooldownTracker().setCooldown(Items.shield, 100);
+                                    entityplayer.getCooldownTracker().setCooldown(Items.SHIELD, 100);
                                     player.worldObj.setEntityState(entityplayer, (byte)30);
                                 }
                             }
@@ -237,7 +237,7 @@ public class AttackEntity extends AbstractServerMessage<AttackEntity> {
 
                         if (attackDamage >= 18.0F)
                         {
-                            player.addStat(AchievementList.overkill);
+                            player.addStat(AchievementList.OVERKILL);
                         }
 
                         player.setLastAttacker(targetEntity);
@@ -274,7 +274,7 @@ public class AttackEntity extends AbstractServerMessage<AttackEntity> {
                         if (targetEntity instanceof EntityLivingBase)
                         {
                             float f5 = f4 - ((EntityLivingBase)targetEntity).getHealth();
-                            player.addStat(StatList.damageDealt, Math.round(f5 * 10.0F));
+                            player.addStat(StatList.DAMAGE_DEALT, Math.round(f5 * 10.0F));
 
                             if (j > 0)
                             {
@@ -292,7 +292,7 @@ public class AttackEntity extends AbstractServerMessage<AttackEntity> {
                     }
                     else
                     {
-                        player.worldObj.playSound((EntityPlayer)null, player.posX, player.posY, player.posZ, SoundEvents.entity_player_attack_nodamage, player.getSoundCategory(), 1.0F, 1.0F);
+                        player.worldObj.playSound((EntityPlayer)null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_PLAYER_ATTACK_NODAMAGE, player.getSoundCategory(), 1.0F, 1.0F);
 
                         if (flag4)
                         {

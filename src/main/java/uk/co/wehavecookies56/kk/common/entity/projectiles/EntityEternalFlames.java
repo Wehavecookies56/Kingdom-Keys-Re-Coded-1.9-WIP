@@ -34,12 +34,7 @@ public class EntityEternalFlames extends EntityThrowable implements IThrowableEn
 	protected float getGravityVelocity () {
 		return 0.0F;
 	}
-	
-	@Override
-	public void func_184538_a(Entity p_184538_1_, float p_184538_2_, float p_184538_3_, float p_184538_4_, float p_184538_5_, float p_184538_6_) {
-		super.func_184538_a(p_184538_1_, p_184538_2_, p_184538_3_, p_184538_4_, p_184538_5_, p_184538_6_);
-	}
-		
+
 	boolean returning = false;
 
 	@Override

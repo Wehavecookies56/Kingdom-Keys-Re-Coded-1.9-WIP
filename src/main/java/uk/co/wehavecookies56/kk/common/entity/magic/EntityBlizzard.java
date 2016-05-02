@@ -64,11 +64,11 @@ public class EntityBlizzard extends EntityThrowable {
 				if (flag) {
 					BlockPos blockpos = movingObject.getBlockPos().offset(movingObject.sideHit);
 
-					if (this.worldObj.getBlockState(blockpos).getBlock() == Blocks.water)
-						this.worldObj.setBlockState(blockpos, Blocks.ice.getDefaultState());
-					else if (this.worldObj.getBlockState(blockpos).getBlock() == Blocks.fire)
-						this.worldObj.setBlockState(blockpos, Blocks.air.getDefaultState());
-					else if (this.worldObj.getBlockState(blockpos).getBlock() == Blocks.lava) this.worldObj.setBlockState(blockpos, Blocks.obsidian.getDefaultState());
+					if (this.worldObj.getBlockState(blockpos).getBlock() == Blocks.WATER)
+						this.worldObj.setBlockState(blockpos, Blocks.ICE.getDefaultState());
+					else if (this.worldObj.getBlockState(blockpos).getBlock() == Blocks.FIRE)
+						this.worldObj.setBlockState(blockpos, Blocks.AIR.getDefaultState());
+					else if (this.worldObj.getBlockState(blockpos).getBlock() == Blocks.LAVA) this.worldObj.setBlockState(blockpos, Blocks.OBSIDIAN.getDefaultState());
 				}
 			}
 			setDead();

@@ -68,7 +68,7 @@ public class EntityOldFire extends EntityThrowable {
 				if (flag) {
 					BlockPos blockpos = movingObject.getBlockPos().offset(movingObject.sideHit);
 
-					if (this.worldObj.isAirBlock(blockpos)) this.worldObj.setBlockState(blockpos, Blocks.fire.getDefaultState());
+					if (this.worldObj.isAirBlock(blockpos)) this.worldObj.setBlockState(blockpos, Blocks.FIRE.getDefaultState());
 				}
 			}
 

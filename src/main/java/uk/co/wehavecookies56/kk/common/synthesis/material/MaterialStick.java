@@ -20,7 +20,7 @@ public class MaterialStick extends Material {
 
 	@Override
 	public ItemStack getItem () {
-		ItemStack stack = new ItemStack(Items.stick);
+		ItemStack stack = new ItemStack(Items.STICK);
 		return stack;
 	}
 

@@ -7,6 +7,7 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import uk.co.wehavecookies56.kk.common.lib.Reference;
 import uk.co.wehavecookies56.kk.common.network.packet.AbstractMessage;
@@ -40,7 +41,7 @@ public class PlaySoundAtPlayer extends AbstractMessage.AbstractServerMessage<Pla
 
 	@Override
 	public void process (EntityPlayer player, Side side) {
-		player.worldObj.playSound(null, player.getPosition(), SoundEvent.soundEventRegistry.getObject(new ResourceLocation(Reference.MODID, sound)), SoundCategory.MASTER, volume, pitch);
+		player.worldObj.playSound(null, player.getPosition(), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation(Reference.MODID, sound)), SoundCategory.MASTER, volume, pitch);
 	}
 
 }

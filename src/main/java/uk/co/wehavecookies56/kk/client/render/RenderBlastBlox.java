@@ -62,7 +62,7 @@ public class RenderBlastBlox extends Render<EntityBlastBlox> {
 	}
 
 	protected ResourceLocation func_180563_a (EntityBlastBlox p_180563_1_) {
-		return TextureMap.locationBlocksTexture;
+		return TextureMap.LOCATION_BLOCKS_TEXTURE;
 	}
 
 	/**

@@ -60,11 +60,11 @@ public class ModItems {
 	public static Item OrganizationRobe_Helmet, OrganizationRobe_Chestplate, OrganizationRobe_Leggings, OrganizationRobe_Boots, Terra_Helmet, Terra_Chestplate, Terra_Leggings, Terra_Boots, Aqua_Helmet, Aqua_Chestplate, Aqua_Leggings, Aqua_Boots, Ventus_Helmet, Ventus_Chestplate, Ventus_Leggings, Ventus_Boots, Eraqus_Helmet, Eraqus_Chestplate, Eraqus_Leggings, Eraqus_Boots;
 
 	// Armour material
-	private static ArmorMaterial ORGANIZATIONROBE = EnumHelper.addArmorMaterial("ORGANIZATIONROBE", Reference.MODID + ":organizationrobe", 35, new int[] { 3, 5, 8, 4 }, 15, SoundEvents.item_armor_equip_leather);
-	private static ArmorMaterial TERRA = EnumHelper.addArmorMaterial("TERRA", Reference.MODID + ":terra", 35, new int[] { 5, 6, 9, 5 }, 15, SoundEvents.item_armor_equip_iron);
-	private static ArmorMaterial AQUA = EnumHelper.addArmorMaterial("AQUA", Reference.MODID + ":aqua", 35, new int[] { 5, 6, 9, 5 }, 15, SoundEvents.item_armor_equip_iron);
-	private static ArmorMaterial VENTUS = EnumHelper.addArmorMaterial("VENTUS", Reference.MODID + ":ventus", 35, new int[] { 5, 6, 9, 5 }, 15, SoundEvents.item_armor_equip_iron);
-	private static ArmorMaterial ERAQUS = EnumHelper.addArmorMaterial("ERAQUS", Reference.MODID + ":eraqus", 35, new int[] { 5, 6, 9, 5 }, 15, SoundEvents.item_armor_equip_iron);
+	private static ArmorMaterial ORGANIZATIONROBE = EnumHelper.addArmorMaterial("ORGANIZATIONROBE", Reference.MODID + ":organizationrobe", 35, new int[] { 3, 5, 8, 4 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER);
+	private static ArmorMaterial TERRA = EnumHelper.addArmorMaterial("TERRA", Reference.MODID + ":terra", 35, new int[] { 5, 6, 9, 5 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_IRON);
+	private static ArmorMaterial AQUA = EnumHelper.addArmorMaterial("AQUA", Reference.MODID + ":aqua", 35, new int[] { 5, 6, 9, 5 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_IRON);
+	private static ArmorMaterial VENTUS = EnumHelper.addArmorMaterial("VENTUS", Reference.MODID + ":ventus", 35, new int[] { 5, 6, 9, 5 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_IRON);
+	private static ArmorMaterial ERAQUS = EnumHelper.addArmorMaterial("ERAQUS", Reference.MODID + ":eraqus", 35, new int[] { 5, 6, 9, 5 }, 15, SoundEvents.ITEM_ARMOR_EQUIP_IRON);
 
 	//public static ToolMaterial KEYCHAIN = EnumHelper.addToolMaterial("KEYCHAIN", 0, -1, 0, 0, 20);
 

@@ -20,7 +20,7 @@ public class MaterialWoodenSword extends Material {
 
 	@Override
 	public ItemStack getItem () {
-		ItemStack stack = new ItemStack(Items.wooden_sword);
+		ItemStack stack = new ItemStack(Items.WOODEN_SWORD);
 		return stack;
 	}
 

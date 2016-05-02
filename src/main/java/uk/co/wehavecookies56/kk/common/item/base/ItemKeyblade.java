@@ -64,12 +64,12 @@ public class ItemKeyblade extends ItemSword {
 
 				if (world.getBlockState(pos).getValue(BlockDoor.HALF) == EnumDoorHalf.UPPER) {
 					world.setBlockState(pos.down(), world.getBlockState(pos.down()).withProperty(BlockDoor.OPEN, !world.getBlockState(pos.down()).getValue(BlockDoor.OPEN)));
-					sound = world.getBlockState(pos.down()).getValue(BlockDoor.OPEN) ? SoundEvents.block_iron_door_close : SoundEvents.block_iron_door_open;
+					sound = world.getBlockState(pos.down()).getValue(BlockDoor.OPEN) ? SoundEvents.BLOCK_IRON_DOOR_CLOSE : SoundEvents.BLOCK_IRON_DOOR_OPEN;
 					world.playSound(player, pos, sound, SoundCategory.BLOCKS, 1.0f, 1.0f);
 					return EnumActionResult.SUCCESS;
 				} else {
 					world.setBlockState(pos, world.getBlockState(pos).withProperty(BlockDoor.OPEN, !world.getBlockState(pos).getValue(BlockDoor.OPEN)));
-					sound = world.getBlockState(pos).getValue(BlockDoor.OPEN) ? SoundEvents.block_iron_door_close : SoundEvents.block_iron_door_open;
+					sound = world.getBlockState(pos).getValue(BlockDoor.OPEN) ? SoundEvents.BLOCK_IRON_DOOR_CLOSE : SoundEvents.BLOCK_IRON_DOOR_OPEN;
 					world.playSound(player, pos, sound, SoundCategory.BLOCKS, 1.0f, 1.0f);
 					return EnumActionResult.SUCCESS;
 				}

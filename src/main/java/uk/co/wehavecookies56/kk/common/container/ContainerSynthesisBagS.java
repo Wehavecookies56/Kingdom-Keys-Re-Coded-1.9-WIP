@@ -64,9 +64,9 @@ public class ContainerSynthesisBagS extends Container {
 	}
 
 	@Override
-	public ItemStack func_184996_a(int slot, int dragType, ClickType clickTypeIn, EntityPlayer player) {
+	public ItemStack slotClick(int slot, int dragType, ClickType clickTypeIn, EntityPlayer player) {
 		if (slot >= 0 && getSlot(slot) != null && getSlot(slot).getStack() == player.getHeldItem(EnumHand.MAIN_HAND)) return null;
-		return super.func_184996_a(slot, dragType, clickTypeIn, player);
+		return super.slotClick(slot, dragType, clickTypeIn, player);
 	}
 
 	@Override

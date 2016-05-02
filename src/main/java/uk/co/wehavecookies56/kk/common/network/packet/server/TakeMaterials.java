@@ -8,6 +8,8 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import uk.co.wehavecookies56.kk.api.materials.MaterialRegistry;
@@ -63,22 +65,22 @@ public class TakeMaterials extends AbstractServerMessage<TakeMaterials> {
 			player.getCapability(ModCapabilities.SYNTHESIS_MATERIALS, null).removeMaterial(MaterialRegistry.get(materialName), amount);
 
 		} else if (materialName.startsWith("item.")) {
-			if (GameRegistry.findItem(Reference.MODID, materialName.replace("item.", "")) != null) {
-				player.inventory.addItemStackToInventory(new ItemStack(GameRegistry.findItem(Reference.MODID, materialName.replace("item.", "")), amount));
+			if (ForgeRegistries.ITEMS.getValue(new ResourceLocation(Reference.MODID, materialName.replace("item.", ""))) != null) {
+				player.inventory.addItemStackToInventory(new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(Reference.MODID, materialName.replace("item.", ""))), amount));
 				player.getCapability(ModCapabilities.SYNTHESIS_MATERIALS, null).removeMaterial(MaterialRegistry.get(materialName), amount);
 			} else {
 				// VANILLA ITEMS HERE
-				if (materialName.equals(Items.wooden_sword.getUnlocalizedName())) {
-					player.inventory.addItemStackToInventory(new ItemStack(Items.wooden_sword, amount));
+				if (materialName.equals(Items.WOODEN_SWORD.getUnlocalizedName())) {
+					player.inventory.addItemStackToInventory(new ItemStack(Items.WOODEN_SWORD, amount));
 					player.getCapability(ModCapabilities.SYNTHESIS_MATERIALS, null).removeMaterial(MaterialRegistry.get(materialName), amount);
 				}
-				if (materialName.equals(Items.stick.getUnlocalizedName())) {
-					player.inventory.addItemStackToInventory(new ItemStack(Items.stick, amount));
+				if (materialName.equals(Items.STICK.getUnlocalizedName())) {
+					player.inventory.addItemStackToInventory(new ItemStack(Items.STICK, amount));
 					player.getCapability(ModCapabilities.SYNTHESIS_MATERIALS, null).removeMaterial(MaterialRegistry.get(materialName), amount);
 				}
 			}
-		} else if (materialName.startsWith("tile.")) if (GameRegistry.findBlock(Reference.MODID, materialName.replace("tile.", "")) != null) {
-			player.inventory.addItemStackToInventory(new ItemStack(GameRegistry.findBlock(Reference.MODID, materialName.replace("tile.", "")), amount));
+		} else if (materialName.startsWith("tile.")) if (ForgeRegistries.BLOCKS.getValue(new ResourceLocation(Reference.MODID, materialName.replace("tile.", ""))) != null) {
+			player.inventory.addItemStackToInventory(new ItemStack(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(Reference.MODID, materialName.replace("tile.", ""))), amount));
 			player.getCapability(ModCapabilities.SYNTHESIS_MATERIALS, null).removeMaterial(MaterialRegistry.get(materialName), amount);
 		} else {
 			// VANILLA BLOCKS HERE

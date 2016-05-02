@@ -30,7 +30,7 @@ public class BlockSavePoint extends Block {
 		super(material);
 		//setBlockBounds(0, 0, 0, 1, 0.1F, 1);
 		setTickRandomly(true);
-		setStepSound(SoundType.STONE);
+		setSoundType(SoundType.STONE);
 	}
 
 	@Override
@@ -40,7 +40,7 @@ public class BlockSavePoint extends Block {
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock (World world, BlockPos pos, Entity entity) {
+	public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entityIn) {
 		if (!world.isRemote) updateState(world, pos);
 	}
 

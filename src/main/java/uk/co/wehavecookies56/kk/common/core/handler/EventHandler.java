@@ -877,11 +877,11 @@ public class EventHandler {
 
 	@SubscribeEvent
 	public void onItemCrafted (ItemCraftedEvent event) {
-		ItemStack WHC56skull = new ItemStack(Items.skull, 1, 3);
+		ItemStack WHC56skull = new ItemStack(Items.SKULL, 1, 3);
 		WHC56skull.setTagCompound(new NBTTagCompound());
 		WHC56skull.getTagCompound().setTag("SkullOwner", new NBTTagString("Wehavecookies56"));
 
-		ItemStack AAskull = new ItemStack(Items.skull, 1, 3);
+		ItemStack AAskull = new ItemStack(Items.SKULL, 1, 3);
 		AAskull.setTagCompound(new NBTTagCompound());
 		AAskull.getTagCompound().setTag("SkullOwner", new NBTTagString("Abelatox"));
 

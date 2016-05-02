@@ -37,7 +37,7 @@ public class ItemSharpshooter extends ItemSword {
 			// TODO set strength
 
 			if (player.getCapability(ModCapabilities.PLAYER_STATS, null).getMP() > 0 && !player.getCapability(ModCapabilities.PLAYER_STATS, null).getRecharge() || player.getCapability(ModCapabilities.CHEAT_MODE, null).getCheatMode()) {
-				world.playSound(player.posX, player.posY, player.posZ, SoundEvents.entity_ghast_shoot, SoundCategory.PLAYERS, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F), false);
+				world.playSound(player.posX, player.posY, player.posZ, SoundEvents.ENTITY_GHAST_SHOOT, SoundCategory.PLAYERS, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F), false);
 				world.spawnEntityInWorld(new EntitySharpshooterBullet(world, player, strength));
 				if (!player.getCapability(ModCapabilities.CHEAT_MODE, null).getCheatMode()) player.getCapability(ModCapabilities.PLAYER_STATS, null).remMP(10);
 				player.swingArm(EnumHand.MAIN_HAND);

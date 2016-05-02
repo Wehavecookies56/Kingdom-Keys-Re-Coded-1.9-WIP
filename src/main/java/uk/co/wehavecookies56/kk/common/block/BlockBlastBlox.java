@@ -64,7 +64,7 @@ public class BlockBlastBlox extends BlockBlox {
 
 	@Override
 	public void onBlockDestroyedByPlayer (World world, BlockPos pos, IBlockState state) {
-		if (Minecraft.getMinecraft().thePlayer.getHeldItem(EnumHand.MAIN_HAND).getItem() == Items.apple) explode(world, pos.getX(), pos.getY(), pos.getZ(), state.getBlock().getMetaFromState(state), (EntityLivingBase) null);
+		if (Minecraft.getMinecraft().thePlayer.getHeldItem(EnumHand.MAIN_HAND).getItem() == Items.APPLE) explode(world, pos.getX(), pos.getY(), pos.getZ(), state.getBlock().getMetaFromState(state), (EntityLivingBase) null);
 	}
 
 	public void explode (World world, int x, int y, int z, int state, EntityLivingBase entity) {
@@ -82,7 +82,7 @@ public class BlockBlastBlox extends BlockBlox {
 	
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
-		if (player.getHeldItem(EnumHand.MAIN_HAND) != null && player.getHeldItem(EnumHand.MAIN_HAND) == new ItemStack(Items.flint_and_steel)) {
+		if (player.getHeldItem(EnumHand.MAIN_HAND) != null && player.getHeldItem(EnumHand.MAIN_HAND) == new ItemStack(Items.FLINT_AND_STEEL)) {
 			explode(world, pos.getX(), pos.getY(), pos.getZ(), 1, player);
 			world.setBlockToAir(pos);
 			player.getHeldItem(EnumHand.MAIN_HAND).damageItem(1, player);
@@ -98,7 +98,7 @@ public class BlockBlastBlox extends BlockBlox {
 	@Override
 	public void onBlockClicked (World world, BlockPos pos, EntityPlayer player) {
 		if (player.getHeldItem(EnumHand.MAIN_HAND) != null) {
-			if (player.getHeldItem(EnumHand.MAIN_HAND).getItem() == Items.feather)
+			if (player.getHeldItem(EnumHand.MAIN_HAND).getItem() == Items.FEATHER)
 				world.destroyBlock(pos, true);
 			else {
 				explode(world, pos.getX(), pos.getY(), pos.getZ(), 1, player);

@@ -50,9 +50,9 @@ public class BlockMagnetBlox extends BlockBlox {
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock (World world, BlockPos pos, Entity entityIn) {
+	public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entityIn) {
 		if (!world.isRemote) updateState(world, pos);
-		super.onEntityCollidedWithBlock(world, pos, entityIn);
+		super.onEntityCollidedWithBlock(world, pos, state, entityIn);
 	}
 
 	@Override

@@ -42,7 +42,7 @@ public class BlockKKChest extends BlockContainer implements ITileEntityProvider 
 		this.setHarvestLevel(toolClass, level);
 		setHardness(hardness);
 		setResistance(resistance);
-		setStepSound(SoundType.STONE);
+		setSoundType(SoundType.STONE);
 	}
 
 	@Override

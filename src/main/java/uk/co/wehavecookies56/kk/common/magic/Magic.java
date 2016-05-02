@@ -56,7 +56,7 @@ public class Magic {
 		{
 			PacketDispatcher.sendToServer(new MagicFire());
 			player.swingArm(EnumHand.MAIN_HAND);
-			world.playSound(player.posX, player.posY, player.posZ, SoundEvents.entity_ghast_shoot, SoundCategory.PLAYERS, 1, 1, false);
+			world.playSound(player.posX, player.posY, player.posZ, SoundEvents.ENTITY_GHAST_SHOOT, SoundCategory.PLAYERS, 1, 1, false);
 		}
 	}
 
@@ -80,12 +80,12 @@ public class Magic {
 	public static void Aero (EntityPlayer player, World world) {
 		PacketDispatcher.sendToServer(new MagicAero());
 		player.swingArm(EnumHand.MAIN_HAND);
-		world.playSound(player.posX, player.posY, player.posZ, SoundEvents.entity_ghast_shoot, SoundCategory.PLAYERS, 1, 1, false);
+		world.playSound(player.posX, player.posY, player.posZ, SoundEvents.ENTITY_GHAST_SHOOT, SoundCategory.PLAYERS, 1, 1, false);
 	}
 
 	public static void Stop (EntityPlayer player, World world) {
 		PacketDispatcher.sendToServer(new MagicStop());
 		player.swingArm(EnumHand.MAIN_HAND);
-		world.playSound(player.posX, player.posY, player.posZ, SoundEvents.entity_ghast_shoot, SoundCategory.PLAYERS, 1, 1, false);
+		world.playSound(player.posX, player.posY, player.posZ, SoundEvents.ENTITY_GHAST_SHOOT, SoundCategory.PLAYERS, 1, 1, false);
 	}
 }

@@ -39,11 +39,11 @@ public class ItemIceCream extends ItemFood {
 					PacketDispatcher.sendToServer(new GiveItemInSlot(new ItemStack(ModItems.WinnerStick), player.inventory.getFirstEmptyStack(), false));
 				}
 			}else{
-				if(player.inventory.hasItemStack(new ItemStack(Items.stick)))
+				if(player.inventory.hasItemStack(new ItemStack(Items.STICK)))
 				{
-					PacketDispatcher.sendToServer(new GiveItemInSlot(new ItemStack(Items.stick), player.inventory.getSlotFor(new ItemStack(ModItems.WinnerStick)),true));
+					PacketDispatcher.sendToServer(new GiveItemInSlot(new ItemStack(Items.STICK), player.inventory.getSlotFor(new ItemStack(ModItems.WinnerStick)),true));
 				}else{
-					PacketDispatcher.sendToServer(new GiveItemInSlot(new ItemStack(Items.stick), player.inventory.getFirstEmptyStack(), false));
+					PacketDispatcher.sendToServer(new GiveItemInSlot(new ItemStack(Items.STICK), player.inventory.getFirstEmptyStack(), false));
 				}	
 			}
 		}
