@@ -1,6 +1,9 @@
 package uk.co.wehavecookies56.kk.common.crafting;
 
-import com.sun.istack.internal.NotNull;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
@@ -8,12 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.oredict.OreDictionary;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 /**
  * Created by Toby on 14/04/2016.
@@ -23,11 +21,11 @@ public class ShapelessNBTRecipe implements IRecipe {
     private ItemStack output;
     private ArrayList<Object> input = new ArrayList<>();
 
-    public ShapelessNBTRecipe(Block result, @NotNull Object... recipe) {
+    public ShapelessNBTRecipe(Block result, Object... recipe) {
         this(new ItemStack(result), recipe);
     }
 
-    public ShapelessNBTRecipe(Item result, @NotNull Object... recipe) {
+    public ShapelessNBTRecipe(Item result, Object... recipe) {
         this(new ItemStack(result), recipe);
     }
 

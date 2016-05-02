@@ -81,6 +81,7 @@ public class WorldGenBlox implements IWorldGenerator {
 			if (OreY < 20) {
 				new WorldGenMinable(ModBlocks.DarkOre.getDefaultState(), 3, BlockMatcher.forBlock(Blocks.STONE)).generate(world, rand, OrePos);
 				new WorldGenMinable(ModBlocks.DenseOre.getDefaultState(), 3, BlockMatcher.forBlock(Blocks.STONE)).generate(world, rand, OrePos);
+				new WorldGenMinable(ModBlocks.StormyOre.getDefaultState(), 3, BlockMatcher.forBlock(Blocks.STONE)).generate(world, rand, OrePos);
 				BiomeGenBase[] wetBiomes = BiomeDictionary.getBiomesForType(BiomeDictionary.Type.WET);
 				for (int i = 0; i < coldBiomes.length; i++){
 					new WorldGenMinable(ModBlocks.PowerOre.getDefaultState(), 3, BlockMatcher.forBlock(Blocks.STONE)).generate(world, rand, OrePos);

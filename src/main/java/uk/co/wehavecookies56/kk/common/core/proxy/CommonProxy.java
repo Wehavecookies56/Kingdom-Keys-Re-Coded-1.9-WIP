@@ -5,10 +5,8 @@ import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.typesafe.config.Config;
-
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IThreadListener;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
@@ -40,6 +38,7 @@ import uk.co.wehavecookies56.kk.common.crafting.KKOreDictionary;
 import uk.co.wehavecookies56.kk.common.crafting.ModBlocksRecipes;
 import uk.co.wehavecookies56.kk.common.crafting.ModItemsRecipes;
 import uk.co.wehavecookies56.kk.common.driveform.ModDriveForms;
+import uk.co.wehavecookies56.kk.common.entity.EntityShadow;
 import uk.co.wehavecookies56.kk.common.entity.block.EntityBlastBlox;
 import uk.co.wehavecookies56.kk.common.entity.magic.EntityFire;
 import uk.co.wehavecookies56.kk.common.entity.magic.EntityThunder;
@@ -91,7 +90,19 @@ public class CommonProxy {
 		LogHelper.info("Blocks loaded");
 
 		ModCapabilities.registerCapabilities();
+		//Mobs
+		registerEntityWithEgg(EntityShadow.class, "shadow", 56, 80, 3, true, 0xFFFFFF, 0xFFFFFF);
 
+	}
+	
+	public static Map<String, Integer> stringtoIDMapping = new HashMap<String, Integer>();
+	static int startEntityId = 600;
+	
+	@SuppressWarnings("unchecked")
+	private static void registerEntityWithEgg(Class<? extends Entity> entity, String name, int modid, int trackingRange, int updateFrequency, boolean sendsVelocityUpdates, int primaryColor, int secondaryColor) {
+		int id = 1;
+		stringtoIDMapping.put(name, id);
+		EntityRegistry.registerModEntity(entity, name, modid, new KingdomKeys(), trackingRange, updateFrequency, sendsVelocityUpdates, primaryColor, secondaryColor);
 	}
 
 	public void init (FMLInitializationEvent event) {

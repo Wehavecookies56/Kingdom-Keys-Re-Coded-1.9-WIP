@@ -1,6 +1,5 @@
 package uk.co.wehavecookies56.kk.common.capability;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;

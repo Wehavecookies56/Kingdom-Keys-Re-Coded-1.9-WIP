@@ -29,7 +29,7 @@ public class KingdomKeys {
 	public static KingdomKeys instance;
 
 	@EventHandler
-	public void preInit (FMLPreInitializationEvent e) { proxy.preInit(e); }
+	public void preInit (FMLPreInitializationEvent e) { proxy.preInit(e);  }
 
 	@EventHandler
 	public void init (FMLInitializationEvent e) { proxy.init(e); }

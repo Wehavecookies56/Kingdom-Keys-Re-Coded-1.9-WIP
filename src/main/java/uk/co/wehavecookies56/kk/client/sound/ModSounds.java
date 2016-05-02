@@ -1,13 +1,8 @@
 package uk.co.wehavecookies56.kk.client.sound;
 
-import java.lang.reflect.Field;
-
-import net.minecraft.client.audio.Sound;
-import net.minecraft.init.Bootstrap;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import uk.co.wehavecookies56.kk.common.lib.Reference;
 
 public class ModSounds {
