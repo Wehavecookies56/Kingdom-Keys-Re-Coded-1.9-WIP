@@ -38,7 +38,6 @@ import uk.co.wehavecookies56.kk.common.crafting.KKOreDictionary;
 import uk.co.wehavecookies56.kk.common.crafting.ModBlocksRecipes;
 import uk.co.wehavecookies56.kk.common.crafting.ModItemsRecipes;
 import uk.co.wehavecookies56.kk.common.driveform.ModDriveForms;
-import uk.co.wehavecookies56.kk.common.entity.EntityShadow;
 import uk.co.wehavecookies56.kk.common.entity.block.EntityBlastBlox;
 import uk.co.wehavecookies56.kk.common.entity.magic.EntityFire;
 import uk.co.wehavecookies56.kk.common.entity.magic.EntityThunder;
@@ -90,9 +89,6 @@ public class CommonProxy {
 		LogHelper.info("Blocks loaded");
 
 		ModCapabilities.registerCapabilities();
-		//Mobs
-		registerEntityWithEgg(EntityShadow.class, "shadow", 56, 80, 3, true, 0xFFFFFF, 0xFFFFFF);
-
 	}
 	
 	public static Map<String, Integer> stringtoIDMapping = new HashMap<String, Integer>();
