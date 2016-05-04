@@ -9,6 +9,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
+import net.minecraftforge.fml.server.FMLServerHandler;
 import uk.co.wehavecookies56.kk.common.container.inventory.InventoryPotionsMenu;
 import uk.co.wehavecookies56.kk.common.network.packet.PacketDispatcher;
 import uk.co.wehavecookies56.kk.common.network.packet.client.ShowOverlayPacket;
@@ -139,10 +140,15 @@ public class PlayerStatsCapability {
 		@Override public boolean getRecharge() { return this.recharge; }
 		@Override public boolean getHudMode() {return this.hudmode;}
 		
-		@Override public boolean setLevel(int level) { if (level <= this.maxLevel) { this.level = level; return true; } return false;}
+		@Override public boolean setLevel(int level) {
+			if (level <= this.maxLevel) {
+				this.level = level;
+				return true;
+			}
+			return false;
+		}
 		@Override public boolean setExperience(int experience) { if (experience <= this.maxExperience) { this.experience = experience; return true; } return false; }
 		@Override 
-		//public void addExperience(int experience) {if (this.experience + experience <= this.maxExperience) this.experience += experience; else this.experience = this.maxExperience;}
 		public void addExperience(EntityPlayer player, int amount, String type)
 		{
 			if(player != null)
@@ -152,8 +158,12 @@ public class PlayerStatsCapability {
 				{
 					case "normal":
 							if (this.experience + amount <= this.maxExperience){
-								this.experience += amount; 
-							}else{ 
+								this.experience += amount;
+								while (this.getExpNeeded(this.getLevel(), this.experience) <= 0) {
+									// TODO PacketDispatcher.sendTo(new ShowOverlayPacket("levelup"),(EntityPlayerMP)player); Setup stat increases and fill messages list for level up message
+									this.setLevel(this.getLevel()+1);
+								}
+							}else {
 								this.experience = this.maxExperience;
 							}
 							PacketDispatcher.sendTo(new ShowOverlayPacket("exp"),(EntityPlayerMP)player);
@@ -209,8 +219,8 @@ public class PlayerStatsCapability {
 		@Override
 		public int getExpNeeded(int level, int currentExp) {
 			//int currentLevel = (int) ((level + 300 * (2 ^ (level / 7))) * (level * 0.25));
-			int nextLevel = (int) (((level + 1) + 300 * (2 ^ ((level + 1) / 7))) * ((level + 1) * 0.25));
-			int needed = (nextLevel - currentExp);
+			double nextLevel = (double) (((level+1.0)+300.0*(Math.pow(2.0,((level+1.0)/7.0))))*((level+1.0)*0.25));
+			int needed = ((int)nextLevel - currentExp);
 			this.remainingExp = needed;
 			return remainingExp;
 		}

@@ -45,7 +45,6 @@ import uk.co.wehavecookies56.kk.common.item.ModItems;
 import uk.co.wehavecookies56.kk.common.lib.Constants;
 import uk.co.wehavecookies56.kk.common.lib.Lists;
 import uk.co.wehavecookies56.kk.common.lib.Reference;
-import uk.co.wehavecookies56.kk.common.network.UpdateChecker;
 import uk.co.wehavecookies56.kk.common.network.packet.PacketDispatcher;
 import uk.co.wehavecookies56.kk.common.synthesis.ModSynthesisMaterials;
 import uk.co.wehavecookies56.kk.common.synthesis.ModSynthesisRecipes;
@@ -109,7 +108,6 @@ public class CommonProxy {
 		//LogHelper.info("Sounds loaded");
 
 		// Update checker
-		MinecraftForge.EVENT_BUS.register(new UpdateChecker());
 		LogHelper.info("Update checker loaded");
 
 		// Crafting recipe

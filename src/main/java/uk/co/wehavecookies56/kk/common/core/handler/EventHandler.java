@@ -83,15 +83,7 @@ import uk.co.wehavecookies56.kk.common.item.base.ItemSynthesisMaterial;
 import uk.co.wehavecookies56.kk.common.lib.Reference;
 import uk.co.wehavecookies56.kk.common.lib.Strings;
 import uk.co.wehavecookies56.kk.common.network.packet.PacketDispatcher;
-import uk.co.wehavecookies56.kk.common.network.packet.client.ShowOverlayPacket;
-import uk.co.wehavecookies56.kk.common.network.packet.client.SyncDriveData;
-import uk.co.wehavecookies56.kk.common.network.packet.client.SyncDriveInventory;
-import uk.co.wehavecookies56.kk.common.network.packet.client.SyncHudData;
-import uk.co.wehavecookies56.kk.common.network.packet.client.SyncItemsInventory;
-import uk.co.wehavecookies56.kk.common.network.packet.client.SyncKeybladeData;
-import uk.co.wehavecookies56.kk.common.network.packet.client.SyncMagicData;
-import uk.co.wehavecookies56.kk.common.network.packet.client.SyncMagicInventory;
-import uk.co.wehavecookies56.kk.common.network.packet.client.SyncMunnyData;
+import uk.co.wehavecookies56.kk.common.network.packet.client.*;
 import uk.co.wehavecookies56.kk.common.network.packet.server.DeSummonKeyblade;
 import uk.co.wehavecookies56.kk.common.network.packet.server.DriveOrbPickup;
 import uk.co.wehavecookies56.kk.common.network.packet.server.HpOrbPickup;
@@ -492,6 +484,7 @@ public class EventHandler {
 			PacketDispatcher.sendTo(new SyncDriveData(event.getEntity().getCapability(ModCapabilities.DRIVE_STATE, null), event.getEntity().getCapability(ModCapabilities.PLAYER_STATS, null)), (EntityPlayerMP) event.getEntity());
 			PacketDispatcher.sendTo(new SyncMagicData(event.getEntity().getCapability(ModCapabilities.MAGIC_STATE, null), event.getEntity().getCapability(ModCapabilities.PLAYER_STATS, null)), (EntityPlayerMP) event.getEntity());
 			PacketDispatcher.sendTo(new SyncKeybladeData(event.getEntity().getCapability(ModCapabilities.SUMMON_KEYBLADE, null)), (EntityPlayerMP) event.getEntity());
+			PacketDispatcher.sendTo(new SyncLevelData(event.getEntity().getCapability(ModCapabilities.PLAYER_STATS, null)), (EntityPlayerMP) event.getEntity());
 			IFirstTimeJoin FTJ = event.getEntity().getCapability(ModCapabilities.FIRST_TIME_JOIN, null);
 			if (!FTJ.getFirstTimeJoin()) {
 				((EntityPlayer) event.getEntity()).inventory.addItemStackToInventory(new ItemStack(ModItems.WoodenKeyblade));
@@ -546,6 +539,7 @@ public class EventHandler {
 
 			EntityMob mob = (EntityMob) event.getEntity();
 			player.getCapability(ModCapabilities.PLAYER_STATS, null).addExperience(player,(int) (mob.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).getAttributeValue() / 2),"normal");
+			PacketDispatcher.sendTo(new SyncLevelData(player.getCapability(ModCapabilities.PLAYER_STATS, null)), (EntityPlayerMP) player);
 		}
 	}
 
@@ -712,7 +706,7 @@ public class EventHandler {
 			munny.addMunny(event.getItem().getEntityItem().getTagCompound().getInteger("amount"));
 			PacketDispatcher.sendTo(new SyncMunnyData(munny), (EntityPlayerMP) event.getEntityPlayer());
 	    	PacketDispatcher.sendTo(new ShowOverlayPacket("munny", event.getItem().getEntityItem().getTagCompound().getInteger("amount")), (EntityPlayerMP) event.getEntityPlayer());
-			
+
 		} else if (event.getItem().getEntityItem().getItem() instanceof ItemHpOrb) {
 			if (event.getEntityPlayer().getHeldItem(EnumHand.MAIN_HAND) != null) if (event.getEntityPlayer().getHeldItem(EnumHand.MAIN_HAND).getItem() == ModItems.EmptyBottle) return;
 			PlayerStatsCapability.IPlayerStats STATS = event.getEntityPlayer().getCapability(ModCapabilities.PLAYER_STATS, null);

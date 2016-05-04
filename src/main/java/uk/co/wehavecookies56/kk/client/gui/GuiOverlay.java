@@ -36,8 +36,8 @@ public class GuiOverlay extends GuiScreen {
 			int screenWidth = event.getResolution().getScaledWidth();
 			int screenHeight = event.getResolution().getScaledHeight();
 			PlayerStatsCapability.IPlayerStats STATS = mc.thePlayer.getCapability(ModCapabilities.PLAYER_STATS, null);
-			String reqExp = String.valueOf(STATS.getExpNeeded(STATS.getLevel(), STATS.getExperience()));
 			if (showExp) {
+				String reqExp = String.valueOf(STATS.getExpNeeded(STATS.getLevel(), STATS.getExperience()));
 				mc.fontRendererObj.drawString("Next LV", 5, 5, 0xFFFFFF);
 				mc.fontRendererObj.drawString(reqExp, 5, 5 + mc.fontRendererObj.FONT_HEIGHT, 0xFFFFFF);
 				if (timeExp + 4 <= (int) Minecraft.getSystemTime() / 1000) showExp = false;

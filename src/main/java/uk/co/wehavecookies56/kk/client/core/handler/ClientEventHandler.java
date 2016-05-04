@@ -20,7 +20,7 @@ public class ClientEventHandler {
 
 	int clientTick = 0;
 	float volume = 1.0f;
-	
+
 	/*
 	PositionedSoundRecord currMusic = Music.sinisterSundown;
 
