@@ -22,8 +22,10 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTBase.NBTPrimitive;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -542,6 +544,24 @@ public class EventHandler {
 		}
 	}
 
+	public void dropRecipe(LivingDropsEvent event)
+	{
+		if(event.getSource().getSourceOfDamage() instanceof EntityPlayer)
+		{
+			EntityPlayer player = (EntityPlayer) event.getSource().getSourceOfDamage();
+			NBTTagList enchant = player.inventory.getCurrentItem().getEnchantmentTagList();
+			NBTBase lvl = enchant.get(0);
+		/*	if(enchant.get(0)
+			{
+				System.out.println("iehfdj");
+			}//TODO XD*/
+			int recipeRand = randomWithRange(1, 100);
+			if(recipeRand <= 1){
+				event.getEntityLiving().entityDropItem(new ItemStack(ModItems.Recipe), 1);
+			}
+		}
+	}
+	
 	@SubscribeEvent
 	public void onLivingDrops (LivingDropsEvent event) {
 		if (event.getEntity() instanceof EntityPlayer) for (int i = 0; i < event.getDrops().size(); i++)
@@ -559,20 +579,14 @@ public class EventHandler {
 			{
 				if (player.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ItemRealKeyblade)
 				{
-					int recipeRand = randomWithRange(1, 100);
-					if(recipeRand <= 1){
-						event.getEntityLiving().entityDropItem(new ItemStack(ModItems.Recipe), 1);
-					}
+					dropRecipe(event);
 				}
 			}
 			if(player.getHeldItem(EnumHand.OFF_HAND) != null)
 			{
 				if(player.getHeldItem(EnumHand.OFF_HAND).getItem() instanceof ItemRealKeyblade)
 				{
-					int recipeRand = randomWithRange(1, 100);
-					if(recipeRand <= 1){
-						event.getEntityLiving().entityDropItem(new ItemStack(ModItems.Recipe), 1);
-					}
+					dropRecipe(event);
 				}
 			}
 			
