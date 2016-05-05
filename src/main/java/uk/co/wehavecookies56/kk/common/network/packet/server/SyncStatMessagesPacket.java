@@ -33,18 +33,18 @@ public class SyncStatMessagesPacket extends AbstractMessage.AbstractClientMessag
 	public void process (EntityPlayer player, Side side) {
 		if (this.stat != null) {
 			IPlayerStats STATS = player.getCapability(ModCapabilities.PLAYER_STATS, null);
-			if (this.stat.equals("clr")) STATS.messages.clear();
-			if (this.stat.equals("def")) STATS.messages.add("def");
-			if (this.stat.equals("str")) STATS.messages.add("str");
-			if (this.stat.equals("mag")) STATS.messages.add("mag");
-			if (this.stat.equals("hp")) STATS.messages.add("hp");
-			if (this.stat.equals("fir")) STATS.messages.add("fir");
-			if (this.stat.equals("bli")) STATS.messages.add("bli");
-			if (this.stat.equals("thu")) STATS.messages.add("thu");
-			if (this.stat.equals("cur")) STATS.messages.add("cur");
-			if (this.stat.equals("gra")) STATS.messages.add("gra");
-			if (this.stat.equals("aer")) STATS.messages.add("aer");
-			if (this.stat.equals("sto")) STATS.messages.add("sto");
+			if (this.stat.equals("clr")) STATS.getMessages().clear();
+			if (this.stat.equals("def")) STATS.getMessages().add("def");
+			if (this.stat.equals("str")) STATS.getMessages().add("str");
+			if (this.stat.equals("mag")) STATS.getMessages().add("mag");
+			if (this.stat.equals("hp")) STATS.getMessages().add("hp");
+			if (this.stat.equals("fir")) STATS.getMessages().add("fir");
+			if (this.stat.equals("bli")) STATS.getMessages().add("bli");
+			if (this.stat.equals("thu")) STATS.getMessages().add("thu");
+			if (this.stat.equals("cur")) STATS.getMessages().add("cur");
+			if (this.stat.equals("gra")) STATS.getMessages().add("gra");
+			if (this.stat.equals("aer")) STATS.getMessages().add("aer");
+			if (this.stat.equals("sto")) STATS.getMessages().add("sto");
 		}
 	}
 

@@ -100,7 +100,7 @@ public class CommandLevelUp implements ICommand {
 				STATS.setHP(20);
 
 				while (STATS.getLevel() < level)
-					STATS.addExperience(player, 20, "normal");
+					STATS.addExperience(player, STATS.getExpNeeded(level - 1, STATS.getExperience()), "normal");
 				player.heal(STATS.getHP());
 				TextHelper.sendFormattedChatMessage("Your level is now " + args[0], TextFormatting.YELLOW, (EntityPlayer) sender.getCommandSenderEntity());
 
@@ -126,7 +126,7 @@ public class CommandLevelUp implements ICommand {
 				STATS.setHP(20);
 
 				while (STATS.getLevel() < level)
-					STATS.addExperience(player, 20, "normal");
+					STATS.addExperience(player, STATS.getExpNeeded(level - 1, STATS.getExperience()), "normal");
 				entityplayermp.heal(STATS.getHP());
 				TextHelper.sendFormattedChatMessage(args[1] + "'s level is now " + args[0], TextFormatting.YELLOW, (EntityPlayer) sender.getCommandSenderEntity());
 
