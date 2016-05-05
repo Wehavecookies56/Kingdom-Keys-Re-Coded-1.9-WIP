@@ -14,12 +14,14 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import uk.co.wehavecookies56.kk.api.materials.Material;
 import uk.co.wehavecookies56.kk.api.materials.MaterialRegistry;
 import uk.co.wehavecookies56.kk.api.recipes.Recipe;
 import uk.co.wehavecookies56.kk.api.recipes.RecipeRegistry;
+import uk.co.wehavecookies56.kk.client.sound.ModSounds;
 import uk.co.wehavecookies56.kk.common.capability.ModCapabilities;
 import uk.co.wehavecookies56.kk.common.capability.MunnyCapability.IMunny;
 import uk.co.wehavecookies56.kk.common.capability.SynthesisMaterialCapability;
@@ -117,6 +119,8 @@ public class GuiSynthesis extends GuiTooltip {
 			case CREATE:
 				if (isRecipeUsable(mc.thePlayer.getCapability(ModCapabilities.SYNTHESIS_RECIPES, null).getKnownRecipes().get(selected), 1)) {
 					PacketDispatcher.sendToServer(new CreateFromSynthesisRecipe(mc.thePlayer.getCapability(ModCapabilities.SYNTHESIS_RECIPES, null).getKnownRecipes().get(selected), 1));
+					mc.thePlayer.worldObj.playSound(mc.thePlayer, mc.thePlayer.getPosition(), ModSounds.itemget, SoundCategory.MASTER, 1.0f, 1.0f);
+
 				}
 				break;
 			case TAKE1:

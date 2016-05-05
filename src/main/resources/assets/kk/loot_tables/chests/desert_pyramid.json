@@ -64,13 +64,13 @@
                 },
                 {
                     "type": "item",
-                    "name": "minecraft:bone",
+                    "name": "minecraft:gunpowder",
                     "functions": [
                         {
                             "function": "set_count",
                             "count": {
-                                "min": 4,
-                                "max": 6
+                                "min": 64,
+                                "max": 64
                             }
                         }
                     ],

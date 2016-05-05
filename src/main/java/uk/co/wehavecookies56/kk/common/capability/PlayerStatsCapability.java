@@ -160,7 +160,7 @@ public class PlayerStatsCapability {
 							if (this.experience + amount <= this.maxExperience){
 								this.experience += amount;
 								while (this.getExpNeeded(this.getLevel(), this.experience) <= 0) {
-									// TODO PacketDispatcher.sendTo(new ShowOverlayPacket("levelup"),(EntityPlayerMP)player); Setup stat increases and fill messages list for level up message
+									//TODO PacketDispatcher.sendTo(new ShowOverlayPacket("levelup"),(EntityPlayerMP)player); Setup stat increases and fill messages list for level up message
 									this.setLevel(this.getLevel()+1);
 								}
 							}else {

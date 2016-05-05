@@ -5,6 +5,13 @@
     		{"name": "kk:kupo", "stream": false}
     	]
     },
+	
+	"itemget": {
+    	"category": "master", 
+    	"sounds": [
+    		{"name": "kk:itemget", "stream": false}
+    	]
+    },
 
     "summon": {
     	"category": "player",
