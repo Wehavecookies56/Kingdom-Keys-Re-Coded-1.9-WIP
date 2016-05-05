@@ -530,7 +530,6 @@ public class EventHandler {
 				}else{
 					SUMMON.setIsKeybladeSummoned(false);
 				}
-
 			}
 		}
 
