@@ -8,7 +8,9 @@ import java.util.UUID;
 
 import com.mojang.authlib.GameProfile;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -85,7 +87,16 @@ import uk.co.wehavecookies56.kk.common.item.base.ItemSynthesisMaterial;
 import uk.co.wehavecookies56.kk.common.lib.Reference;
 import uk.co.wehavecookies56.kk.common.lib.Strings;
 import uk.co.wehavecookies56.kk.common.network.packet.PacketDispatcher;
-import uk.co.wehavecookies56.kk.common.network.packet.client.*;
+import uk.co.wehavecookies56.kk.common.network.packet.client.ShowOverlayPacket;
+import uk.co.wehavecookies56.kk.common.network.packet.client.SyncDriveData;
+import uk.co.wehavecookies56.kk.common.network.packet.client.SyncDriveInventory;
+import uk.co.wehavecookies56.kk.common.network.packet.client.SyncHudData;
+import uk.co.wehavecookies56.kk.common.network.packet.client.SyncItemsInventory;
+import uk.co.wehavecookies56.kk.common.network.packet.client.SyncKeybladeData;
+import uk.co.wehavecookies56.kk.common.network.packet.client.SyncLevelData;
+import uk.co.wehavecookies56.kk.common.network.packet.client.SyncMagicData;
+import uk.co.wehavecookies56.kk.common.network.packet.client.SyncMagicInventory;
+import uk.co.wehavecookies56.kk.common.network.packet.client.SyncMunnyData;
 import uk.co.wehavecookies56.kk.common.network.packet.server.DeSummonKeyblade;
 import uk.co.wehavecookies56.kk.common.network.packet.server.DriveOrbPickup;
 import uk.co.wehavecookies56.kk.common.network.packet.server.HpOrbPickup;
@@ -515,9 +526,7 @@ public class EventHandler {
 			} catch (Exception e) {
 
 			}
-
 		}
-
 	}
 
 	@SubscribeEvent
@@ -543,20 +552,42 @@ public class EventHandler {
 			PacketDispatcher.sendTo(new SyncLevelData(player.getCapability(ModCapabilities.PLAYER_STATS, null)), (EntityPlayerMP) player);
 		}
 	}
+	
+	public int getEnchantment(ItemStack stack, int id) 
+	{
+		if (stack.getEnchantmentTagList() != null) {
+			for (int i = 0; i < stack.getEnchantmentTagList().tagCount(); i++) {
+				if (stack.getEnchantmentTagList().getCompoundTagAt(i).getShort("id") == id) {
+					return stack.getEnchantmentTagList().getCompoundTagAt(i).getShort("lvl");
+				}
+			}
+		}
+		return 0;
+	}
 
 	public void dropRecipe(LivingDropsEvent event)
 	{
+		int	recipeRand = randomWithRange(1, 100);
 		if(event.getSource().getSourceOfDamage() instanceof EntityPlayer)
 		{
 			EntityPlayer player = (EntityPlayer) event.getSource().getSourceOfDamage();
-			NBTTagList enchant = player.inventory.getCurrentItem().getEnchantmentTagList();
-			NBTBase lvl = enchant.get(0);
-		/*	if(enchant.get(0)
+			ItemStack itemstack = player.inventory.getCurrentItem();
+			
+			switch(getEnchantment(itemstack, 21))
 			{
-				System.out.println("iehfdj");
-			}//TODO XD*/
-			int recipeRand = randomWithRange(1, 100);
-			if(recipeRand <= 1){
+			case 1:
+				recipeRand = randomWithRange(1, 99);
+				break;
+			case 2:
+				recipeRand = randomWithRange(1, 98);
+				break;
+			case 3:
+				recipeRand = randomWithRange(1, 97);
+				break;
+			}
+			
+			if(recipeRand <= 1)
+			{
 				event.getEntityLiving().entityDropItem(new ItemStack(ModItems.Recipe), 1);
 			}
 		}
