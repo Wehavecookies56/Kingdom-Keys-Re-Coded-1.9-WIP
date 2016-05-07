@@ -8,7 +8,27 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 import uk.co.wehavecookies56.kk.common.lib.Reference;
-import uk.co.wehavecookies56.kk.common.network.packet.client.*;
+import uk.co.wehavecookies56.kk.common.network.packet.client.ShowOverlayPacket;
+import uk.co.wehavecookies56.kk.common.network.packet.client.SpawnAeroParticles;
+import uk.co.wehavecookies56.kk.common.network.packet.client.SpawnBlizzardParticles;
+import uk.co.wehavecookies56.kk.common.network.packet.client.SpawnCureParticles;
+import uk.co.wehavecookies56.kk.common.network.packet.client.SpawnDriveFormParticles;
+import uk.co.wehavecookies56.kk.common.network.packet.client.SpawnFireParticles;
+import uk.co.wehavecookies56.kk.common.network.packet.client.SpawnStopParticles;
+import uk.co.wehavecookies56.kk.common.network.packet.client.SpawnThunderEntity;
+import uk.co.wehavecookies56.kk.common.network.packet.client.SpawnThunderParticles;
+import uk.co.wehavecookies56.kk.common.network.packet.client.SyncCheatModeData;
+import uk.co.wehavecookies56.kk.common.network.packet.client.SyncDriveData;
+import uk.co.wehavecookies56.kk.common.network.packet.client.SyncDriveInventory;
+import uk.co.wehavecookies56.kk.common.network.packet.client.SyncHudData;
+import uk.co.wehavecookies56.kk.common.network.packet.client.SyncItemsInventory;
+import uk.co.wehavecookies56.kk.common.network.packet.client.SyncKeybladeData;
+import uk.co.wehavecookies56.kk.common.network.packet.client.SyncLevelData;
+import uk.co.wehavecookies56.kk.common.network.packet.client.SyncMagicData;
+import uk.co.wehavecookies56.kk.common.network.packet.client.SyncMagicInventory;
+import uk.co.wehavecookies56.kk.common.network.packet.client.SyncMaterialData;
+import uk.co.wehavecookies56.kk.common.network.packet.client.SyncMunnyData;
+import uk.co.wehavecookies56.kk.common.network.packet.client.SyncRecipeData;
 import uk.co.wehavecookies56.kk.common.network.packet.server.AntiPoints;
 import uk.co.wehavecookies56.kk.common.network.packet.server.AttackEntity;
 import uk.co.wehavecookies56.kk.common.network.packet.server.CreateFromSynthesisRecipe;
@@ -17,6 +37,7 @@ import uk.co.wehavecookies56.kk.common.network.packet.server.DriveFormPacket;
 import uk.co.wehavecookies56.kk.common.network.packet.server.DriveOrbPickup;
 import uk.co.wehavecookies56.kk.common.network.packet.server.GiveItemInSlot;
 import uk.co.wehavecookies56.kk.common.network.packet.server.GlidePacket;
+import uk.co.wehavecookies56.kk.common.network.packet.server.HealPlayer;
 import uk.co.wehavecookies56.kk.common.network.packet.server.HpOrbPickup;
 import uk.co.wehavecookies56.kk.common.network.packet.server.LevelUpDrive;
 import uk.co.wehavecookies56.kk.common.network.packet.server.MagicOrbPickup;
@@ -109,6 +130,7 @@ public class PacketDispatcher {
 		registerMessage(PotionConsume.class);
 		registerMessage(AttackEntity.class);
 		registerMessage(SetKH1Fire.class);
+		registerMessage(HealPlayer.class);
 
 		// Bidirectional
 	}

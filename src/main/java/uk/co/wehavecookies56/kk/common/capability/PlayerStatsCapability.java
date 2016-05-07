@@ -8,14 +8,13 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.IntegerCache;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
-import net.minecraftforge.fml.server.FMLServerHandler;
 import uk.co.wehavecookies56.kk.common.container.inventory.InventoryPotionsMenu;
 import uk.co.wehavecookies56.kk.common.network.packet.PacketDispatcher;
 import uk.co.wehavecookies56.kk.common.network.packet.client.ShowOverlayPacket;
 import uk.co.wehavecookies56.kk.common.network.packet.client.SyncLevelData;
+import uk.co.wehavecookies56.kk.common.network.packet.server.HealPlayer;
 
 public class PlayerStatsCapability {
 
@@ -587,6 +586,11 @@ public class PlayerStatsCapability {
 					this.addMagic(10);
 					this.addHP(5);
 					break;
+			}
+			if(this.level%5 == 0)
+			{
+				System.out.println("Level: "+getLevel());
+				PacketDispatcher.sendToServer(new HealPlayer(100));
 			}
 			PacketDispatcher.sendTo(new SyncLevelData(player.getCapability(ModCapabilities.PLAYER_STATS, null)), (EntityPlayerMP) player);
 		}

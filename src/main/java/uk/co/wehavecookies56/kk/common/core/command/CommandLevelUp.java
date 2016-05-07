@@ -12,9 +12,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.relauncher.Side;
 import uk.co.wehavecookies56.kk.common.capability.ModCapabilities;
 import uk.co.wehavecookies56.kk.common.capability.PlayerStatsCapability;
 import uk.co.wehavecookies56.kk.common.core.helper.TextHelper;
+import uk.co.wehavecookies56.kk.common.network.packet.PacketDispatcher;
+import uk.co.wehavecookies56.kk.common.network.packet.client.SyncLevelData;
 
 public class CommandLevelUp implements ICommand {
 
@@ -72,7 +76,13 @@ public class CommandLevelUp implements ICommand {
 		else
 			throw new PlayerNotFoundException("You must specify which player you wish to perform this action on.", new Object[0]);
 	}
+	public static EntityPlayer getPlayerFromUsername(String username)
+    {
+        if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT)
+            return null;
 
+        return FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayerByUsername(username);
+    }
 	@Override
 	public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
 		if (sender.getCommandSenderEntity() instanceof EntityPlayer) {
@@ -103,6 +113,7 @@ public class CommandLevelUp implements ICommand {
 					STATS.addExperience(player, STATS.getExpNeeded(level - 1, STATS.getExperience()), "normal");
 				player.heal(STATS.getHP());
 				TextHelper.sendFormattedChatMessage("Your level is now " + args[0], TextFormatting.YELLOW, (EntityPlayer) sender.getCommandSenderEntity());
+				PacketDispatcher.sendTo(new SyncLevelData(player.getCapability(ModCapabilities.PLAYER_STATS, null)), (EntityPlayerMP) player);
 
 			} else if (args.length == 2) {
 				int level = 1;
@@ -116,7 +127,10 @@ public class CommandLevelUp implements ICommand {
 					TextHelper.sendFormattedChatMessage("Invalid level, it must be a number between 1 - 100", TextFormatting.RED, (EntityPlayer) sender.getCommandSenderEntity());
 					return;
 				}
-				EntityPlayerMP entityplayermp = args.length == 2 ?  server.getPlayerList().getPlayerByUUID(UUID.fromString(args[1])) : getCommandSenderAsPlayer(sender);
+				System.out.println("args.length: "+args.length);
+				System.out.println("args[1]: "+args[1]);
+				System.out.println("sender: "+sender);
+				EntityPlayerMP entityplayermp = args.length == 2 ?  (EntityPlayerMP) getPlayerFromUsername(args[1]) : getCommandSenderAsPlayer(sender);
 				PlayerStatsCapability.IPlayerStats STATS = entityplayermp.getCapability(ModCapabilities.PLAYER_STATS, null);
 				STATS.setLevel(1);
 				STATS.setExperience(0);
@@ -129,11 +143,11 @@ public class CommandLevelUp implements ICommand {
 					STATS.addExperience(player, STATS.getExpNeeded(level - 1, STATS.getExperience()), "normal");
 				entityplayermp.heal(STATS.getHP());
 				TextHelper.sendFormattedChatMessage(args[1] + "'s level is now " + args[0], TextFormatting.YELLOW, (EntityPlayer) sender.getCommandSenderEntity());
+				PacketDispatcher.sendTo(new SyncLevelData(entityplayermp.getCapability(ModCapabilities.PLAYER_STATS, null)), (EntityPlayerMP) entityplayermp);
 
 			} else
 				TextHelper.sendFormattedChatMessage("Invalid arguments, usage: " + getCommandUsage(sender), TextFormatting.RED, (EntityPlayer) sender.getCommandSenderEntity());
 		}
-		
 	}
 
 	@Override
