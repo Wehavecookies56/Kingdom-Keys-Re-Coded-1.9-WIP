@@ -2,7 +2,6 @@ package uk.co.wehavecookies56.kk.common.core.command;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommand;
@@ -108,6 +107,7 @@ public class CommandLevelUp implements ICommand {
 				STATS.setDefense(1);
 				STATS.setMagic(1);
 				STATS.setHP(20);
+				player.setHealth(20);
 
 				while (STATS.getLevel() < level)
 					STATS.addExperience(player, STATS.getExpNeeded(level - 1, STATS.getExperience()), "normal");
@@ -138,6 +138,8 @@ public class CommandLevelUp implements ICommand {
 				STATS.setDefense(1);
 				STATS.setMagic(1);
 				STATS.setHP(20);
+				entityplayermp.setHealth(20);
+
 
 				while (STATS.getLevel() < level)
 					STATS.addExperience(player, STATS.getExpNeeded(level - 1, STATS.getExperience()), "normal");

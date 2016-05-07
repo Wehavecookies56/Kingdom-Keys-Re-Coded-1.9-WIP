@@ -2,6 +2,7 @@ package uk.co.wehavecookies56.kk.common.capability;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -14,7 +15,7 @@ import uk.co.wehavecookies56.kk.common.container.inventory.InventoryPotionsMenu;
 import uk.co.wehavecookies56.kk.common.network.packet.PacketDispatcher;
 import uk.co.wehavecookies56.kk.common.network.packet.client.ShowOverlayPacket;
 import uk.co.wehavecookies56.kk.common.network.packet.client.SyncLevelData;
-import uk.co.wehavecookies56.kk.common.network.packet.server.HealPlayer;
+import uk.co.wehavecookies56.kk.common.network.packet.server.LevelUpSound;
 
 public class PlayerStatsCapability {
 
@@ -590,8 +591,12 @@ public class PlayerStatsCapability {
 			if(this.level%5 == 0)
 			{
 				System.out.println("Level: "+getLevel());
-				PacketDispatcher.sendToServer(new HealPlayer(100));
+				//int localhp = getHP();
+				player.setHealth(getHP());
+				player.getFoodStats().addStats(20,0);
+				//PacketDispatcher.sendTo(new HealPlayer(getHP()), (EntityPlayerMP) player);
 			}
+			PacketDispatcher.sendToServer(new LevelUpSound());
 			PacketDispatcher.sendTo(new SyncLevelData(player.getCapability(ModCapabilities.PLAYER_STATS, null)), (EntityPlayerMP) player);
 		}
 	}

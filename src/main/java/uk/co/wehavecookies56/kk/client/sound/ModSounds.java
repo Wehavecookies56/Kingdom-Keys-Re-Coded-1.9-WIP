@@ -10,6 +10,7 @@ public class ModSounds {
 	public static SoundEvent
 	kupo,
 	itemget,
+	levelup,
 	summon,
 	alarm,
 	unsummon,
@@ -42,6 +43,7 @@ public class ModSounds {
     public static void registerSounds() {
         kupo = registerSound("kupo");
         itemget = registerSound("itemget");
+        levelup = registerSound("levelup");
         summon = registerSound("summon");
         alarm = registerSound("alarm");
         unsummon = registerSound("unsummon");

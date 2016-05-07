@@ -37,9 +37,9 @@ import uk.co.wehavecookies56.kk.common.network.packet.server.DriveFormPacket;
 import uk.co.wehavecookies56.kk.common.network.packet.server.DriveOrbPickup;
 import uk.co.wehavecookies56.kk.common.network.packet.server.GiveItemInSlot;
 import uk.co.wehavecookies56.kk.common.network.packet.server.GlidePacket;
-import uk.co.wehavecookies56.kk.common.network.packet.server.HealPlayer;
 import uk.co.wehavecookies56.kk.common.network.packet.server.HpOrbPickup;
 import uk.co.wehavecookies56.kk.common.network.packet.server.LevelUpDrive;
+import uk.co.wehavecookies56.kk.common.network.packet.server.LevelUpSound;
 import uk.co.wehavecookies56.kk.common.network.packet.server.MagicOrbPickup;
 import uk.co.wehavecookies56.kk.common.network.packet.server.MagnetBloxMotion;
 import uk.co.wehavecookies56.kk.common.network.packet.server.ManifestKnowledgePacket;
@@ -130,7 +130,7 @@ public class PacketDispatcher {
 		registerMessage(PotionConsume.class);
 		registerMessage(AttackEntity.class);
 		registerMessage(SetKH1Fire.class);
-		registerMessage(HealPlayer.class);
+		registerMessage(LevelUpSound.class);
 
 		// Bidirectional
 	}

@@ -6,6 +6,13 @@
     	]
     },
 	
+	"levelup": {
+    	"category": "master", 
+    	"sounds": [
+    		{"name": "kk:levelup", "stream": false}
+    	]
+    },
+	
 	"itemget": {
     	"category": "master", 
     	"sounds": [
