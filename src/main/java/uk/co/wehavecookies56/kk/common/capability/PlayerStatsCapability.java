@@ -9,8 +9,10 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.SoundCategory;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
+import uk.co.wehavecookies56.kk.client.sound.ModSounds;
 import uk.co.wehavecookies56.kk.common.container.inventory.InventoryPotionsMenu;
 import uk.co.wehavecookies56.kk.common.network.packet.PacketDispatcher;
 import uk.co.wehavecookies56.kk.common.network.packet.client.ShowOverlayPacket;
@@ -590,13 +592,12 @@ public class PlayerStatsCapability {
 			}
 			if(this.level%5 == 0)
 			{
-				System.out.println("Level: "+getLevel());
-				//int localhp = getHP();
+				//System.out.println("Level: "+getLevel());
 				player.setHealth(getHP());
 				player.getFoodStats().addStats(20,0);
-				//PacketDispatcher.sendTo(new HealPlayer(getHP()), (EntityPlayerMP) player);
 			}
-			PacketDispatcher.sendToServer(new LevelUpSound());
+			player.worldObj.playSound((EntityPlayer)null, player.getPosition(), ModSounds.levelup, SoundCategory.MASTER, 1.0f, 1.0f);
+
 			PacketDispatcher.sendTo(new SyncLevelData(player.getCapability(ModCapabilities.PLAYER_STATS, null)), (EntityPlayerMP) player);
 		}
 	}

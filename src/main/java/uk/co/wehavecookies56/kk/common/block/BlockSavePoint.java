@@ -66,7 +66,7 @@ public class BlockSavePoint extends Block {
 					world.playSound((EntityPlayer)null, player.getPosition(), ModSounds.savespawn, SoundCategory.BLOCKS, 1.0f, 1.0f);
 				}
 					
-				if(!(player.getHealth() == player.getMaxHealth()))
+				if(player.getHealth() != player.getMaxHealth())
 				{
 					player.heal(4);
 					player.getCapability(ModCapabilities.PLAYER_STATS, null).setMP(100);
