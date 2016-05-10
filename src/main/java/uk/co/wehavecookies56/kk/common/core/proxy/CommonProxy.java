@@ -161,7 +161,7 @@ public class CommonProxy {
 		Constants.registerMagicLevels();
 
 		// Chest loot init
-		ChestGen.init();
+		MinecraftForge.EVENT_BUS.register(new ChestGen());
 		LogHelper.info("Chest loot loaded");
 	}
 

@@ -303,6 +303,10 @@ public class Strings {
 	// Synthesis Materials
 	public static final String 
 	SM_Rank = "sm.rank",
+	SM_Rank_C = SM_Rank + ".c",
+	SM_Rank_B = SM_Rank + ".b",
+	SM_Rank_A = SM_Rank + ".a",
+	SM_Rank_S = SM_Rank + ".s",
 	SM_BlazingShard = "sm.blazingshard", 
 	SM_BlazingStone = "sm.blazingstone",
 	SM_BlazingGem = "sm.blazinggem", 
